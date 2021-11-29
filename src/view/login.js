@@ -36,20 +36,20 @@ export const initLogin = () => {
     e.preventDefault();
     const email = document.querySelector('#login-email').value;
     const password = document.querySelector('#login-password').value;
-
-    // codigo firebase
+    // codings firebase
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        console.log(user);
         console.log(email, password);
         console.log('ingresando');
         window.location.hash = '#/home';
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
         console.log(error);
       });
   });
@@ -61,21 +61,22 @@ export const initLogin = () => {
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
+        console.log(credential);
+        // const token = credential.accessToken;
+        // // The signed-in user info.
+        // const user = result.user;
 
         window.location.hash = '#/home';
         console.log('ingresando con correo google');
         // ...
       }).catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // // The email of the user's account used.
+        // const email = error.email;
+        // // The AuthCredential type that was used.
+        // const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
         console.log(error);
       });
