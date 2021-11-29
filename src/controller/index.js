@@ -1,24 +1,28 @@
-import { components } from "../view/index.js";
+import { components } from '../view/index.js';
 
 const changeView = (route) => {
-  const container = document.getElementById("container");
+  const container = document.getElementById('container');
   window.location.hash = route;
-  container.innerHTML = "";
+  container.innerHTML = '';
 
   switch (route) {
-    case "":
-    case "#/login":
-    case "#/":
+    case '':
+    case '#/login':
+    case '#/':
       container.appendChild(components.login.Login());
       components.login.initLogin();
       break;
-    case "#/signup":
+    case '#/signup':
       container.appendChild(components.signup.SignUp());
-        components.signup.Register();
+      components.signup.Register();
       break;
-    case "#/home":
-      container.appendChild(components.home.Home()),
+    case '#/home':
+      container.appendChild(components.home.Home());
       components.home.LogOut();
+      break;
+
+    default:
+      container.appendChild(components);
       break;
   }
 };
