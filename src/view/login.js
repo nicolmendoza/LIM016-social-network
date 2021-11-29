@@ -1,11 +1,10 @@
-
-  import { getAuth, signInWithPopup, GoogleAuthProvider,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js"
-
-
-
+import {
+  getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword,
+// eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 export const Login = () => {
-  const viewHome = document.createElement("div");
+  const viewHome = document.createElement('div');
 
   viewHome.innerHTML = `
 <div>SOCIAL NETWORK</div>
@@ -30,67 +29,56 @@ export const Login = () => {
   return viewHome;
 };
 
-
-
-
-
-
 export const initLogin = () => {
-  const signInForm = document.querySelector("#login-form");
+  const signInForm = document.querySelector('#login-form');
 
-  signInForm.addEventListener("submit", (e) => {
+  signInForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = document.querySelector("#login-email").value;
-    const password = document.querySelector("#login-password").value;
-
-
-
-//codigo firebase
-const auth = getAuth();
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    console.log(email, password)
-    console.log('ingresando')
-    window.location.hash='#/home'
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(error)
-  });
+    const email = document.querySelector('#login-email').value;
+    const password = document.querySelector('#login-password').value;
+    // codings firebase
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        console.log(email, password);
+        console.log('ingresando');
+        window.location.hash = '#/home';
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        console.log(error);
+      });
   });
 
+  document.querySelector('#googleLogin').addEventListener('click', () => {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        console.log(credential);
+        // const token = credential.accessToken;
+        // // The signed-in user info.
+        // const user = result.user;
 
-document.querySelector('#googleLogin').addEventListener('click',()=>{
-
-
-  const provider = new GoogleAuthProvider();
-const auth = getAuth();
-signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-
-    window.location.hash='#/home'
-console.log('ingresando con correo google')
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-    console.log(error)
+        window.location.hash = '#/home';
+        console.log('ingresando con correo google');
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // // The email of the user's account used.
+        // const email = error.email;
+        // // The AuthCredential type that was used.
+        // const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+        console.log(error);
+      });
   });
-})
-
-
 };
