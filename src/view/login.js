@@ -1,31 +1,35 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
+/* eslint-disable import/no-unresolved */
 import {
-  getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, FacebookAuthProvider,
-// eslint-disable-next-line import/no-unresolved
+  getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider,
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 export const Login = () => {
   const viewHome = document.createElement('div');
 
   viewHome.innerHTML = `
-<div>SOCIAL NETWORK</div>
-<div><img id="logoLogin" src='./img/logoLogin.png' ></div>
-<div>
- <a href="#/login">Login</a>
-  <a href="#/signup" >Sign Up</a>
-</div>
-<div>LOGIN</div>
-<form id="login-form">
-<div class="form-group">
-  <input type="text" id="login-email"  placeholder="Title" >
-</div>
-<div class="form-group">
-  <input type="password" id="login-password"  placeholder="Password" >
-</div>
-<a href="#/resetPassword" id="resetPass"> ¿Has olvidado tu contraseña?</a><br>
-<button type="submit" >Login</button>
-<button type="button"  id="googleLogin"><i class="fab fa-google"></i></button>
-<button type="button"  id="facebookLogin"><i class="fab fa-facebook-square"></i></button>
-</form>`;
+  <div>SOCIAL NETWORK</div>
+  <div><img id="logoLogin" src='./img/logoLogin.png' ></div>
+  <div>
+    <a href="#/login">Login</a>
+    <a href="#/signup" >Sign Up</a>
+  </div>
+  <div>LOGIN</div>
+
+  <form id="login-form">
+    <div class="form-group">
+      <input type="text" id="login-email"  placeholder="Title" >
+    </div>
+    <div class="form-group">
+      <input type="password" id="login-password"  placeholder="Password" >
+    </div>
+    <a href="#/resetPassword" id="resetPass"> ¿Has olvidado tu contraseña?</a><br>
+    <button type="submit" >Login</button>
+    <button type="button" id="googleLogin"><i class="fab fa-google"></i></button>
+    <button type="button" id="facebookLogin"><i class="fab fa-facebook-square"></i></button>
+    <button type="button" id="githubLogin"><i class="fab fa-github"></i></button>
+  </form>`;
 
   return viewHome;
 };
@@ -108,6 +112,31 @@ export const initLogin = () => {
         // const credential = FacebookAuthProvider.credentialFromError(error);
 
         // // ...
+        console.log(error);
+      });
+  });
+
+  document.getElementById('githubLogin').addEventListener('click', () => {
+    const provider = new GithubAuthProvider();
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+        // const credential = GithubAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
+
+        // The signed-in user info.
+        // const user = result.user;
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // The email of the user's account used.
+        // const email = error.email;
+        // The AuthCredential type that was used.
+        // const credential = GithubAuthProvider.credentialFromError(error);
+        // ...
         console.log(error);
       });
   });
