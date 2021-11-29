@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 export const SignUp = () => {
   const viewSignUp = `
@@ -25,6 +25,15 @@ export const SignUp = () => {
   return divElement;
 };
 
+// function verificar() {
+//   const auth = getAuth();
+//   sendEmailVerification(auth.currentUser)
+//     .then(() => {
+//     // Email verification sent!
+//     // ...
+//     });
+// }
+
 export const Register = () => {
   const signupForm = document.querySelector('#signup-form');
   signupForm.addEventListener('submit', (e) => {
@@ -39,9 +48,18 @@ export const Register = () => {
         // Signed in
         const user = userCredential.user;
 
-        console.log(user);
+        if (!user.emailVerified) {
+          sendEmailVerification(auth.currentUser)
+            .then(() => {
+            // Email verification sent!
+            // ...
+              console.log('correo enviado');
+            });
+        }
+
         console.log('usuario creeado');
       })
+
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;

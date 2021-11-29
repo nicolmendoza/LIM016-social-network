@@ -38,14 +38,17 @@ export const initLogin = () => {
     const password = document.querySelector('#login-password').value;
     // codings firebase
     const auth = getAuth();
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
-        console.log(email, password);
-        console.log('ingresando');
-        window.location.hash = '#/home';
+
+        if (user.emailVerified === true) {
+          window.location.hash = '#/home';
+        } else {
+          alert('te enviamos un correo para verificar tu cuenta, revisa tu bandeja');
+        }
       })
       .catch((error) => {
         // const errorCode = error.code;
