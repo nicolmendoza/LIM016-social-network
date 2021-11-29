@@ -1,7 +1,7 @@
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js";
+// eslint-disable-next-line import/no-unresolved
+import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
-
-export const SignUp=() => {
+export const SignUp = () => {
   const viewSignUp = `
     <div>SOCIAL NETWORK</div>
     <div><img id="logoLogin" src='./img/logoLogin.png' ></div>
@@ -20,48 +20,33 @@ export const SignUp=() => {
       <button type="submit" >Save changes</button>
     </form>`;
 
-    
-  const divElement = document.createElement("div");
+  const divElement = document.createElement('div');
   divElement.innerHTML = viewSignUp;
   return divElement;
 };
 
+export const Register = () => {
+  const signupForm = document.querySelector('#signup-form');
 
-
-
-
-
-export const Register=() =>{
-  
-  const signupForm = document.querySelector("#signup-form");
-
-  const container=document.getElementById('container')
-  
-  
-  signupForm.addEventListener("submit", (e) => {
+  signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = document.querySelector("#signup-email").value;
-    const password = document.querySelector("#signup-password").value;
-  
+    const email = document.querySelector('#signup-email').value;
+    const password = document.querySelector('#signup-password').value;
+
     console.log(email, password);
-  
-    //codigo firebase
+
+    // codigo firebase
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log('usuario creeado')
+        console.log('usuario creeado');
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error)
+        console.log(error);
       });
   });
-
-
-
-
-}
-
+};
