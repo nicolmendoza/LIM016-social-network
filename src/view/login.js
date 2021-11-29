@@ -83,6 +83,8 @@ export const initLogin = () => {
   });
 
   document.querySelector('#facebookLogin').addEventListener('click', () => {
+    // eslint-disable-next-line no-undef
+    e.preventDefault();
     const provider = new FacebookAuthProvider();
     const auth = getAuth();
     signInWithPopup(auth, provider)
