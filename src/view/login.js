@@ -21,9 +21,10 @@ export const Login = () => {
 <div class="form-group">
   <input type="password" id="login-password"  placeholder="Password" >
 </div>
+<a href="#/resetPassword" id="resetPass"> ¿Has olvidado tu contraseña?</a><br>
 <button type="submit" >Login</button>
-<button type="button"  id="googleLogin">Login with Google</button>
-<button type="button"  id="facebookLogin">Login with Facebook</button>
+<button type="button"  id="googleLogin"><i class="fab fa-google"></i></button>
+<button type="button"  id="facebookLogin"><i class="fab fa-facebook-square"></i></button>
 </form>`;
 
   return viewHome;
@@ -66,7 +67,6 @@ export const initLogin = () => {
         // // The signed-in user info.
         // const user = result.user;
 
-        window.location.hash = '#/home';
         console.log('ingresando con correo google');
         // ...
       }).catch((error) => {
@@ -83,19 +83,19 @@ export const initLogin = () => {
   });
 
   document.querySelector('#facebookLogin').addEventListener('click', () => {
-    // eslint-disable-next-line no-undef
-    e.preventDefault();
     const provider = new FacebookAuthProvider();
     const auth = getAuth();
     signInWithPopup(auth, provider)
       .then((result) => {
+        console.log('facebook sign in');
         // The signed-in user info.
         const user = result.user;
-
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         const credential = FacebookAuthProvider.credentialFromResult(result);
-        const accessToken = credential.accessToken;
-
+        console.log(credential);
+        console.log(user);
+        window.location.hash = '#/home';
+        // const accessToken = credential.accessToken;
         // ...
       })
       .catch((error) => {

@@ -20,7 +20,10 @@ const changeView = (route) => {
       container.appendChild(components.home.Home());
       components.home.LogOut();
       break;
-
+    case '#/resetPassword':
+      container.appendChild(components.resetPassword.resetPassword());
+      components.resetPassword.resetPasswordInit();
+      break;
     default:
       container.appendChild(components);
       break;
