@@ -1,6 +1,17 @@
+// Este es el punto de entrada de tu aplicacion
 
-alert('Hola! :D Soy un cambio.')
+// import { myFunction } from './lib/index.js';
 
-myFunction();
+// myFunction();
 
-console.log("holi")
+import { changeView } from "./controller/index.js"
+
+const init=()=>{
+    changeView(window.location.hash)
+window.addEventListener('hashchange',()=>{
+    changeView(window.location.hash)})}
+
+
+
+window.addEventListener('load', init)
+
