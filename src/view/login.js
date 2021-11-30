@@ -69,7 +69,7 @@ export const initLogin = () => {
         // const token = credential.accessToken;
         // // The signed-in user info.
         // const user = result.user;
-
+        window.location.hash = '#/home';
         console.log('ingresando con correo google');
         // ...
       }).catch((error) => {
