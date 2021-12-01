@@ -1,5 +1,8 @@
 // eslint-disable-next-line import/no-unresolved
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+import {
+  getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile,
+// eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 export const SignUp = () => {
   const viewSignUp = `
@@ -11,13 +14,17 @@ export const SignUp = () => {
     </div>
     <div>SIGN UP</div>
     <form id="signup-form">
-      <div >
-        <input type="text" id="signup-email"  placeholder="E-mail" >
+    <div>
+    <input type="text" id="signup-name"  placeholder="Name" required>
+  </div>
+      <div>
+        <input type="text" id="signup-email"  placeholder="Email" required>
         <p id='emailMessage'></p>
       </div>
-      <div >
-        <input type="password" id="signup-password"  placeholder="Password" >
+      <div>
+        <input type="password" id="signup-password"  placeholder="Password" required>
         <p id='passwordMessage'></p>
+
       </div>
       <button type="submit" >Save changes</button>
     </form>`;
@@ -26,15 +33,6 @@ export const SignUp = () => {
   divElement.innerHTML = viewSignUp;
   return divElement;
 };
-
-// function verificar() {
-//   const auth = getAuth();
-//   sendEmailVerification(auth.currentUser)
-//     .then(() => {
-//     // Email verification sent!
-//     // ...
-//     });
-// }
 
 export const Register = () => {
   const signupForm = document.querySelector('#signup-form');
@@ -49,12 +47,21 @@ export const Register = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        updateProfile(auth.currentUser, {
+          displayName: document.getElementById('signup-name').value,
+          photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
+        }).then(() => {
+          // Profile updated!
+          // ...
+        }).catch((error) => {
+          console.log(error);
+        });
 
         if (!user.emailVerified) {
-          sendEmailVerification(auth.currentUser)
-            .then(() => {
+          sendEmailVerification(auth.currentUser).then(() => {
             // Email verification sent!
             // ...
+
               alert('Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja.');
               console.log('correo enviado');
             });
