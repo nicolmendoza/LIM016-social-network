@@ -61,18 +61,19 @@ export const initLogin = () => {
         const errorMessage = error.message;
         console.log(errorMessage);
 
+        const message = document.getElementById('generalMessage');
         if (password === '' || email === '') {
-          document.getElementById('generalMessage').innerHTML = 'Correo o contraseña inválidos.';
+          message.innerHTML = 'Correo o contraseña inválidos.';
         } else if (errorMessage === 'Firebase: Error (auth/internal-error).' || errorMessage === 'Firebase: Error (auth/invalid-email).') {
-          document.getElementById('generalMessage').innerHTML = 'Correo o contraseña inválidos.';
+          message.innerHTML = 'Correo o contraseña inválidos.';
         } else if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
-          document.getElementById('generalMessage').innerHTML = 'Usuario no encontrado';
+          message.innerHTML = 'Usuario no encontrado';
         }
 
         if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
-          document.getElementById('generalMessage').innerHTML = 'Contraseña incorrecta.';
+          message.innerHTML = 'Contraseña incorrecta.';
         } else if (errorMessage === 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).') {
-          document.getElementById('generalMessage').innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+          message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
         }
       });
   });

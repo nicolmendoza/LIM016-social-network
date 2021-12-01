@@ -68,18 +68,21 @@ export const Register = () => {
         const errorMessage = error.message;
         console.log(errorMessage);
 
+        const emailMessage = document.getElementById('emailMessage');
+        const passwordMessage = document.getElementById('passwordMessage');
+
         if (errorMessage === 'Firebase: Error (auth/missing-email).' || errorMessage === 'Firebase: Error (auth/invalid-email).') {
-          document.getElementById('emailMessage').innerHTML = 'Correo inválido.';
+          emailMessage.innerHTML = 'Correo inválido.';
         } else if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
-          document.getElementById('emailMessage').innerHTML = 'Correo en uso.';
+          emailMessage.innerHTML = 'Correo en uso.';
         } else {
-          document.getElementById('emailMessage').innerHTML = '';
+          emailMessage.innerHTML = '';
         }
 
         if (password === '' || errorMessage === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
-          document.getElementById('passwordMessage').innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
+          passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
         } else {
-          document.getElementById('passwordMessage').innerHTML = '';
+          passwordMessage.innerHTML = '';
         }
       });
   });
