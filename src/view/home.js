@@ -1,38 +1,43 @@
 // eslint-disable-next-line import/no-unresolved
-import { getAuth, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 export const Home = () => {
   const divElement = document.createElement('div');
   divElement.innerHTML = ` 
   <div>WELCOME</div>
+  <img id="photoUser" width="100px">
   <div id="infoUser"></div>
-  <img id="photoUser">
   <button id="logout">Log Out</button>`;
 
-  return divElement;
+  return document.getElementById('container').appendChild(divElement);
 };
 
 export const LogOut = () => {
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      // const uid = user.uid;
-      console.log(user);
-      document.getElementById('infoUser').innerHTML = `Nombre:${user.displayName} Correo=${user.email}`;
-      document.getElementById('photoUser').src = `${user.photoURL}`;
+  const user = auth.currentUser;
+
+  if (user) {
+    console.log(user);
+    if (user.displayName == null) {
+      const info = document.getElementById('infoUser');
+
+      info.innerHTML = 'Bienvenida Developer';
     } else {
-      // User is signed out
-      // ...
+      const info = document.getElementById('infoUser');
+
+      info.innerHTML = `Bienvenida ${user.displayName}`;
     }
-  });
+    document.getElementById('photoUser').src = `${user.photoURL}`;
+  } else {
+  // No user is signed in.
+  }
 
   document.querySelector('#logout').addEventListener('click', () => {
     signOut(auth)
       .then(() => {
         console.log('log out');
         window.location.hash = '#/';
+        // window.location.reload();
         // Sign-out successful.
       })
       .catch((error) => {

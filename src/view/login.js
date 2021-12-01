@@ -19,10 +19,10 @@ export const Login = () => {
 
   <form id="login-form">
     <div class="form-group">
-      <input type="text" id="login-email"  placeholder="Title" >
+      <input type="email" id="login-email"  placeholder="Email" required>
     </div>
     <div class="form-group">
-      <input type="password" id="login-password"  placeholder="Password" >
+      <input type="password" id="login-password"  placeholder="Password" required>
     </div>
     <a href="#/resetPassword" id="resetPass"> ¿Has olvidado tu contraseña?</a><br>
     <button type="submit" >Login</button>
@@ -48,7 +48,6 @@ export const initLogin = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-
         if (user.emailVerified === true) {
           window.location.hash = '#/home';
         } else {
@@ -130,7 +129,8 @@ export const initLogin = () => {
 
         // The signed-in user info.
         // const user = result.user;
-        // ...
+        console.log(result);
+        window.location.hash = '#/home';
       }).catch((error) => {
         // Handle Errors here.
         // const errorCode = error.code;
