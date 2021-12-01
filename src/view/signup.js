@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from '
 export const SignUp = () => {
   const viewSignUp = `
     <div>SOCIAL NETWORK</div>
-    <div><img id="logoLogin" src='./img/logoLogin.png' ></div>
+    <div><img id="logoLogin" src='./img/imgLogo.png' ></div>
     <div>
      <a href="#/login">Login</a>
       <a href="#/signup" >Sign Up</a>
@@ -12,12 +12,15 @@ export const SignUp = () => {
     <div>SIGN UP</div>
     <form id="signup-form">
       <div >
-        <input type="text" id="signup-email"  placeholder="Title" >
+        <input type="text" id="signup-user"  placeholder="Name user" >
       </div>
       <div >
-        <input type="password" id="signup-password"  placeholder="Password" >
+        <input type="email" id="signup-email"  placeholder="correo@example.com" >
       </div>
-      <button type="submit" >Save changes</button>
+      <div >
+        <input type="password" id="signup-password"  placeholder="**************" >
+      </div>
+      <button type="submit" class="btnLogin" >CREATE A COUNT</button>
     </form>`;
 
   const divElement = document.createElement('div');

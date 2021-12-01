@@ -9,8 +9,8 @@ export const Login = () => {
   const viewHome = document.createElement('div');
 
   viewHome.innerHTML = `
-  <div>SOCIAL NETWORK</div>
-  <div><img id="logoLogin" src='./img/logoLogin.png' ></div>
+  <div class="logo">SOCIAL NETWORK</div>
+  <div><img id="logoLogin" src='./img/imgLogo.png' ></div>
   <div>
     <a href="#/login">Login</a>
     <a href="#/signup" >Sign Up</a>
@@ -19,13 +19,13 @@ export const Login = () => {
 
   <form id="login-form">
     <div class="form-group">
-      <input type="text" id="login-email"  placeholder="Title" >
+      <input type="email" id="login-email"  placeholder="correo@example.com" >
     </div>
     <div class="form-group">
-      <input type="password" id="login-password"  placeholder="Password" >
+      <input type="password" id="login-password"  placeholder="****************" >
     </div>
     <a href="#/resetPassword" id="resetPass"> ¿Has olvidado tu contraseña?</a><br>
-    <button type="submit" >Login</button>
+    <button type="submit" class="btnLogin">LOGIN</button>
     <button type="button" id="googleLogin"><i class="fab fa-google"></i></button>
     <button type="button" id="facebookLogin"><i class="fab fa-facebook-square"></i></button>
     <button type="button" id="githubLogin"><i class="fab fa-github"></i></button>
