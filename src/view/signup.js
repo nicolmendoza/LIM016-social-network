@@ -23,6 +23,7 @@ export const SignUp = () => {
       <div>
         <input type="password" id="signup-password"  placeholder="Password" required>
       </div>
+
       <button type="submit" >Save changes</button>
     </form>`;
 
