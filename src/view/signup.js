@@ -19,9 +19,12 @@ export const SignUp = () => {
   </div>
       <div>
         <input type="text" id="signup-email"  placeholder="Email" required>
+        <p id='emailMessage'></p>
       </div>
       <div>
         <input type="password" id="signup-password"  placeholder="Password" required>
+        <p id='passwordMessage'></p>
+
       </div>
       <button type="submit" >Save changes</button>
     </form>`;
@@ -58,17 +61,36 @@ export const Register = () => {
           sendEmailVerification(auth.currentUser).then(() => {
             // Email verification sent!
             // ...
-            alert('correo enviado');
-          });
+
+              alert('Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja.');
+              console.log('correo enviado');
+            });
         }
 
-        console.log('usuario creeado');
+        console.log('usuario creado');
       })
 
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorCode, errorMessage);
+        console.log(errorMessage);
+
+        const emailMessage = document.getElementById('emailMessage');
+        const passwordMessage = document.getElementById('passwordMessage');
+
+        if (errorMessage === 'Firebase: Error (auth/missing-email).' || errorMessage === 'Firebase: Error (auth/invalid-email).') {
+          emailMessage.innerHTML = 'Correo inválido.';
+        } else if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
+          emailMessage.innerHTML = 'Correo en uso.';
+        } else {
+          emailMessage.innerHTML = '';
+        }
+
+        if (password === '' || errorMessage === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
+          passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
+        } else {
+          passwordMessage.innerHTML = '';
+        }
       });
   });
 };
