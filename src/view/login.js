@@ -24,6 +24,7 @@ export const Login = () => {
     <div class="form-group">
       <input type="password" id="login-password"  placeholder="****************" >
     </div>
+    <p id="generalMessage"></p>
     <a href="#/resetPassword" id="resetPass"> ¿Has olvidado tu contraseña?</a><br>
     <button type="submit" class="btnLogin">LOGIN</button>
     <button type="button" id="googleLogin"><i class="fab fa-google"></i></button>
@@ -57,8 +58,23 @@ export const initLogin = () => {
       })
       .catch((error) => {
         // const errorCode = error.code;
-        // const errorMessage = error.message;
-        console.log(error);
+        const errorMessage = error.message;
+        console.log(errorMessage);
+
+        const message = document.getElementById('generalMessage');
+        if (password === '' || email === '') {
+          message.innerHTML = 'Correo o contraseña inválidos.';
+        } else if (errorMessage === 'Firebase: Error (auth/internal-error).' || errorMessage === 'Firebase: Error (auth/invalid-email).') {
+          message.innerHTML = 'Correo o contraseña inválidos.';
+        } else if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
+          message.innerHTML = 'Usuario no encontrado';
+        }
+
+        if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
+          message.innerHTML = 'Contraseña incorrecta.';
+        } else if (errorMessage === 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).') {
+          message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+        }
       });
   });
 
@@ -124,12 +140,16 @@ export const initLogin = () => {
     const auth = getAuth();
     signInWithPopup(auth, provider)
       .then((result) => {
+        console.log('github sign in');
+        window.location.hash = '#/home';
         // This gives you a GitHub Access Token. You can use it to access the GitHub API.
         // const credential = GithubAuthProvider.credentialFromResult(result);
         // const token = credential.accessToken;
 
         // The signed-in user info.
-        // const user = result.user;
+        const user = result.user;
+        console.log(user);
+        alert(`Bienvenida ${user.displayName}`);
         // ...
       }).catch((error) => {
         // Handle Errors here.
