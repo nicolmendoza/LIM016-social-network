@@ -1,10 +1,11 @@
+// eslint-disable-next-line import/no-unresolved
+import { getAuth } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+
 import { components } from '../view/index.js';
 
 const changeView = (route) => {
   const container = document.getElementById('container');
-  window.location.hash = route;
   container.innerHTML = '';
-
   switch (route) {
     case '':
     case '#/login':
@@ -16,10 +17,20 @@ const changeView = (route) => {
       container.appendChild(components.signup.SignUp());
       components.signup.Register();
       break;
-    case '#/home':
-      container.appendChild(components.home.Home());
-      components.home.LogOut();
+
+    case '#/home': {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (user) {
+        (components.home.Home());
+        components.home.LogOut();
+      } else {
+        window.location.hash = '#/';
+      }
+
       break;
+    }
     case '#/resetPassword':
       container.appendChild(components.resetPassword.resetPassword());
       components.resetPassword.resetPasswordInit();
