@@ -1,48 +1,72 @@
 // eslint-disable-next-line import/no-unresolved
-import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+import {
+  getAuth,
+// eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+// eslint-disable-next-line import/no-unresolved
+import {
+  logout, savePost, showAbout,
+} from '../firebase.js';
+
+import { display } from './post.js';
 
 export const Home = () => {
   const divElement = document.createElement('div');
   divElement.innerHTML = ` 
+  <button id="logout">Log Out</button>
+  <button id="profile">Profile</button>
   <div>WELCOME</div>
   <img id="photoUser" width="100px">
   <div id="infoUser"></div>
-  <button id="logout">Log Out</button>`;
+  <p id="aboutP"></p>
+
+<h1>Add POST</h1>
+<input type="text" id="post-description"  placeholder="about" >
+ <button id="btn" >Save</button>
+ <div id="showPost">
+ </div>
+
+  `;
 
   return document.getElementById('container').appendChild(divElement);
 };
 
-export const LogOut = () => {
+export const FunctionsHome = () => {
+  // autentificando usuario logueado
   const auth = getAuth();
   const user = auth.currentUser;
-
   if (user) {
     console.log(user);
     if (user.displayName == null) {
       const info = document.getElementById('infoUser');
-
       info.innerHTML = 'Bienvenida Developer';
     } else {
       const info = document.getElementById('infoUser');
-
       info.innerHTML = `Bienvenida ${user.displayName}`;
     }
     document.getElementById('photoUser').src = `${user.photoURL}`;
-  } else {
-  // No user is signed in.
   }
 
+  // read the posts
+  display();
+
+  // save the post , genera ID automatico
+  const postDescription = document.getElementById('post-description');
+  document.getElementById('btn').addEventListener('click', async () => {
+    savePost(postDescription);
+  });
+
+  // LogOut
   document.querySelector('#logout').addEventListener('click', () => {
-    signOut(auth)
-      .then(() => {
-        console.log('log out');
-        window.location.hash = '#/';
-        // window.location.reload();
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
+    logout();
+  });
+
+  // function show about
+  const aboutParrafo = document.getElementById('aboutP');
+  showAbout(aboutParrafo);
+
+  // profile
+  document.getElementById('profile').addEventListener('click', () => {
+    window.location.hash = '#/profile';
   });
 };

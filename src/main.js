@@ -1,4 +1,4 @@
-import { changeView } from './controller/index.js';
+import { changeView } from './controller/routes.js';
 
 window.addEventListener('load', () => {
   changeView(window.location.hash);
