@@ -143,3 +143,7 @@ body{
 .link:hover { 
     font-weight: bold;
 }    
+p.errorMessage{
+    font-size: 12px;
+    color: rgb(173, 72, 72);
+}

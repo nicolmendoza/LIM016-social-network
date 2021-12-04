@@ -31,7 +31,7 @@ export const Login = () => {
       </span>
       <input type="password" id="login-password"  placeholder="****************" required >
     </div>
-    <p id="generalMessage"></p>
+    <p id="generalMessage" class="errorMessage"></p>
     <button type="submit" class="btnLogin">LOGIN</button><br>
     <div class="divResetPassword">
     <a href="#/resetPassword" id="resetPass"> Forgot password?</a></div>
@@ -73,11 +73,8 @@ export const initLogin = () => {
         console.log(errorMessage);
 
         const message = document.getElementById('generalMessage');
-        if (password === '' || email === '') {
-          message.innerHTML = 'Correo o contraseña inválidos.';
-        } else if (errorMessage === 'Firebase: Error (auth/internal-error).' || errorMessage === 'Firebase: Error (auth/invalid-email).') {
-          message.innerHTML = 'Correo o contraseña inválidos.';
-        } else if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
+
+        if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
           message.innerHTML = 'Usuario no encontrado';
         }
 
