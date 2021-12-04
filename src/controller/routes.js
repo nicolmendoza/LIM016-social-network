@@ -6,22 +6,28 @@ import { components } from '../view/index.js';
 const changeView = (route) => {
   const container = document.getElementById('container');
   container.innerHTML = '';
+  const auth = getAuth();
+  const user = auth.currentUser;
   switch (route) {
-    case '':
+    case '#':
+    case '/':
     case '#/login':
-    case '#/':
-      container.appendChild(components.login.Login());
-      components.login.initLogin();
+    case '#/': {
+      if (!user) {
+        container.appendChild(components.login.Login());
+        components.login.initLogin();
+      } else {
+        window.location.hash = '#/home';
+      }
       break;
+    }
+
     case '#/signup':
       container.appendChild(components.signup.SignUp());
       components.signup.Register();
       break;
 
     case '#/home': {
-      const auth = getAuth();
-      const user = auth.currentUser;
-
       if (user) {
         (components.home.Home());
         components.home.FunctionsHome();
@@ -32,9 +38,6 @@ const changeView = (route) => {
       break;
     }
     case '#/profile': {
-      const auth = getAuth();
-      const user = auth.currentUser;
-
       if (user) {
         components.profile.Profile();
         components.profile.FunctionProfile();

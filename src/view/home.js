@@ -50,10 +50,13 @@ export const FunctionsHome = () => {
   // read the posts
   display();
 
+  const userID = auth.currentUser.uid;
+  const nameUser = auth.currentUser.displayName;
+  console.log(nameUser);
   // save the post , genera ID automatico
   const postDescription = document.getElementById('post-description');
   document.getElementById('btn').addEventListener('click', async () => {
-    savePost(postDescription);
+    savePost(postDescription, userID, nameUser);
   });
 
   // LogOut
