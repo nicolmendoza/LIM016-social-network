@@ -10,7 +10,7 @@ export const Login = () => {
 
   viewHome.innerHTML = `
   <div class="logo">SOCIAL NETWORK</div>
-  <div><img id="logoLogin" src='./img/imgLogo.png' ></div>
+  <div><img id="logoLogin" src='./img/imgLogo.png'></div>
   <div class="form-group-text">
     <div class="textForm clickLogin">
     <a href="#/login">Login</a> </div>
@@ -42,7 +42,8 @@ export const Login = () => {
 
     <div class="textResetPassword">
     <p class="registerText">Don’t you have an account?  <a href="#/signup" class="registerText link">Register now</a></p></div>
-  </form>`;
+  </form>
+  `;
 
   return viewHome;
 };
