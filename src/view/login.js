@@ -11,25 +11,37 @@ export const Login = () => {
   viewHome.innerHTML = `
   <div class="logo">SOCIAL NETWORK</div>
   <div><img id="logoLogin" src='./img/imgLogo.png' ></div>
-  <div>
-    <a href="#/login">Login</a>
-    <a href="#/signup" >Sign Up</a>
+  <div class="form-group-text">
+    <div class="textForm clickLogin">
+    <a href="#/login">Login</a> </div>
+    <div class="textForm">
+    <a href="#/signup" >Sign Up</a> </div>
   </div>
-  <div>LOGIN</div>
 
   <form id="login-form">
     <div class="form-group">
+      <span class="icon-input">
+        <i class="far fa-envelope"></i>
+      </span>
       <input type="email" id="login-email"  placeholder="correo@example.com" required >
     </div>
     <div class="form-group">
+      <span class="icon-input" id="icon-eye">
+        <i class="fas fa-eye-slash"></i>
+      </span>
       <input type="password" id="login-password"  placeholder="****************" required >
     </div>
     <p id="generalMessage"></p>
-    <a href="#/resetPassword" id="resetPass"> ¿Has olvidado tu contraseña?</a><br>
-    <button type="submit" class="btnLogin">LOGIN</button>
-    <button type="button" id="googleLogin"><i class="fab fa-google"></i></button>
-    <button type="button" id="facebookLogin"><i class="fab fa-facebook-square"></i></button>
-    <button type="button" id="githubLogin"><i class="fab fa-github"></i></button>
+    <button type="submit" class="btnLogin">LOGIN</button><br>
+    <div class="divResetPassword">
+    <a href="#/resetPassword" id="resetPass"> Forgot password?</a></div>
+    
+    <button type="button" class="icon-login" id="googleLogin"><img src="img/google.png"></i></button>
+    <button type="button" class="icon-login" id="facebookLogin"><img src="img/facebook.png"></button>
+    <button type="button" class="icon-login" id="githubLogin"><img src="img/github.png"></button>
+
+    <div class="textResetPassword">
+    <p class="registerText">Don’t you have an account?  <a href="#/signup" class="registerText link">Register now</a></p></div>
   </form>`;
 
   return viewHome;
@@ -150,7 +162,6 @@ export const initLogin = () => {
         const user = result.user;
         console.log(user);
         alert(`Bienvenida ${user.displayName}`);
-
       }).catch((error) => {
         // Handle Errors here.
         // const errorCode = error.code;
@@ -163,4 +174,21 @@ export const initLogin = () => {
         console.log(error);
       });
   });
+
+  const iconEye = document.querySelector('#icon-eye');
+
+  iconEye.addEventListener('click', function () {
+    const icon = this.querySelector('i');
+
+    if ((this.nextElementSibling).type === 'password') {
+      this.nextElementSibling.type = 'text';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    } else {
+      this.nextElementSibling.type = 'password';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    }
+  });
+  
 };

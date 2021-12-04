@@ -6,27 +6,41 @@ import {
 
 export const SignUp = () => {
   const viewSignUp = `
-    <div>SOCIAL NETWORK</div>
+    <div class="logo">SOCIAL NETWORK</div>
     <div><img id="logoLogin" src='./img/imgLogo.png' ></div>
-    <div>
-     <a href="#/login">Login</a>
-      <a href="#/signup" >Sign Up</a>
+    <div class="form-group-text">
+      <div class="textForm">
+        <a href="#/login">Login</a> </div>
+      <div class="textForm clickSingUp">
+        <a href="#/signup" >Sign Up</a> </div>
     </div>
-    <div>SIGN UP</div>
     <form id="signup-form">
-    <div>
+    <div class="form-group">
+      <span class="icon-input">
+        <i class="far fa-user-circle"></i>
+      </span>
     <input type="text" id="signup-name"  placeholder="Name" required>
   </div>
-      <div>
+      <div class="form-group">
+        <span class="icon-input">
+          <i class="far fa-envelope"></i>
+        </span>
         <input type="text" id="signup-email"  placeholder="correo@example.com" required>
         <p id='emailMessage'></p>
       </div>
-      <div>
+      <div class="form-group">
+        <span class="icon-input" id="icon-eye">
+          <i class="fas fa-eye-slash"></i>
+        </span>
         <input type="password" id="signup-password"  placeholder="**************" required>
         <p id='passwordMessage'></p>
 
       </div>
       <button type="submit" class="btnLogin" >CREATE A COUNT</button>
+
+      <div class="textResetPassword">
+    <p class="registerText">Do you have an account?  <a href="#/signup" class="registerText link">Login now</a></p></div>
+
     </form>`;
 
   const divElement = document.createElement('div');
@@ -92,5 +106,21 @@ export const Register = () => {
           passwordMessage.innerHTML = '';
         }
       });
+  });
+
+  const iconEye = document.querySelector('#icon-eye');
+
+  iconEye.addEventListener('click', function () {
+    const icon = this.querySelector('i');
+
+    if ((this.nextElementSibling).type === 'password') {
+      this.nextElementSibling.type = 'text';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    } else {
+      this.nextElementSibling.type = 'password';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    }
   });
 };
