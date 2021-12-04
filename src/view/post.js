@@ -14,10 +14,12 @@ export const template = (post) => {
       </div>
       <div>`;
   });
+  console.log(post);
 
   document.querySelectorAll('.deleteDiv').forEach((div) => {
     div.addEventListener('click', (e) => {
       const id = e.target.id;
+      console.log(div);
       deletePost(id);
     });
   });

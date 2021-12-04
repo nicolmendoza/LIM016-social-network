@@ -1,156 +1,153 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-body{
-    background-image: linear-gradient(to bottom, #BEBDFF 0%, #C6FCFF 100%);
-    min-height: 100vh;
-    font-family: 'Outfit', sans-serif;
+body {
+  background-image: linear-gradient(to bottom, #bebdff 0%, #c6fcff 100%);
+
+  font-family: "Outfit", sans-serif;
 }
 
-#container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
-#container div{
-    text-align: center;
+#container div {
+  text-align: center;
 }
-
 
 /* ESTILO A LA VISTA 1*/
-#logoLogin{
-    width: 300px;
+#logoLogin {
+  width: 300px;
 }
-.logo{
-    font-size: 38px;
-    font-family: sans-serif;
-    font-weight: 900;
-    color: white;
+.logo {
+  font-size: 38px;
+  font-family: sans-serif;
+  font-weight: 900;
+  color: white;
 }
-#botonesLogin{
-    justify-content: space-evenly;
-    display: flex;
-    flex-direction: row;
+#botonesLogin {
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
 }
 
 #login-form input,
-#signup-form input{
-    height: 40px;
-    width: 70%;
-    border-radius: 20px;
-    margin: 6px 0px;
-    padding-left: 10px;
-    border: 1.5px transparent;
-    background: #6CC5DE;
-    color: white;
-    font-size: 14px;
-    box-shadow: 1px 1px 2px 1px #8888;
+#signup-form input {
+  height: 40px;
+  width: 70%;
+  border-radius: 20px;
+  margin: 6px 0px;
+  padding-left: 10px;
+  border: 1.5px transparent;
+  background: #6cc5de;
+  color: white;
+  font-size: 14px;
+  box-shadow: 1px 1px 2px 1px #8888;
 }
 
-.btnLogin{
-    
-    height: 40px;
-    width: 70%;
-    border-radius: 15px;
-    margin: 10px 0px 6px 0px;
-    padding-left: 10px;
-    border: 1.5px transparent;
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    color: #6CC5DE;
-    font-size: 14px;
-    box-shadow: 1px 1px 2px 1px #8888;
-    font-weight: bold;
+.btnLogin {
+  height: 40px;
+  width: 70%;
+  border-radius: 15px;
+  margin: 10px 0px 6px 0px;
+  padding-left: 10px;
+  border: 1.5px transparent;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  color: #6cc5de;
+  font-size: 14px;
+  box-shadow: 1px 1px 2px 1px #8888;
+  font-weight: bold;
 }
-.form-group{
-    position:relative;
+.form-group {
+  position: relative;
 }
-.icon-input{
-    position: absolute;
-    right: calc(100% - 80%);
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.form-group-text{
-    display: flex;
-    justify-content: space-around;
-    width: 75%;
-    outline: none;
-    margin-left: 12.5%;
+.icon-input {
+  position: absolute;
+  right: calc(100% - 80%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.textForm{
-    border-bottom: 2px solid rgb(255, 255, 255);
-    width: 50%;
-    padding: 6px 0px;
-    margin-bottom: 15px;
+.form-group-text {
+  display: flex;
+  justify-content: space-around;
+  width: 75%;
+  outline: none;
+  margin-left: 12.5%;
 }
 
-.clickLogin{
-    border-bottom: 2px solid #1774FF !important;
-    font-weight: 900;
+.textForm {
+  border-bottom: 2px solid rgb(255, 255, 255);
+  width: 50%;
+  padding: 6px 0px;
+  margin-bottom: 15px;
 }
 
-.clickSingUp{
-    border-bottom: 2px solid #1774FF !important;
-    font-weight: 900;
+.clickLogin {
+  border-bottom: 2px solid #1774ff !important;
+  font-weight: 900;
 }
 
-.textForm a{
-    text-decoration: none;
-    color: black;
-    font-size: 18px;
-
+.clickSingUp {
+  border-bottom: 2px solid #1774ff !important;
+  font-weight: 900;
 }
 
-.icon-login{
-    background: white;
-    outline: none;
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: fit-content;
-}
-.divResetPassword{    
-    width: 70%;
-    margin: auto;
-    display: flex;
-    justify-content: flex-end;
-    padding-bottom: 12px;
+.textForm a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
 }
 
-#resetPass{
-    font-size: 12px;
-    padding-right: 0px;
-    text-decoration: none;
-    color: #286FFB;
+.icon-login {
+  background: white;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: fit-content;
+}
+.divResetPassword {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 12px;
 }
 
-.registerText{
-    font-size: 13px;
-    text-decoration: none;
-    color: #286FFB;
-    padding-top: 7px;
-}
-.link{
-    text-decoration: underline;
-}
-.link:hover { 
-    font-weight: bold;
-}    
-p.errorMessage{
-    font-size: 12px;
-    color: rgb(173, 72, 72);
-
+#resetPass {
+  font-size: 12px;
+  padding-right: 0px;
+  text-decoration: none;
+  color: #286ffb;
 }
 
-.postDiv{
-    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);    
-    margin:10px;
-    border-radius: 20px;
+.registerText {
+  font-size: 13px;
+  text-decoration: none;
+  color: #286ffb;
+  padding-top: 7px;
 }
+.link {
+  text-decoration: underline;
+}
+.link:hover {
+  font-weight: bold;
+}
+p.errorMessage {
+  font-size: 12px;
+  color: rgb(173, 72, 72);
+}
+
+.postDiv {
+  background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+  margin: 10px;
+  border-radius: 20px;
+}
+
