@@ -7,7 +7,7 @@ import {
 export const SignUp = () => {
   const viewSignUp = `
     <div>SOCIAL NETWORK</div>
-    <div><img id="logoLogin" src='./img/logoLogin.png' ></div>
+    <div><img id="logoLogin" src='./img/imgLogo.png' ></div>
     <div>
      <a href="#/login">Login</a>
       <a href="#/signup" >Sign Up</a>
@@ -18,13 +18,15 @@ export const SignUp = () => {
     <input type="text" id="signup-name"  placeholder="Name" required>
   </div>
       <div>
-        <input type="text" id="signup-email"  placeholder="Email" required>
+        <input type="text" id="signup-email"  placeholder="correo@example.com" required>
+        <p id='emailMessage'></p>
       </div>
       <div>
-        <input type="password" id="signup-password"  placeholder="Password" required>
-      </div>
+        <input type="password" id="signup-password"  placeholder="**************" required>
+        <p id='passwordMessage'></p>
 
-      <button type="submit" >Save changes</button>
+      </div>
+      <button type="submit" class="btnLogin" >CREATE A COUNT</button>
     </form>`;
 
   const divElement = document.createElement('div');
@@ -59,17 +61,36 @@ export const Register = () => {
           sendEmailVerification(auth.currentUser).then(() => {
             // Email verification sent!
             // ...
-            alert('correo enviado');
+
+            alert('Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja.');
+            console.log('correo enviado');
           });
         }
 
-        console.log('usuario creeado');
+        console.log('usuario creado');
       })
 
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorCode, errorMessage);
+        console.log(errorMessage);
+
+        const emailMessage = document.getElementById('emailMessage');
+        const passwordMessage = document.getElementById('passwordMessage');
+
+        if (errorMessage === 'Firebase: Error (auth/missing-email).' || errorMessage === 'Firebase: Error (auth/invalid-email).') {
+          emailMessage.innerHTML = 'Correo inválido.';
+        } else if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
+          emailMessage.innerHTML = 'Correo en uso.';
+        } else {
+          emailMessage.innerHTML = '';
+        }
+
+        if (password === '' || errorMessage === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
+          passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
+        } else {
+          passwordMessage.innerHTML = '';
+        }
       });
   });
 };

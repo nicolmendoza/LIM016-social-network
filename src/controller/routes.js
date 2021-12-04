@@ -24,7 +24,20 @@ const changeView = (route) => {
 
       if (user) {
         (components.home.Home());
-        components.home.LogOut();
+        components.home.FunctionsHome();
+      } else {
+        window.location.hash = '#/';
+      }
+
+      break;
+    }
+    case '#/profile': {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (user) {
+        components.profile.Profile();
+        components.profile.FunctionProfile();
       } else {
         window.location.hash = '#/';
       }
@@ -36,7 +49,7 @@ const changeView = (route) => {
       components.resetPassword.resetPasswordInit();
       break;
     default:
-      container.appendChild(components);
+      window.location.hash = '#/';
       break;
   }
 };

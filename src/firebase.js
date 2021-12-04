@@ -3,7 +3,25 @@
 // Initialize Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js';
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  collection,
+  getDocs,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy,
+  deleteDoc,
+  updateDoc,
+  // eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+import {
+  getAuth,
+  signOut,
+// eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyD9ngpw2YVZK0ZTgYEn2L3kJX2HFlcDK8Q',
@@ -19,4 +37,77 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-export const db = getFirestore();
+const db = getFirestore();
+const auth = getAuth();
+const user = auth.currentUser;
+
+export const logout = () => {
+  signOut(auth)
+    .then(() => {
+      console.log('log out');
+      window.location.hash = '#/';
+      // Sign-out successful.
+    })
+    .catch((error) => {
+      // An error happened.
+      console.log(error);
+    });
+};
+
+export const saveAbout = async (About) => {
+  await setDoc(doc(db, 'usuarios', auth.currentUser.uid), {
+    about: About,
+  });
+};
+
+export const showAbout = async (idUser) => {
+  const Snapshot = await getDocs(collection(db, 'usuarios'));
+  Snapshot.forEach((docAbout) => {
+    if (docAbout.id === idUser) {
+      document.getElementById('aboutP').innerHTML = `About : ${
+        docAbout.data().about
+      }`;
+      console.log(docAbout.id, ' => ', docAbout.data());
+    }
+  });
+};
+
+export const deletePost = async (id) => {
+  await deleteDoc(doc(db, 'post', id));
+};
+
+export const updatePost = async (id) => {
+  // const postDescription = document.getElementById('post-description').value;
+  const washingtonRef = doc(db, 'post', id);
+  // Set the "capital" field of the city 'DC'
+  await updateDoc(washingtonRef, {
+    message: 'post actualizado',
+  });
+};
+
+export const savePost = async (postDescription) => {
+  const docRef = await addDoc(collection(db, 'post'), {
+    message: postDescription.value,
+    userName: auth.currentUser.displayName,
+    userId: auth.currentUser.uid,
+    date: Date.now(),
+  });
+  console.log('Document written with ID: ', docRef.id);
+};
+
+export const readData = async (callback) => {
+  const q = query(collection(db, 'post'), orderBy('date', 'desc'));
+  onSnapshot(q, (querySnapshot) => {
+    document.getElementById('showPost').innerHTML = '';
+    const post = [];
+    querySnapshot.forEach((doct) => {
+      const objectPost = { };
+      objectPost.content = doct.data().message;
+      objectPost.userName = doct.data().userName;
+      objectPost.idP = doct.id;
+      post.push(objectPost);
+    });
+    console.log(post);
+    callback(post);
+  });
+};
