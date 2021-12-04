@@ -63,3 +63,8 @@ body{
     box-shadow: 1px 1px 2px 1px #8888;
     font-weight: bold;
 }
+
+p.errorMessage{
+    font-size: 12px;
+    color: rgb(173, 72, 72);
+}

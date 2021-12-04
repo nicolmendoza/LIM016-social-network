@@ -19,12 +19,12 @@ export const Login = () => {
 
   <form id="login-form">
     <div class="form-group">
-      <input type="email" id="login-email"  placeholder="correo@example.com" required >
+      <input type="email" id="login-email"  placeholder="E-mail" required >
     </div>
     <div class="form-group">
-      <input type="password" id="login-password"  placeholder="****************" required >
+      <input type="password" id="login-password"  placeholder="********" required >
     </div>
-    <p id="generalMessage"></p>
+    <p id="generalMessage" class="errorMessage"></p>
     <a href="#/resetPassword" id="resetPass"> ¿Has olvidado tu contraseña?</a><br>
     <button type="submit" class="btnLogin">LOGIN</button>
     <button type="button" id="googleLogin"><i class="fab fa-google"></i></button>
@@ -61,11 +61,8 @@ export const initLogin = () => {
         console.log(errorMessage);
 
         const message = document.getElementById('generalMessage');
-        if (password === '' || email === '') {
-          message.innerHTML = 'Correo o contraseña inválidos.';
-        } else if (errorMessage === 'Firebase: Error (auth/internal-error).' || errorMessage === 'Firebase: Error (auth/invalid-email).') {
-          message.innerHTML = 'Correo o contraseña inválidos.';
-        } else if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
+
+        if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
           message.innerHTML = 'Usuario no encontrado';
         }
 
@@ -150,7 +147,6 @@ export const initLogin = () => {
         const user = result.user;
         console.log(user);
         alert(`Bienvenida ${user.displayName}`);
-
       }).catch((error) => {
         // Handle Errors here.
         // const errorCode = error.code;
