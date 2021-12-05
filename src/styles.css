@@ -26,7 +26,7 @@ body {
   width: 300px;
 }
 .logo {
-  font-size: 38px;
+  font-size: 35px;
   font-family: sans-serif;
   font-weight: 900;
   color: white;
@@ -166,11 +166,25 @@ p.errorMessage{
     padding-bottom: 15px;
 }
 
+.backLogin{
+    padding-top: 10%;
+    color: #286FFB;
+}
+
+.backLogin a{
+    text-decoration: none;
+    color: #286FFB;
+}
+.backLogin:hover{
+    color: #1f4da9;
+    font-weight: bold;
+}
+
 /* VISTA DEL MODAL DE RESET*/
 .modalReset{
     width: 100%;
     min-height: 100vh;
-    background-color: rgb(106, 106, 233);
+    background-color: rgba(44, 44, 44, 0.371);
     position: absolute;
     left: 0;
     top:0;
@@ -179,7 +193,6 @@ p.errorMessage{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #f5576c;
     width: 100%;
     align-items: center;
 }
@@ -188,4 +201,47 @@ p.errorMessage{
     padding-right: 14px;
     padding-top: 10px;
     font-size: 21px;
+}
+.modalContainer{
+    background: aliceblue;
+    width: 90%;
+    height: max-content;
+    border-radius: 20px;
+    box-shadow: 0px 0px 6px 3px #46464673;
+}
+
+.modalContainer h{
+    color: #286FFB;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1.3cm;
+}
+
+.modal-parrafo{
+    padding-bottom: 12px;
+    width: 90%;
+    margin: auto;
+    line-height: 0.7cm;
+}
+.emailText{
+    color: #18449b;
+}
+
+.aceptReset{
+    height: 40px;
+    width: 146px;
+    border-radius: 15px;
+    margin: 10px 0px 25px 0px;
+    padding-left: 10px;
+    border: 1.5px transparent;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    color: #6CC5DE;
+    font-size: 14px;
+    box-shadow: 1px 1px 2px 1px #8888;
+    font-weight: bold;
+}
+
+.aceptReset a{
+    text-decoration: none;
+    color: cornflowerblue;
 }

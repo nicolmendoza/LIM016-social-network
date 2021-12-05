@@ -12,17 +12,19 @@ export const resetPassword = () => {
       <div class= "textReset" style="font-size: 17px;">Ingresa tu correo y te enviaremos <br> un enlace para que recuperes <br> el acceso a tu cuenta</div>
       <input type="email" class="input-reset" id="resetEmail"  placeholder="correo@example.com" required >
       <button type="submit" class="btnLogin">ENVIAR</button>
+      <div class="backLogin"><a href="#/login"> Volver a inicio de sesión </a> </div>
     </form>
     
-    <section class="modalReset" style="display: flex">
+    <section class="modalReset" style="display: none">
       <div class="modalDiv"> 
-      <div>
+      <div class="modalContainer">
       <div id="far">
         <i class="far fa-times-circle"></i>
       </div>
       <div>
         <h>Correo electronico enviado</h>
-        <p>Enviamos un correo electronico a <b class="emailText"></b> con un enlace para que recuperes el acceso a tu cuenta</p> 
+        <div class="modal-parrafo">
+        Te hemos enviado un correo electrónico <b class="emailText"></b> con instrucciones para volver a establecer tu contraseña.</div>
         <button class="aceptReset"><a href="#/login">ACEPTAR</a></button>
       </div>
       </div>
@@ -56,5 +58,9 @@ export const resetPasswordInit = () => {
       // ..
         console.log(error);
       });
+  });
+
+  document.querySelector('.far').addEventListener('click', () => {
+    document.querySelector('.modalReset').style.display = 'none';
   });
 };

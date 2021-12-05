@@ -19,7 +19,7 @@ import { saveAbout, showAbout } from '../firebase.js';
 export const Profile = () => {
   const divElementProfile = document.createElement('div');
   divElementProfile.innerHTML = `
-  <button id="home">Home</button>
+  <!-- <button id="home">Home</button> -->
   <div>Profile</div>
   <img id="photoUserProfile" width="100px">
   <div id="infoUserProfile"></div>
@@ -110,7 +110,7 @@ export const FunctionProfile = () => {
   // };
   // leerPostProfile(showPostProfile);
 
-  document.getElementById('home').addEventListener('click', () => {
-    window.location.hash = '#/home';
-  });
+  // document.getElementById('home').addEventListener('click', () => {
+  //   window.location.hash = '#/home';
+  // });
 };

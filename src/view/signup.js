@@ -39,7 +39,7 @@ export const SignUp = () => {
       <button type="submit" class="btnLogin" >CREATE A COUNT</button>
 
       <div class="textResetPassword">
-    <p class="registerText">Do you have an account?  <a href="#/signup" class="registerText link">Login now</a></p></div>
+    <p class="registerText">Do you have an account?  <a href="#/login" class="registerText link">Login now</a></p></div>
 
     </form>`;
 

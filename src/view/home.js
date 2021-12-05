@@ -14,7 +14,7 @@ export const Home = () => {
   const divElement = document.createElement('div');
   divElement.innerHTML = ` 
   <button id="logout">Log Out</button>
-  <button id="profile">Profile</button>
+  <!-- <button id="profile">Profile</button> -->
   <div>WELCOME</div>
   <img id="photoUser" width="100px">
   <div id="infoUser"></div>
@@ -69,7 +69,7 @@ export const FunctionsHome = () => {
   showAbout(aboutParrafo);
 
   // profile
-  document.getElementById('profile').addEventListener('click', () => {
-    window.location.hash = '#/profile';
-  });
+  // document.getElementById('profile').addEventListener('click', () => {
+  //   window.location.hash = '#/profile';
+  // });
 };

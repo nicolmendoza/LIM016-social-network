@@ -3,6 +3,7 @@ import { Login, initLogin } from './login.js';
 import { Home, FunctionsHome } from './home.js';
 import { resetPassword, resetPasswordInit } from './resetPassword.js';
 import { Profile, FunctionProfile } from './profile.js';
+import { navMobile } from './navMobile.js';
 
 export const components = {
   login: { Login, initLogin },
@@ -10,4 +11,5 @@ export const components = {
   home: { Home, FunctionsHome },
   resetPassword: { resetPassword, resetPasswordInit },
   profile: { Profile, FunctionProfile },
+  navMobile: { navMobile },
 };

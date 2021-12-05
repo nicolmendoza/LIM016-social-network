@@ -6,6 +6,8 @@ import { components } from '../view/index.js';
 const changeView = (route) => {
   const container = document.getElementById('container');
   container.innerHTML = '';
+  const footer = document.getElementById('container-footer');
+  footer.innerHTML = '';
   const auth = getAuth();
   const user = auth.currentUser;
   switch (route) {
@@ -29,6 +31,7 @@ const changeView = (route) => {
 
     case '#/home': {
       if (user) {
+        footer.appendChild(components.navMobile.navMobile());
         (components.home.Home());
         components.home.FunctionsHome();
       } else {
@@ -39,6 +42,7 @@ const changeView = (route) => {
     }
     case '#/profile': {
       if (user) {
+        footer.appendChild(components.navMobile.navMobile());
         components.profile.Profile();
         components.profile.FunctionProfile();
       } else {
