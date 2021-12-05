@@ -41,6 +41,8 @@ const db = getFirestore();
 const auth = getAuth();
 const user = auth.currentUser;
 
+export const currentUser = () => auth;
+
 export const logout = () => {
   signOut(auth)
     .then(() => {
@@ -108,7 +110,6 @@ export const readData = async (callback) => {
       objectPost.userID = doct.data().userId;
       post.push(objectPost);
     });
-
     callback(post);
   });
 };

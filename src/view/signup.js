@@ -1,19 +1,31 @@
 // eslint-disable-next-line import/no-unresolved
 import {
-  getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile,
-// eslint-disable-next-line import/no-unresolved
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+  // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 export const SignUp = () => {
-  const viewSignUp = `
+  const viewSignUp = document.createElement('div');
+  viewSignUp.classList.add('sectionLogin');
+  viewSignUp.innerHTML = `
+  <section class="bubble">
+  <!-- content here -->
+</section>
+  <div class="section1"><img class="imgInicio"></div>
+  <div class="section2">
+  <div class="formulario">
     <div class="logo">SOCIAL NETWORK</div>
-    <div><img id="logoLogin" src='./img/imgLogo.png' ></div>
+    <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png' ></div>
     <div class="form-group-text">
       <div class="textForm">
         <a href="#/login">Login</a> </div>
       <div class="textForm clickSingUp">
         <a href="#/signup" >Sign Up</a> </div>
     </div>
+
     <form id="signup-form">
     <div class="form-group">
       <span class="icon-input">
@@ -40,12 +52,11 @@ export const SignUp = () => {
 
       <div class="textResetPassword">
     <p class="registerText">Do you have an account?  <a href="#/signup" class="registerText link">Login now</a></p></div>
+    </form>
+    </div>
+    </div>`;
 
-    </form>`;
-
-  const divElement = document.createElement('div');
-  divElement.innerHTML = viewSignUp;
-  return divElement;
+  return viewSignUp;
 };
 
 // minlength='8' maxlength='16' pattern="(?=.*[0-9]{2,14})(?=.*[a-zA-Z]{2,14})">
@@ -71,13 +82,25 @@ export const Register = () => {
 
     if (email === null || email === '') {
       emailMessage.innerHTML = 'Ingresa tu e-mail (email@ejemplo.com)';
-    } else if ((email.indexOf('@') === -1 || email.indexOf('.com') === -1) || (email.indexOf('@.com') !== -1) || email.charAt(0) === '@') {
+    } else if (
+      email.indexOf('@') === -1
+      || email.indexOf('.com') === -1
+      || email.indexOf('@.com') !== -1
+      || email.charAt(0) === '@'
+    ) {
       emailMessage.innerHTML = 'Ingresa tu e-mail (email@ejemplo.com)';
     } else {
       emailMessage.innerHTML = '';
     }
 
-    if ((password.length < 8 || password.length > 16) || (password.indexOf(' ') !== -1) || (password.search(/[^a-zA-Z0-9]/) !== -1 || password.search(/[a-zA-Z\u00F1\u00D1][0-9]|[0-9][a-zA-Z\u00F1\u00D1]/) === -1)) {
+    if (
+      password.length < 8
+      || password.length > 16
+      || password.indexOf(' ') !== -1
+      || password.search(/[^a-zA-Z0-9]/) !== -1
+      || password.search(/[a-zA-Z\u00F1\u00D1][0-9]|[0-9][a-zA-Z\u00F1\u00D1]/)
+        === -1
+    ) {
       passwordMessage.innerHTML = 'La contraseña debe tener de 8 y 16 caracteres entre números y letras(minúsculas o mayúsculas). No puede tener espacios ni otros símbolos.';
     } else {
       passwordMessage.innerHTML = '';
@@ -85,25 +108,30 @@ export const Register = () => {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-        // Signed in
+          // Signed in
 
           const user = userCredential.user;
           updateProfile(auth.currentUser, {
             displayName: document.getElementById('signup-name').value,
-            photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
-          }).then(() => {
-          // Profile updated!
-          // ...
-          }).catch((error) => {
-            console.log(error);
-          });
+            photoURL:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+            })
+            .catch((error) => {
+              console.log(error);
+            });
 
           if (!user.emailVerified) {
             sendEmailVerification(auth.currentUser).then(() => {
-            // Email verification sent!
-            // ...
+              // Email verification sent!
+              // ...
 
-              alert('Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja.');
+              alert(
+                'Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja.',
+              );
               console.log('correo enviado');
             });
           }
@@ -124,7 +152,7 @@ export const Register = () => {
   iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 
-    if ((this.nextElementSibling).type === 'password') {
+    if (this.nextElementSibling.type === 'password') {
       this.nextElementSibling.type = 'text';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');

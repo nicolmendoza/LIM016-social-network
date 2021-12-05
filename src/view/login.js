@@ -9,9 +9,13 @@ export const Login = () => {
   const viewHome = document.createElement('div');
   viewHome.classList.add('sectionLogin');
   viewHome.innerHTML = `
+  <section class="bubble">
+  <!-- content here -->
+</section>
   <div class="section1"><img class="imgInicio" ></div>
   <div class="section2">
   <div class="formulario">
+
   <div class="logo">SOCIAL NETWORK</div>
   <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png' ></div>
   <div class="form-group-text">
