@@ -1,14 +1,10 @@
 // eslint-disable-next-line import/no-unresolved
-import {
-  getAuth,
-// eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
 import {
-  logout, savePost, showAbout,
+  logout, savePost, showAbout, currentUser, readData,
 } from '../firebase.js';
 
-import { display } from './post.js';
+import { template } from './post.js';
 
 export const Home = () => {
   const divElement = document.createElement('div');
@@ -33,26 +29,24 @@ export const Home = () => {
 
 export const FunctionsHome = () => {
   // autentificando usuario logueado
-  const auth = getAuth();
-  const user = auth.currentUser;
-  if (user) {
-    console.log(user);
-    if (user.displayName == null) {
-      const info = document.getElementById('infoUser');
-      info.innerHTML = 'Bienvenida Developer';
-    } else {
-      const info = document.getElementById('infoUser');
-      info.innerHTML = `Bienvenida ${user.displayName}`;
-    }
-    document.getElementById('photoUser').src = `${user.photoURL}`;
+  const userCurrent = currentUser().currentUser;
+
+  if (userCurrent.displayName == null) {
+    const info = document.getElementById('infoUser');
+    info.innerHTML = 'Bienvenida Developer';
+  } else {
+    const info = document.getElementById('infoUser');
+    info.innerHTML = `Bienvenida ${userCurrent.displayName}`;
   }
+  document.getElementById('photoUser').src = `${userCurrent.photoURL}`;
 
   // read the posts
-  display();
+  readData(template);
 
-  const userID = auth.currentUser.uid;
-  const nameUser = auth.currentUser.displayName;
+  const userID = userCurrent.uid;
+  const nameUser = userCurrent.displayName;
   console.log(nameUser);
+
   // save the post , genera ID automatico
   const postDescription = document.getElementById('post-description');
   document.getElementById('btn').addEventListener('click', async () => {
