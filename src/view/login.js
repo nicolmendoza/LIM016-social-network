@@ -7,10 +7,13 @@ import {
 
 export const Login = () => {
   const viewHome = document.createElement('div');
-
+  viewHome.classList.add('sectionLogin');
   viewHome.innerHTML = `
+  <div class="section1"><img class="imgInicio" ></div>
+  <div class="section2">
+  <div class="formulario">
   <div class="logo">SOCIAL NETWORK</div>
-  <div><img id="logoLogin" src='./img/imgLogo.png'></div>
+  <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png' ></div>
   <div class="form-group-text">
     <div class="textForm clickLogin">
     <a href="#/login">Login</a> </div>
@@ -43,7 +46,8 @@ export const Login = () => {
     <div class="textResetPassword">
     <p class="registerText">Don’t you have an account?  <a href="#/signup" class="registerText link">Register now</a></p></div>
   </form>
-  `;
+  </div>
+  </div>`;
 
   return viewHome;
 };
@@ -188,5 +192,4 @@ export const initLogin = () => {
       icon.classList.add('fa-eye-slash');
     }
   });
-  
 };

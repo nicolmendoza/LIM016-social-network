@@ -1,0 +1,50 @@
+
+@media (min-width: 768px) {
+    .imgInicioPequeño {
+      display: none;
+    }
+    .imgInicio {
+      content: url("../img/imgLogo.png");
+      width: 90%;
+    }
+    .sectionLogin {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+    }
+    .section1{
+        width: 50%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center
+      }
+      .section2{
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin: auto;
+          align-items: center;
+          
+  
+      }
+      .formulario{
+          width: 100%;
+      }
+  }
+  @media (min-width: 992px) {
+      .section1{
+          width: 50% }
+      .section2{
+          width: 60%;
+  
+      }
+      .formulario{
+          width: 70%;
+      }
+      .imgInicio {
+          width: 70%;
+        }
+  }

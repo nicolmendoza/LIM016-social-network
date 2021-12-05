@@ -85,11 +85,11 @@ export const updatePost = async (id) => {
   });
 };
 
-export const savePost = async (postDescription) => {
+export const savePost = async (postDescription, userID, nameUser) => {
   const docRef = await addDoc(collection(db, 'post'), {
     message: postDescription.value,
-    userName: auth.currentUser.displayName,
-    userId: auth.currentUser.uid,
+    userName: nameUser,
+    userId: userID,
     date: Date.now(),
   });
   console.log('Document written with ID: ', docRef.id);
@@ -105,9 +105,10 @@ export const readData = async (callback) => {
       objectPost.content = doct.data().message;
       objectPost.userName = doct.data().userName;
       objectPost.idP = doct.id;
+      objectPost.userID = doct.data().userId;
       post.push(objectPost);
     });
-    console.log(post);
+
     callback(post);
   });
 };
