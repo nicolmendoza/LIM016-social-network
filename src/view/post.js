@@ -4,7 +4,7 @@ export const template = (post) => {
   post.forEach((onePost) => {
     document.getElementById('showPost').innerHTML += `<div class="postDiv">
       <div>${onePost.userName}</div>
-      <div class="contentPost">${onePost.content}</div>
+      <div id="contentPost${onePost.idP}">${onePost.content}</div>
       <div class="deleteDiv">
       <button id="${onePost.idP}">DELETE</button>
       </div>
@@ -44,8 +44,14 @@ export const template = (post) => {
       for (let i = 0; i < post.length; i++) {
         console.log(post[i].userID === user.uid, post[i].idP === id);
         if (post[i].userID === user.uid && post[i].idP === id) {
-          document.querySelector('.contentPost').innerHTML = `<textarea id="contentEdit">${post[i].content}</textarea>
-          <button id="save">SAVE</button>`;
+          document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `<textarea id="contentEdit">${post[i].content}</textarea>
+          <button class="save">SAVE</button>`;
+          document.querySelector('.save').addEventListener('click', () => {
+            e.preventDefault();
+            const postEdit = document.getElementById('contentEdit').value;
+            console.log(document.getElementById('contentEdit').value);
+            updatePost(id, postEdit);
+          });
 
           break;
         // } else {
@@ -53,12 +59,6 @@ export const template = (post) => {
         //   break;
         }
       }
-      document.getElementById('save').addEventListener('click', () => {
-        e.preventDefault();
-        const postEdit = document.getElementById('contentEdit').value;
-        console.log(document.getElementById('contentEdit').value);
-        updatePost(id, postEdit);
-      });
     });
   });
 };
