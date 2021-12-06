@@ -57,7 +57,7 @@ export const logout = () => {
 };
 
 export const saveAbout = async (About) => {
-  await setDoc(doc(db, 'usuarios', auth.currentUser.uid), {
+  await setDoc(doc(db, 'usuarios', (auth.currentUser).uid), {
     about: About,
   });
 };
@@ -78,13 +78,12 @@ export const deletePost = async (id) => {
   await deleteDoc(doc(db, 'post', id));
 };
 
-export const updatePost = async (id, likeCount) => {
+export const updatePost = async (id, postEdit) => {
   // const postDescription = document.getElementById('post-description').value;
   const washingtonRef = doc(db, 'post', id);
   // Set the "capital" field of the city 'DC'
   await updateDoc(washingtonRef, {
-    message: 'post actualizado',
-    likes: likeCount,
+    message: postEdit,
   });
 };
 

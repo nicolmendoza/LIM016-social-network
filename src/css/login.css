@@ -1,7 +1,7 @@
 .bubble::after {
-  content: '';
-  border-bottom-right-radius: 900px ;
-  border-top-right-radius: 900px ;
+  content: "";
+  border-bottom-right-radius: 900px;
+  border-top-right-radius: 900px;
   /* border-top-left-radius: 500px ;
   border-bottom-left-radius: 500px ; */
   position: absolute;
@@ -10,60 +10,63 @@
   z-index: -1;
   width: 40%;
   background-color: white;
-  height: 100%;
   transform: scale(1.5);
+  height: 80vh;
+}
+.sectionLogin {
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
-    .imgInicioPequeño {
-      display: none;
-    }
-    .imgInicio {
-      content: url("../img/imgLogo.png");
-      width: 90%;
-    }
-    .sectionLogin {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 100%;
-    }
-    .section1{
-        width: 50%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center
-      }
-      .section2{
-          width: 50%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          margin: auto;
-          align-items: center;
-          
-  
-      }
-      .formulario{
-          width: 100%;
-      }
+  .imgInicioPequeño {
+    display: none;
   }
-  @media (min-width: 992px) {
-      .section1{
-          width: 50% }
-      .section2{
-          width: 60%;
-  
-      }
-      .formulario{
-          width: 70%;
-      }
-      .imgInicio {
-          width: 70%;
-        }
+  .imgInicio {
+    content: url("../img/imgLogo.png");
+    width: 90%;
   }
-  @media (max-width:768px) {
-    .bubble{
-      display: none;
-    }}
+  .sectionLogin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+  .section1 {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .section2 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+  }
+  .formulario {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .section1 {
+    width: 50%;
+  }
+  .section2 {
+    width: 60%;
+  }
+  .formulario {
+    width: 70%;
+  }
+  .imgInicio {
+    width: 70%;
+  }
+}
+@media (max-width: 768px) {
+  .bubble {
+    display: none;
+  }
+}
