@@ -6,12 +6,16 @@ export const template = (post) => {
       <div>${onePost.userName}</div>
       <div>${onePost.content}</div>
       <div class="deleteDiv">
-      <button id="${onePost.idP}">DELETE</button>
+        <button id="${onePost.idP}">DELETE</button>
       </div>
       <div class="updateDiv">
-      <button id="${onePost.idP}">EDIT</button>
+        <button id="${onePost.idP}">EDIT</button>
       </div>
-      <div>`;
+      <div id="postIcon">
+        <i class="far fa-heart"></i>
+        <i class="far fa-comment"></i>
+        <i class="far fa-paper-plane"></i>
+      </div>`;
   });
 
   const user = currentUser().currentUser;

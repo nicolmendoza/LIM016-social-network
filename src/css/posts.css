@@ -1,0 +1,6 @@
+#postIcon{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: red;
+}
