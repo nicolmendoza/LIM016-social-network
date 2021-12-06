@@ -116,6 +116,7 @@ body {
     border-radius: 50%;
     width: 35px;
     height: fit-content;
+    cursor: pointer;
 }
 .divResetPassword{    
     width: 70%;

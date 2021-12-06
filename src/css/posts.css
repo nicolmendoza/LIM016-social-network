@@ -1,6 +1,9 @@
 #postIcon{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    color: red;
+    justify-content: space-evenly;
+}
+.icon{
+    margin: 0.5em;
+    cursor: pointer;
 }

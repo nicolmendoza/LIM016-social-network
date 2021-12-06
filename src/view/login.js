@@ -183,7 +183,7 @@ export const initLogin = () => {
 
   const iconEye = document.querySelector('#icon-eye');
 
-  iconEye.addEventListener('click', function () {
+  iconEye.addEventListener('click', () => {
     const icon = this.querySelector('i');
 
     if ((this.nextElementSibling).type === 'password') {
