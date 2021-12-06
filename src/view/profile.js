@@ -1,19 +1,20 @@
 // eslint-disable-next-line import/no-unresolved
 import {
   getAuth,
-  updateProfile,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
-import {
+// import {
 //   getFirestore,
 //   collection,
 //   onSnapshot,
 //   query,
 //   where,
 // eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
+// eslint-disable-next-line import/no-unresolved
+import { doc, updateDoc, getFirestore } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 import { saveAbout, showAbout } from '../firebase.js';
 
 export const Profile = () => {
@@ -43,7 +44,6 @@ export const FunctionProfile = () => {
   const auth = getAuth();
   // const db = getFirestore();
 
-  console.log(document.getElementById('PostProfile'));
   // autentificando usuario logueado
   const user = auth.currentUser;
   if (user) {
@@ -57,19 +57,25 @@ export const FunctionProfile = () => {
     }
     document.getElementById('photoUserProfile').src = `${user.photoURL}`;
   }
-
+  const db = getFirestore();
   // edit username
-  document.getElementById('btn-edit-name').addEventListener('click', () => {
+  console.log(user.uid);
+  document.getElementById('btn-edit-name').addEventListener('click', async () => {
     const newName = document.getElementById('name');
-    updateProfile(auth.currentUser, {
-      displayName: newName.value,
-    }).then(() => {
-      const info = document.getElementById('infoUserProfile');
-      info.innerHTML = `Bienvenida ${user.displayName}`;
-    }).catch((error) => {
-      console.log(error);
+    // updateProfile(auth.currentUser, {
+    //   displayName: newName.value,
+    // }).then(() => {
+    //   const info = document.getElementById('infoUserProfile');
+    //   info.innerHTML = `Bienvenida ${user.displayName}`;
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+    const info = doc(db, 'usuarios', user.uid);
+    await updateDoc(info, {
+      name: newName.value,
     });
   });
+  /// ///////
 
   const idUser = auth.currentUser.uid;
   // function show about

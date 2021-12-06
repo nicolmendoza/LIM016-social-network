@@ -57,7 +57,7 @@ export const logout = () => {
 };
 
 export const saveAbout = async (About) => {
-  await setDoc(doc(db, 'usuarios', auth.currentUser.uid), {
+  await setDoc(doc(db, 'usuarios', (auth.currentUser).uid), {
     about: About,
   });
 };

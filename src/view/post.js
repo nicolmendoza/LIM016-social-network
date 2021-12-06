@@ -10,6 +10,7 @@ export const template = (post) => {
       </div>
       <div class="updateDiv">
       <button id="${onePost.idP}">EDIT</button>
+      <button id="" >LIKE</button>
       </div>
       <div>`;
   });
