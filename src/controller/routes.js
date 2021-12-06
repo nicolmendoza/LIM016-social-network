@@ -55,6 +55,12 @@ const changeView = (route) => {
       container.appendChild(components.resetPassword.resetPassword());
       components.resetPassword.resetPasswordInit();
       break;
+
+    case '#/newPost':
+      container.appendChild(components.newPost.newPost());
+      components.newPost.functionNewPost();
+      break;
+
     default:
       window.location.hash = '#/';
       break;

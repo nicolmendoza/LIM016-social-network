@@ -78,12 +78,12 @@ export const deletePost = async (id) => {
   await deleteDoc(doc(db, 'post', id));
 };
 
-export const updatePost = async (id) => {
+export const updatePost = async (id, postEdit) => {
   // const postDescription = document.getElementById('post-description').value;
   const washingtonRef = doc(db, 'post', id);
   // Set the "capital" field of the city 'DC'
   await updateDoc(washingtonRef, {
-    message: 'post actualizado',
+    message: postEdit,
   });
 };
 
