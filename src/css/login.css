@@ -1,10 +1,10 @@
-.bubble::after {
+/* .bubble::after {
   content: '';
   border-bottom-right-radius: 900px ;
-  border-top-right-radius: 900px ;
+  border-top-right-radius: 900px ; */
   /* border-top-left-radius: 500px ;
   border-bottom-left-radius: 500px ; */
-  position: absolute;
+  /* position: absolute;
   top: 0;
   bottom: 0;
   z-index: -1;
@@ -12,9 +12,9 @@
   background-color: white;
   height: 100%;
   transform: scale(1.5);
-}
+} */
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .imgInicioPequeño {
       display: none;
     }
@@ -66,4 +66,4 @@
   @media (max-width:768px) {
     .bubble{
       display: none;
-    }}
+    }} */
