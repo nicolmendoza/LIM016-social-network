@@ -5,6 +5,10 @@ import {
   getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider,
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
+import {
+  doc, setDoc, getDoc, getFirestore,
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+
 export const Login = () => {
   const viewHome = document.createElement('div');
   viewHome.classList.add('sectionLogin');
@@ -103,9 +107,7 @@ export const initLogin = () => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         console.log(credential);
-        // const token = credential.accessToken;
-        // // The signed-in user info.
-        // const user = result.user;
+
         window.location.hash = '#/home';
         console.log('ingresando con correo google');
         // ...

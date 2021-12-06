@@ -1,6 +1,10 @@
 // eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line import/no-unresolved
 import {
+  doc, setDoc, getDoc, getFirestore,
+// eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+import {
   logout, savePost, showAbout, currentUser, readData,
 } from '../firebase.js';
 
@@ -30,7 +34,27 @@ export const Home = () => {
 export const FunctionsHome = () => {
   // autentificando usuario logueado
   const userCurrent = currentUser().currentUser;
+  console.log(userCurrent.uid);
 
+  const db = getFirestore();
+  async function verificarSiExisteUsuario() {
+    const docRef = doc(db, 'usuarios', userCurrent.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log('existe');
+    } else {
+      await setDoc(doc(db, 'usuarios', userCurrent.uid), {
+        name: userCurrent.displayName,
+        photo: userCurrent.photoURL,
+        userUID: userCurrent.uid,
+      });
+      console.log('No existe');
+    }
+  }
+  verificarSiExisteUsuario();
+
+  // saveUser();
   if (userCurrent.displayName == null) {
     const info = document.getElementById('infoUser');
     info.innerHTML = 'Bienvenida Developer';
