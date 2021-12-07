@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line import/no-unresolved
 import {
-  doc, setDoc, getDoc, getFirestore,
+  doc, setDoc, getDoc, getFirestore, updateDoc,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 import {
@@ -48,6 +48,7 @@ export const FunctionsHome = () => {
         name: userCurrent.displayName,
         photo: userCurrent.photoURL,
         userUID: userCurrent.uid,
+        about: 'About',
       });
       console.log('No existe');
     }
@@ -55,15 +56,27 @@ export const FunctionsHome = () => {
   verificarSiExisteUsuario();
 
   // saveUser();
-  if (userCurrent.displayName == null) {
-    const info = document.getElementById('infoUser');
-    info.innerHTML = 'Bienvenida Developer';
-  } else {
-    const info = document.getElementById('infoUser');
-    info.innerHTML = `Bienvenida ${userCurrent.displayName}`;
-  }
-  document.getElementById('photoUser').src = `${userCurrent.photoURL}`;
 
+  async function profileInfo() {
+    const docRef = doc(db, 'usuarios', userCurrent.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const userInfo = docSnap.data();
+      if (userInfo.name == null) {
+        await updateDoc(docRef, {
+          name: 'Developer',
+        });
+      }
+      const info = document.getElementById('infoUser');
+      info.innerHTML = `Bienvenida ${userInfo.name}`;
+      document.getElementById('photoUser').src = `${userInfo.photo}`;
+    }
+
+    console.log(docSnap.data());
+  }
+
+  profileInfo();
   // read the posts
   readData(template);
 
@@ -74,7 +87,7 @@ export const FunctionsHome = () => {
   // save the post , genera ID automatico
   const postDescription = document.getElementById('post-description');
   document.getElementById('btn').addEventListener('click', async () => {
-    savePost(postDescription, userID, nameUser);
+    savePost(postDescription, userID);
   });
 
   // LogOut
