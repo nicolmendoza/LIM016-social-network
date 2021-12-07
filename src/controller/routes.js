@@ -1,15 +1,17 @@
 // eslint-disable-next-line import/no-unresolved
-import { getAuth } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 import { components } from '../view/index.js';
+
+const auth = getAuth();
+let user;
 
 const changeView = (route) => {
   const container = document.getElementById('container');
   container.innerHTML = '';
   const footer = document.getElementById('container-footer');
   footer.innerHTML = '';
-  const auth = getAuth();
-  const user = auth.currentUser;
+
   switch (route) {
     case '#':
     case '/':
@@ -66,5 +68,15 @@ const changeView = (route) => {
       break;
   }
 };
+
+onAuthStateChanged(auth, (userOne) => {
+  if (userOne) {
+    user = userOne;
+    changeView('#/home');
+  } else {
+    user = '';
+    changeView('#/');
+  }
+});
 
 export { changeView };
