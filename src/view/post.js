@@ -9,31 +9,22 @@ export const template = (post) => {
   const nuevoElemento = document.createElement('div');
   const postElements = post.map(async (onePost) => {
     const NAME = await obtenerInfo(onePost.userID);
-    nuevoElemento.innerHTML += `<div class="postDiv">
+    nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
       <div>${NAME}</div>
       <div id="contentPost${onePost.idP}">${onePost.content}</div>
-      <div class="deleteDiv">
-      <button id="${onePost.idP}">DELETE</button>
-      </div>
-      <div class="updateDiv">
-      <button id="${onePost.idP}">EDIT</button>
+      <button class="delete">DELETE</button>
+      <button class="edit">EDIT</button>
       <button id="" >LIKE</button>
-      </div>
-      <div id="postIcon">
-          <i class="far fa-heart icon iconHeart" id="${onePost.idP}"></i>
-          <i class="far fa-comment icon"></i>
-          <i class="far fa-paper-plane icon"></i>
-       </div>
       <div>`;
   });
   Promise.all(postElements).then(() => {
     const user = currentUser().currentUser;
     console.log(user.uid);
 
-    nuevoElemento.querySelectorAll('.deleteDiv').forEach((div) => {
+    nuevoElemento.querySelectorAll('.delete').forEach((div) => {
       div.addEventListener('click', (e) => {
-        console.log(e.target.parentNode.parentNode);
-        const id = e.target.id;
+        console.log(e.target.parentNode);
+        const id = e.target.parentNode.id;
         console.log(id);
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < post.length; i++) {
@@ -49,9 +40,9 @@ export const template = (post) => {
         }
       });
     });
-    nuevoElemento.querySelectorAll('.updateDiv').forEach((div) => {
+    nuevoElemento.querySelectorAll('.edit').forEach((div) => {
       div.addEventListener('click', (e) => {
-        const id = e.target.id;
+        const id = e.target.parentNode.id;
         console.log(id);
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < post.length; i++) {
@@ -80,40 +71,5 @@ export const template = (post) => {
     console.log(inicio);
     console.log(final);
     console.log(final - inicio);
-  });
-
-  document.querySelectorAll('.iconHeart').forEach((like) => {
-    let clickCounter = 0;
-    let likeCounter = 0;
-
-    like.addEventListener('click', (e) => {
-      clickCounter += 1;
-      console.log(clickCounter);
-      const likeId = e.target.id;
-      console.log(likeId);
-
-      // eslint-disable-next-line no-plusplus
-      for (let i = 0; i < post.length; i++) {
-        if (clickCounter === 1 && post[i].idP === likeId) {
-          e.target.classList.add('fas');
-          likeCounter = post[i].likes + 1;
-          console.log(post[i]);
-          console.log(`clickCounter ${clickCounter}`);
-          console.log(`likeCounter ${likeCounter}`);
-          // updateLikePost(likeId, likeCounter);
-          break;
-        }
-        if (clickCounter === 2 && post[i].idP === likeId) {
-          e.target.classList.remove('fas');
-          likeCounter = post[i].likes - 1;
-          console.log(post[i]);
-          console.log(`clickCounter ${clickCounter}`);
-          console.log(`likeCounter ${likeCounter}`);
-          // updateLikePost(likeId, likeCounter);
-          clickCounter = 0;
-          break;
-        }
-      }
-    });
   });
 };
