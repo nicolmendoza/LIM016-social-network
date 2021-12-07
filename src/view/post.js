@@ -88,7 +88,7 @@ export const template = (post) => {
           console.log(post[i]);
           console.log(`clickCounter ${clickCounter}`);
           console.log(`likeCounter ${likeCounter}`);
-          //updateLikePost(likeId, likeCounter);
+          // updateLikePost(likeId, likeCounter);
           break;
         }
         if (clickCounter === 2 && post[i].idP === likeId) {
