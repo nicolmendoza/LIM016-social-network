@@ -27,8 +27,12 @@ const changeView = (route) => {
     }
 
     case '#/signup':
-      container.appendChild(components.signup.SignUp());
-      components.signup.Register();
+      if (!user) {
+        container.appendChild(components.signup.SignUp());
+        components.signup.Register();
+      } else {
+        window.location.hash = '#/home';
+      }
       break;
 
     case '#/home': {
