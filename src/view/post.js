@@ -19,6 +19,11 @@ export const template = (post) => {
       <button id="${onePost.idP}">EDIT</button>
       <button id="" >LIKE</button>
       </div>
+      <div id="postIcon">
+          <i class="far fa-heart icon iconHeart" id="${onePost.idP}"></i>
+          <i class="far fa-comment icon"></i>
+          <i class="far fa-paper-plane icon"></i>
+       </div>
       <div>`;
   });
   Promise.all(postElements).then(() => {
@@ -75,5 +80,40 @@ export const template = (post) => {
     console.log(inicio);
     console.log(final);
     console.log(final - inicio);
+  });
+
+  document.querySelectorAll('.iconHeart').forEach((like) => {
+    let clickCounter = 0;
+    let likeCounter = 0;
+
+    like.addEventListener('click', (e) => {
+      clickCounter += 1;
+      console.log(clickCounter);
+      const likeId = e.target.id;
+      console.log(likeId);
+
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < post.length; i++) {
+        if (clickCounter === 1 && post[i].idP === likeId) {
+          e.target.classList.add('fas');
+          likeCounter = post[i].likes + 1;
+          console.log(post[i]);
+          console.log(`clickCounter ${clickCounter}`);
+          console.log(`likeCounter ${likeCounter}`);
+          // updateLikePost(likeId, likeCounter);
+          break;
+        }
+        if (clickCounter === 2 && post[i].idP === likeId) {
+          e.target.classList.remove('fas');
+          likeCounter = post[i].likes - 1;
+          console.log(post[i]);
+          console.log(`clickCounter ${clickCounter}`);
+          console.log(`likeCounter ${likeCounter}`);
+          // updateLikePost(likeId, likeCounter);
+          clickCounter = 0;
+          break;
+        }
+      }
+    });
   });
 };
