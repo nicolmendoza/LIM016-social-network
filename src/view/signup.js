@@ -32,6 +32,7 @@ export const SignUp = () => {
         <i class="far fa-user-circle"></i>
       </span>
     <input type="text" id="signup-name"  placeholder="Name" required>
+    <p id='nameMessage' class="errorMessage"></p>
   </div>
       <div class="form-group">
         <span class="icon-input">
@@ -149,7 +150,7 @@ export const Register = () => {
 
   const iconEye = document.querySelector('#icon-eye');
 
-  iconEye.addEventListener('click', function () {
+  iconEye.addEventListener('click', () => {
     const icon = this.querySelector('i');
 
     if (this.nextElementSibling.type === 'password') {
