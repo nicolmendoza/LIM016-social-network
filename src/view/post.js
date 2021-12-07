@@ -49,8 +49,12 @@ export const template = (post) => {
           document.querySelector('.save').addEventListener('click', () => {
             e.preventDefault();
             const postEdit = document.getElementById('contentEdit').value;
-            console.log(document.getElementById('contentEdit').value);
-            updatePost(id, postEdit);
+            if (postEdit === `${post[i].content}`) {
+              document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `${post[i].content}`;
+            } else {
+              console.log(document.getElementById('contentEdit').value);
+              updatePost(id, postEdit);
+            }
           });
 
           break;

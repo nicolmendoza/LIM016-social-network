@@ -22,8 +22,19 @@ export const newPost = () => {
     </div>
 
     <textarea name="textarea" id="post-description" rows="10" cols="50" placeholder="What's on you mind?"></textarea>
-
+    <div id="container-image-preview">
+      <img src="" class="image-preview" alt=""/>
+    </div>
+    <div class="add-element">
     <div class="plus-image"><b>+</b></div>
+      <div class="addImage">
+        <button class= "addImg"><ion-icon name="image-outline"></ion-icon></ion-icon></button>
+        <input type="file" id="input-file" style="display:none" multiple/>
+        <button class= "add camara"><ion-icon name="camera-outline"></ion-icon></button>
+        <button class= "add video"><ion-icon name="videocam-outline"></ion-icon></button>
+        <button class= "add archive"><ion-icon name="attach-outline"></ion-icon></button>
+      </div>
+    </div>
     `;
 
   return newPostContainer;
@@ -46,5 +57,28 @@ export const functionNewPost = () => {
   document.querySelector('.publish').addEventListener('click', async () => {
     savePost(postDescription, userID, nameUser);
     window.location.hash = '#/home';
+  });
+
+  document.querySelector('.addImg').addEventListener('click', () => {
+    document.querySelector('#input-file').click();
+  });
+
+  // const previewContainer = document.getElementById('container-image-preview');
+  const previewImg = document.querySelector('.image-preview');
+
+  document.querySelector('#input-file').addEventListener('change', function () {
+    const file = this.files[0];
+    console.log(file);
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        previewImg.setAttribute('src', this.result);
+      });
+      reader.readAsDataURL(file);
+    } else {
+      previewImg.setAttribute('src', '');
+    }
   });
 };

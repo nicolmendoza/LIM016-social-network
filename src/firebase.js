@@ -23,6 +23,8 @@ import {
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
+// import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyD9ngpw2YVZK0ZTgYEn2L3kJX2HFlcDK8Q',
   authDomain: 'social-network-268a8.firebaseapp.com',
