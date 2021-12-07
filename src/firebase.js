@@ -15,6 +15,7 @@ import {
   orderBy,
   deleteDoc,
   updateDoc,
+  getDoc,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 import {
@@ -87,6 +88,13 @@ export const updatePost = async (id, postEdit) => {
   });
 };
 
+export const obtenerInfo = async (ID) => {
+  const docRef = doc(db, 'usuarios', ID);
+  const docSnap = await getDoc(docRef);
+
+  return docSnap.data().name;
+};
+
 export const updateLikePost = async (id, likeCount) => {
   const postLiked = doc(db, 'post', id);
   await updateDoc(postLiked, {
@@ -94,10 +102,11 @@ export const updateLikePost = async (id, likeCount) => {
   });
 };
 
-export const savePost = async (postDescription, userID, nameUser) => {
+export const savePost = async (postDescription, userID) => {
+  console.log(await obtenerInfo(userID));
   const docRef = await addDoc(collection(db, 'post'), {
     message: postDescription.value,
-    userName: nameUser,
+    userName: await obtenerInfo(userID),
     userId: userID,
     likes: 0,
     date: Date.now(),
@@ -108,7 +117,6 @@ export const savePost = async (postDescription, userID, nameUser) => {
 export const readData = async (callback) => {
   const q = query(collection(db, 'post'), orderBy('date', 'desc'));
   onSnapshot(q, (querySnapshot) => {
-    document.getElementById('showPost').innerHTML = '';
     const post = [];
     querySnapshot.forEach((doct) => {
       const objectPost = { };

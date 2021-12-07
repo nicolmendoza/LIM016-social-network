@@ -1,21 +1,16 @@
 // eslint-disable-next-line import/no-unresolved
 import {
   getAuth,
-// eslint-disable-next-line import/no-unresolved
+  // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-// eslint-disable-next-line import/no-unresolved
-// import {
-//   getFirestore,
-//   collection,
-//   onSnapshot,
-//   query,
-//   where,
-// eslint-disable-next-line import/no-unresolved
-// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
-// eslint-disable-next-line import/no-unresolved
-import { doc, updateDoc, getFirestore } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-import { saveAbout, showAbout } from '../firebase.js';
+import {
+  doc,
+  updateDoc,
+  getFirestore,
+  onSnapshot,
+  // eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 export const Profile = () => {
   const divElementProfile = document.createElement('div');
@@ -42,51 +37,48 @@ export const Profile = () => {
 
 export const FunctionProfile = () => {
   const auth = getAuth();
-  // const db = getFirestore();
-
-  // autentificando usuario logueado
   const user = auth.currentUser;
-  if (user) {
-    console.log(user);
-    if (user.displayName == null) {
-      const info = document.getElementById('infoUserProfile');
-      info.innerHTML = 'Bienvenida Developer';
-    } else {
-      const info = document.getElementById('infoUserProfile');
-      info.innerHTML = `Bienvenida ${user.displayName}`;
-    }
-    document.getElementById('photoUserProfile').src = `${user.photoURL}`;
-  }
+  // autentificando usuario logueado
+
   const db = getFirestore();
+
+  document.getElementById('photoUserProfile').src = user.photoURL;
+  (async () => {
+    onSnapshot(doc(db, 'usuarios', user.uid), (docUser) => {
+      const info = document.getElementById('infoUserProfile');
+      info.innerHTML = `Bienvenida ${docUser.data().name}`;
+      console.log('Current data: ', docUser.data());
+    });
+  })();
+
   // edit username
   console.log(user.uid);
-  document.getElementById('btn-edit-name').addEventListener('click', async () => {
-    const newName = document.getElementById('name');
-    // updateProfile(auth.currentUser, {
-    //   displayName: newName.value,
-    // }).then(() => {
-    //   const info = document.getElementById('infoUserProfile');
-    //   info.innerHTML = `Bienvenida ${user.displayName}`;
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
-    const info = doc(db, 'usuarios', user.uid);
-    await updateDoc(info, {
-      name: newName.value,
+
+  document
+    .getElementById('btn-edit-name')
+    .addEventListener('click', async () => {
+      const newName = document.getElementById('name');
+      const infoUser = doc(db, 'usuarios', user.uid);
+      await updateDoc(infoUser, {
+        name: newName.value,
+      });
     });
-  });
   /// ///////
 
-  const idUser = auth.currentUser.uid;
-  // function show about
-  // const aboutParrafo = document.getElementById('aboutP');
-  showAbout(idUser);
-
+  (async () => {
+    onSnapshot(doc(db, 'usuarios', user.uid), (docUser) => {
+      const aboutParrafo = document.getElementById('aboutP');
+      aboutParrafo.innerHTML = `${docUser.data().about}`;
+      console.log('Current data: ', docUser.data());
+    });
+  })();
   // actualizar about
-  document.getElementById('btn-edit-about').addEventListener('click', () => {
+  document.getElementById('btn-edit-about').addEventListener('click', async () => {
     const About = document.getElementById('about').value;
-    saveAbout(About);
-    showAbout(idUser);
+    const infoUser = doc(db, 'usuarios', user.uid);
+    await updateDoc(infoUser, {
+      about: About,
+    });
   });
 
   // function showPostProfile(post) {
