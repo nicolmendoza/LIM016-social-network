@@ -19,7 +19,6 @@ export const Login = () => {
   <div class="section1"><img class="imgInicio" ></div>
   <div class="section2">
   <div class="formulario">
-
   <div class="logo">SOCIAL NETWORK</div>
   <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png' ></div>
   <div class="form-group-text">
@@ -28,7 +27,6 @@ export const Login = () => {
     <div class="textForm">
     <a href="#/signup" >Sign Up</a> </div>
   </div>
-
   <form id="login-form">
     <div class="form-group">
       <span class="icon-input">
@@ -50,7 +48,6 @@ export const Login = () => {
     <button type="button" class="icon-login" id="googleLogin"><img src="img/google.png"></i></button>
     <button type="button" class="icon-login" id="facebookLogin"><img src="img/facebook.png"></button>
     <button type="button" class="icon-login" id="githubLogin"><img src="img/github.png"></button>
-
     <div class="textResetPassword">
     <p class="registerText">Don’t you have an account?  <a href="#/signup" class="registerText link">Register now</a></p></div>
   </form>
@@ -185,7 +182,7 @@ export const initLogin = () => {
 
   const iconEye = document.querySelector('#icon-eye');
 
-  iconEye.addEventListener('click', () => {
+  iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 
     if ((this.nextElementSibling).type === 'password') {

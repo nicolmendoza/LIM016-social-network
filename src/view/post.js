@@ -1,5 +1,6 @@
+/* eslint-disable no-plusplus */
 import {
-  deletePost, updatePost, currentUser, savePost,
+  deletePost, updatePost, updateLikePost, currentUser, savePost,
 } from '../firebase.js';
 
 export const template = (post) => {
@@ -23,9 +24,9 @@ export const template = (post) => {
   });
 
   const user = currentUser().currentUser;
-  console.log(user.uid);
+  // console.log(user.uid);
 
-  console.log(post);
+  // console.log(post);
   document.querySelectorAll('.deleteDiv').forEach((div) => {
     div.addEventListener('click', (e) => {
       const id = e.target.id;
@@ -70,21 +71,36 @@ export const template = (post) => {
   });
 
   document.querySelectorAll('.iconHeart').forEach((like) => {
-    let clickCount = 0;
-    let likeCount = 0;
-    like.addEventListener('click', (e) => {
-      clickCount += 1;
-      const idPost = e.target.id;
+    let clickCounter = 0;
+    let likeCounter = 0;
 
-      if (clickCount === 1) {
-        likeCount += 1;
-        e.target.classList.add('fas');
-        updatePost(idPost, likeCount);
-      }
-      if (clickCount > 1) {
-        likeCount -= 1;
-        e.target.classList.remove('fas');
-        clickCount = 0;
+    like.addEventListener('click', (e) => {
+      clickCounter += 1;
+      console.log(clickCounter);
+      const likeId = e.target.id;
+      console.log(likeId);
+
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < post.length; i++) {
+        if (clickCounter === 1 && post[i].idP === likeId) {
+          e.target.classList.add('fas');
+          likeCounter = post[i].likes + 1;
+          console.log(post[i]);
+          console.log(`clickCounter ${clickCounter}`);
+          console.log(`likeCounter ${likeCounter}`);
+          //updateLikePost(likeId, likeCounter);
+          break;
+        }
+        if (clickCounter === 2 && post[i].idP === likeId) {
+          e.target.classList.remove('fas');
+          likeCounter = post[i].likes - 1;
+          console.log(post[i]);
+          console.log(`clickCounter ${clickCounter}`);
+          console.log(`likeCounter ${likeCounter}`);
+          // updateLikePost(likeId, likeCounter);
+          clickCounter = 0;
+          break;
+        }
       }
     });
   });

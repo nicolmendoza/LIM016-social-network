@@ -87,6 +87,13 @@ export const updatePost = async (id, postEdit) => {
   });
 };
 
+export const updateLikePost = async (id, likeCount) => {
+  const postLiked = doc(db, 'post', id);
+  await updateDoc(postLiked, {
+    likes: likeCount,
+  });
+};
+
 export const savePost = async (postDescription, userID, nameUser) => {
   const docRef = await addDoc(collection(db, 'post'), {
     message: postDescription.value,
@@ -95,7 +102,7 @@ export const savePost = async (postDescription, userID, nameUser) => {
     likes: 0,
     date: Date.now(),
   });
-  console.log('Document written with ID: ', docRef.id);
+  // console.log('Document written with ID: ', docRef.id);
 };
 
 export const readData = async (callback) => {
@@ -109,6 +116,7 @@ export const readData = async (callback) => {
       objectPost.userName = doct.data().userName;
       objectPost.idP = doct.id;
       objectPost.userID = doct.data().userId;
+      objectPost.likes = doct.data().likes;
       post.push(objectPost);
     });
     callback(post);
