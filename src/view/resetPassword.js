@@ -22,7 +22,7 @@ export const resetPassword = () => {
         <i class="far fa-times-circle"></i>
       </div>
       <div>
-        <h>Correo electronico enviado</h>
+        <h1>Correo electronico enviado</h1>
         <div class="modal-parrafo">
         Te hemos enviado un correo electrónico <b class="emailText"></b> con instrucciones para volver a establecer tu contraseña.</div>
         <button class="aceptReset"><a href="#/login">ACEPTAR</a></button>
