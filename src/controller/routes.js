@@ -73,6 +73,16 @@ const changeView = (route) => {
       }
       break;
 
+    case '#/editProfile':
+      if (user) {
+        footer.appendChild(components.navMobile.navMobile());
+        container.appendChild(components.edit.profileEdit());
+        components.edit.FunctionEdit();
+      } else {
+        window.location.hash = '#/';
+      }
+
+      break;
     default:
       window.location.hash = '#/';
       break;

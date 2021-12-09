@@ -5,6 +5,8 @@ import { resetPassword, resetPasswordInit } from './resetPassword.js';
 import { Profile, FunctionProfile } from './profile.js';
 import { navMobile } from './navMobile.js';
 import { newPost, functionNewPost } from './newPost.js';
+// import { newPost, functionNewPost } from './newPost.js';
+import { profileEdit, FunctionEdit } from './editProfile.js';
 
 export const components = {
   login: { Login, initLogin },
@@ -14,4 +16,6 @@ export const components = {
   profile: { Profile, FunctionProfile },
   navMobile: { navMobile },
   newPost: { newPost, functionNewPost },
+  // newPost: { newPost, functionNewPost },
+  edit: { profileEdit, FunctionEdit },
 };

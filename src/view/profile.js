@@ -6,33 +6,33 @@ import {
 
 import {
   doc,
-  updateDoc,
   getFirestore,
-  onSnapshot,
+  getDoc,
+  query,
+  collection,
+  where,
+  getDocs,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
+import {
+  obtenerInfo,
+} from '../firebase.js';
+
 export const Profile = () => {
-  const divElementProfile = document.createElement('div');
-  divElementProfile.innerHTML = `
+  document.getElementById('container').innerHTML = '';
+  const profile = document.createElement('div');
+  profile.innerHTML = `
   <!-- <button id="home">Home</button> -->
   <div>Profile</div>
   <img id="photoUserProfile" width="100px">
   <div id="infoUserProfile"></div>
-
-  <p>Edita tu Nombre</p>
-  <input type="text" id="name"  placeholder="Name" >
-  <button id="btn-edit-name">click</button>
-
-  <p>Edita tu about</p>
-  <input type="text" id="about"  placeholder="about" >
-  <button id="btn-edit-about">about</button> 
-
   <p id="aboutP"></p>
-    <h1> POST</h1>
+  <button id="goEdit">Edit Profile</button>
+    <h1> MY POST</h1>
     <div id="PostProfile"></div>`;
 
-  return document.getElementById('container').appendChild(divElementProfile);
+  return document.getElementById('container').appendChild(profile);
 };
 
 export const FunctionProfile = () => {
@@ -44,71 +44,51 @@ export const FunctionProfile = () => {
 
   document.getElementById('photoUserProfile').src = user.photoURL;
   (async () => {
-    onSnapshot(doc(db, 'usuarios', user.uid), (docUser) => {
-      const info = document.getElementById('infoUserProfile');
-      info.innerHTML = `Bienvenida ${docUser.data().name}`;
-      console.log('Current data: ', docUser.data());
-    });
+    const docRef = doc(db, 'usuarios', user.uid);
+    const docSnap = await getDoc(docRef);
+    const docUser = docSnap.data();
+    console.log(docUser);
+    const info = document.getElementById('infoUserProfile');
+    info.innerHTML = `Bienvenida ${docUser.name}`;
+    const aboutParrafo = document.getElementById('aboutP');
+    aboutParrafo.innerHTML = `${docUser.about}`;
+    console.log('Current data: ', docUser);
   })();
 
-  // edit username
-  console.log(user.uid);
+  function showPostProfile(post) {
+    console.log(post);
+    const PostProfile = document.getElementById('PostProfile');
+    const nuevoElemento = document.createElement('div');
 
-  document
-    .getElementById('btn-edit-name')
-    .addEventListener('click', async () => {
-      const newName = document.getElementById('name');
-      const infoUser = doc(db, 'usuarios', user.uid);
-      await updateDoc(infoUser, {
-        name: newName.value,
-      });
+    const postProfileAll = post.map(async (onePost) => {
+      const dataUser = await obtenerInfo(onePost.userID);
+      nuevoElemento.innerHTML += `<div class="postDiv">
+      <div>${dataUser.name}</div>
+      <div>${onePost.content}</div>
+      <div>`;
     });
-  /// ///////
+    Promise.all(postProfileAll).then(() => PostProfile.appendChild(nuevoElemento));
+  }
 
-  (async () => {
-    onSnapshot(doc(db, 'usuarios', user.uid), (docUser) => {
-      const aboutParrafo = document.getElementById('aboutP');
-      aboutParrafo.innerHTML = `${docUser.data().about}`;
-      console.log('Current data: ', docUser.data());
+  const leerPostProfile = async (callback) => {
+    const q = query(collection(db, 'post'), where('userId', '==', `${auth.currentUser.uid}`));
+    const querySnapshot = await getDocs(q);
+    const postP = [];
+    querySnapshot.forEach((doctP) => {
+      const objectPost = { };
+      console.log(doctP.data());
+      objectPost.content = doctP.data().message;
+      objectPost.userID = doctP.data().userId;
+      postP.push(objectPost);
+      return postP;
     });
-  })();
-  // actualizar about
-  document.getElementById('btn-edit-about').addEventListener('click', async () => {
-    const About = document.getElementById('about').value;
-    const infoUser = doc(db, 'usuarios', user.uid);
-    await updateDoc(infoUser, {
-      about: About,
-    });
+    callback(postP);
+    console.log(postP);
+  };
+  leerPostProfile(showPostProfile);
+
+  document.getElementById('goEdit').addEventListener('click', () => {
+    window.location.hash = '#/editProfile';
+    console.log('hi');
   });
-
-  // function showPostProfile(post) {
-  //   post.forEach((onePost) => {
-  //     document.getElementById('PostProfile').innerHTML
-  //     += `<div class="postDiv">
-  //     <div>${onePost.userName}</div>
-  //     <div>${onePost.content}</div>
-  //     <div>`;
-  //   });
-  // }
-
-  // const leerPostProfile = (callback) => {
-  //   const q = query(collection(db, 'post'), where('userId', '==', `${auth.currentUser.uid}`));
-  //   onSnapshot(q, (querySnapshot) => {
-  //     console.log(document.getElementById('PostProfile'));
-  //     document.getElementById('PostProfile').innerHTML = '';
-  //     const postP = [];
-  //     querySnapshot.forEach((doctP) => {
-  //       const objectPost = { };
-  //       objectPost.content = doctP.data().message;
-  //       objectPost.userName = doctP.data().userName;
-  //       postP.push(objectPost);
-  //     });
-  //     callback(postP);
-  //   });
-  // };
-  // leerPostProfile(showPostProfile);
-
-  // document.getElementById('home').addEventListener('click', () => {
-  //   window.location.hash = '#/home';
-  // });
 };
