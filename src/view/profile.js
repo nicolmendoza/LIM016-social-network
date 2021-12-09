@@ -26,7 +26,7 @@ export const Profile = () => {
 
   <p>Edita tu about</p>
   <input type="text" id="about"  placeholder="about" >
-  <button id="btn-edit-about">about</button>
+  <button id="btn-edit-about">about</button> 
 
   <p id="aboutP"></p>
     <h1> POST</h1>

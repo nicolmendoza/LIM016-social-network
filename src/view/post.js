@@ -112,4 +112,3 @@ export const template = (post) => {
     // console.log(final - inicio);
   });
 };
-

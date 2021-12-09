@@ -24,7 +24,9 @@ import {
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
-// import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
+import {
+  getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyD9ngpw2YVZK0ZTgYEn2L3kJX2HFlcDK8Q',
@@ -130,5 +132,34 @@ export const readData = async (callback) => {
       post.push(objectPost);
     });
     callback(post);
+  });
+};
+
+export const uploadImg = async function (files, extention, name) {
+  const imgUpload = files;
+
+  const imgName = name + extention;
+
+  const metadata = {
+    content: imgUpload.type,
+  };
+
+  const storage = getStorage();
+
+  const storageRef = sRef(storage, imgName);
+
+  const UploadTask = uploadBytesResumable(storageRef, imgUpload, metadata);
+
+  UploadTask.on('state-changed', (snapshot) => {
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  },
+  (error) => {
+    alert('error al cargar imagen');
+  },
+
+  () => {
+    getDownloadURL(UploadTask.snapshot.ref).then((downloasURL) => {
+      console.log(downloasURL);
+    });
   });
 };
