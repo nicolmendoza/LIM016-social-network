@@ -2,19 +2,23 @@
 //   getFirestore, query, collection, onSnapshot, orderBy, addDoc,
 // // eslint-disable-next-line import/no-unresolved
 // } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+
+/* eslint-disable no-plusplus */
+
 import {
-  deletePost, currentUser, obtenerInfo, updatePost,
+  deletePost, currentUser, obtenerInfo, updatePost, updateLikePost,
 } from '../firebase.js';
 
 export const template = (post) => {
   // const inicio = Date.now();
-  console.log(post);
+  // console.log(post);
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
   const postElements = post.map(async (onePost) => {
     const dataUser = await obtenerInfo(onePost.userID);
 
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
+    
       <div>${dataUser.name}</div>
       <div id="contentPost${onePost.idP}">${onePost.content}</div>
 
@@ -29,16 +33,34 @@ export const template = (post) => {
        <div id="contentComment${onePost.idP}"></div>
        </div>`;
   });
+  
   Promise.all(postElements).then(() => {
     const user = currentUser().currentUser;
     console.log(user.uid);
+
+    nuevoElemento.querySelectorAll('.date').forEach((date) => {
+      const postId = date.parentElement.id;
+      const pElement = date.firstChild;
+
+      for (let i = 0; i < post.length; i++) {
+        if (post[i].idP === postId) {
+          const d = new Date();
+          const dateUTC = post[i].date;
+          d.setTime(dateUTC);
+          const dateData = d.toLocaleDateString();
+          // console.log(dateData, i);
+
+          pElement.innerHTML = dateData;
+        }
+      }
+    });
 
     nuevoElemento.querySelectorAll('.delete').forEach((div) => {
       div.addEventListener('click', (e) => {
         console.log(e.target.parentNode);
         const id = e.target.parentNode.id;
         console.log(id);
-        // eslint-disable-next-line no-plusplus
+
         for (let i = 0; i < post.length; i++) {
           console.log(post[i].userID === user.uid, post[i].idP === id);
           if (post[i].userID === user.uid && post[i].idP === id) {
@@ -52,11 +74,12 @@ export const template = (post) => {
         }
       });
     });
+
     nuevoElemento.querySelectorAll('.edit').forEach((div) => {
       div.addEventListener('click', (e) => {
         const id = e.target.parentNode.id;
         console.log(id);
-        // eslint-disable-next-line no-plusplus
+
         for (let i = 0; i < post.length; i++) {
           console.log(post[i].userID === user.uid, post[i].idP === id);
           if (post[i].userID === user.uid && post[i].idP === id) {
@@ -76,6 +99,7 @@ export const template = (post) => {
         }
       });
     });
+
     // const db = getFirestore();
     // nuevoElemento.querySelectorAll('.fa-comment').forEach((icon) => {
     //   icon.addEventListener('click', (e) => {
@@ -111,37 +135,49 @@ export const template = (post) => {
     //   });
     // });
 
+
     nuevoElemento.querySelectorAll('.iconHeart').forEach((like) => {
       let clickCounter = 0;
-      let likeCounter = 0;
 
       like.addEventListener('click', (e) => {
         clickCounter += 1;
-        console.log(clickCounter);
-        const likeId = e.target.id;
-        console.log(likeId);
 
-        // eslint-disable-next-line no-plusplus
-        for (let i = 0; i < post.length; i++) {
-          if (clickCounter === 1 && post[i].idP === likeId) {
-            e.target.classList.add('fas');
-            likeCounter = post[i].likes + 1;
-            console.log(post[i]);
-            console.log(`clickCounter ${clickCounter}`);
-            console.log(`likeCounter ${likeCounter}`);
-            // updateLikePost(likeId, likeCounter);
-            break;
+        let cant = 0;
+        const userCurrentId = currentUser().currentUser.uid;
+        const postId = e.target.parentNode.id;
+
+        const currentPost = post.filter((postElement) => postElement.idP === postId);
+        const people = currentPost[0].likes[0].user;
+        // console.log(people);
+
+        function removeItemFromArr(arr, item) {
+          const i = arr.indexOf(item);
+          if (i !== -1) {
+            arr.splice(i, 1);
           }
-          if (clickCounter === 2 && post[i].idP === likeId) {
-            e.target.classList.remove('fas');
-            likeCounter = post[i].likes - 1;
-            console.log(post[i]);
-            console.log(`clickCounter ${clickCounter}`);
-            console.log(`likeCounter ${likeCounter}`);
-            // updateLikePost(likeId, likeCounter);
-            clickCounter = 0;
-            break;
-          }
+        }
+
+        if (clickCounter === 1) {
+          e.target.classList.add('fas');
+          people.push(userCurrentId);
+          cant = people.length;
+          console.log(`clickCounter ${clickCounter}`);
+          console.log(`people ${people}`);
+          console.log(`cant ${cant}`);
+          console.log(postId, cant, people);
+          console.log('------------------------------------');
+          updateLikePost(postId, cant, people);
+        } else {
+          e.target.classList.remove('fas');
+          removeItemFromArr(people, userCurrentId);
+          cant = people.length;
+          clickCounter = 0;
+          console.log(`clickCounter ${clickCounter}`);
+          console.log(`people ${people}`);
+          console.log(`cant ${cant}`);
+          console.log(postId, cant, people);
+          console.log('------------------------------------');
+          updateLikePost(postId, cant, people);
         }
       });
     });
