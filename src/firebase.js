@@ -99,10 +99,13 @@ export const obtenerInfo = async (ID) => {
   return docSnap.data().name;
 };
 
-export const updateLikePost = async (id, likeCount) => {
-  const postLiked = doc(db, 'post', id);
-  await updateDoc(postLiked, {
-    likes: likeCount,
+export const updateLikePost = async (id, cantLikes, idUser) => {
+  const postRef = doc(db, 'post', id);
+  await updateDoc(postRef, {
+    likes: [{
+      cant: cantLikes,
+      user: idUser,
+    }],
   });
 };
 
@@ -112,10 +115,13 @@ export const savePost = async (postDescription, userID) => {
     message: postDescription.value,
     userName: await obtenerInfo(userID),
     userId: userID,
-    likes: 0,
+    likes: [{
+      cant: 0,
+      user: [],
+    }],
     date: Date.now(),
   });
-  // console.log('Document written with ID: ', docRef.id);
+  console.log('Document written with ID: ', docRef.id);
 };
 
 export const readData = async (callback) => {
@@ -128,6 +134,7 @@ export const readData = async (callback) => {
       objectPost.userName = doct.data().userName;
       objectPost.idP = doct.id;
       objectPost.userID = doct.data().userId;
+      objectPost.date = doct.data().date;
       objectPost.likes = doct.data().likes;
       post.push(objectPost);
     });
