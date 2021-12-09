@@ -94,7 +94,7 @@ export const obtenerInfo = async (ID) => {
   const docRef = doc(db, 'usuarios', ID);
   const docSnap = await getDoc(docRef);
 
-  return docSnap.data().name;
+  return docSnap.data();
 };
 
 export const updateLikePost = async (id, likeCount) => {
@@ -110,7 +110,7 @@ export const savePost = async (postDescription, userID) => {
     message: postDescription.value,
     userName: await obtenerInfo(userID),
     userId: userID,
-    likes: 0,
+    likes: [],
     date: Date.now(),
   });
   // console.log('Document written with ID: ', docRef.id);
