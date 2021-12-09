@@ -21,6 +21,7 @@
 //         </div>
 //     </div>
 
+// eslint-disable-next-line max-len
 //     <textarea name="textarea" id="post-description" rows="10" cols="50" placeholder="What's on you mind?"></textarea>
 //     <div id="container-image-preview">
 //       <img src="" class="image-preview" alt=""/>

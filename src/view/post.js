@@ -1,4 +1,10 @@
+// import {
+//   getFirestore, query, collection, onSnapshot, orderBy, addDoc,
+// // eslint-disable-next-line import/no-unresolved
+// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+
 /* eslint-disable no-plusplus */
+
 import {
   deletePost, currentUser, obtenerInfo, updatePost, updateLikePost,
 } from '../firebase.js';
@@ -9,18 +15,25 @@ export const template = (post) => {
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
   const postElements = post.map(async (onePost) => {
-    const NAME = await obtenerInfo(onePost.userID);
+    const dataUser = await obtenerInfo(onePost.userID);
+
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
-    <div>${NAME}</div>
-    <div class="date"><p></p></div>
-    <div id="contentPost${onePost.idP}">${onePost.content}</div>
-    <button class="delete">DELETE</button>
-    <button class="edit">EDIT</button>
-    <i class="far fa-heart icon iconHeart" id="${onePost.idP}"></i>
-    <i class="far fa-comment icon"></i>
-    <i class="far fa-paper-plane icon"></i>
-    </div>`;
+    
+      <div>${dataUser.name}</div>
+      <div id="contentPost${onePost.idP}">${onePost.content}</div>
+
+      <button class="delete">DELETE</button>
+      <button class="edit">EDIT</button>
+      
+      <div id="postIcon">
+          <i class="far fa-heart icon iconHeart" id="${onePost.idP}"></i>
+          <i class="far fa-comment icon"></i>
+          <i class="far fa-paper-plane icon"></i>
+       </div>
+       <div id="contentComment${onePost.idP}"></div>
+       </div>`;
   });
+  
   Promise.all(postElements).then(() => {
     const user = currentUser().currentUser;
     console.log(user.uid);
@@ -86,6 +99,42 @@ export const template = (post) => {
         }
       });
     });
+
+    // const db = getFirestore();
+    // nuevoElemento.querySelectorAll('.fa-comment').forEach((icon) => {
+    //   icon.addEventListener('click', (e) => {
+    //     const id = e.target.parentNode.parentNode.id;
+    // eslint-disable-next-line max-len
+    //     nuevoElemento.querySelector(`#contentComment${id}`).innerHTML = `<textarea id="comment"></textarea>
+    //     <button id="saveComment">SAVE</button>`;
+    //     const comentario = document.getElementById('comment');
+    //     console.log(comentario);
+    //     document.getElementById('saveComment').addEventListener('click', async () => {
+    //       await addDoc(collection(db, 'post', id, 'comments'), {
+    //         userID: user.uid,
+    //         message: comentario.value,
+    //         date: Date.now(),
+    //       });
+    //       document.querySelector(`#contentComment${id}`).innerHTML = comentario.value;
+    //       const readComment = async () => {
+    //         const q = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
+    //         onSnapshot(q, (querySnapshot) => {
+    //           const comments = [];
+    //           querySnapshot.forEach((docC) => {
+    //             const objectComment = { };
+    //             objectComment.content = docC.data().message;
+    //             objectComment.userID = docC.data().userID;
+    //             objectComment.ID = docC.id;
+    //             comments.push(objectComment);
+    //             console.log(comments);
+    //           });
+    //         });
+    //       };
+    //       readComment();
+    //     });
+    //   });
+    // });
+
 
     nuevoElemento.querySelectorAll('.iconHeart').forEach((like) => {
       let clickCounter = 0;

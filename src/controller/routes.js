@@ -62,11 +62,21 @@ const changeView = (route) => {
       components.resetPassword.resetPasswordInit();
       break;
 
-    // case '#/newPost':
-    //   container.appendChild(components.newPost.newPost());
-    //   components.newPost.functionNewPost();
-    //   break;
+      // case '#/newPost':
+      //   container.appendChild(components.newPost.newPost());
+      //   components.newPost.functionNewPost();
+      //   break;
 
+    case '#/editProfile':
+      if (user) {
+        footer.appendChild(components.navMobile.navMobile());
+        container.appendChild(components.edit.profileEdit());
+        components.edit.FunctionEdit();
+      } else {
+        window.location.hash = '#/';
+      }
+
+      break;
     default:
       window.location.hash = '#/';
       break;
