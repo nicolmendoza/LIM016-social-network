@@ -88,11 +88,11 @@ export const initLogin = () => {
         message.innerHTML = 'La dirección de correo electrónico no es válida';
         break;
       default:
-        message.innerHTML = 'Se ha producido un error en la página. Por favor, inténtelo más tarde.';
+        message.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
     }
   }
 
-  /* ........Logearse con correo........ */
+  /* .........Logearse con correo........ */
   signInForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = userEmail;
@@ -114,21 +114,17 @@ export const initLogin = () => {
   /* ........Logearse con Google........ */
   googleLogin.addEventListener('click', () => {
     loginGoogle()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(() => {
         window.location.hash = '#/home';
       }).catch((error) => {
         errorOccurs(error);
       });
   });
 
-  /* ........Logearse con Facebook........ */
+  /* .......Logearse con Facebook........ */
   facebookLogin.addEventListener('click', () => {
     loginFacebook()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(() => {
         window.location.hash = '#/home';
       })
       .catch((error) => {
@@ -136,12 +132,10 @@ export const initLogin = () => {
       });
   });
 
-  /* ........Logearse con GitHub........ */
+  /* .......Logearse con GitHub........ */
   githubLogin.addEventListener('click', () => {
     loginGitHub()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(() => {
         window.location.hash = '#/home';
       }).catch((error) => {
         errorOccurs(error);
@@ -151,6 +145,7 @@ export const initLogin = () => {
   /* .....Función ocultar y mostrar contraseña..... */
   const iconEye = document.querySelector('#icon-eye');
 
+  // eslint-disable-next-line func-names
   iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 
