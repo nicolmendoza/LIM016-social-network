@@ -5,7 +5,7 @@ import {
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 import {
-  logout, savePost, showAbout, currentUser, readData,
+  logout, savePost, currentUser, readData,
 } from '../firebase.js';
 
 import { template } from './post.js';
@@ -87,16 +87,21 @@ export const FunctionsHome = () => {
 
   // save the post , genera ID automatico
   const postDescription = document.getElementById('post-description');
-  document.getElementById('btn').addEventListener('click', async () => {
+  document.getElementById('btn').addEventListener('click', () => {
     savePost(postDescription, userID);
   });
 
   // LogOut
   document.querySelector('#logout').addEventListener('click', () => {
-    logout();
+    logout()
+      .then(() => {
+        console.log('log out');
+        window.location.hash = '#/';
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
   });
-
-  // function show about
-  const aboutParrafo = document.getElementById('aboutP');
-  showAbout(aboutParrafo);
 };
