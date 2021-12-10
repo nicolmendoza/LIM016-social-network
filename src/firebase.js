@@ -21,6 +21,8 @@ import {
 import {
   getAuth,
   signOut,
+  signInWithEmailAndPassword,
+  signInWithPopup,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
@@ -99,12 +101,11 @@ export const obtenerInfo = async (ID) => {
   return docSnap.data();
 };
 
-export const updateLikePost = async (id, cantLikes, idUser) => {
+export const updateLikePost = async (id, people) => {
   const postRef = doc(db, 'post', id);
   await updateDoc(postRef, {
     likes: [{
-      cant: cantLikes,
-      user: idUser,
+      users: people,
     }],
   });
 };
@@ -116,8 +117,7 @@ export const savePost = async (postDescription, userID) => {
     userName: await obtenerInfo(userID),
     userId: userID,
     likes: [{
-      cant: 0,
-      user: [],
+      users: [],
     }],
 
     date: Date.now(),
@@ -170,4 +170,21 @@ export const uploadImg = async function (files, extention, name) {
       console.log(downloasURL);
     });
   });
+};
+
+/* ..........LOGIN............ */
+/* Login normal para Firebase.auth */
+const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
+/* Login con Google para Firebase.auth */
+const loginGoogle = (provider) => signInWithPopup(auth, provider);
+/* Login con Fabebook para Firebase.auth */
+const loginFacebook = (provider) => signInWithPopup(auth, provider);
+/* Login con GitHub para Firebase.auth */
+const loginGitHub = (provider) => signInWithPopup(auth, provider);
+
+export {
+  loginEmail,
+  loginGoogle,
+  loginFacebook,
+  loginGitHub,
 };
