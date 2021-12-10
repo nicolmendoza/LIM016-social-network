@@ -1,7 +1,9 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable max-len */
 import {
-  GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 import {
@@ -78,6 +80,8 @@ export const initLogin = () => {
   const googleLogin = document.querySelector('#googleLogin');
   const facebookLogin = document.querySelector('#facebookLogin');
   const githubLogin = document.getElementById('githubLogin');
+  /* ................................... */
+  const message = document.getElementById('generalMessage');
 
   /* ........Logearse con correo........ */
   signInForm.addEventListener('submit', (e) => {
@@ -87,29 +91,14 @@ export const initLogin = () => {
 
     loginEmail(email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        if (user.emailVerified === true) {
+        if (userCredential.user.emailVerified) {
           window.location.hash = '#/home';
         } else {
-          alert('te enviamos un correo para verificar tu cuenta, revisa tu bandeja');
+          alert('Te enviamos un correo para verificar tu cuenta, por favor revisa tu bandeja.');
         }
       })
       .catch((error) => {
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-
-        const message = document.getElementById('generalMessage');
-
-        if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
-          message.innerHTML = 'Usuario no encontrado';
-        }
-
-        if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
-          message.innerHTML = 'Contraseña incorrecta.';
-        } else if (errorMessage === 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).') {
-          message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
-        }
+        errorOccurs(error);
       });
   });
 
@@ -119,23 +108,11 @@ export const initLogin = () => {
 
     loginGoogle(provider)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        console.log(result);
-
+        const user = result.user;
+        console.log(user);
         window.location.hash = '#/home';
-        console.log('ingresando con correo google');
-        // ...
       }).catch((error) => {
-        // Handle Errors here.
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // // The email of the user's account used.
-        // const email = error.email;
-        // // The AuthCredential type that was used.
-        // const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-        console.log(error);
+        errorOccurs(error);
       });
   });
 
@@ -145,25 +122,12 @@ export const initLogin = () => {
 
     loginFacebook(provider)
       .then((result) => {
-        console.log('facebook sign in');
-        // The signed-in user info.
         const user = result.user;
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const credential = FacebookAuthProvider.credentialFromResult(result);
-        console.log(credential);
         console.log(user);
         window.location.hash = '#/home';
-        // const accessToken = credential.accessToken;
       })
       .catch((error) => {
-        // // Handle Errors here.
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // // The email of the user's account used.
-        // const email = error.email;
-        // // The AuthCredential type that was used.
-        // const credential = FacebookAuthProvider.credentialFromError(error);
-        console.log(error);
+        errorOccurs(error);
       });
   });
 
@@ -173,22 +137,11 @@ export const initLogin = () => {
 
     loginGitHub(provider)
       .then((result) => {
-        console.log('github sign in');
-        window.location.hash = '#/home';
-        // const credential = GithubAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
         const user = result.user;
         console.log(user);
-        alert(`Bienvenida ${user.displayName}`);
+        window.location.hash = '#/home';
       }).catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // The email of the user's account used.
-        // const email = error.email;
-        // The AuthCredential type that was used.
-        // const credential = GithubAuthProvider.credentialFromError(error);
-        // ...
-        console.log(error);
+        errorOccurs(error);
       });
   });
 
@@ -196,16 +149,36 @@ export const initLogin = () => {
   const iconEye = document.querySelector('#icon-eye');
 
   iconEye.addEventListener('click', () => {
-    const icon = this.querySelector('i');
+    const icon = iconEye.querySelector('i');
 
-    if ((this.nextElementSibling).type === 'password') {
-      this.nextElementSibling.type = 'text';
+    if ((iconEye.nextElementSibling).type === 'password') {
+      iconEye.nextElementSibling.type = 'text';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
     } else {
-      this.nextElementSibling.type = 'password';
+      iconEye.nextElementSibling.type = 'password';
       icon.classList.remove('fa-eye');
       icon.classList.add('fa-eye-slash');
     }
   });
+
+  function errorOccurs(typeError) {
+    const errorCode = typeError.code;
+    switch (errorCode) {
+      case 'auth/user-not-found':
+        message.innerHTML = 'Usuario no encontrado';
+        break;
+      case 'auth/wrong-password':
+        message.innerHTML = 'Contraseña incorrecta.';
+        break;
+      case 'auth/too-many-requests':
+        message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+        break;
+      case 'auth/invalid-email':
+        message.innerHTML = 'La dirección de correo electrónico no es válida';
+        break;
+      default:
+        alert(errorCode);
+    }
+  }
 };

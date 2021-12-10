@@ -78,8 +78,6 @@ export const Register = () => {
       email.indexOf('@') === -1
       || email.indexOf('.com') === -1
       || email.indexOf('@.com') !== -1
-      || email.indexOf('.pe') === -1
-      || email.indexOf('@.pe') === -1
       || email.charAt(0) === '@'
     ) {
       emailMessage.innerHTML = 'Ingresa tu e-mail (email@ejemplo.com)';
@@ -92,8 +90,7 @@ export const Register = () => {
       || password.length > 16
       || password.indexOf(' ') !== -1
       || password.search(/[^a-zA-Z0-9]/) !== -1
-      || password.search(/[a-zA-Z\u00F1\u00D1][0-9]|[0-9][a-zA-Z\u00F1\u00D1]/)
-        === -1
+      || password.search(/[a-zA-Z\u00F1\u00D1][0-9]|[0-9][a-zA-Z\u00F1\u00D1]/) === -1
     ) {
       passwordMessage.innerHTML = 'La contraseña debe tener de 8 y 16 caracteres entre números y letras(minúsculas o mayúsculas). No puede tener espacios ni otros símbolos.';
     } else {
