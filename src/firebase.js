@@ -23,7 +23,9 @@ import {
   signOut,
   signInWithEmailAndPassword,
   signInWithPopup,
-  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
@@ -173,23 +175,20 @@ export const uploadImg = async function (files, extention, name) {
   });
 };
 
-/* ..........LOGIN............ */
-/* Login normal para Firebase.auth */
-const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
-/* Login con Google para Firebase.auth */
-const loginGoogle = (provider) => signInWithPopup(auth, provider);
-/* Login con Fabebook para Firebase.auth */
-const loginFacebook = (provider) => signInWithPopup(auth, provider);
-/* Login con GitHub para Firebase.auth */
-const loginGitHub = (provider) => signInWithPopup(auth, provider);
+/* ........LOGIN PROVEEDORES....... */
+const providerGoogle = new GoogleAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
+const providerGithub = new GithubAuthProvider();
 
-/* ..........SIGNUP............ */
-const signupEmail = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+/* ..........LOGIN............ */
+const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
+const loginGoogle = () => signInWithPopup(auth, providerGoogle);
+const loginFacebook = () => signInWithPopup(auth, providerFacebook);
+const loginGitHub = () => signInWithPopup(auth, providerGithub);
 
 export {
   loginEmail,
   loginGoogle,
   loginFacebook,
   loginGitHub,
-  signupEmail,
 };

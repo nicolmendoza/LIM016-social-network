@@ -1,21 +1,9 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable max-len */
-import {
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  GithubAuthProvider,
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
 import {
   loginEmail,
   loginGoogle,
   loginFacebook,
   loginGitHub,
 } from '../firebase.js';
-
-// import {
-//   doc, setDoc, getDoc, getFirestore,
-// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 export const Login = () => {
   const viewHome = document.createElement('div');
@@ -83,6 +71,7 @@ export const initLogin = () => {
   /* ................................... */
   const message = document.getElementById('generalMessage');
 
+  /* ........Imprimir errores....... */
   function errorOccurs(typeError) {
     const errorCode = typeError.code;
     switch (errorCode) {
@@ -99,7 +88,7 @@ export const initLogin = () => {
         message.innerHTML = 'La dirección de correo electrónico no es válida';
         break;
       default:
-        alert(typeError.code);
+        message.innerHTML = 'Se ha producido un error en la página. Por favor, inténtelo más tarde.';
     }
   }
 
@@ -124,9 +113,7 @@ export const initLogin = () => {
 
   /* ........Logearse con Google........ */
   googleLogin.addEventListener('click', () => {
-    const provider = new GoogleAuthProvider();
-
-    loginGoogle(provider)
+    loginGoogle()
       .then((result) => {
         const user = result.user;
         console.log(user);
@@ -138,9 +125,7 @@ export const initLogin = () => {
 
   /* ........Logearse con Facebook........ */
   facebookLogin.addEventListener('click', () => {
-    const provider = new FacebookAuthProvider();
-
-    loginFacebook(provider)
+    loginFacebook()
       .then((result) => {
         const user = result.user;
         console.log(user);
@@ -153,9 +138,7 @@ export const initLogin = () => {
 
   /* ........Logearse con GitHub........ */
   githubLogin.addEventListener('click', () => {
-    const provider = new GithubAuthProvider();
-
-    loginGitHub(provider)
+    loginGitHub()
       .then((result) => {
         const user = result.user;
         console.log(user);
