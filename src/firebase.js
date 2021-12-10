@@ -21,6 +21,9 @@ import {
 import {
   getAuth,
   signOut,
+  sendPasswordResetEmail,
+  sendEmailVerification,
+  onAuthStateChanged,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
@@ -47,20 +50,21 @@ const auth = getAuth();
 const user = auth.currentUser;
 
 export const currentUser = () => auth;
+/* ----------------------------VISTA CON INICIO DE SESION - AUTH ---------------------------------*/
 
-export const logout = () => {
-  signOut(auth)
-    .then(() => {
-      console.log('log out');
-      window.location.hash = '#/';
-      // Sign-out successful.
-    })
-    .catch((error) => {
-      // An error happened.
-      console.log(error);
-    });
-};
+/** ********RESET PASSWORD***** */
+export const resetPasswordFirebase = (email) => sendPasswordResetEmail(auth, email);
 
+/** ********SIGN OUT***** */
+export const logout = () => signOut(auth);
+
+/** ********VERIFICAR EMAIL***** */
+export const emailVerify = () => sendEmailVerification(auth.currentUser);
+
+/** ********CAMBIO DE SESION***** */
+export const stateChanged = (callback) => onAuthStateChanged(auth, callback);
+
+/* ---------------------------FUNCIONES RELACIONADAS A FIREBASE----------------------------------*/
 export const saveAbout = async (About) => {
   await setDoc(doc(db, 'usuarios', (auth.currentUser).uid), {
     about: About,
@@ -143,20 +147,22 @@ export const readData = async (callback) => {
   });
 };
 
+/* ---------------------------FUNCIONES RELACIONADAS A STORAGE----------------------------------*/
+
 export const uploadImg = async function (files, extention, name) {
   const imgUpload = files;
 
   const imgName = name + extention;
 
-  const metadata = {
-    content: imgUpload.type,
-  };
+  // const metadata = {
+  //   content: imgUpload.type,
+  // };
 
   const storage = getStorage();
 
   const storageRef = sRef(storage, imgName);
 
-  const UploadTask = uploadBytesResumable(storageRef, imgUpload, metadata);
+  const UploadTask = uploadBytesResumable(storageRef, imgUpload);
 
   UploadTask.on('state-changed', (snapshot) => {
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;

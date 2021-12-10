@@ -93,7 +93,14 @@ export const FunctionsHome = () => {
 
   // LogOut
   document.querySelector('#logout').addEventListener('click', () => {
-    logout();
+    logout()
+      .then(() => {
+        console.log('log out');
+        window.location.hash = '#/';
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   });
 
   // function show about

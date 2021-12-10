@@ -20,6 +20,8 @@ export const template = (post) => {
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
     
       <div>${dataUser.name}</div>
+      <div class="date"><p></p></div>
+
       <div id="contentPost${onePost.idP}">${onePost.content}</div>
 
       <button class="delete">DELETE</button>
@@ -33,7 +35,7 @@ export const template = (post) => {
        <div id="contentComment${onePost.idP}"></div>
        </div>`;
   });
-  
+
   Promise.all(postElements).then(() => {
     const user = currentUser().currentUser;
     console.log(user.uid);
@@ -134,7 +136,6 @@ export const template = (post) => {
     //     });
     //   });
     // });
-
 
     nuevoElemento.querySelectorAll('.iconHeart').forEach((like) => {
       let clickCounter = 0;
