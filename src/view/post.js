@@ -1,50 +1,50 @@
 // import {
-//   getFirestore, query, collection, onSnapshot, orderBy, addDoc,
+//   getFirestore, collection, addDoc,
 // // eslint-disable-next-line import/no-unresolved
 // } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
-/* eslint-disable no-plusplus */
-
 import {
-  deletePost, currentUser, obtenerInfo, updatePost, updateLikePost,
+  deletePost, currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
 } from '../firebase.js';
 
+// import { templateComents }
+//   from './comments.js';
+
 export const template = (post) => {
-  // const inicio = Date.now();
-  // console.log(post);
+  console.log(post);
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
   const postElements = post.map(async (onePost) => {
     const dataUser = await obtenerInfo(onePost.userID);
-
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
-    
-      <div>${dataUser.name}</div>
+      <div>${dataUser.data().name}</div>
       <div class="date"><p></p></div>
-
       <div id="contentPost${onePost.idP}">${onePost.content}</div>
-      <div id="container-image-preview">
-      </div>
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
-      
       <div id="postIcon">
           <i class="far fa-heart icon iconHeart" id="${onePost.idP}"></i>
           <i class="far fa-comment icon"></i>
           <i class="far fa-paper-plane icon"></i>
        </div>
+       <div id="comments${onePost.idP}">
        <div id="contentComment${onePost.idP}"></div>
+       <div id="showComment${onePost.idP}"></div>
+       </div>
        </div>`;
+
+    return nuevoElemento;
   });
 
   Promise.all(postElements).then(() => {
     const user = currentUser().currentUser;
-    console.log(user.uid);
+    const uidUser = (user.uid);
 
     nuevoElemento.querySelectorAll('.date').forEach((date) => {
       const postId = date.parentElement.id;
       const pElement = date.firstChild;
 
+      // eslint-disable-next-line no-plusplus
       for (let i = 0; i < post.length; i++) {
         if (post[i].idP === postId) {
           const d = new Date();
@@ -60,10 +60,12 @@ export const template = (post) => {
 
     nuevoElemento.querySelectorAll('.delete').forEach((div) => {
       div.addEventListener('click', (e) => {
+        console.log('hi');
         console.log(e.target.parentNode);
         const id = e.target.parentNode.id;
         console.log(id);
 
+        // eslint-disable-next-line no-plusplus
         for (let i = 0; i < post.length; i++) {
           console.log(post[i].userID === user.uid, post[i].idP === id);
           if (post[i].userID === user.uid && post[i].idP === id) {
@@ -83,6 +85,7 @@ export const template = (post) => {
         const id = e.target.parentNode.id;
         console.log(id);
 
+        // eslint-disable-next-line no-plusplus
         for (let i = 0; i < post.length; i++) {
           console.log(post[i].userID === user.uid, post[i].idP === id);
           if (post[i].userID === user.uid && post[i].idP === id) {
@@ -102,42 +105,6 @@ export const template = (post) => {
         }
       });
     });
-
-    // const db = getFirestore();
-    // nuevoElemento.querySelectorAll('.fa-comment').forEach((icon) => {
-    //   icon.addEventListener('click', (e) => {
-    //     const id = e.target.parentNode.parentNode.id;
-    // eslint-disable-next-line max-len
-    //     nuevoElemento.querySelector(`#contentComment${id}`).innerHTML = `<textarea id="comment"></textarea>
-    //     <button id="saveComment">SAVE</button>`;
-    //     const comentario = document.getElementById('comment');
-    //     console.log(comentario);
-    //     document.getElementById('saveComment').addEventListener('click', async () => {
-    //       await addDoc(collection(db, 'post', id, 'comments'), {
-    //         userID: user.uid,
-    //         message: comentario.value,
-    //         date: Date.now(),
-    //       });
-    //       document.querySelector(`#contentComment${id}`).innerHTML = comentario.value;
-    //       const readComment = async () => {
-    //         const q = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
-    //         onSnapshot(q, (querySnapshot) => {
-    //           const comments = [];
-    //           querySnapshot.forEach((docC) => {
-    //             const objectComment = { };
-    //             objectComment.content = docC.data().message;
-    //             objectComment.userID = docC.data().userID;
-    //             objectComment.ID = docC.id;
-    //             comments.push(objectComment);
-    //             console.log(comments);
-    //           });
-    //         });
-    //       };
-    //       readComment();
-    //     });
-    //   });
-    // });
-
     nuevoElemento.querySelectorAll('.iconHeart').forEach((like) => {
       let clickCounter = 0;
 
@@ -184,12 +151,34 @@ export const template = (post) => {
       });
     });
 
-    showPost.innerHTML = '';
+    nuevoElemento.querySelectorAll('.fa-comment').forEach((icon) => {
+      icon.addEventListener('click', (e) => {
+        const id = e.target.parentNode.parentNode.id;
+        const showComment = document.getElementById(`showComment${id}`);
+        showComment.innerHTML = '';
+        const templateComents = (comments) => {
+          const divComment = document.createElement('div');
+          comments.forEach((element) => {
+            divComment.innerHTML += `<div>${element.content}</div>`;
+          });
+          showComment.innerHTML = '';
+          showComment.appendChild(divComment);
+        };
+        readComment(templateComents, id);
 
+        const divComment = document.createElement('div');
+        divComment.innerHTML = `<textarea id="textComent${id}"></textarea>
+        <button id="saveComment${id}">SAVE</button>`;
+        nuevoElemento.querySelector(`#contentComment${id}`).appendChild(divComment);
+        document.getElementById(`saveComment${id}`).addEventListener('click', () => {
+          const commentOne = document.getElementById(`textComent${id}`).value;
+          console.log(commentOne);
+          saveComment(id, commentOne, uidUser);
+        });
+      });
+    });
+
+    showPost.innerHTML = '';
     showPost.appendChild(nuevoElemento);
-    // const final = (Date.now());
-    // console.log(inicio);
-    // console.log(final);
-    // console.log(final - inicio);
   });
 };
