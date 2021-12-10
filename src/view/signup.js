@@ -105,6 +105,7 @@ export const Register = () => {
       passwordMessage.innerHTML = 'La contraseña debe tener de 8 y 16 caracteres entre números y letras(minúsculas o mayúsculas). No puede tener espacios ni otros símbolos.';
     } else {
       passwordMessage.innerHTML = '';
+
       // firebase
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, email, password)

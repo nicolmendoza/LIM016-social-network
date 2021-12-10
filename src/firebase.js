@@ -113,7 +113,7 @@ export const updateLikePost = async (id, cantLikes, idUser) => {
   });
 };
 
-export const savePost = async (postDescription, userID) => {
+export const savePost = async (postDescription, userID, result) => {
   console.log(await obtenerInfo(userID));
   const docRef = await addDoc(collection(db, 'post'), {
     message: postDescription.value,
@@ -150,19 +150,23 @@ export const readData = async (callback) => {
 /* ---------------------------FUNCIONES RELACIONADAS A STORAGE----------------------------------*/
 
 export const uploadImg = async function (files, extention, name) {
-  const imgUpload = files;
+  const imgUpload = files[0];
+
+  console.log(imgUpload);
 
   const imgName = name + extention;
 
-  // const metadata = {
-  //   content: imgUpload.type,
-  // };
+  const metadata = {
+    content: imgUpload.type,
+  };
+
+  console.log(metadata);
 
   const storage = getStorage();
 
   const storageRef = sRef(storage, imgName);
 
-  const UploadTask = uploadBytesResumable(storageRef, imgUpload);
+  const UploadTask = uploadBytesResumable(storageRef, imgUpload, metadata);
 
   UploadTask.on('state-changed', (snapshot) => {
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;

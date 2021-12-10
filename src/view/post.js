@@ -23,7 +23,8 @@ export const template = (post) => {
       <div class="date"><p></p></div>
 
       <div id="contentPost${onePost.idP}">${onePost.content}</div>
-
+      <div id="container-image-preview">
+      </div>
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
       

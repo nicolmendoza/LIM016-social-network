@@ -82,6 +82,7 @@ export const functionNewPost = () => {
 
   let files = [];
   const reader = new FileReader();
+  
   function GetFileExt(file) {
     const temp = file.name.split('.');
     const ext = temp.slice((temp.length - 1), (temp.length));
