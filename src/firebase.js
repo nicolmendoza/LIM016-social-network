@@ -23,6 +23,7 @@ import {
   signOut,
   signInWithEmailAndPassword,
   signInWithPopup,
+  createUserWithEmailAndPassword,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
@@ -182,9 +183,13 @@ const loginFacebook = (provider) => signInWithPopup(auth, provider);
 /* Login con GitHub para Firebase.auth */
 const loginGitHub = (provider) => signInWithPopup(auth, provider);
 
+/* ..........SIGNUP............ */
+const signupEmail = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+
 export {
   loginEmail,
   loginGoogle,
   loginFacebook,
   loginGitHub,
+  signupEmail,
 };

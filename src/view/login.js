@@ -178,7 +178,7 @@ export const initLogin = () => {
         message.innerHTML = 'La dirección de correo electrónico no es válida';
         break;
       default:
-        alert(errorCode);
+        alert(typeError.code);
     }
   }
 };

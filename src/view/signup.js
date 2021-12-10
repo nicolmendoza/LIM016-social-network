@@ -1,11 +1,14 @@
 // eslint-disable-next-line import/no-unresolved
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   sendEmailVerification,
   updateProfile,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+
+import {
+  signupEmail,
+} from '../firebase.js';
 
 export const SignUp = () => {
   const viewSignUp = document.createElement('div');
@@ -78,6 +81,8 @@ export const Register = () => {
       email.indexOf('@') === -1
       || email.indexOf('.com') === -1
       || email.indexOf('@.com') !== -1
+      || email.indexOf('.pe') === -1
+      || email.indexOf('@.pe') === -1
       || email.charAt(0) === '@'
     ) {
       emailMessage.innerHTML = 'Ingresa tu e-mail (email@ejemplo.com)';
@@ -97,7 +102,8 @@ export const Register = () => {
       passwordMessage.innerHTML = '';
       // firebase
       const auth = getAuth();
-      createUserWithEmailAndPassword(auth, email, password)
+
+      signupEmail(email, password)
         .then((userCredential) => {
           // Signed in
 
