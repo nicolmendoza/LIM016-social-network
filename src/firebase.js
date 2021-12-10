@@ -99,11 +99,10 @@ export const obtenerInfo = async (ID) => {
   return docSnap.data();
 };
 
-export const updateLikePost = async (id, cantLikes, idUser) => {
+export const updateLikePost = async (id, idUser) => {
   const postRef = doc(db, 'post', id);
   await updateDoc(postRef, {
     likes: [{
-      cant: cantLikes,
       user: idUser,
     }],
   });

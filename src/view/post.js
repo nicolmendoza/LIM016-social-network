@@ -20,23 +20,24 @@ export const template = (post) => {
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
     
       <div>${dataUser.name}</div>
+      <div class="date"><p></p></div>
       <div id="contentPost${onePost.idP}">${onePost.content}</div>
 
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
       
       <div id="postIcon">
-          <i class="far fa-heart icon iconHeart" id="${onePost.idP}"></i>
+          <i class="far fa-heart icon"></i> <p class="cant-${onePost.idP}"></p>
           <i class="far fa-comment icon"></i>
           <i class="far fa-paper-plane icon"></i>
        </div>
        <div id="contentComment${onePost.idP}"></div>
-       </div>`;
+      </div>`;
   });
-  
+
   Promise.all(postElements).then(() => {
     const user = currentUser().currentUser;
-    console.log(user.uid);
+    // console.log(user.uid);
 
     nuevoElemento.querySelectorAll('.date').forEach((date) => {
       const postId = date.parentElement.id;
@@ -135,59 +136,42 @@ export const template = (post) => {
     //   });
     // });
 
-
-    nuevoElemento.querySelectorAll('.iconHeart').forEach((like) => {
-      let clickCounter = 0;
-
+    nuevoElemento.querySelectorAll('.fa-heart').forEach((like) => {
       like.addEventListener('click', (e) => {
-        clickCounter += 1;
-
-        let cant = 0;
-        const userCurrentId = currentUser().currentUser.uid;
         const postId = e.target.parentNode.parentNode.id;
+        console.log(postId);
+        const cant = document.querySelector(`.cant-${postId}`);
 
         const currentPost = post.filter((postElement) => postElement.idP === postId);
-        const people = currentPost[0].likes[0].user;
-        // console.log(people);
+        const arrOfUsers = currentPost[0].likes[0].user;
 
         function removeItemFromArr(arr, item) {
-          const i = arr.indexOf(item);
-          if (i !== -1) {
-            arr.splice(i, 1);
+          const j = arr.indexOf(item);
+          if (j !== -1) {
+            arr.splice(j, 1);
           }
         }
 
-        if (clickCounter === 1) {
-          e.target.classList.add('fas');
-          people.push(userCurrentId);
-          cant = people.length;
-          console.log(`clickCounter ${clickCounter}`);
-          console.log(`people ${people}`);
-          console.log(`cant ${cant}`);
-          console.log(postId, cant, people);
-          console.log('------------------------------------');
-          updateLikePost(postId, cant, people);
-        } else {
+        if (arrOfUsers.includes(user.uid)) {
           e.target.classList.remove('fas');
-          removeItemFromArr(people, userCurrentId);
-          cant = people.length;
-          clickCounter = 0;
-          console.log(`clickCounter ${clickCounter}`);
-          console.log(`people ${people}`);
-          console.log(`cant ${cant}`);
-          console.log(postId, cant, people);
+          removeItemFromArr(arrOfUsers, user.uid);
+          console.log(`people ${arrOfUsers}`);
+          console.log(postId, arrOfUsers);
           console.log('------------------------------------');
-          updateLikePost(postId, cant, people);
+          updateLikePost(postId, arrOfUsers);
+        } else {
+          e.target.classList.add('fas');
+          arrOfUsers.push(user.uid);
+          console.log(`people ${arrOfUsers}`);
+          console.log(postId, arrOfUsers);
+          console.log('------------------------------------');
+          updateLikePost(postId, arrOfUsers);
         }
+        cant.innerHTML = arrOfUsers.length;
       });
     });
 
     showPost.innerHTML = '';
-
     showPost.appendChild(nuevoElemento);
-    // const final = (Date.now());
-    // console.log(inicio);
-    // console.log(final);
-    // console.log(final - inicio);
   });
 };
