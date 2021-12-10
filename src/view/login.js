@@ -83,6 +83,26 @@ export const initLogin = () => {
   /* ................................... */
   const message = document.getElementById('generalMessage');
 
+  function errorOccurs(typeError) {
+    const errorCode = typeError.code;
+    switch (errorCode) {
+      case 'auth/user-not-found':
+        message.innerHTML = 'Usuario no encontrado';
+        break;
+      case 'auth/wrong-password':
+        message.innerHTML = 'Contraseña incorrecta.';
+        break;
+      case 'auth/too-many-requests':
+        message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+        break;
+      case 'auth/invalid-email':
+        message.innerHTML = 'La dirección de correo electrónico no es válida';
+        break;
+      default:
+        alert(typeError.code);
+    }
+  }
+
   /* ........Logearse con correo........ */
   signInForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -148,37 +168,17 @@ export const initLogin = () => {
   /* .....Función ocultar y mostrar contraseña..... */
   const iconEye = document.querySelector('#icon-eye');
 
-  iconEye.addEventListener('click', () => {
-    const icon = iconEye.querySelector('i');
+  iconEye.addEventListener('click', function () {
+    const icon = this.querySelector('i');
 
-    if ((iconEye.nextElementSibling).type === 'password') {
-      iconEye.nextElementSibling.type = 'text';
+    if ((this.nextElementSibling).type === 'password') {
+      this.nextElementSibling.type = 'text';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
     } else {
-      iconEye.nextElementSibling.type = 'password';
+      this.nextElementSibling.type = 'password';
       icon.classList.remove('fa-eye');
       icon.classList.add('fa-eye-slash');
     }
   });
-
-  function errorOccurs(typeError) {
-    const errorCode = typeError.code;
-    switch (errorCode) {
-      case 'auth/user-not-found':
-        message.innerHTML = 'Usuario no encontrado';
-        break;
-      case 'auth/wrong-password':
-        message.innerHTML = 'Contraseña incorrecta.';
-        break;
-      case 'auth/too-many-requests':
-        message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
-        break;
-      case 'auth/invalid-email':
-        message.innerHTML = 'La dirección de correo electrónico no es válida';
-        break;
-      default:
-        alert(typeError.code);
-    }
-  }
 };
