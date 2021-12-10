@@ -27,7 +27,7 @@ export const template = (post) => {
       <button class="edit">EDIT</button>
       
       <div id="postIcon">
-          <i class="far fa-heart icon"></i> <p class="cant-${onePost.idP}">0</p>
+          <i class="far fa-heart icon"></i> <p class="cant-${onePost.idP}"></p>
           <i class="far fa-comment icon"></i>
           <i class="far fa-paper-plane icon"></i>
        </div>
@@ -176,52 +176,6 @@ export const template = (post) => {
         console.log(cant);
       });
     });
-
-    // nuevoElemento.querySelectorAll('.iconHeart').forEach((like) => {
-    //   let clickCounter = 0;
-
-    //   like.addEventListener('click', (e) => {
-    //     clickCounter += 1;
-
-    //     let cant = 0;
-    //     const userCurrentId = currentUser().currentUser.uid;
-    //     const postId = e.target.parentNode.parentNode.id;
-
-    //     const currentPost = post.filter((postElement) => postElement.idP === postId);
-    //     const people = currentPost[0].likes[0].user;
-    //     // console.log(people);
-
-    //     function removeItemFromArr(arr, item) {
-    //       const i = arr.indexOf(item);
-    //       if (i !== -1) {
-    //         arr.splice(i, 1);
-    //       }
-    //     }
-
-    //     if (clickCounter === 1) {
-    //       e.target.classList.add('fas');
-    //       people.push(userCurrentId);
-    //       cant = people.length;
-    //       console.log(`clickCounter ${clickCounter}`);
-    //       console.log(`people ${people}`);
-    //       console.log(`cant ${cant}`);
-    //       console.log(postId, cant, people);
-    //       console.log('------------------------------------');
-    //       updateLikePost(postId, cant, people);
-    //     } else {
-    //       e.target.classList.remove('fas');
-    //       removeItemFromArr(people, userCurrentId);
-    //       cant = people.length;
-    //       clickCounter = 0;
-    //       console.log(`clickCounter ${clickCounter}`);
-    //       console.log(`people ${people}`);
-    //       console.log(`cant ${cant}`);
-    //       console.log(postId, cant, people);
-    //       console.log('------------------------------------');
-    //       updateLikePost(postId, cant, people);
-    //     }
-    //   });
-    // });
 
     showPost.innerHTML = '';
 
