@@ -10,7 +10,9 @@ import {
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
-import { currentUser, savePost, uploadImg } from '../firebase.js';
+import {
+  currentUser, savePost, uploadImg 
+} from '../firebase.js';
 
 export const newPost = () => {
   const newPostContainer = document.createElement('section');
@@ -73,33 +75,35 @@ export const functionNewPost = () => {
   const nameUser = userCurrent.displayName;
   console.log(nameUser);
 
+  const photoFile = document.querySelector('#input-file');
+
   document.querySelector('.addImg').addEventListener('click', () => {
-    document.querySelector('#input-file').click();
+    photoFile.click();
   });
 
   // const previewContainer = document.getElementById('container-image-preview');
   const previewImg = document.querySelector('.image-preview');
   let files = [];
   const reader = new FileReader();
-  
-  function GetFileExt(file) {
-    const temp = file.name.split('.');
-    const ext = temp.slice((temp.length - 1), (temp.length));
-    return `.${ext[0]}`;
-  }
-  function GetFileName(file) {
-    const temp = file.name.split('.');
-    const fname = temp.slice(0, -1).join('.');
-    return fname;
-  }
-  document.querySelector('#input-file').onchange = (e) => {
+
+  // function GetFileExt(file) {
+  //   const temp = file.name.split('.');
+  //   const ext = temp.slice((temp.length - 1), (temp.length));
+  //   return `.${ext[0]}`;
+  // }
+  // function GetFileName(file) {
+  //   const temp = file.name.split('.');
+  //   const fname = temp.slice(0, -1).join('.');
+  //   return fname;
+  // }
+
+  photoFile.onchange = (e) => {
     files = e.target.files;
-    const extention = GetFileExt(files[0]);
-    const name = GetFileName(files[0]);
-    console.log(extention);
-    console.log(name);
+    // const extention = GetFileExt(files[0]);
+    // const name = GetFileName(files[0]);
+
     reader.readAsDataURL(files[0]);
-    uploadImg(files, extention, name);
+    uploadImg(files);
   };
   reader.onload = function () {
     previewImg.src = reader.result;
@@ -124,7 +128,28 @@ export const functionNewPost = () => {
   // });
 
   const postDescription = document.getElementById('post-description');
-  document.querySelector('.publish').addEventListener('click', async () => {
+  document.querySelector('.publish').addEventListener('click', (e) => {
+    e.preventDefault();
+    // eslint-disable-next-line max-len
+    // if ((postDescription.value !== '' && photoFile.files[0]) || (postDescription.value === '' && photoFile.files[0])) {
+    //   const imgUpload = files[0];
+    //   const metadata = { content: imgUpload.type };
+    //   storageRef(imgUpload).then(() => uploadTask(imgUpload, metadata)
+    //     .on('state_changed', (snapshot) => {
+    //       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //       console.log(`Upload is ${progress}% done`);
+    //     }),
+    //   () => {
+    //     // eslint-disable-next-line max-len
+    // eslint-disable-next-line max-len
+    //     getPhotoURL(uploadTask.snapshot.ref).then((downloadURL) => savePost(postDescription, userID, downloadURL));
+    //   });
+    // } else if (postDescription.value !== '' && !photoFile.files[0]) {
+    //   savePost(postDescription, userID, '');
+    // } else {
+    //   alert('su post esta vacio');
+    // }
+
     savePost(postDescription, userID);
     window.location.hash = '#/home';
   });
