@@ -112,14 +112,6 @@ export const savePost = (postDescription, userID) => {
   console.log('Document written with ID: ', docRef);
 };
 
-export const saveComment = (id, comentario, uid) => {
-  addDoc(collection(db, 'post', id, 'comments'), {
-    userID: uid,
-    message: comentario,
-    date: Date.now(),
-  });
-};
-
 export const readData = (callback) => {
   const q = query(collection(db, 'post'), orderBy('date', 'desc'));
   onSnapshot(q, (querySnapshot) => {
@@ -165,6 +157,14 @@ export const updateInfoUser = (uid, newAbout, newName) => {
   return updateDoc(infoUser, {
     about: newAbout,
     name: newName,
+  });
+};
+
+export const saveComment = (id, comentario, uid) => {
+  addDoc(collection(db, 'post', id, 'comments'), {
+    userID: uid,
+    message: comentario,
+    date: Date.now(),
   });
 };
 
