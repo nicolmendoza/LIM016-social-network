@@ -41,9 +41,16 @@ export const FunctionsHome = () => {
   async function verificarSiExisteUsuario() {
     const docRef = doc(db, 'usuarios', userCurrent.uid);
     const docSnap = await getDoc(docRef);
-
+    const name = userCurrent.displayName;
     if (docSnap.exists()) {
       console.log('existe');
+    } else if (name === null) {
+      await setDoc(doc(db, 'usuarios', userCurrent.uid), {
+        name: 'Developer',
+        photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
+        userUID: userCurrent.uid,
+        about: 'About',
+      });
     } else {
       await setDoc(doc(db, 'usuarios', userCurrent.uid), {
         name: userCurrent.displayName,
