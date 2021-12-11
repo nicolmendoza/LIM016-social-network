@@ -28,8 +28,8 @@ export const FunctionProfile = () => {
   const user = auth.currentUser;
   // autentificando usuario logueado
 
-  document.getElementById('photoUserProfile').src = user.photoURL;
   readPostProfile(user.uid).then((docUser) => {
+    document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
     const info = document.getElementById('infoUserProfile');
     info.innerHTML = `Bienvenida ${docUser.data().name}`;
     const aboutParrafo = document.getElementById('aboutP');

@@ -46,8 +46,8 @@ export const FunctionsHome = () => {
       console.log('existe');
     } else {
       await setDoc(doc(db, 'usuarios', userCurrent.uid), {
-        name: userCurrent.displayName,
-        photo: userCurrent.photoURL,
+        name: 'Developer',
+        photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
         userUID: userCurrent.uid,
         about: 'About',
       });
