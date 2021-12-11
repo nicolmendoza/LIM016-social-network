@@ -107,6 +107,8 @@ export const initLogin = () => {
         }
       })
       .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
         errorOccurs(error);
       });
   });
@@ -117,6 +119,8 @@ export const initLogin = () => {
       .then(() => {
         window.location.hash = '#/home';
       }).catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
         errorOccurs(error);
       });
   });
@@ -128,6 +132,8 @@ export const initLogin = () => {
         window.location.hash = '#/home';
       })
       .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
         errorOccurs(error);
       });
   });
@@ -138,6 +144,8 @@ export const initLogin = () => {
       .then(() => {
         window.location.hash = '#/home';
       }).catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
         errorOccurs(error);
       });
   });

@@ -1,14 +1,11 @@
 // eslint-disable-next-line import/no-unresolved
 import {
   getAuth,
+  createUserWithEmailAndPassword,
   sendEmailVerification,
   updateProfile,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
-import {
-  signupEmail,
-} from '../firebase.js';
 
 export const SignUp = () => {
   const viewSignUp = document.createElement('div');
@@ -35,6 +32,7 @@ export const SignUp = () => {
         <i class="far fa-user-circle"></i>
       </span>
     <input type="text" id="signup-name"  placeholder="Name" required>
+    <p id='nameMessage' class="errorMessage"></p>
   </div>
       <div class="form-group">
         <span class="icon-input">
@@ -69,11 +67,19 @@ export const Register = () => {
 
   signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    const name = document.querySelector('#signup-name').value;
     const email = document.querySelector('#signup-email').value;
     const password = document.querySelector('#signup-password').value;
 
+    const nameMessage = document.getElementById('nameMessage');
     const emailMessage = document.getElementById('emailMessage');
     const passwordMessage = document.getElementById('passwordMessage');
+
+    if (name === null || name === '') {
+      nameMessage.innerHTML = 'Ingresa tu nombre de usuaria.';
+    } else {
+      nameMessage.innerHTML = '';
+    }
 
     if (email === null || email === '') {
       emailMessage.innerHTML = 'Ingresa tu e-mail (email@ejemplo.com)';
@@ -81,8 +87,6 @@ export const Register = () => {
       email.indexOf('@') === -1
       || email.indexOf('.com') === -1
       || email.indexOf('@.com') !== -1
-      || email.indexOf('.pe') === -1
-      || email.indexOf('@.pe') === -1
       || email.charAt(0) === '@'
     ) {
       emailMessage.innerHTML = 'Ingresa tu e-mail (email@ejemplo.com)';
@@ -95,15 +99,15 @@ export const Register = () => {
       || password.length > 16
       || password.indexOf(' ') !== -1
       || password.search(/[^a-zA-Z0-9]/) !== -1
-      || password.search(/[a-zA-Z\u00F1\u00D1][0-9]|[0-9][a-zA-Z\u00F1\u00D1]/) === -1
+      || password.search(/[a-zA-Z\u00F1\u00D1][0-9]|[0-9][a-zA-Z\u00F1\u00D1]/)
+        === -1
     ) {
       passwordMessage.innerHTML = 'La contraseña debe tener de 8 y 16 caracteres entre números y letras(minúsculas o mayúsculas). No puede tener espacios ni otros símbolos.';
     } else {
       passwordMessage.innerHTML = '';
       // firebase
       const auth = getAuth();
-
-      signupEmail(email, password)
+      createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in
 
