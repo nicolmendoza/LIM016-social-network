@@ -7,8 +7,8 @@ import {
   deletePost, currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
 } from '../firebase.js';
 
-// import { templateComents }
-//   from './comments.js';
+import { templateComents }
+  from './comments.js';
 
 export const template = (post) => {
   console.log(post);
@@ -147,14 +147,6 @@ export const template = (post) => {
         const id = e.target.parentNode.parentNode.id;
         const showComment = document.getElementById(`showComment${id}`);
         showComment.innerHTML = '';
-        const templateComents = (comments) => {
-          const divComment = document.createElement('div');
-          comments.forEach((element) => {
-            divComment.innerHTML += `<div>${element.content}</div>`;
-          });
-          showComment.innerHTML = '';
-          showComment.appendChild(divComment);
-        };
         readComment(templateComents, id);
 
         const divComment = document.createElement('div');
