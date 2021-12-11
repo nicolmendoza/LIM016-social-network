@@ -11,7 +11,9 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 import {
-  currentUser, savePost, uploadImg 
+  currentUser, savePost, storageRef,
+  uploadTask,
+  getPhotoURL,
 } from '../firebase.js';
 
 export const newPost = () => {
@@ -62,10 +64,9 @@ export const functionNewPost = () => {
   // const userCurrent = currentUser().currentUser;
   const db = getFirestore();
 
-  document.getElementById('photoUser').src = user.photoURL;
-
   (async () => {
     onSnapshot(doc(db, 'usuarios', user.uid), (docUser) => {
+      document.getElementById('photoUser').src = docUser.data().photo;
       const info2 = document.getElementById('namePost');
       info2.innerHTML = docUser.data().name;
     });
@@ -103,7 +104,7 @@ export const functionNewPost = () => {
     // const name = GetFileName(files[0]);
 
     reader.readAsDataURL(files[0]);
-    uploadImg(files);
+    // uploadImg(files);
   };
   reader.onload = function () {
     previewImg.src = reader.result;
@@ -131,26 +132,34 @@ export const functionNewPost = () => {
   document.querySelector('.publish').addEventListener('click', (e) => {
     e.preventDefault();
     // eslint-disable-next-line max-len
-    // if ((postDescription.value !== '' && photoFile.files[0]) || (postDescription.value === '' && photoFile.files[0])) {
-    //   const imgUpload = files[0];
-    //   const metadata = { content: imgUpload.type };
-    //   storageRef(imgUpload).then(() => uploadTask(imgUpload, metadata)
-    //     .on('state_changed', (snapshot) => {
-    //       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //       console.log(`Upload is ${progress}% done`);
-    //     }),
-    //   () => {
-    //     // eslint-disable-next-line max-len
-    // eslint-disable-next-line max-len
-    //     getPhotoURL(uploadTask.snapshot.ref).then((downloadURL) => savePost(postDescription, userID, downloadURL));
-    //   });
-    // } else if (postDescription.value !== '' && !photoFile.files[0]) {
-    //   savePost(postDescription, userID, '');
-    // } else {
-    //   alert('su post esta vacio');
-    // }
+    if ((postDescription.value !== '' && photoFile.files[0]) || (postDescription.value === '' && photoFile.files[0])) {
+      const imgUpload = files[0];
+      const metadata = { content: imgUpload.type };
+      console.log(imgUpload);
 
-    savePost(postDescription, userID);
-    window.location.hash = '#/home';
+      const storageRef1 = storageRef(imgUpload);
+      const task = uploadTask(storageRef1, imgUpload, metadata);
+
+      task.on('state_changed', (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+      },
+      (() => {
+        // eslint-disable-next-line max-len
+        getPhotoURL(task.snapshot.ref).then((downloadURL) => {
+          savePost(postDescription, userID, downloadURL);
+          console.log(downloadURL);
+        });
+      })());
+      window.location.hash = '#/home';
+    } else if (postDescription.value !== '' && !photoFile.files[0]) {
+      savePost(postDescription, userID, '');
+      window.location.hash = '#/home';
+    } else {
+      alert('su post esta vacio');
+    }
+
+    // savePost(postDescription, userID);
+    // window.location.hash = '#/home';
   });
 };

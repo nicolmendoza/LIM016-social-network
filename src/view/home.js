@@ -100,7 +100,7 @@ export const FunctionsHome = () => {
   // save the post , genera ID automatico
   const postDescription = document.getElementById('post-description');
   document.getElementById('btn').addEventListener('click', () => {
-    savePost(postDescription, userID);
+    savePost(postDescription, userID, '');
   });
 
   // LogOut
