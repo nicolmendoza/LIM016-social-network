@@ -140,10 +140,11 @@ export const template = (post) => {
       like.addEventListener('click', (e) => {
         const postId = e.target.parentNode.parentNode.id;
         console.log(postId);
-        const cant = document.querySelector(`.cant-${postId}`);
+        const cant = e.target.nextElementSibling;
+        console.log(cant);
 
         const currentPost = post.filter((postElement) => postElement.idP === postId);
-        const arrOfUsers = currentPost[0].likes[0].user;
+        const arrOfUsers = currentPost[0].likes[0].users;
 
         function removeItemFromArr(arr, item) {
           const j = arr.indexOf(item);

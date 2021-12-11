@@ -21,6 +21,11 @@ import {
 import {
   getAuth,
   signOut,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
@@ -99,11 +104,11 @@ export const obtenerInfo = async (ID) => {
   return docSnap.data();
 };
 
-export const updateLikePost = async (id, idUser) => {
+export const updateLikePost = async (id, people) => {
   const postRef = doc(db, 'post', id);
   await updateDoc(postRef, {
     likes: [{
-      user: idUser,
+      users: people,
     }],
   });
 };
@@ -115,8 +120,7 @@ export const savePost = async (postDescription, userID) => {
     userName: await obtenerInfo(userID),
     userId: userID,
     likes: [{
-      cant: 0,
-      user: [],
+      users: [],
     }],
 
     date: Date.now(),
@@ -169,4 +173,22 @@ export const uploadImg = async function (files, extention, name) {
       console.log(downloasURL);
     });
   });
+};
+
+/* ........LOGIN PROVEEDORES....... */
+const providerGoogle = new GoogleAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
+const providerGithub = new GithubAuthProvider();
+
+/* ..........LOGIN............ */
+const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
+const loginGoogle = () => signInWithPopup(auth, providerGoogle);
+const loginFacebook = () => signInWithPopup(auth, providerFacebook);
+const loginGitHub = () => signInWithPopup(auth, providerGithub);
+
+export {
+  loginEmail,
+  loginGoogle,
+  loginFacebook,
+  loginGitHub,
 };
