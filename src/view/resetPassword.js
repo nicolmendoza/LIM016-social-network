@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import { getAuth, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+import { resetPasswordFirebase } from '../firebase.js';
 
 export const resetPassword = () => {
   const viewResetPassword = document.createElement('div');
@@ -40,22 +40,15 @@ export const resetPasswordInit = () => {
   resetP.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.querySelector('#resetEmail').value;
-    console.log(email);
-    const auth = getAuth();
-    sendPasswordResetEmail(auth, email)
+    resetPasswordFirebase(email)
       .then(() => {
         console.log('Reset Password successful');
         document.querySelector('.modalReset').style.display = 'flex';
         const emailText = document.querySelector('.emailText');
         emailText.innerHTML = `${email}`;
-
-      // Password reset email sent!
-      // ..
       })
-      .catch((error) => {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // ..
+      .catch((err) => {
+        const error = err.code;
         console.log(error);
       });
   });

@@ -79,34 +79,28 @@ export const functionNewPost = () => {
 
   // const previewContainer = document.getElementById('container-image-preview');
   const previewImg = document.querySelector('.image-preview');
-
   let files = [];
   const reader = new FileReader();
+  
   function GetFileExt(file) {
     const temp = file.name.split('.');
     const ext = temp.slice((temp.length - 1), (temp.length));
     return `.${ext[0]}`;
   }
-
   function GetFileName(file) {
     const temp = file.name.split('.');
     const fname = temp.slice(0, -1).join('.');
     return fname;
   }
-
   document.querySelector('#input-file').onchange = (e) => {
     files = e.target.files;
-
     const extention = GetFileExt(files[0]);
     const name = GetFileName(files[0]);
-
     console.log(extention);
     console.log(name);
-
     reader.readAsDataURL(files[0]);
     uploadImg(files, extention, name);
   };
-
   reader.onload = function () {
     previewImg.src = reader.result;
   };

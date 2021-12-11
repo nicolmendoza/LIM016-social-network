@@ -1,9 +1,12 @@
 // eslint-disable-next-line import/no-unresolved
-import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+// import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+
+import { stateChanged } from '../firebase.js';
 
 import { components } from '../view/index.js';
 
-const auth = getAuth();
+// onst auth = getAuth();
+
 let user;
 
 const changeView = (route) => {
@@ -89,7 +92,7 @@ const changeView = (route) => {
   }
 };
 
-onAuthStateChanged(auth, (userOne) => {
+stateChanged((userOne) => {
   if (userOne) {
     user = userOne;
     changeView('#/home');

@@ -5,18 +5,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 import {
-  doc,
-  getFirestore,
-  getDoc,
-  query,
-  collection,
-  where,
-  getDocs,
-  // eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-
-import {
-  obtenerInfo,
+  obtenerInfo, readPostProfile, leerPostProfile,
 } from '../firebase.js';
 
 export const Profile = () => {
@@ -34,58 +23,37 @@ export const Profile = () => {
 
   return document.getElementById('container').appendChild(profile);
 };
-
 export const FunctionProfile = () => {
   const auth = getAuth();
   const user = auth.currentUser;
   // autentificando usuario logueado
 
-  const db = getFirestore();
-
   document.getElementById('photoUserProfile').src = user.photoURL;
-  (async () => {
-    const docRef = doc(db, 'usuarios', user.uid);
-    const docSnap = await getDoc(docRef);
-    const docUser = docSnap.data();
-    console.log(docUser);
+  readPostProfile(user.uid).then((docUser) => {
     const info = document.getElementById('infoUserProfile');
-    info.innerHTML = `Bienvenida ${docUser.name}`;
+    info.innerHTML = `Bienvenida ${docUser.data().name}`;
     const aboutParrafo = document.getElementById('aboutP');
-    aboutParrafo.innerHTML = `${docUser.about}`;
-    console.log('Current data: ', docUser);
-  })();
+    aboutParrafo.innerHTML = `${docUser.data().about}`;
+    console.log('Current data: ', docUser.data());
+  });
 
   function showPostProfile(post) {
-    console.log(post);
     const PostProfile = document.getElementById('PostProfile');
     const nuevoElemento = document.createElement('div');
 
-    const postProfileAll = post.map(async (onePost) => {
-      const dataUser = await obtenerInfo(onePost.userID);
-      nuevoElemento.innerHTML += `<div class="postDiv">
-      <div>${dataUser.name}</div>
+    const postProfileAll = post.map((onePost) => {
+      obtenerInfo(onePost.userID).then((dataUser) => {
+        nuevoElemento.innerHTML += `<div class="postDiv">
+      <div>${dataUser.data().name}</div>
       <div>${onePost.content}</div>
       <div>`;
+      });
+      return nuevoElemento;
     });
     Promise.all(postProfileAll).then(() => PostProfile.appendChild(nuevoElemento));
   }
 
-  const leerPostProfile = async (callback) => {
-    const q = query(collection(db, 'post'), where('userId', '==', `${auth.currentUser.uid}`));
-    const querySnapshot = await getDocs(q);
-    const postP = [];
-    querySnapshot.forEach((doctP) => {
-      const objectPost = { };
-      console.log(doctP.data());
-      objectPost.content = doctP.data().message;
-      objectPost.userID = doctP.data().userId;
-      postP.push(objectPost);
-      return postP;
-    });
-    callback(postP);
-    console.log(postP);
-  };
-  leerPostProfile(showPostProfile);
+  leerPostProfile(showPostProfile, auth.currentUser.uid);
 
   document.getElementById('goEdit').addEventListener('click', () => {
     window.location.hash = '#/editProfile';

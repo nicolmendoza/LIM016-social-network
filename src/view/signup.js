@@ -105,6 +105,7 @@ export const Register = () => {
       passwordMessage.innerHTML = 'La contraseña debe tener de 8 y 16 caracteres entre números y letras(minúsculas o mayúsculas). No puede tener espacios ni otros símbolos.';
     } else {
       passwordMessage.innerHTML = '';
+
       // firebase
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, email, password)
@@ -115,7 +116,7 @@ export const Register = () => {
           updateProfile(auth.currentUser, {
             displayName: document.getElementById('signup-name').value,
             photoURL:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
           })
             .then(() => {
               // Profile updated!
@@ -150,7 +151,7 @@ export const Register = () => {
 
   const iconEye = document.querySelector('#icon-eye');
 
-  iconEye.addEventListener('click', () => {
+  iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 
     if (this.nextElementSibling.type === 'password') {
