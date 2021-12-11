@@ -17,8 +17,13 @@ export const template = (post) => {
   const postElements = post.map(async (onePost) => {
     const dataUser = await obtenerInfo(onePost.userID);
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
-      <div>${dataUser.data().name}</div>
-      <div class="date"><p></p></div>
+      <div class="header-post">
+      <img src=${dataUser.data().photo} >
+        <div class="header-info">
+        <div class="post-name">${dataUser.data().name}</div>
+        <div class="date"><p></p></div> 
+        </div>
+      </div>
       <div id="contentPost${onePost.idP}">${onePost.content}</div>
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
@@ -41,7 +46,7 @@ export const template = (post) => {
     const uidUser = (user.uid);
 
     nuevoElemento.querySelectorAll('.date').forEach((date) => {
-      const postId = date.parentElement.id;
+      const postId = date.parentElement.parentElement.parentElement.id;
       const pElement = date.firstChild;
 
       // eslint-disable-next-line no-plusplus
@@ -93,7 +98,12 @@ export const template = (post) => {
             <button class="save">SAVE</button>`;
             document.querySelector('.save').addEventListener('click', () => {
               const postEdit = document.getElementById('contentEdit').value;
-              console.log(document.getElementById('contentEdit').value);
+              if (postEdit === `${post[i].content}`) {
+                document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `${post[i].content}`;
+              } else {
+                console.log(document.getElementById('contentEdit').value);
+                updatePost(id, postEdit);
+              }
               updatePost(id, postEdit);
             });
 
@@ -172,7 +182,13 @@ export const template = (post) => {
         nuevoElemento.querySelector(`#contentComment${id}`).appendChild(divComment);
         document.getElementById(`saveComment${id}`).addEventListener('click', () => {
           const commentOne = document.getElementById(`textComent${id}`).value;
-          console.log(commentOne);
+          if (commentOne !== '') {
+            console.log(commentOne);
+            saveComment(id, commentOne, uidUser);
+          } else {
+            divComment.remove(`<textarea id="textComent${id}"></textarea>
+            <button id="saveComment${id}">SAVE</button>`);
+          }
           saveComment(id, commentOne, uidUser);
         });
       });
