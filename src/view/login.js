@@ -72,25 +72,26 @@ export const initLogin = () => {
   const message = document.getElementById('generalMessage');
 
   /* ........Imprimir errores....... */
-  function errorOccurs(typeError) {
-    const errorCode = typeError.code;
-    switch (errorCode) {
-      case 'auth/user-not-found':
-        message.innerHTML = 'Usuario no encontrado';
-        break;
-      case 'auth/wrong-password':
-        message.innerHTML = 'Contraseña incorrecta.';
-        break;
-      case 'auth/too-many-requests':
-        message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
-        break;
-      case 'auth/invalid-email':
-        message.innerHTML = 'La dirección de correo electrónico no es válida';
-        break;
-      default:
-        message.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
-    }
-  }
+  // function errorOccurs(typeError) {
+  //   const errorCode = typeError.code;
+  //   switch (errorCode) {
+  //     case 'auth/user-not-found':
+  //       message.innerHTML = 'Usuario no encontrado';
+  //       break;
+  //     case 'auth/wrong-password':
+  //       message.innerHTML = 'Contraseña incorrecta.';
+  //       break;
+  //     case 'auth/too-many-requests':
+  // eslint-disable-next-line max-len
+  //       message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+  //       break;
+  //     case 'auth/invalid-email':
+  //       message.innerHTML = 'La dirección de correo electrónico no es válida';
+  //       break;
+  //     default:
+  //       message.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
+  //   }
+  // }
 
   /* .........Logearse con correo........ */
   signInForm.addEventListener('submit', (e) => {
@@ -103,13 +104,24 @@ export const initLogin = () => {
         if (userCredential.user.emailVerified) {
           window.location.hash = '#/home';
         } else {
+          // eslint-disable-next-line no-alert
           alert('Te enviamos un correo para verificar tu cuenta, por favor revisa tu bandeja.');
         }
       })
       .catch((error) => {
         const errorMessage = error.message;
-        console.log(errorMessage);
-        errorOccurs(error);
+        if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
+          message.innerHTML = 'Usuario no encontrado';
+        }
+
+        if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
+          message.innerHTML = 'Contraseña incorrecta.';
+        } else if (errorMessage === 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).') {
+          message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+        }
+        // const errorMessage = error.message;
+        // console.log(errorMessage);
+        // errorOccurs(error);
       });
   });
 
@@ -120,8 +132,9 @@ export const initLogin = () => {
         window.location.hash = '#/home';
       }).catch((error) => {
         const errorMessage = error.message;
+        // eslint-disable-next-line no-console
         console.log(errorMessage);
-        errorOccurs(error);
+        // errorOccurs(error);
       });
   });
 
@@ -133,8 +146,9 @@ export const initLogin = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
+        // eslint-disable-next-line no-console
         console.log(errorMessage);
-        errorOccurs(error);
+        // errorOccurs(error);
       });
   });
 
@@ -145,8 +159,9 @@ export const initLogin = () => {
         window.location.hash = '#/home';
       }).catch((error) => {
         const errorMessage = error.message;
+        // eslint-disable-next-line no-console
         console.log(errorMessage);
-        errorOccurs(error);
+        // errorOccurs(error);
       });
   });
 
