@@ -123,6 +123,7 @@ export const readData = (callback) => {
       objectPost.userID = doct.data().userId;
       objectPost.date = doct.data().date;
       objectPost.likes = doct.data().likes;
+      objectPost.likes = doct.data().img;
       post.push(objectPost);
       return post;
     });
