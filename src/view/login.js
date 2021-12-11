@@ -1,57 +1,62 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
-/* eslint-disable import/no-unresolved */
 import {
-  getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider,
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
-import {
-  doc, setDoc, getDoc, getFirestore,
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+  loginEmail,
+  loginGoogle,
+  loginFacebook,
+  loginGitHub,
+} from '../firebase.js';
 
 export const Login = () => {
   const viewHome = document.createElement('div');
   viewHome.classList.add('sectionLogin');
   viewHome.innerHTML = `
   <section class="bubble">
-  <!-- content here -->
-</section>
-  <div class="section1"><img class="imgInicio" ></div>
+    <!-- content here -->
+  </section>
+
+  <div class="section1"><img class="imgInicio"></div>
   <div class="section2">
-  <div class="formulario">
-  <div class="logo">SOCIAL NETWORK</div>
-  <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png' ></div>
-  <div class="form-group-text">
-    <div class="textForm clickLogin">
-    <a href="#/login">Login</a> </div>
-    <div class="textForm">
-    <a href="#/signup" >Sign Up</a> </div>
-  </div>
-  <form id="login-form">
-    <div class="form-group">
-      <span class="icon-input">
-        <i class="far fa-envelope"></i>
-      </span>
-      <input type="email" id="login-email"  placeholder="correo@example.com" required >
+    <div class="formulario">
+      <div class="logo">SOCIAL NETWORK</div>
+      <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
+
+      <div class="form-group-text">
+        <div class="textForm clickLogin">
+          <a href="#/login">Login</a> 
+        </div>
+        <div class="textForm">
+          <a href="#/signup" >Sign Up</a>
+        </div>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <span class="icon-input">
+            <i class="far fa-envelope"></i>
+          </span>
+          <input type="email" id="login-email" placeholder="correo@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <span class="icon-input" id="icon-eye">
+            <i class="fas fa-eye-slash"></i>
+          </span>
+          <input type="password" id="login-password"  placeholder="****************" required>
+        </div>
+
+        <p id="generalMessage" class="errorMessage"></p>
+        <button type="submit" class="btnLogin">LOGIN</button><br>
+        <div class="divResetPassword">
+          <a href="#/resetPassword" id="resetPass"> Forgot password?</a>
+        </div>
+        
+        <button type="button" class="icon-login" id="googleLogin"><img src="img/google.png"></i></button>
+        <button type="button" class="icon-login" id="facebookLogin"><img src="img/facebook.png"></button>
+        <button type="button" class="icon-login" id="githubLogin"><img src="img/github.png"></button>
+        <div class="textResetPassword">
+          <p class="registerText">Don't you have an account? <a href="#/signup" class="registerText link">Register now</a></p>
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-      <span class="icon-input" id="icon-eye">
-        <i class="fas fa-eye-slash"></i>
-      </span>
-      <input type="password" id="login-password"  placeholder="****************" required >
-    </div>
-    <p id="generalMessage" class="errorMessage"></p>
-    <button type="submit" class="btnLogin">LOGIN</button><br>
-    <div class="divResetPassword">
-    <a href="#/resetPassword" id="resetPass"> Forgot password?</a></div>
-    
-    <button type="button" class="icon-login" id="googleLogin"><img src="img/google.png"></i></button>
-    <button type="button" class="icon-login" id="facebookLogin"><img src="img/facebook.png"></button>
-    <button type="button" class="icon-login" id="githubLogin"><img src="img/github.png"></button>
-    <div class="textResetPassword">
-    <p class="registerText">Don’t you have an account?  <a href="#/signup" class="registerText link">Register now</a></p></div>
-  </form>
-  </div>
   </div>`;
 
   return viewHome;
@@ -59,130 +64,95 @@ export const Login = () => {
 
 export const initLogin = () => {
   const signInForm = document.querySelector('#login-form');
+  /* ................................... */
+  const googleLogin = document.querySelector('#googleLogin');
+  const facebookLogin = document.querySelector('#facebookLogin');
+  const githubLogin = document.getElementById('githubLogin');
+  /* ................................... */
+  const message = document.getElementById('generalMessage');
 
+  /* ........Ingreso correcto....... */
+  function correctEntry() {
+    window.location.hash = '#/home';
+  }
+
+  /* ........Errorres para ingresar....... */
+  function errorOccurs(typeError) {
+    const errorCode = typeError.code;
+    switch (errorCode) {
+      case 'auth/user-not-found':
+        message.innerHTML = 'Usuario no encontrado';
+        break;
+      case 'auth/wrong-password':
+        message.innerHTML = 'Contraseña incorrecta.';
+        break;
+      case 'auth/too-many-requests':
+        message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+        break;
+      case 'auth/invalid-email':
+        message.innerHTML = 'La dirección de correo electrónico no es válida';
+        break;
+      default:
+        message.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
+    }
+  }
+
+  /* .........Logearse con correo........ */
   signInForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = document.querySelector('#login-email').value;
-    const password = document.querySelector('#login-password').value;
-    // codings firebase
-    const auth = getAuth();
+    const email = e.target.childNodes[1].childNodes[3].value;
+    // const email = document.querySelector('#login-email').value;
+    const password = e.target.childNodes[3].childNodes[3].value;
+    // const password = document.querySelector('#login-password').value;
 
-    signInWithEmailAndPassword(auth, email, password)
+    loginEmail(email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         if (user.emailVerified === true) {
-          console.log('hola');
-          window.location.hash = '#/home';
+          correctEntry();
         } else {
-          alert('te enviamos un correo para verificar tu cuenta, revisa tu bandeja');
+          alert('Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.');
         }
       })
       .catch((error) => {
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-
-        const message = document.getElementById('generalMessage');
-
-        if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
-          message.innerHTML = 'Usuario no encontrado';
-        }
-
-        if (errorMessage === 'Firebase: Error (auth/wrong-password).') {
-          message.innerHTML = 'Contraseña incorrecta.';
-        } else if (errorMessage === 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).') {
-          message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
-        }
+        errorOccurs(error);
       });
   });
 
-  document.querySelector('#googleLogin').addEventListener('click', () => {
-    const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        console.log(result);
-
-        window.location.hash = '#/home';
-        console.log('ingresando con correo google');
-        // ...
+  /* ........Logearse con Google........ */
+  googleLogin.addEventListener('click', () => {
+    loginGoogle()
+      .then(() => {
+        correctEntry();
       }).catch((error) => {
-        // Handle Errors here.
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // // The email of the user's account used.
-        // const email = error.email;
-        // // The AuthCredential type that was used.
-        // const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-        console.log(error);
+        errorOccurs(error);
       });
   });
 
-  document.querySelector('#facebookLogin').addEventListener('click', () => {
-    const provider = new FacebookAuthProvider();
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log('facebook sign in');
-        // The signed-in user info.
-        const user = result.user;
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const credential = FacebookAuthProvider.credentialFromResult(result);
-        console.log(credential);
-        console.log(user);
-        window.location.hash = '#/home';
-        // const accessToken = credential.accessToken;
-        // ...
+  /* .......Logearse con Facebook........ */
+  facebookLogin.addEventListener('click', () => {
+    loginFacebook()
+      .then(() => {
+        correctEntry();
       })
       .catch((error) => {
-        // // Handle Errors here.
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // // The email of the user's account used.
-        // const email = error.email;
-        // // The AuthCredential type that was used.
-        // const credential = FacebookAuthProvider.credentialFromError(error);
-
-        // // ...
-        console.log(error);
+        errorOccurs(error);
       });
   });
 
-  document.getElementById('githubLogin').addEventListener('click', () => {
-    const provider = new GithubAuthProvider();
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log('github sign in');
-        window.location.hash = '#/home';
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        // const credential = GithubAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-
-        // The signed-in user info.
-
-        const user = result.user;
-        console.log(user);
-        alert(`Bienvenida ${user.displayName}`);
+  /* .......Logearse con GitHub........ */
+  githubLogin.addEventListener('click', () => {
+    loginGitHub()
+      .then(() => {
+        correctEntry();
       }).catch((error) => {
-        // Handle Errors here.
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // The email of the user's account used.
-        // const email = error.email;
-        // The AuthCredential type that was used.
-        // const credential = GithubAuthProvider.credentialFromError(error);
-        // ...
-        console.log(error);
+        errorOccurs(error);
       });
   });
 
+  /* .....Función ocultar y mostrar contraseña..... */
   const iconEye = document.querySelector('#icon-eye');
-
+  // eslint-disable-next-line func-names
   iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 

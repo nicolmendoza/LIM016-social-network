@@ -22,6 +22,11 @@ import {
 import {
   getAuth,
   signOut,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
   sendPasswordResetEmail,
   sendEmailVerification,
   onAuthStateChanged,
@@ -89,12 +94,11 @@ export const obtenerInfo = (ID) => {
   return docSnap;
 };
 
-export const updateLikePost = (id, cantLikes, idUser) => {
+export const updateLikePost = async (id, people) => {
   const postRef = doc(db, 'post', id);
   return updateDoc(postRef, {
     likes: [{
-      cant: cantLikes,
-      user: idUser,
+      users: people,
     }],
   });
 };
@@ -104,8 +108,7 @@ export const savePost = (postDescription, userID) => {
     message: postDescription.value,
     userId: userID,
     likes: [{
-      cant: 0,
-      user: [],
+      users: [],
     }],
     date: Date.now(),
   });
@@ -210,4 +213,22 @@ export const uploadImg = async function (files, extention, name) {
       console.log(downloasURL);
     });
   });
+};
+
+/* ........LOGIN PROVEEDORES....... */
+const providerGoogle = new GoogleAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
+const providerGithub = new GithubAuthProvider();
+
+/* ..........LOGIN............ */
+const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
+const loginGoogle = () => signInWithPopup(auth, providerGoogle);
+const loginFacebook = () => signInWithPopup(auth, providerFacebook);
+const loginGitHub = () => signInWithPopup(auth, providerGithub);
+
+export {
+  loginEmail,
+  loginGoogle,
+  loginFacebook,
+  loginGitHub,
 };
