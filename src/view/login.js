@@ -72,6 +72,7 @@ export const initLogin = () => {
         // Signed in
         const user = userCredential.user;
         if (user.emailVerified === true) {
+          console.log('hola');
           window.location.hash = '#/home';
         } else {
           alert('te enviamos un correo para verificar tu cuenta, revisa tu bandeja');

@@ -1,15 +1,14 @@
 // eslint-disable-next-line import/no-unresolved
 // import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
-import { stateChanged } from '../firebase.js';
+import { currentUser } from '../firebase.js';
 
 import { components } from '../view/index.js';
 
 // onst auth = getAuth();
 
-let user;
-
 const changeView = (route) => {
+  const user = currentUser().currentUser;
   const container = document.getElementById('container');
   container.innerHTML = '';
   const footer = document.getElementById('container-footer');
@@ -19,23 +18,15 @@ const changeView = (route) => {
     case '#':
     case '/':
     case '#/login':
-    case '#/': {
-      if (!user) {
-        container.appendChild(components.login.Login());
-        components.login.initLogin();
-      } else {
-        window.location.hash = '#/home';
-      }
+    case '#/':
+      container.appendChild(components.login.Login());
+      components.login.initLogin();
+
       break;
-    }
 
     case '#/signup':
-      if (!user) {
-        container.appendChild(components.signup.SignUp());
-        components.signup.Register();
-      } else {
-        window.location.hash = '#/home';
-      }
+      container.appendChild(components.signup.SignUp());
+      components.signup.Register();
       break;
 
     case '#/home': {
@@ -92,14 +83,19 @@ const changeView = (route) => {
   }
 };
 
-stateChanged((userOne) => {
-  if (userOne) {
-    user = userOne;
-    changeView('#/home');
-  } else {
-    user = '';
-    changeView('#/');
-  }
-});
+// export const stateChanged = (callback) => onAuthStateChanged(auth, callback);
+
+// stateChanged((userOne) => {
+//   if (userOne) {
+//     user = userOne;
+//     const verificar = userOne.emailVerified;
+//     if (verificar) {
+//       changeView('#/home');
+//     }
+//   } else {
+//     user = '';
+//     changeView('#/');
+//   }
+// });
 
 export { changeView };
