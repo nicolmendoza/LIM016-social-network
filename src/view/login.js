@@ -71,11 +71,6 @@ export const initLogin = () => {
   /* ................................... */
   const message = document.getElementById('generalMessage');
 
-  /* ........Ingreso correcto....... */
-  function correctEntry() {
-    window.location.hash = '#/home';
-  }
-
   /* ........Errorres para ingresar....... */
   function errorOccurs(typeError) {
     const errorCode = typeError.code;
@@ -109,7 +104,7 @@ export const initLogin = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         if (user.emailVerified === true) {
-          correctEntry();
+          window.location.hash = '#/home';
         } else {
           alert('Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.');
         }
@@ -123,7 +118,7 @@ export const initLogin = () => {
   googleLogin.addEventListener('click', () => {
     loginGoogle()
       .then(() => {
-        correctEntry();
+        window.location.hash = '#/home';
       }).catch((error) => {
         errorOccurs(error);
       });
@@ -133,7 +128,7 @@ export const initLogin = () => {
   facebookLogin.addEventListener('click', () => {
     loginFacebook()
       .then(() => {
-        correctEntry();
+        window.location.hash = '#/home';
       })
       .catch((error) => {
         errorOccurs(error);
@@ -144,7 +139,7 @@ export const initLogin = () => {
   githubLogin.addEventListener('click', () => {
     loginGitHub()
       .then(() => {
-        correctEntry();
+        window.location.hash = '#/home';
       }).catch((error) => {
         errorOccurs(error);
       });

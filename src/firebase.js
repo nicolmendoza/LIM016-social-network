@@ -28,6 +28,7 @@ import {
   FacebookAuthProvider,
   GithubAuthProvider,
   sendPasswordResetEmail,
+  createUserWithEmailAndPassword,
   sendEmailVerification,
   onAuthStateChanged,
 // eslint-disable-next-line import/no-unresolved
@@ -255,6 +256,10 @@ export const uploadTask = (storageRef1, imgUpload, metadata) => uploadBytesResum
 // };
 export const getPhotoURL = (task) => getDownloadURL(task);
 
+/* .............SIGNUP.............. */
+const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+const verificationEmail = () => sendEmailVerification(auth.currentUser);
+
 /* ........LOGIN PROVEEDORES....... */
 const providerGoogle = new GoogleAuthProvider();
 const providerFacebook = new FacebookAuthProvider();
@@ -271,4 +276,6 @@ export {
   loginGoogle,
   loginFacebook,
   loginGitHub,
+  createUser,
+  verificationEmail,
 };
