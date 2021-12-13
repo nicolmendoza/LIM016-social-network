@@ -99,7 +99,7 @@ export const template = (post) => {
               if (postEdit === `${post[i].content}`) {
                 document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `${post[i].content}`;
               } else {
-                console.log(document.getElementById('contentEdit').value);
+                console.log(document.getElementById(`contentEdit${post[i].idP}`).value);
                 updatePost(id, postEdit);
               }
 
