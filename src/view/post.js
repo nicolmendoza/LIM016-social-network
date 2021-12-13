@@ -15,14 +15,21 @@ export const template = (post) => {
   console.log(post);
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
+  const user = currentUser().currentUser;
+
   const postElements = post.map(async (onePost) => {
     const dataUser = await obtenerInfo(onePost.userID);
-    nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
+
+    const arrOfUsers = onePost.likes[0].users;
+    const likeIcon = arrOfUsers.includes(user.uid) ? 'fas' : '';
+
+    nuevoElemento.innerHTML += `
+    <div class="postDiv" id="${onePost.idP}">
       <div class="header-post">
-      <img src=${dataUser.data().photo} width="100px" >
+        <img src=${dataUser.data().photo} width="100px" >
         <div class="header-info">
-        <div class="post-name">${dataUser.data().name}</div>
-        <div class="date"><p></p></div> 
+          <div class="post-name">${dataUser.data().name}</div>
+          <div class="date"><p></p></div> 
         </div>
       </div>
       <div id="contentPost${onePost.idP}">${onePost.content}</div>
@@ -30,21 +37,20 @@ export const template = (post) => {
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
       <div id="postIcon">
-          <i class="far fa-heart icon"></i> <p class="cant-${onePost.idP}"></p>
+          <i class="${likeIcon} far fa-heart icon"></i> <p class='cant'>${onePost.likes[0].users.length}</p>
           <i class="far fa-comment icon"></i>
           <i class="far fa-paper-plane icon"></i>
-       </div>
-       <div id="comments${onePost.idP}">
-       <div id="contentComment${onePost.idP}"></div>
-       <div id="showComment${onePost.idP}"></div>
-       </div>
-       </div>`;
+      </div>
+      <div id="comments${onePost.idP}">
+        <div id="contentComment${onePost.idP}"></div>
+        <div id="showComment${onePost.idP}"></div>
+      </div>
+    </div>`;
 
     return nuevoElemento;
   });
 
   Promise.all(postElements).then(() => {
-    const user = currentUser().currentUser;
     const uidUser = (user.uid);
 
     nuevoElemento.querySelectorAll('.date').forEach((date) => {
@@ -118,12 +124,9 @@ export const template = (post) => {
     nuevoElemento.querySelectorAll('.fa-heart').forEach((like) => {
       like.addEventListener('click', (e) => {
         const postId = e.target.parentNode.parentNode.id;
-        console.log(postId);
-        const cant = e.target.nextElementSibling;
-        console.log(cant);
-
         const currentPost = post.filter((postElement) => postElement.idP === postId);
         const arrOfUsers = currentPost[0].likes[0].users;
+        const cant = e.target.nextElementSibling;
 
         function removeItemFromArr(arr, item) {
           const j = arr.indexOf(item);
@@ -133,15 +136,17 @@ export const template = (post) => {
         }
 
         if (arrOfUsers.includes(user.uid)) {
-          e.target.classList.remove('fas');
+          e.target.classList.toggle('fas');
           removeItemFromArr(arrOfUsers, user.uid);
+          console.log('remove fas');
           console.log(`people ${arrOfUsers}`);
           console.log(postId, arrOfUsers);
           console.log('------------------------------------');
           updateLikePost(postId, arrOfUsers);
         } else {
-          e.target.classList.add('fas');
+          e.target.classList.toggle('fas');
           arrOfUsers.push(user.uid);
+          console.log('add fas');
           console.log(`people ${arrOfUsers}`);
           console.log(postId, arrOfUsers);
           console.log('------------------------------------');
