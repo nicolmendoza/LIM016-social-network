@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 // import {
 //   getFirestore, collection, addDoc,
 // // eslint-disable-next-line import/no-unresolved
@@ -49,8 +50,6 @@ export const template = (post) => {
     nuevoElemento.querySelectorAll('.date').forEach((date) => {
       const postId = date.parentElement.parentElement.parentElement.id;
       const pElement = date.firstChild;
-
-      // eslint-disable-next-line no-plusplus
       for (let i = 0; i < post.length; i++) {
         if (post[i].idP === postId) {
           const d = new Date();
@@ -71,7 +70,6 @@ export const template = (post) => {
         const id = e.target.parentNode.id;
         console.log(id);
 
-        // eslint-disable-next-line no-plusplus
         for (let i = 0; i < post.length; i++) {
           console.log(post[i].userID === user.uid, post[i].idP === id);
           if (post[i].userID === user.uid && post[i].idP === id) {
@@ -91,7 +89,6 @@ export const template = (post) => {
         const id = e.target.parentNode.id;
         console.log(id);
 
-        // eslint-disable-next-line no-plusplus
         for (let i = 0; i < post.length; i++) {
           console.log(post[i].userID === user.uid, post[i].idP === id);
           if (post[i].userID === user.uid && post[i].idP === id) {
