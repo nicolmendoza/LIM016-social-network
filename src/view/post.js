@@ -18,7 +18,7 @@ export const template = (post) => {
     const dataUser = await obtenerInfo(onePost.userID);
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
       <div class="header-post">
-      <img src=${dataUser.data().photo} >
+      <img src=${dataUser.data().photo} width="100px" >
         <div class="header-info">
         <div class="post-name">${dataUser.data().name}</div>
         <div class="date"><p></p></div> 
@@ -102,7 +102,7 @@ export const template = (post) => {
               if (postEdit === `${post[i].content}`) {
                 document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `${post[i].content}`;
               } else {
-                console.log(document.getElementById('contentEdit').value);
+                console.log(document.getElementById(`contentEdit${post[i].idP}`).value);
                 updatePost(id, postEdit);
               }
 
