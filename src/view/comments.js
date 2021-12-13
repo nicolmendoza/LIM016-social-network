@@ -1,6 +1,11 @@
 // eslint-disable-next-line import/no-unresolved
-import { doc, deleteDoc, getFirestore } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-import { obtenerInfo, currentUser } from '../firebase.js';
+import {
+  doc, deleteDoc, getFirestore,
+// eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+import {
+  obtenerInfo, currentUser, updateComment,
+} from '../firebase.js';
 
 export const templateComents = (comments, id) => {
   const showComment = document.getElementById(`showComment${id}`);
@@ -8,7 +13,7 @@ export const templateComents = (comments, id) => {
   const commentsElements = comments.map(async (oneComment) => {
     const dataUser = await obtenerInfo(oneComment.userID);
     divComment.innerHTML += `
-    <div id="${oneComment.ID}" class="pruebaDivComment">
+    <div id="${oneComment.ID}" class="divComment">
     <div>${dataUser.data().name}</div>
     <div id="contentEdit-${oneComment.ID}">${oneComment.content}</div>
     <button class="deleteComment">Delete</button>
@@ -38,11 +43,12 @@ export const templateComents = (comments, id) => {
       for (let i = 0; i < comments.length; i++) {
         console.log(comments[i].ID === idComment && comments[i].userID === user.uid);
         if (comments[i].ID === idComment && comments[i].userID === user.uid) {
-          document.querySelector(`#contentEdit-${idComment}`).innerHTML = `<textarea id="contentEdit-${idComment}">${comments[i].content}</textarea>
+          document.querySelector(`#contentEdit-${idComment}`).innerHTML = `<textarea id="edit-${idComment}">${comments[i].content}</textarea>
             <button id="save-${idComment}">SAVE</button>`;
           document.querySelector(`#save-${idComment}`).addEventListener('click', () => {
-            const commentEdit = document.getElementById(`contentEdit-${idComment}`);
+            const commentEdit = document.getElementById(`edit-${idComment}`);
             console.log(commentEdit.value);
+            updateComment(id, idComment, commentEdit.value);
           });
         }
       }

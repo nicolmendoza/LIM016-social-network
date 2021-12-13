@@ -3,6 +3,7 @@ import { resetPasswordFirebase } from '../firebase.js';
 
 export const resetPassword = () => {
   const viewResetPassword = document.createElement('div');
+  viewResetPassword.classList.add('viewReset');
   viewResetPassword.innerHTML = `
     <div class="logo">SOCIAL NETWORK</div>
     <div><img id="logoLogin" src='./img/lock.png' style="width:195px"></div>

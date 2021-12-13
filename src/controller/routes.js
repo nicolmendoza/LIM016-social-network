@@ -13,6 +13,8 @@ const changeView = (route) => {
   container.innerHTML = '';
   const footer = document.getElementById('container-footer');
   footer.innerHTML = '';
+  const header = document.getElementById('container-header');
+  header.innerHTML = '';
 
   switch (route) {
     case '#':
@@ -31,6 +33,7 @@ const changeView = (route) => {
 
     case '#/home': {
       if (user) {
+        header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
         (components.home.Home());
         components.home.FunctionsHome();
@@ -42,6 +45,7 @@ const changeView = (route) => {
     }
     case '#/profile': {
       if (user) {
+        header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
         components.profile.Profile();
         components.profile.FunctionProfile();

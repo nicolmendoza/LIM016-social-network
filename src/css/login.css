@@ -14,7 +14,10 @@
   height: 80vh;
 }
 .sectionLogin {
-  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  /* background: aqua; */
   overflow: hidden;
 }
 

@@ -1,11 +1,11 @@
 /* eslint-disable no-plusplus */
 // import {
 //   getFirestore, collection, addDoc,
-// // eslint-disable-next-line import/no-unresolved
 // } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 import {
-  deletePost, currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
+  deletePost,
+  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost, countComment,
 } from '../firebase.js';
 
 import { templateComents }
@@ -92,16 +92,17 @@ export const template = (post) => {
         for (let i = 0; i < post.length; i++) {
           console.log(post[i].userID === user.uid, post[i].idP === id);
           if (post[i].userID === user.uid && post[i].idP === id) {
-            document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `<textarea id="contentEdit">${post[i].content}</textarea>
+            document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `<textarea id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
             <button class="save">SAVE</button>`;
             document.querySelector('.save').addEventListener('click', () => {
-              const postEdit = document.getElementById('contentEdit').value;
+              const postEdit = document.getElementById(`contentEdit${post[i].idP}`).value;
               if (postEdit === `${post[i].content}`) {
                 document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `${post[i].content}`;
               } else {
                 console.log(document.getElementById('contentEdit').value);
                 updatePost(id, postEdit);
               }
+
               updatePost(id, postEdit);
             });
 
@@ -171,6 +172,7 @@ export const template = (post) => {
           //   <button id="saveComment${id}">SAVE</button>`);
           // }
           saveComment(id, commentOne, uidUser);
+          document.getElementById(`textComent${id}`).value = '';
         });
       });
     });

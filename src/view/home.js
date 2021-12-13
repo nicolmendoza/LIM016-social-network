@@ -15,7 +15,10 @@ export const Home = () => {
   divElement.classList.add('container-home');
   divElement.innerHTML = ` 
   <button id="logout"><ion-icon name="log-out-outline"></ion-icon></button>
-  <!-- <button id="profile">Profile</button> -->
+ <form id="uploader">
+ <input type="file" name="file" id="file" >
+ <button type="submit">subir</button>
+ </form>
   <div class='header-home'>
     <img id="photoUser" class="photoHome" width="100px">
     <div class="header-text">
