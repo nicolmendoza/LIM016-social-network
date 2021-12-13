@@ -22,6 +22,11 @@ import {
 import {
   getAuth,
   signOut,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
   sendPasswordResetEmail,
   sendEmailVerification,
   onAuthStateChanged,
@@ -29,8 +34,12 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 import {
-  getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
+  getStorage, ref, uploadBytesResumable, getDownloadURL,
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
+
+// import {
+//   getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
+// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyD9ngpw2YVZK0ZTgYEn2L3kJX2HFlcDK8Q',
@@ -49,6 +58,7 @@ const analytics = getAnalytics(app);
 const db = getFirestore();
 const auth = getAuth();
 const user = auth.currentUser;
+const storage = getStorage();
 
 export const currentUser = () => auth;
 /* ----------------------------VISTA CON INICIO DE SESION - AUTH ---------------------------------*/
@@ -76,6 +86,13 @@ export const updatePost = (id, postEdit) => {
   });
 };
 
+export const updateComment = (id, idComment, newComment) => {
+  const washingtonRef = doc(db, 'post', id, 'comments', idComment);
+  return updateDoc(washingtonRef, {
+    message: newComment,
+  });
+};
+
 // export const readPostProfile = (uid) => {
 //   const docRef = doc(db, 'usuarios', uid);
 //   const docSnap = getDoc(docRef);
@@ -89,27 +106,25 @@ export const obtenerInfo = (ID) => {
   return docSnap;
 };
 
-export const updateLikePost = (id, cantLikes, idUser) => {
+export const updateLikePost = async (id, people) => {
   const postRef = doc(db, 'post', id);
   return updateDoc(postRef, {
     likes: [{
-      cant: cantLikes,
-      user: idUser,
+      users: people,
     }],
   });
 };
 
-export const savePost = (postDescription, userID) => {
+export const savePost = (postDescription, userID, imgULR) => {
   const docRef = addDoc(collection(db, 'post'), {
     message: postDescription.value,
     userId: userID,
+    img: imgULR,
     likes: [{
-      cant: 0,
-      user: [],
+      users: [],
     }],
     date: Date.now(),
   });
-  console.log('Document written with ID: ', docRef);
 };
 
 export const readData = (callback) => {
@@ -123,7 +138,7 @@ export const readData = (callback) => {
       objectPost.userID = doct.data().userId;
       objectPost.date = doct.data().date;
       objectPost.likes = doct.data().likes;
-      objectPost.likes = doct.data().img;
+      objectPost.img = doct.data().img;
       post.push(objectPost);
       return post;
     });
@@ -185,30 +200,93 @@ export const readComment = (callback, id) => {
   });
 };
 
+export const countComment = (id) => {
+  const qC = query(collection(db, 'post', id, 'comments'));
+  onSnapshot(qC, (querySnapshot) => {
+    const commentsOne = [];
+    querySnapshot.forEach((docC) => {
+      commentsOne.push(docC.data());
+    });
+    console.log(commentsOne.length);
+    return commentsOne.length;
+  });
+};
+
 /* ---------------------------FUNCIONES RELACIONADAS A STORAGE----------------------------------*/
 
-export const uploadImg = async function (files, extention, name) {
-  const imgUpload = files[0];
-  console.log(imgUpload);
-  const imgName = name + extention;
-  const metadata = {
-    content: imgUpload.type,
-  };
+// Create the file metadata
+/* @type {any} */
 
-  console.log(metadata);
+// export const uploadImg = function (files) {
+//   const imgUpload = files[0];
+//   const metadata = { content: imgUpload.type };
 
-  const storage = getStorage();
-  const storageRef = sRef(storage, imgName);
-  const UploadTask = uploadBytesResumable(storageRef, imgUpload, metadata);
-  UploadTask.on('state-changed', (snapshot) => {
-    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  },
-  (error) => {
-    alert('error al cargar imagen');
-  },
-  () => {
-    getDownloadURL(UploadTask.snapshot.ref).then((downloasURL) => {
-      console.log(downloasURL);
-    });
-  });
+//   const storageRef = ref(storage, `img-post/${imgUpload.name}`);
+//   const uploadTask = uploadBytesResumable(storageRef, imgUpload, metadata);
+//   // Listen for state changes, errors, and completion of the upload.
+//   uploadTask.on('state_changed', (snapshot) => {
+//     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//     console.log(`Upload is ${progress}% done`);
+//     // switch (snapshot.state) {
+//     //   case 'paused':
+//     //     console.log('Upload is paused');
+//     //     break;
+//     //   case 'running':
+//     //     console.log('Upload is running');
+//     //     break;
+//     // }
+//   },
+//   (error) => {
+//     // A full list of error codes is available at
+//     // https://firebase.google.com/docs/storage/web/handle-errors
+//     // switch (error.code) {
+//     //   case 'storage/unauthorized':
+//     //     // User doesn't have permission to access the object
+//     //     break;
+//     //   case 'storage/canceled':
+//     //     // User canceled the upload
+//     //     break;
+
+//     //   case 'storage/unknown':
+//     //     // Unknown error occurred, inspect error.serverResponse
+//     //     break;
+//     // }
+//   },
+//   () => {
+//     // Upload completed successfully, now we can get the download URL
+//     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+//       console.log('File available at', downloadURL);
+//     });
+//   });
+// };
+
+export const storageRef = (imgUpload) => ref(storage, `img-post/${imgUpload.name}`);
+
+// eslint-disable-next-line max-len
+export const uploadTask = (storageRef1, imgUpload, metadata) => uploadBytesResumable(storageRef1, imgUpload, metadata);
+// export const uploadTask = function (imgUpload, metadata) {
+//   const task = uploadBytesResumable(storageRef, imgUpload, metadata);
+//   task.on('state_changed', (snapshot) => {
+//     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//     console.log(`Upload is ${progress}% done`);
+//   });
+// };
+export const getPhotoURL = (task) => getDownloadURL(task);
+
+/* ........LOGIN PROVEEDORES....... */
+const providerGoogle = new GoogleAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
+const providerGithub = new GithubAuthProvider();
+
+/* ..........LOGIN............ */
+const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
+const loginGoogle = () => signInWithPopup(auth, providerGoogle);
+const loginFacebook = () => signInWithPopup(auth, providerFacebook);
+const loginGitHub = () => signInWithPopup(auth, providerGithub);
+
+export {
+  loginEmail,
+  loginGoogle,
+  loginFacebook,
+  loginGitHub,
 };

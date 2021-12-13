@@ -1,10 +1,10 @@
 // import {
 //   getFirestore, collection, addDoc,
-// // eslint-disable-next-line import/no-unresolved
 // } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 import {
-  deletePost, currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
+  deletePost,
+  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost, countComment,
 } from '../firebase.js';
 
 import { templateComents }
@@ -17,13 +17,19 @@ export const template = (post) => {
   const postElements = post.map(async (onePost) => {
     const dataUser = await obtenerInfo(onePost.userID);
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
-      <div>${dataUser.data().name}</div>
-      <div class="date"><p></p></div>
+      <div class="header-post">
+      <img src=${dataUser.data().photo} >
+        <div class="header-info">
+        <div class="post-name">${dataUser.data().name}</div>
+        <div class="date"><p></p></div> 
+        </div>
+      </div>
       <div id="contentPost${onePost.idP}">${onePost.content}</div>
+      <img id= "img-${onePost.idP}" src="${onePost.img}">
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
       <div id="postIcon">
-          <i class="far fa-heart icon iconHeart" id="${onePost.idP}"></i>
+          <i class="far fa-heart icon"></i> <p class="cant-${onePost.idP}"></p>
           <i class="far fa-comment icon"></i>
           <i class="far fa-paper-plane icon"></i>
        </div>
@@ -41,7 +47,7 @@ export const template = (post) => {
     const uidUser = (user.uid);
 
     nuevoElemento.querySelectorAll('.date').forEach((date) => {
-      const postId = date.parentElement.id;
+      const postId = date.parentElement.parentElement.parentElement.id;
       const pElement = date.firstChild;
 
       // eslint-disable-next-line no-plusplus
@@ -89,11 +95,17 @@ export const template = (post) => {
         for (let i = 0; i < post.length; i++) {
           console.log(post[i].userID === user.uid, post[i].idP === id);
           if (post[i].userID === user.uid && post[i].idP === id) {
-            document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `<textarea id="contentEdit">${post[i].content}</textarea>
+            document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `<textarea id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
             <button class="save">SAVE</button>`;
             document.querySelector('.save').addEventListener('click', () => {
-              const postEdit = document.getElementById('contentEdit').value;
-              console.log(document.getElementById('contentEdit').value);
+              const postEdit = document.getElementById(`contentEdit${post[i].idP}`).value;
+              if (postEdit === `${post[i].content}`) {
+                document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `${post[i].content}`;
+              } else {
+                console.log(document.getElementById('contentEdit').value);
+                updatePost(id, postEdit);
+              }
+
               updatePost(id, postEdit);
             });
 
@@ -105,49 +117,40 @@ export const template = (post) => {
         }
       });
     });
-    nuevoElemento.querySelectorAll('.iconHeart').forEach((like) => {
-      let clickCounter = 0;
 
+    nuevoElemento.querySelectorAll('.fa-heart').forEach((like) => {
       like.addEventListener('click', (e) => {
-        clickCounter += 1;
-
-        let cant = 0;
-        const userCurrentId = currentUser().currentUser.uid;
         const postId = e.target.parentNode.parentNode.id;
+        console.log(postId);
+        const cant = e.target.nextElementSibling;
+        console.log(cant);
 
         const currentPost = post.filter((postElement) => postElement.idP === postId);
-        const people = currentPost[0].likes[0].user;
-        // console.log(people);
+        const arrOfUsers = currentPost[0].likes[0].users;
 
         function removeItemFromArr(arr, item) {
-          const i = arr.indexOf(item);
-          if (i !== -1) {
-            arr.splice(i, 1);
+          const j = arr.indexOf(item);
+          if (j !== -1) {
+            arr.splice(j, 1);
           }
         }
 
-        if (clickCounter === 1) {
-          e.target.classList.add('fas');
-          people.push(userCurrentId);
-          cant = people.length;
-          console.log(`clickCounter ${clickCounter}`);
-          console.log(`people ${people}`);
-          console.log(`cant ${cant}`);
-          console.log(postId, cant, people);
-          console.log('------------------------------------');
-          updateLikePost(postId, cant, people);
-        } else {
+        if (arrOfUsers.includes(user.uid)) {
           e.target.classList.remove('fas');
-          removeItemFromArr(people, userCurrentId);
-          cant = people.length;
-          clickCounter = 0;
-          console.log(`clickCounter ${clickCounter}`);
-          console.log(`people ${people}`);
-          console.log(`cant ${cant}`);
-          console.log(postId, cant, people);
+          removeItemFromArr(arrOfUsers, user.uid);
+          console.log(`people ${arrOfUsers}`);
+          console.log(postId, arrOfUsers);
           console.log('------------------------------------');
-          updateLikePost(postId, cant, people);
+          updateLikePost(postId, arrOfUsers);
+        } else {
+          e.target.classList.add('fas');
+          arrOfUsers.push(user.uid);
+          console.log(`people ${arrOfUsers}`);
+          console.log(postId, arrOfUsers);
+          console.log('------------------------------------');
+          updateLikePost(postId, arrOfUsers);
         }
+        cant.innerHTML = arrOfUsers.length;
       });
     });
 
@@ -164,8 +167,15 @@ export const template = (post) => {
         nuevoElemento.querySelector(`#contentComment${id}`).appendChild(divComment);
         document.getElementById(`saveComment${id}`).addEventListener('click', () => {
           const commentOne = document.getElementById(`textComent${id}`).value;
-          console.log(commentOne);
+          // if (commentOne !== '') {
+          //   console.log(commentOne);
+          //   saveComment(id, commentOne, uidUser);
+          // } else {
+          //   divComment.remove(`<textarea id="textComent${id}"></textarea>
+          //   <button id="saveComment${id}">SAVE</button>`);
+          // }
           saveComment(id, commentOne, uidUser);
+          document.getElementById(`textComent${id}`).value = '';
         });
       });
     });

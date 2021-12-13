@@ -12,13 +12,21 @@ import { template } from './post.js';
 
 export const Home = () => {
   const divElement = document.createElement('div');
+  divElement.classList.add('container-home');
   divElement.innerHTML = ` 
-  <button id="logout">Log Out</button>
-  <button id="prueba">PRUEBA</button>
-  <!-- <button id="profile">Profile</button> -->
-  <div>WELCOME</div>
-  <img id="photoUser" width="100px">
-  <div id="infoUser"></div>
+  <button id="logout"><ion-icon name="log-out-outline"></ion-icon></button>
+ <form id="uploader">
+ <input type="file" name="file" id="file" >
+ <button type="submit">subir</button>
+ </form>
+  <div class='header-home'>
+    <img id="photoUser" class="photoHome" width="100px">
+    <div class="header-text">
+      <h>Hello,</h>
+      <p id="infoUser"></p>
+    </div>
+  </div>
+  
   <p id="aboutP"></p>
 
 <h1>Add POST</h1>
@@ -77,7 +85,7 @@ export const FunctionsHome = () => {
         });
       }
       const info = document.getElementById('infoUser');
-      info.innerHTML = `Bienvenida ${userInfo.name}`;
+      info.innerHTML = `${userInfo.name}`;
       document.getElementById('photoUser').src = `${userInfo.photo}`;
     }
 
@@ -95,7 +103,7 @@ export const FunctionsHome = () => {
   // save the post , genera ID automatico
   const postDescription = document.getElementById('post-description');
   document.getElementById('btn').addEventListener('click', () => {
-    savePost(postDescription, userID);
+    savePost(postDescription, userID, '');
   });
 
   // LogOut

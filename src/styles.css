@@ -149,11 +149,7 @@ p.errorMessage{
     color: rgb(173, 72, 72);
 }
 
-.postDiv{
-    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);    
-    margin:10px;
-    border-radius: 20px;
-}
+
 
 /*VISTA DE RESETEO*/
 #resetPasswordBtn{
