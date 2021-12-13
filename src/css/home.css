@@ -1,7 +1,9 @@
 .container-home{
     width: 100%;
     padding-bottom: 7em;
-    /*background-image: linear-gradient(to bottom, #e0f5ff 0%, #FFFFFF 100%);*/
+    background-image: linear-gradient(to bottom, #e0f5ff 0%, #FFFFFF 100%);
+    min-height: 100vh;
+    padding-top: 1em;
 }
 
 .header-home{
@@ -47,4 +49,11 @@
     margin-top: 9px;
     position: absolute;
     right: 9px;
+}
+
+
+@media (min-width: 768px){
+    .container-home{
+        padding-top: 7em;
+    }
 }

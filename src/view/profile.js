@@ -11,13 +11,40 @@ import {
 export const Profile = () => {
   document.getElementById('container').innerHTML = '';
   const profile = document.createElement('div');
+  profile.classList.add('container-profile');
   profile.innerHTML = `
   <!-- <button id="home">Home</button> -->
-  <div>Profile</div>
-  <img id="photoUserProfile" width="100px">
+  <section class="header-profile">
+    <div class='container-portada'>
+      <img src="https://facebookportadas.com/imagenes/notodoloquesedice.jpg" id="frontPageProfile" width="100px"> 
+      <button id="goEdit">Edit Profile</button>
+    </div>
+    <div class="container-info">
+      <img id="photoUserProfile" width="100px">
+      <div class="info-profile">
+        <div id="infoUserProfile"></div>
+        <p id="career">Designer</p>
+        <p id="aboutP"></p>
+        <ul class="container-follower">
+          <li class="follower">
+            <p class="li-number">1.2 M</p>
+            <p class="li-description">Seguidores</p>
+          </li>
+          <li class="follow">
+            <p class="li-number">98</p>
+            <p class="li-description">Seguidos</p>
+          </li>
+          <li class="posts-li">
+            <p class="li-number">250</p>
+            <p class="li-description">Posts</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
   <div id="infoUserProfile"></div>
   <p id="aboutP"></p>
-  <button id="goEdit">Edit Profile</button>
+  
     <h1> MY POST</h1>
     <div id="PostProfile"></div>`;
 
@@ -31,7 +58,7 @@ export const FunctionProfile = () => {
   readPostProfile(user.uid).then((docUser) => {
     document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
     const info = document.getElementById('infoUserProfile');
-    info.innerHTML = `Bienvenida ${docUser.data().name}`;
+    info.innerHTML = `${docUser.data().name}`;
     const aboutParrafo = document.getElementById('aboutP');
     aboutParrafo.innerHTML = `${docUser.data().about}`;
     console.log('Current data: ', docUser.data());
