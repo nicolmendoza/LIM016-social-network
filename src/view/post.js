@@ -15,6 +15,8 @@ export const template = (post) => {
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
   const postElements = post.map(async (onePost) => {
+    const count = countComment(onePost.idP);
+    console.log(count);
     const dataUser = await obtenerInfo(onePost.userID);
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
       <div class="header-post">
@@ -102,7 +104,7 @@ export const template = (post) => {
               if (postEdit === `${post[i].content}`) {
                 document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `${post[i].content}`;
               } else {
-                console.log(document.getElementById('contentEdit').value);
+                console.log(document.getElementById(`contentEdit${post[i].idP}`).value);
                 updatePost(id, postEdit);
               }
 
