@@ -33,8 +33,8 @@ export const template = (post) => {
           <div class="date"><p></p></div> 
         </div>
       </div>
-      <div id="contentPost${onePost.idP}">${onePost.content}</div>
-      <img id= "img-${onePost.idP}" src="${onePost.img}">
+      <div class="text-post-home" "id="contentPost${onePost.idP}">${onePost.content}</div>
+      <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
       <div id="postIcon">
@@ -62,6 +62,21 @@ export const template = (post) => {
         const num = comments.length;
         parrafoCountComment.innerHTML = num;
       }, idPost);
+    });
+
+    nuevoElemento.querySelectorAll('.postImg').forEach((postImg) => {
+      const postImgId = postImg.parentElement.id;
+      console.log(postImgId);
+      const imgSrc = postImg;
+      console.log(imgSrc);
+      console.log(imgSrc.src);
+      for (let i = 0; i < post.length; i++) {
+        if (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html') {
+          imgSrc.className = 'img-post-home';
+        } else {
+          imgSrc.className = 'postImg';
+        }
+      }
     });
 
     nuevoElemento.querySelectorAll('.date').forEach((date) => {

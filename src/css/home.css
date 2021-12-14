@@ -37,6 +37,9 @@
 
 .photoHome{
     margin: 12px 0;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
 }
 
 #logout{
@@ -51,9 +54,27 @@
     right: 9px;
 }
 
+#btn-newPost{
+    height: 40px;
+    width: 9em;
+    border-radius: 15px;
+    /* margin: 10px 0px 6px 0px; */
+    /* padding-left: 10px; */
+    border: transparent;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    color: #6CC5DE;
+    font-size: 14px;
+    box-shadow: 0px 0px 3px 1px #8888;
+    font-weight: bold;
+}
+
 
 @media (min-width: 768px){
     .container-home{
         padding-top: 7em;
+    }
+    #btn-newPost{
+        display: block !important;
+        margin-left: calc(100% - 10em);
     }
 }

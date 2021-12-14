@@ -24,7 +24,7 @@ export const Home = () => {
     </div>
   </div>
 
-  <button id="btn-newPost"> + Create a post </button>
+  <button id="btn-newPost" style="display:none"> Add New Post </button>
   
   <p id="aboutP"></p>
 
@@ -133,9 +133,16 @@ export const FunctionsHome = () => {
 
   // Crear nuevo post
 
-  document.getElementById('btn-newPost').addEventListener('click', () => {
-    newPost();
-    document.querySelector('.modalNewPost').style.display = 'flex';
-    functionNewPost();
+  window.addEventListener('click', (e) => {
+    const btnNewPost = e.target;
+    if (btnNewPost.id === 'btn-newPost') {
+      newPost();
+      document.querySelector('.modalNewPost').style.display = 'flex';
+      functionNewPost();
+    } else if (btnNewPost.id === 'btn-post-mobile') {
+      newPost();
+      document.querySelector('.modalNewPost').style.display = 'flex';
+      functionNewPost();
+    }
   });
 };

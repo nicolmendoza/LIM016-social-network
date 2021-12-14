@@ -70,13 +70,6 @@ export const functionNewPost = () => {
     const info2 = document.getElementById('namePost');
     info2.innerHTML = docUser.data().name;
   });
-  // (async () => {
-  //   onSnapshot(doc(db, 'usuarios', user.uid), (docUser) => {
-  //     document.getElementById('photoUser').src = `${docUser.data().photo}`;
-  //     const info2 = document.getElementById('namePost');
-  //     info2.innerHTML = docUser.data().name;
-  //   });
-  // })();
 
   const userID = userCurrent.uid;
   const nameUser = userCurrent.displayName;
@@ -102,6 +95,7 @@ export const functionNewPost = () => {
     // uploadImg(files);
   };
   reader.onload = function () {
+    document.querySelector('.image-preview').className = 'image-preview img-prev';
     previewImg.src = reader.result;
   };
 
@@ -159,6 +153,7 @@ export const functionNewPost = () => {
           savePost(postDescription, userID, downloadURL);
           console.log(downloadURL);
           document.querySelector('.modalNewPost').style.display = 'none';
+          document.querySelector('.containerNewPost').remove();
         });
       }));
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
