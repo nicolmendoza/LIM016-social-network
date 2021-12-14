@@ -33,7 +33,7 @@ export const template = (post) => {
           <div class="date"><p></p></div> 
         </div>
       </div>
-      <div class="text-post-home" "id="contentPost${onePost.idP}">${onePost.content}</div>
+      <div class="text-post-home" id="contentPost${onePost.idP}">${onePost.content}</div>
       <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
@@ -65,11 +65,7 @@ export const template = (post) => {
     });
 
     nuevoElemento.querySelectorAll('.postImg').forEach((postImg) => {
-      const postImgId = postImg.parentElement.id;
-      console.log(postImgId);
       const imgSrc = postImg;
-      console.log(imgSrc);
-      console.log(imgSrc.src);
       for (let i = 0; i < post.length; i++) {
         if (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html') {
           imgSrc.className = 'img-post-home';
@@ -207,7 +203,6 @@ export const template = (post) => {
         });
       });
     });
-
     showPost.innerHTML = '';
     showPost.appendChild(nuevoElemento);
   });
