@@ -4,7 +4,7 @@
 
 import {
   deletePost,
-  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost, countComment,
+  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
 } from '../firebase.js';
 
 import { templateComents }
@@ -15,14 +15,12 @@ export const template = (post) => {
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
   const postElements = post.map(async (onePost) => {
-    const count = countComment(onePost.idP);
-    console.log(count);
     const dataUser = await obtenerInfo(onePost.userID);
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
       <div class="header-post">
-      <img src=${dataUser.data().photo} >
+      <img  id="photo${onePost.idP}"  src=${dataUser.data().photo} width="100px" >
         <div class="header-info">
-        <div class="post-name">${dataUser.data().name}</div>
+        <div id="name${onePost.idP}"  class="post-name">${dataUser.data().name}</div>
         <div class="date"><p></p></div> 
         </div>
       </div>
@@ -32,7 +30,7 @@ export const template = (post) => {
       <button class="edit">EDIT</button>
       <div id="postIcon">
           <i class="far fa-heart icon"></i> <p class="cant-${onePost.idP}"></p>
-          <i class="far fa-comment icon"></i>
+          <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
           <i class="far fa-paper-plane icon"></i>
        </div>
        <div id="comments${onePost.idP}">
