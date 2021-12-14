@@ -3,7 +3,9 @@ import {
   loginGoogle,
   loginFacebook,
   loginGitHub,
-} from '../firebase.js';
+} from '../../firebase.js';
+
+import { verificarUsuario } from '../verificar-usuario.js';
 
 export const Login = () => {
   const viewHome = document.createElement('div');
@@ -104,7 +106,9 @@ export const initLogin = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         if (user.emailVerified === true) {
-          window.location.hash = '#/home';
+          verificarUsuario().then(() => {
+            window.location.hash = '#/home';
+          });
         } else {
           alert('Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.');
         }
@@ -117,9 +121,11 @@ export const initLogin = () => {
   /* ........Logearse con Google........ */
   googleLogin.addEventListener('click', () => {
     loginGoogle()
+      .then(() => verificarUsuario())
       .then(() => {
         window.location.hash = '#/home';
-      }).catch((error) => {
+      })
+      .catch((error) => {
         errorOccurs(error);
       });
   });
@@ -127,6 +133,7 @@ export const initLogin = () => {
   /* .......Logearse con Facebook........ */
   facebookLogin.addEventListener('click', () => {
     loginFacebook()
+      .then(() => verificarUsuario())
       .then(() => {
         window.location.hash = '#/home';
       })
@@ -138,6 +145,7 @@ export const initLogin = () => {
   /* .......Logearse con GitHub........ */
   githubLogin.addEventListener('click', () => {
     loginGitHub()
+      .then(() => verificarUsuario())
       .then(() => {
         window.location.hash = '#/home';
       }).catch((error) => {
@@ -161,4 +169,5 @@ export const initLogin = () => {
       icon.classList.add('fa-eye-slash');
     }
   });
+  /* ........Verificar si el usuario existe............. */
 };

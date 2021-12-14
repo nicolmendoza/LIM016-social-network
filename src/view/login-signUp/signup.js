@@ -1,7 +1,7 @@
 import {
   createUser,
   verificationEmail,
-} from '../firebase.js';
+} from '../../firebase.js';
 
 export const SignUp = () => {
   const viewSignUp = document.createElement('div');
@@ -82,6 +82,7 @@ export const Register = () => {
     e.preventDefault();
     const email = document.querySelector('#signup-email').value;
     const password = document.querySelector('#signup-password').value;
+    const name = document.querySelector('#signup-password').value;
 
     createUser(email, password)
       .then((userCredential) => {

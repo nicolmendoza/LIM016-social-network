@@ -3,16 +3,10 @@ import {
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 import {
-  currentUser, savePost, storageRef,
-  uploadTask,
-  getPhotoURL,
-  readPostProfile,
-  readData,
+  currentUser, savePost, readPostProfile,
 } from '../firebase.js';
 
 import { getImage } from './get-Image.js';
-
-import { template } from './post.js';
 
 export const newPost = () => {
   if (document.querySelector('.containerNewPost')) {
@@ -86,22 +80,6 @@ export const functionNewPost = () => {
     document.querySelector('.image-preview').className = 'image-preview img-prev';
     previewImg.src = reader.result;
   };
-  // document.querySelector('#input-file').addEventListener('change', function () {
-  //   const file = this.files[0];
-  //   console.log(file);
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.addEventListener('load', function () {
-  //       previewImg.setAttribute('src', this.result);
-  //     });
-  //     reader.readAsDataURL(file);
-  //     async () => {
-  //       uploadImg(file);
-  //     };
-  //   } else {
-  //     previewImg.setAttribute('src', '');
-  //   }
-  // });
   const postDescription = document.getElementById('post-description');
   document.querySelector('.publish').addEventListener('click', (e) => {
     e.preventDefault();
@@ -115,7 +93,7 @@ export const functionNewPost = () => {
       });
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
       savePost(postDescription, userID, '');
-      document.querySelector('.modalNewPost').style.display = 'none'
+      document.querySelector('.modalNewPost').style.display = 'none';
     } else {
       alert('su post esta vacio');
     }
