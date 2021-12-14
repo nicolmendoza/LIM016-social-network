@@ -53,8 +53,6 @@ export const SignUp = () => {
   return viewSignUp;
 };
 
-// minlength='8' maxlength='16' pattern="(?=.*[0-9]{2,14})(?=.*[a-zA-Z]{2-14})">
-
 export const Register = () => {
   const signupForm = document.querySelector('#signup-form');
   const emailMessage = document.getElementById('emailMessage');
@@ -74,6 +72,7 @@ export const Register = () => {
         passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
         break;
       default:
+        console.log(typeError);
         alert('Lo sentimos, se ha producido un error en la página.');
     }
   }
