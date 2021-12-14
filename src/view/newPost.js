@@ -14,6 +14,7 @@ import {
   currentUser, savePost, storageRef,
   uploadTask,
   getPhotoURL,
+  readPostProfile,
 } from '../firebase.js';
 
 export const newPost = () => {
@@ -27,7 +28,7 @@ export const newPost = () => {
     </div>
 
     <div class="info-user">
-        <div class="photo"><img id="photoUser"></div>
+        <div class="photo"><img id="photoUser1"></div>
         <div class="name-user">
             <div id='namePost'></div>
             <select class="privacity">
@@ -64,13 +65,18 @@ export const functionNewPost = () => {
   // const userCurrent = currentUser().currentUser;
   const db = getFirestore();
 
-  (async () => {
-    onSnapshot(doc(db, 'usuarios', user.uid), (docUser) => {
-      document.getElementById('photoUser').src = docUser.data().photo;
-      const info2 = document.getElementById('namePost');
-      info2.innerHTML = docUser.data().name;
-    });
-  })();
+  readPostProfile(user.uid).then((docUser) => {
+    document.getElementById('photoUser1').src = `${docUser.data().photo}`;
+    const info2 = document.getElementById('namePost');
+    info2.innerHTML = docUser.data().name;
+  });
+  // (async () => {
+  //   onSnapshot(doc(db, 'usuarios', user.uid), (docUser) => {
+  //     document.getElementById('photoUser').src = `${docUser.data().photo}`;
+  //     const info2 = document.getElementById('namePost');
+  //     info2.innerHTML = docUser.data().name;
+  //   });
+  // })();
 
   const userID = userCurrent.uid;
   const nameUser = userCurrent.displayName;
@@ -158,6 +164,7 @@ export const functionNewPost = () => {
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
       savePost(postDescription, userID, '');
       document.querySelector('.modalNewPost').style.display = 'none';
+      document.querySelector('.containerNewPost').remove();
     } else {
       alert('su post esta vacio');
     }
@@ -168,5 +175,6 @@ export const functionNewPost = () => {
 
   document.querySelector('.descart').addEventListener('click', () => {
     document.querySelector('.modalNewPost').style.display = 'none';
+    document.querySelector('.containerNewPost').remove();
   });
 };

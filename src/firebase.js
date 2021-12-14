@@ -184,20 +184,41 @@ export const saveComment = (id, comentario, uid) => {
 
 export const readComment = (callback, id) => {
   const q = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
-  onSnapshot(q, (querySnapshot) => {
-    const comments = [];
-    querySnapshot.forEach((docC) => {
-      const objectComment = { };
-      objectComment.content = docC.data().message;
-      objectComment.userID = docC.data().userID;
-      objectComment.ID = docC.id;
-      comments.push(objectComment);
-      return comments;
+  return new Promise((resolve, reject) => {
+    onSnapshot(q, (querySnapshot) => {
+      const comments = [];
+      querySnapshot.forEach((docC) => {
+        const objectComment = { };
+        objectComment.content = docC.data().message;
+        objectComment.userID = docC.data().userID;
+        objectComment.ID = docC.id;
+        comments.push(objectComment);
+      });
+      resolve(callback(comments, id));
     });
-    callback(comments, id);
   });
 };
 
+export const countComment = (id) => {
+  const qC = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
+  return new Promise((resolve, reject) => {
+    onSnapshot(qC, (querySnapshot) => {
+      const commentsOne = [];
+      querySnapshot.forEach((docC) => {
+        commentsOne.push(docC.data());
+      });
+
+      resolve(commentsOne.length);
+    });
+  });
+};
+
+export const updateComment = (id, idComment, newComment) => {
+  const washingtonRef = doc(db, 'post', id, 'comments', idComment);
+  return updateDoc(washingtonRef, {
+    message: newComment,
+  });
+};
 /* ---------------------------FUNCIONES RELACIONADAS A STORAGE----------------------------------*/
 
 export const storageRef = (imgUpload) => ref(storage, `img-post/${imgUpload.name}`);

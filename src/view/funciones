@@ -1,8 +1,0 @@
-// export const deletePost = (id) => deleteDoc(doc(db, 'post', id));
-
-// export const updatePost = (id, postEdit) => {
-//   const washingtonRef = doc(db, 'post', id);
-//   return updateDoc(washingtonRef, {
-//     message: postEdit,
-//   });
-// };

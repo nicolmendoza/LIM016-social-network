@@ -2,7 +2,6 @@ import {
   logout,
   currentUser,
   readData,
-  savePost,
   userDocRef,
   getUserDoc,
   setUserDoc,

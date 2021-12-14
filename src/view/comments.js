@@ -4,9 +4,8 @@ import {
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 import {
-  obtenerInfo, currentUser, /*updateComment,*/
+  obtenerInfo, currentUser, updateComment,
 } from '../firebase.js';
-
 export const templateComents = (comments, id) => {
   const showComment = document.getElementById(`showComment${id}`);
   const divComment = document.createElement('div');
