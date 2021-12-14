@@ -18,7 +18,7 @@ export const template = (post) => {
     const dataUser = await obtenerInfo(onePost.userID);
     nuevoElemento.innerHTML += `<div class="postDiv" id="${onePost.idP}">
       <div class="header-post">
-      <img src=${dataUser.data().photo} width="100px" >
+      <img src=${dataUser.data().photo}>
         <div class="header-info">
         <div class="post-name">${dataUser.data().name}</div>
         <div class="date"><p></p></div> 
@@ -181,6 +181,6 @@ export const template = (post) => {
     });
 
     showPost.innerHTML = '';
-    showPost.appendChild(nuevoElemento);
+    showPost.prepend(nuevoElemento);
   });
 };

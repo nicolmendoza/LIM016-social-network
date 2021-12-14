@@ -10,14 +10,12 @@ import {
 
 import { template } from './post.js';
 
+import { newPost, functionNewPost } from './newPost.js';
+
 export const Home = () => {
   const divElement = document.createElement('div');
   divElement.classList.add('container-home');
   divElement.innerHTML = ` 
-  <button id="logout"><ion-icon name="log-out-outline"></ion-icon></button>
- <input type="file" name="file" id="file" >
- <button type="submit">subir</button>
- </form>
   <div class='header-home'>
     <img id="photoUser" class="photoHome" width="100px">
     <div class="header-text">
@@ -25,14 +23,20 @@ export const Home = () => {
       <p id="infoUser"></p>
     </div>
   </div>
+
+  <button id="btn-newPost"> + Create a post </button>
   
   <p id="aboutP"></p>
 
-<h1>Add POST</h1>
-<input type="text" id="post-description"  placeholder="about" >
- <button id="btn" >Save</button>
  <div id="showPost">
  </div>
+
+ <section class="modalNewPost" style="display: none">
+      <div class="modalDivPost"> 
+      <div class="modalContainer-NewPost">
+      </div>
+      </div>
+  </section>
 
   `;
 
@@ -57,13 +61,16 @@ export const FunctionsHome = () => {
         photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
         userUID: userCurrent.uid,
         about: 'About',
+        portada: 'https://static-cse.canva.com/blob/706582/1600w-dzsSYIjyvws.jpg',
       });
     } else {
       await setDoc(doc(db, 'usuarios', userCurrent.uid), {
         name: userCurrent.displayName,
         photo: userCurrent.photoURL,
         userUID: userCurrent.uid,
-        about: 'About',
+        about: 'Escribe una frase con la que te identifiques',
+        portada: 'https://static-cse.canva.com/blob/706582/1600w-dzsSYIjyvws.jpg',
+        career: 'Cuentanos a que te dedicas',
       });
       console.log('No existe');
     }
@@ -100,20 +107,40 @@ export const FunctionsHome = () => {
   console.log(nameUser);
 
   // save the post , genera ID automatico
-  const postDescription = document.getElementById('post-description');
-  document.getElementById('btn').addEventListener('click', () => {
-    savePost(postDescription, userID, '');
-  });
+  // const postDescription = document.getElementById('post-description');
+  // document.getElementById('btn').addEventListener('click', () => {
+  //   savePost(postDescription, userID, '');
+  // });
 
   // LogOut
-  document.querySelector('#logout').addEventListener('click', () => {
-    logout()
-      .then(() => {
-        console.log('log out');
-        window.location.hash = '#/';
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  window.addEventListener('click', (e) => {
+    const btnOut = e.target.id;
+    if (btnOut === 'out') {
+      logout()
+        .then(() => {
+          console.log('log out');
+          window.location.hash = '#/';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (btnOut === 'logout-mob') {
+      logout()
+        .then(() => {
+          console.log('log out');
+          window.location.hash = '#/';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  });
+
+  // Crear nuevo post
+
+  document.getElementById('btn-newPost').addEventListener('click', () => {
+    newPost();
+    document.querySelector('.modalNewPost').style.display = 'flex';
+    functionNewPost();
   });
 };

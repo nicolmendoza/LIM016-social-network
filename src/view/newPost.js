@@ -53,7 +53,7 @@ export const newPost = () => {
     </div>
     `;
 
-  return document.getElementById('container').appendChild(newPostContainer);
+  return document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
 };
 
 export const functionNewPost = () => {
@@ -86,17 +86,6 @@ export const functionNewPost = () => {
   const previewImg = document.querySelector('.image-preview');
   let files = [];
   const reader = new FileReader();
-
-  // function GetFileExt(file) {
-  //   const temp = file.name.split('.');
-  //   const ext = temp.slice((temp.length - 1), (temp.length));
-  //   return `.${ext[0]}`;
-  // }
-  // function GetFileName(file) {
-  //   const temp = file.name.split('.');
-  //   const fname = temp.slice(0, -1).join('.');
-  //   return fname;
-  // }
 
   photoFile.onchange = (e) => {
     files = e.target.files;
@@ -163,17 +152,21 @@ export const functionNewPost = () => {
         getPhotoURL(task.snapshot.ref).then((downloadURL) => {
           savePost(postDescription, userID, downloadURL);
           console.log(downloadURL);
-          window.location.hash = '#/home';
+          document.querySelector('.modalNewPost').style.display = 'none';
         });
       }));
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
       savePost(postDescription, userID, '');
-      window.location.hash = '#/home';
+      document.querySelector('.modalNewPost').style.display = 'none';
     } else {
       alert('su post esta vacio');
     }
 
     // savePost(postDescription, userID);
     // window.location.hash = '#/home';
+  });
+
+  document.querySelector('.descart').addEventListener('click', () => {
+    document.querySelector('.modalNewPost').style.display = 'none';
   });
 };

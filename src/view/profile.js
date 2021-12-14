@@ -16,14 +16,14 @@ export const Profile = () => {
   <!-- <button id="home">Home</button> -->
   <section class="header-profile">
     <div class='container-portada'>
-      <img src="https://facebookportadas.com/imagenes/notodoloquesedice.jpg" id="frontPageProfile" width="100px"> 
+      <img id="frontPageProfile" width="100px"> 
       <button id="goEdit">Edit Profile</button>
     </div>
     <div class="container-info">
       <img id="photoUserProfile" width="100px">
       <div class="info-profile">
         <div id="infoUserProfile"></div>
-        <p id="career">Designer</p>
+        <p id="career"></p>
         <p id="aboutP"></p>
         <ul class="container-follower">
           <li class="follower">
@@ -57,8 +57,11 @@ export const FunctionProfile = () => {
 
   readPostProfile(user.uid).then((docUser) => {
     document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
+    document.getElementById('frontPageProfile').src = `${docUser.data().portada}`;
     const info = document.getElementById('infoUserProfile');
     info.innerHTML = `${docUser.data().name}`;
+    const career = document.getElementById('career');
+    career.innerHTML = `${docUser.data().career}`;
     const aboutParrafo = document.getElementById('aboutP');
     aboutParrafo.innerHTML = `${docUser.data().about}`;
     console.log('Current data: ', docUser.data());
@@ -84,6 +87,5 @@ export const FunctionProfile = () => {
 
   document.getElementById('goEdit').addEventListener('click', () => {
     window.location.hash = '#/editProfile';
-    console.log('hi');
   });
 };
