@@ -5,7 +5,7 @@
 
 import {
   deletePost,
-  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost, countComment,
+  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost, /*countComment,*/
 } from '../firebase.js';
 
 import { templateComents }

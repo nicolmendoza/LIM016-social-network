@@ -1,11 +1,12 @@
-// eslint-disable-next-line import/no-unresolved
-// eslint-disable-next-line import/no-unresolved
 import {
-  doc, setDoc, getDoc, getFirestore, updateDoc,
-// eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-import {
-  logout, currentUser, readData, savePost,
+  logout,
+  currentUser,
+  readData,
+  savePost,
+  userDocRef,
+  getUserDoc,
+  setUserDoc,
+  updateUserDoc,
 } from '../firebase.js';
 
 import { template } from './post.js';
@@ -25,11 +26,10 @@ export const Home = () => {
   
   <p id="aboutP"></p>
 
-<h1>Add POST</h1>
-<input type="text" id="post-description"  placeholder="about" >
- <button id="btn" >Save</button>
- <div id="showPost">
- </div>`;
+  <h1>Add POST</h1>
+  <input type="text" id="post-description"  placeholder="about" >
+  <button id="btn" >Save</button>
+  <div id="showPost"></div>`;
 
   return document.getElementById('container').appendChild(divElement);
 };
@@ -37,27 +37,28 @@ export const Home = () => {
 export const FunctionsHome = () => {
   // autentificando usuario logueado
   const userCurrent = currentUser().currentUser;
-  console.log(userCurrent.uid);
+  const userID = userCurrent.uid;
+  const nameUser = userCurrent.displayName;
 
-  const db = getFirestore();
   async function verificarSiExisteUsuario() {
-    const docRef = doc(db, 'usuarios', userCurrent.uid);
-    const docSnap = await getDoc(docRef);
-    const name = userCurrent.displayName;
+    const docRef = userDocRef('usuarios', userID);
+    const docSnap = await getUserDoc(docRef);
+
     if (docSnap.exists()) {
       console.log('existe');
-    } else if (name === null) {
-      await setDoc(doc(db, 'usuarios', userCurrent.uid), {
+    } else if (nameUser === null) {
+      console.log(nameUser);
+      await setUserDoc(docRef, {
         name: 'Developer',
         photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
-        userUID: userCurrent.uid,
+        userUID: userID,
         about: 'About',
       });
     } else {
-      await setDoc(doc(db, 'usuarios', userCurrent.uid), {
-        name: userCurrent.displayName,
+      await setUserDoc(docRef, {
+        name: nameUser,
         photo: userCurrent.photoURL,
-        userUID: userCurrent.uid,
+        userUID: userID,
         about: 'About',
       });
       console.log('No existe');
@@ -65,16 +66,14 @@ export const FunctionsHome = () => {
   }
   verificarSiExisteUsuario();
 
-  // saveUser();
-
   async function profileInfo() {
-    const docRef = doc(db, 'usuarios', userCurrent.uid);
-    const docSnap = await getDoc(docRef);
+    const docRef = userDocRef('usuarios', userID);
+    const docSnap = await getUserDoc(docRef);
 
     if (docSnap.exists()) {
       const userInfo = docSnap.data();
       if (userInfo.name == null) {
-        await updateDoc(docRef, {
+        await updateUserDoc(docRef, {
           name: 'Developer',
         });
       }
@@ -89,10 +88,6 @@ export const FunctionsHome = () => {
   profileInfo();
   // read the posts
   readData(template);
-
-  const userID = userCurrent.uid;
-  const nameUser = userCurrent.displayName;
-  console.log(nameUser);
 
   // save the post , genera ID automatico
   const postDescription = document.getElementById('post-description');
