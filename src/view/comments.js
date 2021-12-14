@@ -1,10 +1,5 @@
-// eslint-disable-next-line import/no-unresolved
 import {
-  doc, deleteDoc, getFirestore,
-// eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-import {
-  obtenerInfo, currentUser, updateComment,
+  obtenerInfo, currentUser, updateComment, deleteComment,
 } from '../firebase.js';
 
 export const templateComents = (comments, id) => {
@@ -24,14 +19,13 @@ export const templateComents = (comments, id) => {
   Promise.all(commentsElements).then(() => {
     const user = currentUser().currentUser;
     console.log(user);
-    const db = getFirestore();
     divComment.querySelectorAll('.deleteComment').forEach((div) => div.addEventListener('click', (e) => {
       const idComment = e.target.parentNode.id;
       // eslint-disable-next-line no-plusplus
       for (let i = 0; i < comments.length; i++) {
         console.log(comments[i].ID === idComment && comments[i].userID === user.uid);
         if (comments[i].ID === idComment && comments[i].userID === user.uid) {
-          deleteDoc(doc(db, 'post', id, 'comments', idComment));
+          deleteComment(id, idComment);
         }
         console.log(idComment);
       }
