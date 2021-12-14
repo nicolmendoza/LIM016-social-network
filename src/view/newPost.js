@@ -4,13 +4,6 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 import {
-  doc,
-  getFirestore,
-  onSnapshot,
-  // eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-
-import {
   currentUser, savePost, storageRef,
   uploadTask,
   getPhotoURL,
@@ -18,6 +11,10 @@ import {
 } from '../firebase.js';
 
 export const newPost = () => {
+  if (document.querySelector('.containerNewPost')) {
+    document.querySelector('.containerNewPost').remove();
+  }
+
   const newPostContainer = document.createElement('section');
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
@@ -54,7 +51,7 @@ export const newPost = () => {
     </div>
     `;
 
-  return document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
+  document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
 };
 
 export const functionNewPost = () => {
@@ -63,7 +60,6 @@ export const functionNewPost = () => {
   const auth = getAuth();
   const user = auth.currentUser;
   // const userCurrent = currentUser().currentUser;
-  const db = getFirestore();
 
   readPostProfile(user.uid).then((docUser) => {
     document.getElementById('photoUser1').src = `${docUser.data().photo}`;
@@ -153,13 +149,11 @@ export const functionNewPost = () => {
           savePost(postDescription, userID, downloadURL);
           console.log(downloadURL);
           document.querySelector('.modalNewPost').style.display = 'none';
-          document.querySelector('.containerNewPost').remove();
         });
       }));
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
       savePost(postDescription, userID, '');
       document.querySelector('.modalNewPost').style.display = 'none';
-      document.querySelector('.containerNewPost').remove();
     } else {
       alert('su post esta vacio');
     }
@@ -170,6 +164,5 @@ export const functionNewPost = () => {
 
   document.querySelector('.descart').addEventListener('click', () => {
     document.querySelector('.modalNewPost').style.display = 'none';
-    document.querySelector('.containerNewPost').remove();
   });
 };
