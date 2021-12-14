@@ -87,13 +87,6 @@ export const updatePost = (id, postEdit) => {
   });
 };
 
-export const updateComment = (id, idComment, newComment) => {
-  const washingtonRef = doc(db, 'post', id, 'comments', idComment);
-  return updateDoc(washingtonRef, {
-    message: newComment,
-  });
-};
-
 // export const readPostProfile = (uid) => {
 //   const docRef = doc(db, 'usuarios', uid);
 //   const docSnap = getDoc(docRef);
@@ -126,6 +119,7 @@ export const savePost = (postDescription, userID, imgULR) => {
     }],
     date: Date.now(),
   });
+  console.log('Document written with ID: ', docRef);
 };
 
 export const readData = (callback) => {
@@ -198,18 +192,6 @@ export const readComment = (callback, id) => {
       return comments;
     });
     callback(comments, id);
-  });
-};
-
-export const countComment = (id) => {
-  const qC = query(collection(db, 'post', id, 'comments'));
-  onSnapshot(qC, (querySnapshot) => {
-    const commentsOne = [];
-    querySnapshot.forEach((docC) => {
-      commentsOne.push(docC.data());
-    });
-    console.log(commentsOne.length);
-    return commentsOne.length;
   });
 };
 
@@ -290,10 +272,23 @@ const loginFacebook = () => signInWithPopup(auth, providerFacebook);
 const loginGitHub = () => signInWithPopup(auth, providerGithub);
 
 export {
+  createUser,
+  verificationEmail,
   loginEmail,
   loginGoogle,
   loginFacebook,
   loginGitHub,
-  createUser,
-  verificationEmail,
+};
+
+/* ....ALMACENAR DATOS DE USUARIO.... */
+const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);
+const getUserDoc = (docRef) => getDoc(docRef);
+const setUserDoc = (docs, obj) => setDoc(docs, obj);
+const updateUserDoc = (docRef, obj) => updateDoc(docRef, obj);
+
+export {
+  userDocRef,
+  getUserDoc,
+  setUserDoc,
+  updateUserDoc,
 };
