@@ -5,7 +5,8 @@
 
 import {
   deletePost,
-  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost, /*countComment,*/
+  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
+
 } from '../firebase.js';
 
 import { templateComents }
@@ -26,6 +27,7 @@ export const template = (post) => {
     nuevoElemento.innerHTML += `
     <div class="postDiv" id="${onePost.idP}">
       <div class="header-post">
+
         <img src=${dataUser.data().photo} width="100px" >
         <div class="header-info">
           <div class="post-name">${dataUser.data().name}</div>
@@ -38,7 +40,8 @@ export const template = (post) => {
       <button class="edit">EDIT</button>
       <div id="postIcon">
           <i class="${likeIcon} far fa-heart icon"></i> <p class='cant'>${onePost.likes[0].users.length}</p>
-          <i class="far fa-comment icon"></i>
+          <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
+
           <i class="far fa-paper-plane icon"></i>
       </div>
       <div id="comments${onePost.idP}">
@@ -52,6 +55,16 @@ export const template = (post) => {
 
   Promise.all(postElements).then(() => {
     const uidUser = (user.uid);
+
+    post.forEach((one) => {
+      const idPost = one.idP;
+      const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
+      console.log(parrafoCountComment);
+      readComment((comments) => {
+        const num = comments.length;
+        parrafoCountComment.innerHTML = num;
+      }, idPost);
+    });
 
     nuevoElemento.querySelectorAll('.date').forEach((date) => {
       const postId = date.parentElement.parentElement.parentElement.id;
