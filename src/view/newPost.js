@@ -3,12 +3,12 @@ import {
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
-import {
-  doc,
-  getFirestore,
-  onSnapshot,
-  // eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+// import {
+//   doc,
+//   getFirestore,
+//   onSnapshot,
+//   // eslint-disable-next-line import/no-unresolved
+// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 import {
   currentUser, savePost, storageRef,
@@ -18,6 +18,10 @@ import {
 } from '../firebase.js';
 
 export const newPost = () => {
+  if (document.querySelector('.containerNewPost')) {
+    document.querySelector('.containerNewPost').remove();
+  }
+
   const newPostContainer = document.createElement('section');
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
@@ -26,7 +30,6 @@ export const newPost = () => {
         <div> CREAR </div>
         <button type="submit" class="publish">PUBLISH</button>
     </div>
-
     <div class="info-user">
         <div class="photo"><img id="photoUser1"></div>
         <div class="name-user">
@@ -37,7 +40,6 @@ export const newPost = () => {
             </select>
         </div>
     </div>
-
     <textarea namePost="textarea" id="post-description" rows="10" cols="50" placeholder="What's on you mind?"></textarea>
     <div id="container-image-preview">
       <img src="" class="image-preview" alt=""/>
@@ -63,7 +65,7 @@ export const functionNewPost = () => {
   const auth = getAuth();
   const user = auth.currentUser;
   // const userCurrent = currentUser().currentUser;
-  const db = getFirestore();
+  // const db = getFirestore();
 
   readPostProfile(user.uid).then((docUser) => {
     document.getElementById('photoUser1').src = `${docUser.data().photo}`;
@@ -118,13 +120,13 @@ export const functionNewPost = () => {
   // });
 
   const postDescription = document.getElementById('post-description');
-  document.querySelector('.publish').addEventListener('click', (e) => {
-    e.preventDefault();
+  document.querySelector('.publish').addEventListener('click', () => {
+    // e.preventDefault();
     // eslint-disable-next-line max-len
     if ((postDescription.value !== '' && photoFile.files[0]) || (postDescription.value === '' && photoFile.files[0])) {
       const imgUpload = files[0];
       const metadata = { content: imgUpload.type };
-      console.log(imgUpload);
+      // console.log(imgUpload);
 
       const storageRef1 = storageRef(imgUpload);
       const task = uploadTask(storageRef1, imgUpload, metadata);
@@ -153,13 +155,13 @@ export const functionNewPost = () => {
           savePost(postDescription, userID, downloadURL);
           console.log(downloadURL);
           document.querySelector('.modalNewPost').style.display = 'none';
-          document.querySelector('.containerNewPost').remove();
+          // document.querySelector('.containerNewPost').remove();
         });
       }));
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
       savePost(postDescription, userID, '');
       document.querySelector('.modalNewPost').style.display = 'none';
-      document.querySelector('.containerNewPost').remove();
+      // document.querySelector('.containerNewPost').remove();
     } else {
       alert('su post esta vacio');
     }
@@ -170,6 +172,6 @@ export const functionNewPost = () => {
 
   document.querySelector('.descart').addEventListener('click', () => {
     document.querySelector('.modalNewPost').style.display = 'none';
-    document.querySelector('.containerNewPost').remove();
+    // document.querySelector('.containerNewPost').remove();
   });
 };
