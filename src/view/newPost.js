@@ -2,6 +2,7 @@ import {
   getAuth,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+
 import {
   currentUser, savePost, storageRef,
   uploadTask,
@@ -18,6 +19,7 @@ export const newPost = () => {
   if (document.querySelector('.containerNewPost')) {
     document.querySelector('.containerNewPost').remove();
   }
+
   const newPostContainer = document.createElement('section');
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
@@ -51,6 +53,7 @@ export const newPost = () => {
       </div>
     </div>
     `;
+
   document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
 };
 export const functionNewPost = () => {
@@ -59,6 +62,7 @@ export const functionNewPost = () => {
   const auth = getAuth();
   const user = auth.currentUser;
   // const userCurrent = currentUser().currentUser;
+
   readPostProfile(user.uid).then((docUser) => {
     document.getElementById('photoUser1').src = `${docUser.data().photo}`;
     const info2 = document.getElementById('namePost');

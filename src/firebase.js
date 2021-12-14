@@ -125,7 +125,7 @@ export const savePost = (postDescription, userID, imgULR) => {
 export const readData = (callback) => {
   const q = query(collection(db, 'post'), orderBy('date', 'desc'));
   onSnapshot(q, (querySnapshot) => {
-    const post = [];
+    const posts = [];
     querySnapshot.forEach((doct) => {
       const objectPost = { };
       objectPost.content = doct.data().message;
@@ -134,10 +134,10 @@ export const readData = (callback) => {
       objectPost.date = doct.data().date;
       objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
-      post.push(objectPost);
-      return post;
+      posts.push(objectPost);
+      return posts;
     });
-    callback(post);
+    callback(posts);
   });
 };
 
@@ -219,6 +219,11 @@ export const updateComment = (id, idComment, newComment) => {
     message: newComment,
   });
 };
+
+export const deleteComment = (id, idComment) => {
+  deleteDoc(doc(db, 'post', id, 'comments', idComment));
+};
+
 /* ---------------------------FUNCIONES RELACIONADAS A STORAGE----------------------------------*/
 
 export const storageRef = (imgUpload) => ref(storage, `img-post/${imgUpload.name}`);
