@@ -103,8 +103,8 @@ export const functionNewPost = () => {
   //   }
   // });
   const postDescription = document.getElementById('post-description');
-  document.querySelector('.publish').addEventListener('click', () => {
-    // e.preventDefault();
+  document.querySelector('.publish').addEventListener('click', (e) => {
+    e.preventDefault();
     // eslint-disable-next-line max-len
     if ((postDescription.value !== '' && photoFile.files[0]) || (postDescription.value === '' && photoFile.files[0])) {
       const imgUpload = files[0];

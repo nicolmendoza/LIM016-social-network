@@ -1,11 +1,5 @@
-/* eslint-disable no-plusplus */
-// import {
-//   getFirestore, collection, addDoc,
-// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-
 import {
-  deletePost,
-  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
+  deletePost, currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
 } from '../firebase.js';
 
 import { templateComents }
