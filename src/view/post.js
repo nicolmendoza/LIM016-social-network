@@ -46,6 +46,16 @@ export const template = (post) => {
     const user = currentUser().currentUser;
     const uidUser = (user.uid);
 
+    post.forEach((one) => {
+      const idPost = one.idP;
+      const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
+      console.log(parrafoCountComment);
+      readComment((comments) => {
+        const num = comments.length;
+        parrafoCountComment.innerHTML = num;
+      }, idPost);
+    });
+
     nuevoElemento.querySelectorAll('.date').forEach((date) => {
       const postId = date.parentElement.parentElement.parentElement.id;
       const pElement = date.firstChild;
