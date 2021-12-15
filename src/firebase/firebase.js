@@ -3,6 +3,7 @@
 // Initialize Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 import {
   getFirestore,
   doc,
@@ -19,26 +20,15 @@ import {
   where,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-import {
-  getAuth,
-  signOut,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  GithubAuthProvider,
-  sendPasswordResetEmail,
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-  onAuthStateChanged,
-// eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+
 import {
   getStorage, ref, uploadBytesResumable, getDownloadURL, uploadBytes,
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
+
 // import {
 //   getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
 // } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyD9ngpw2YVZK0ZTgYEn2L3kJX2HFlcDK8Q',
   authDomain: 'social-network-268a8.firebaseapp.com',
@@ -49,35 +39,16 @@ const firebaseConfig = {
   appId: '1:564158720663:web:0349103b12e24b0fe697d2',
   measurementId: 'G-VP2LPBCJD7',
 };
+
 // Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
 const analytics = getAnalytics(app);
 const db = getFirestore();
-const auth = getAuth();
 // const user = auth.currentUser;
 const storage = getStorage();
-/* ........LOGIN PROVEEDORES....... */
-const providerGoogle = new GoogleAuthProvider();
-const providerFacebook = new FacebookAuthProvider();
-const providerGithub = new GithubAuthProvider();
-export const currentUser = () => auth;
-/* ----------------------------VISTA CON INICIO DE SESION - AUTH ---------------------------------*/
-/* .............SIGNUP.............. */
-const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-const verificationEmail = () => sendEmailVerification(auth.currentUser);
-/* ..........LOGIN............ */
-const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
-const loginGoogle = () => signInWithPopup(auth, providerGoogle);
-const loginFacebook = () => signInWithPopup(auth, providerFacebook);
-const loginGitHub = () => signInWithPopup(auth, providerGithub);
-/** ********RESET PASSWORD***** */
-export const resetPasswordFirebase = (email) => sendPasswordResetEmail(auth, email);
-/** ********SIGN OUT***** */
-export const logout = () => signOut(auth);
-/** ********VERIFICAR EMAIL***** */
-export const emailVerify = () => sendEmailVerification(auth.currentUser);
-/** ********CAMBIO DE SESION***** */
-export const stateChanged = (callback) => onAuthStateChanged(auth, callback);
+
 /* ----------------FUNCIONES RELACIONADAS A FIRESTORE ------------------- */
 export const deletePost = (id) => deleteDoc(doc(db, 'post', id));
 export const updatePost = (id, postEdit) => {
@@ -211,14 +182,7 @@ export const storagePortada = (imgUpload) => ref(storage, `img-profile/${imgUplo
 // eslint-disable-next-line max-len
 export const uploadTask = (storageRef1, imgUpload, metadata) => uploadBytesResumable(storageRef1, imgUpload, metadata);
 export const getPhotoURL = (task) => getDownloadURL(task);
-export {
-  createUser,
-  verificationEmail,
-  loginEmail,
-  loginGoogle,
-  loginFacebook,
-  loginGitHub,
-};
+
 /* ....ALMACENAR DATOS DE USUARIO.... */
 const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);
 const getUserDoc = (docRef) => getDoc(docRef);
