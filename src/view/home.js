@@ -23,21 +23,17 @@ export const Home = () => {
       <p id="infoUser"></p>
     </div>
   </div>
-
   <button id="btn-newPost" style="display:none"> Add New Post </button>
   
   <p id="aboutP"></p>
-
  <div id="showPost">
  </div>
-
  <section class="modalNewPost" style="display: none">
       <div class="modalDivPost"> 
       <div class="modalContainer-NewPost">
       </div>
       </div>
   </section>
-
   `;
 
   return document.getElementById('container').appendChild(divElement);
