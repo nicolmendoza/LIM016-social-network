@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import {
-  deletePost, currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
+  deletePost, auth, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
 } from '../firebase/firebase.js';
 
 import { templateComents }
@@ -10,7 +10,7 @@ export const template = (post) => {
   console.log(post);
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
-  const user = currentUser().currentUser;
+  const user = auth().currentUser;
 
   post.forEach((onePost) => {
     const arrOfUsers = onePost.likes[0].users;

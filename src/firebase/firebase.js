@@ -19,6 +19,7 @@ import {
   where,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+
 import {
   getAuth,
   signOut,
@@ -57,38 +58,41 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore();
-const auth = getAuth();
+// const auth = getAuth();
 // const user = auth.currentUser;
 const storage = getStorage();
-/* ........LOGIN PROVEEDORES....... */
+
+export const auth = () => getAuth();
+
+/* ----------------------------VISTA CON INICIO DE SESION - AUTH ---------------------------------*/
+/* **********SIGNUP********** */
+export const createUser = (email, password) => {
+  createUserWithEmailAndPassword(auth, email, password);
+};
+export const verificationEmail = () => sendEmailVerification(auth.currentUser);
+
+/* *****LOGIN PROVEEDORES***** */
 const providerGoogle = new GoogleAuthProvider();
 const providerFacebook = new FacebookAuthProvider();
 const providerGithub = new GithubAuthProvider();
 
-export const currentUser = () => auth;
+/* **********LOGIN********** */
+export const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
+export const loginGoogle = () => signInWithPopup(auth, providerGoogle);
+export const loginFacebook = () => signInWithPopup(auth, providerFacebook);
+export const loginGitHub = () => signInWithPopup(auth, providerGithub);
 
-/* ----------------------------VISTA CON INICIO DE SESION - AUTH ---------------------------------*/
-/* .............SIGNUP.............. */
-const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-const verificationEmail = () => sendEmailVerification(auth.currentUser);
-
-/* ..........LOGIN............ */
-const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
-const loginGoogle = () => signInWithPopup(auth, providerGoogle);
-const loginFacebook = () => signInWithPopup(auth, providerFacebook);
-const loginGitHub = () => signInWithPopup(auth, providerGithub);
-
-/** ********RESET PASSWORD***** */
+/* ******RESET PASSWORD****** */
 export const resetPasswordFirebase = (email) => sendPasswordResetEmail(auth, email);
 
-/** ********SIGN OUT***** */
-export const logout = () => signOut(auth);
-
-/** ********VERIFICAR EMAIL***** */
+/* ******VERIFICAR EMAIL****** */
 export const emailVerify = () => sendEmailVerification(auth.currentUser);
 
-/** ********CAMBIO DE SESION***** */
+/* *****CAMBIO DE SESION***** */
 export const stateChanged = (callback) => onAuthStateChanged(auth, callback);
+
+/* *********LOG OUT********* */
+export const logout = () => signOut(auth);
 
 /* ----------------FUNCIONES RELACIONADAS A FIRESTORE ------------------- */
 
@@ -245,15 +249,6 @@ export const storagePortada = (imgUpload) => ref(storage, `img-profile/${imgUplo
 export const uploadTask = (storageRef1, imgUpload, metadata) => uploadBytesResumable(storageRef1, imgUpload, metadata);
 
 export const getPhotoURL = (task) => getDownloadURL(task);
-
-export {
-  createUser,
-  verificationEmail,
-  loginEmail,
-  loginGoogle,
-  loginFacebook,
-  loginGitHub,
-};
 
 /* ....ALMACENAR DATOS DE USUARIO.... */
 const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);

@@ -1,6 +1,6 @@
 import {
   logout,
-  currentUser,
+  auth,
   readData,
   userDocRef,
   getUserDoc,
@@ -42,7 +42,7 @@ export const FunctionsHome = () => {
   readData(template);
 
   // autentificando usuario logueado
-  const userCurrent = currentUser().currentUser;
+  const userCurrent = auth().currentUser;
   const userID = userCurrent.uid;
 
   async function profileInfo() {

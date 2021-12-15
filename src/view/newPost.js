@@ -1,5 +1,5 @@
 import {
-  currentUser, savePost,
+  auth, savePost,
   readPostProfile,
 } from '../firebase/firebase.js';
 
@@ -48,11 +48,11 @@ export const newPost = () => {
 };
 export const functionNewPost = () => {
   // userID = () => auth.currentUser.uid;
-  const userCurrent = currentUser().currentUser;
+  const userCurrent = auth().currentUser;
   // autentificando usuario logueado
   // const auth = getAuth();
   // const user = auth.currentUser;
-  // const userCurrent = currentUser().currentUser;
+  // const userCurrent = auth().currentUser;
 
   readPostProfile(userCurrent.uid).then((docUser) => {
     document.getElementById('photoUser1').src = `${docUser.data().photo}`;

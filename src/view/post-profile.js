@@ -1,4 +1,4 @@
-// const user = currentUser().currentUser;
+// const user = auth().currentUser;
 // console.log(user.uid);
 
 // console.log(post);

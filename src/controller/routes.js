@@ -1,14 +1,14 @@
 // eslint-disable-next-line import/no-unresolved
 // import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
-import { currentUser } from '../firebase/firebase.js';
+import { auth } from '../firebase/firebase.js';
 
 import { components } from '../view/index.js';
 
 // onst auth = getAuth();
 
 const changeView = (route) => {
-  const user = currentUser().currentUser;
+  const user = auth().currentUser;
   const container = document.getElementById('container');
   container.innerHTML = '';
   const footer = document.getElementById('container-footer');

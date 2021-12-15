@@ -5,7 +5,7 @@
 // } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 import {
-  obtenerInfo, currentUser, updateInfoUser, storagePhotoProf,
+  obtenerInfo, auth, updateInfoUser, storagePhotoProf,
   uploadTask,
   getPhotoURL,
 } from '../firebase/firebase.js';
@@ -30,7 +30,7 @@ export const profileEdit = () => {
 };
 
 export const FunctionEdit = () => {
-  const user = currentUser().currentUser;
+  const user = auth().currentUser;
 
   const newName = document.getElementById('edit-name');
   const newAbout = document.getElementById('edit-about');
