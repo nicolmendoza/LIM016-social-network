@@ -39,8 +39,6 @@ export const Home = () => {
 };
 
 export const FunctionsHome = () => {
-  readData(template);
-
   // autentificando usuario logueado
   const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
@@ -94,16 +92,15 @@ export const FunctionsHome = () => {
 
   // Crear nuevo post
 
-  window.addEventListener('click', (e) => {
-    const btnNewPost = e.target;
-    if (btnNewPost.id === 'btn-newPost') {
-      newPost();
-      document.querySelector('.modalNewPost').style.display = 'flex';
-      functionNewPost();
-    } else if (btnNewPost.id === 'btn-post-mobile') {
-      newPost();
-      document.querySelector('.modalNewPost').style.display = 'flex';
-      functionNewPost();
-    }
+  document.getElementById('btn-newPost').addEventListener('click', () => {
+    newPost();
+    document.querySelector('.modalNewPost').style.display = 'flex';
+    functionNewPost();
+  });
+
+  document.getElementById('btn-post-mobile').addEventListener('click', () => {
+    newPost();
+    document.querySelector('.modalNewPost').style.display = 'flex';
+    functionNewPost();
   });
 };

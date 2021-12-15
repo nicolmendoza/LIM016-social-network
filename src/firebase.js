@@ -100,7 +100,7 @@ export const obtenerInfo = (ID) => {
   return docSnap;
 };
 
-export const updateLikePost = async (id, people) => {
+export const updateLikePost = (id, people) => {
   const postRef = doc(db, 'post', id);
   return updateDoc(postRef, {
     likes: [{
