@@ -1,11 +1,6 @@
 /* eslint-disable no-plusplus */
-// import {
-//   getFirestore, collection, addDoc,
-// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-
 import {
-  deletePost,
-  currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
+  deletePost, currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
 } from '../firebase.js';
 
 import { templateComents }
@@ -24,7 +19,6 @@ export const template = (post) => {
     nuevoElemento.innerHTML += `
     <div class="postDiv" id="${onePost.idP}">
       <div class="header-post">
-
         <img  id="post-img${onePost.idP}" width="100px" >
         <div class="header-info">
           <div class="post-name${onePost.idP}"></div>
@@ -38,7 +32,6 @@ export const template = (post) => {
       <div id="postIcon">
           <i class="${likeIcon} far fa-heart icon"></i> <p class='cant'>${onePost.likes[0].users.length}</p>
           <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
-
           <i class="far fa-paper-plane icon"></i>
       </div>
       <div id="comments${onePost.idP}">
@@ -74,11 +67,12 @@ export const template = (post) => {
   });
 
   nuevoElemento.querySelectorAll('.postImg').forEach((postImg) => {
-    const postImgId = postImg.parentElement.id;
+    // const postImgId = postImg.parentElement.id;
     // console.log(postImgId);
     const imgSrc = postImg;
     // console.log(imgSrc);
     // console.log(imgSrc.src);
+    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < post.length; i++) {
       if (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html') {
         imgSrc.className = 'img-post-home';
@@ -91,6 +85,7 @@ export const template = (post) => {
   nuevoElemento.querySelectorAll('.date').forEach((date) => {
     const postId = date.parentElement.parentElement.parentElement.id;
     const pElement = date.firstChild;
+    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < post.length; i++) {
       if (post[i].idP === postId) {
         const d = new Date();
@@ -216,7 +211,6 @@ export const template = (post) => {
       });
     });
   });
-
   showPost.innerHTML = '';
   showPost.appendChild(nuevoElemento);
 };

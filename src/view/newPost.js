@@ -1,10 +1,6 @@
 import {
-  getAuth,
-  // eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
-import {
-  currentUser, savePost, readPostProfile,
+  currentUser, savePost,
+  readPostProfile,
 } from '../firebase.js';
 
 import { getImage } from './get-Image.js';
@@ -51,13 +47,14 @@ export const newPost = () => {
   document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
 };
 export const functionNewPost = () => {
+  // userID = () => auth.currentUser.uid;
   const userCurrent = currentUser().currentUser;
   // autentificando usuario logueado
-  const auth = getAuth();
-  const user = auth.currentUser;
+  // const auth = getAuth();
+  // const user = auth.currentUser;
   // const userCurrent = currentUser().currentUser;
 
-  readPostProfile(user.uid).then((docUser) => {
+  readPostProfile(userCurrent.uid).then((docUser) => {
     document.getElementById('photoUser1').src = `${docUser.data().photo}`;
     const info2 = document.getElementById('namePost');
     info2.innerHTML = docUser.data().name;

@@ -5,8 +5,6 @@ import {
   currentUser,
 } from '../firebase.js';
 
-import { SignUp } from './login-signUp/signup.js';
-
 export const verificarUsuario = async function verificarSiExisteUsuario() {
   const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
