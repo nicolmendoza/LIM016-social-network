@@ -84,7 +84,6 @@ export const template = (post) => {
         imgSrc.className = 'img-post-home';
       } else {
         imgSrc.className = 'postImg';
-
       }
     }
   });
