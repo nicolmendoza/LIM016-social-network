@@ -35,7 +35,8 @@ const changeView = (route) => {
       if (user) {
         header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
-        (components.home.Home());
+        components.navMobile.navChangeView();
+        components.home.Home();
         components.home.FunctionsHome();
       } else {
         window.location.hash = '#/';
@@ -47,6 +48,7 @@ const changeView = (route) => {
       if (user) {
         header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
+        components.navMobile.navChangeView();
         components.profile.Profile();
         components.profile.FunctionProfile();
       } else {
@@ -60,16 +62,16 @@ const changeView = (route) => {
       components.resetPassword.resetPasswordInit();
       break;
 
-    case '#/newPost':
-      if (user) {
-        footer.appendChild(components.navMobile.navMobile());
-        components.newPost.newPost();
-        // container.appendChild(components.newPost.newPost());
-        components.newPost.functionNewPost();
-      } else {
-        window.location.hash = '#/home';
-      }
-      break;
+      // case '#/newPost':
+      //   if (user) {
+      //     footer.appendChild(components.navMobile.navMobile());
+      //     components.newPost.newPost();
+      //     // container.appendChild(components.newPost.newPost());
+      //     components.newPost.functionNewPost();
+      //   } else {
+      //     window.location.hash = '#/home';
+      //   }
+      //   break;
 
     case '#/editProfile':
       if (user) {

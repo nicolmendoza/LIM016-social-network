@@ -65,8 +65,6 @@ export const FunctionsHome = () => {
   }
 
   profileInfo();
-  // read the posts
-  readData(template);
 
   // LogOut
   window.addEventListener('click', (e) => {

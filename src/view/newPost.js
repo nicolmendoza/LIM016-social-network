@@ -59,6 +59,7 @@ export const functionNewPost = () => {
     const info2 = document.getElementById('namePost');
     info2.innerHTML = docUser.data().name;
   });
+  
   const userID = userCurrent.uid;
   const nameUser = userCurrent.displayName;
   console.log(nameUser);
@@ -82,8 +83,7 @@ export const functionNewPost = () => {
     previewImg.src = reader.result;
   };
   const postDescription = document.getElementById('post-description');
-  document.querySelector('.publish').addEventListener('click', (e) => {
-    e.preventDefault();
+  document.querySelector('.publish').addEventListener('click', () => {
     // eslint-disable-next-line max-len
     if ((postDescription.value !== '' && photoFile.files[0]) || (postDescription.value === '' && photoFile.files[0])) {
       const imgUpload = files[0];
