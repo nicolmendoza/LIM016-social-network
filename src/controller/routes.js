@@ -36,7 +36,7 @@ const changeView = (route) => {
         header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
         components.navMobile.navChangeView();
-        components.home.Home();
+        (components.home.Home());
         components.home.FunctionsHome();
       } else {
         window.location.hash = '#/';

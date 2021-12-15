@@ -10,6 +10,7 @@ export const template = (post) => {
   console.log(post);
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
+  nuevoElemento.setAttribute('id', 'holi');
   const user = currentUser().currentUser;
 
   post.forEach((onePost) => {

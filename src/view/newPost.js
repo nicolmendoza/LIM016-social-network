@@ -59,7 +59,6 @@ export const functionNewPost = () => {
     const info2 = document.getElementById('namePost');
     info2.innerHTML = docUser.data().name;
   });
-  
   const userID = userCurrent.uid;
   const nameUser = userCurrent.displayName;
   console.log(nameUser);

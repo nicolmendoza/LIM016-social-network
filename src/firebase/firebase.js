@@ -142,7 +142,7 @@ export const readData = (callback) => {
       objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
       posts.push(objectPost);
-      return posts;
+      // return posts;
     });
     callback(posts);
   });
