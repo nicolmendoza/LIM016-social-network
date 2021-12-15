@@ -58,7 +58,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore();
 const auth = getAuth();
-const user = auth.currentUser;
+// const user = auth.currentUser;
 const storage = getStorage();
 
 export const currentUser = () => auth;

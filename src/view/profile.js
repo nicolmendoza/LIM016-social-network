@@ -1,11 +1,5 @@
-// eslint-disable-next-line import/no-unresolved
 import {
-  getAuth,
-  // eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
-import {
-  obtenerInfo, readPostProfile, leerPostProfile,
+  obtenerInfo, readPostProfile, leerPostProfile, currentUser,
 } from '../firebase.js';
 
 export const Profile = () => {
@@ -51,8 +45,8 @@ export const Profile = () => {
   return document.getElementById('container').appendChild(profile);
 };
 export const FunctionProfile = () => {
-  const auth = getAuth();
-  const user = auth.currentUser;
+  // const auth = getAuth();
+  const user = currentUser().currentUser;
   // autentificando usuario logueado
 
   readPostProfile(user.uid).then((docUser) => {
@@ -83,7 +77,7 @@ export const FunctionProfile = () => {
     Promise.all(postProfileAll).then(() => PostProfile.appendChild(nuevoElemento));
   }
 
-  leerPostProfile(showPostProfile, auth.currentUser.uid);
+  leerPostProfile(showPostProfile, currentUser().currentUser.uid);
 
   document.getElementById('goEdit').addEventListener('click', () => {
     window.location.hash = '#/editProfile';
