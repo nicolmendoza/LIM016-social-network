@@ -6,9 +6,9 @@ import {
 import { getImage } from './get-Image.js';
 
 export const newPost = () => {
-  if (document.querySelector('.containerNewPost')) {
-    document.querySelector('.containerNewPost').remove();
-  }
+  // if (document.querySelector('.containerNewPost')) {
+  //   document.querySelector('.containerNewPost').remove();
+  // }
 
   const newPostContainer = document.createElement('section');
   newPostContainer.classList.add('containerNewPost');
@@ -44,18 +44,14 @@ export const newPost = () => {
     </div>
     `;
 
+  document.querySelector('.modalContainer-NewPost').innerHTML = '';
   document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
 };
+
 export const functionNewPost = () => {
-  // userID = () => auth.currentUser.uid;
   const userCurrent = currentUser().currentUser;
-  // autentificando usuario logueado
-  // const auth = getAuth();
-  // const user = auth.currentUser;
-  // const userCurrent = currentUser().currentUser;
 
   readPostProfile(userCurrent.uid).then((docUser) => {
-
     document.getElementById('photoUser1').src = `${docUser.data().photo}`;
     const info2 = document.getElementById('namePost');
     info2.innerHTML = docUser.data().name;
@@ -67,56 +63,33 @@ export const functionNewPost = () => {
   document.querySelector('.addImg').addEventListener('click', () => {
     photoFile.click();
   });
-  // const previewContainer = document.getElementById('container-image-preview');
   const previewImg = document.querySelector('.image-preview');
   let files = [];
   const reader = new FileReader();
   photoFile.onchange = (e) => {
     files = e.target.files;
-    // const extention = GetFileExt(files[0]);
-    // const name = GetFileName(files[0]);
     reader.readAsDataURL(files[0]);
-    // uploadImg(files);
   };
   reader.onload = function () {
     document.querySelector('.image-preview').className = 'image-preview img-prev';
     previewImg.src = reader.result;
   };
-  // document.querySelector('#input-file').addEventListener('change', function () {
-  //   const file = this.files[0];
-  //   console.log(file);
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.addEventListener('load', function () {
-  //       previewImg.setAttribute('src', this.result);
-  //     });
-  //     reader.readAsDataURL(file);
-  //     async () => {
-  //       uploadImg(file);
-  //     };
-  //   } else {
-  //     previewImg.setAttribute('src', '');
-  //   }
-  // });
   const postDescription = document.getElementById('post-description');
   document.querySelector('.publish').addEventListener('click', (e) => {
     e.preventDefault();
-    // eslint-disable-next-line max-len
     if ((postDescription.value !== '' && photoFile.files[0]) || (postDescription.value === '' && photoFile.files[0])) {
       const imgUpload = files[0];
       getImage(imgUpload, (downloadURL) => {
         savePost(postDescription, userID, downloadURL);
         console.log(downloadURL);
-        document.querySelector('.modalNewPost').style.display = 'none';
+        document.querySelector('.modalNewPost').remove();
       });
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
       savePost(postDescription, userID, '');
-      document.querySelector('.modalNewPost').style.display = 'none'
+      document.querySelector('.modalNewPost').style.display = 'none';
     } else {
       alert('su post esta vacio');
     }
-    // savePost(postDescription, userID);
-    // window.location.hash = '#/home';
   });
   document.querySelector('.descart').addEventListener('click', () => {
     document.querySelector('.modalNewPost').style.display = 'none';

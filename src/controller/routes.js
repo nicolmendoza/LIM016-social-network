@@ -64,7 +64,6 @@ const changeView = (route) => {
       if (user) {
         footer.appendChild(components.navMobile.navMobile());
         components.newPost.newPost();
-        // container.appendChild(components.newPost.newPost());
         components.newPost.functionNewPost();
       } else {
         window.location.hash = '#/home';
@@ -86,20 +85,5 @@ const changeView = (route) => {
       break;
   }
 };
-
-// export const stateChanged = (callback) => onAuthStateChanged(auth, callback);
-
-// stateChanged((userOne) => {
-//   if (userOne) {
-//     user = userOne;
-//     const verificar = userOne.emailVerified;
-//     if (verificar) {
-//       changeView('#/home');
-//     }
-//   } else {
-//     user = '';
-//     changeView('#/');
-//   }
-// });
 
 export { changeView };
