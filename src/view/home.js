@@ -39,8 +39,6 @@ export const Home = () => {
 };
 
 export const FunctionsHome = () => {
-  readData(template);
-
   // autentificando usuario logueado
   const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;

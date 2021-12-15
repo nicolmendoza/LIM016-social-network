@@ -3,6 +3,7 @@
 // Initialize Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js';
+
 import {
   getFirestore,
   doc,
@@ -19,6 +20,11 @@ import {
   where,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+
+import {
+  getStorage, ref, uploadBytesResumable, getDownloadURL, uploadBytes,
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
+
 import {
   getAuth,
   signOut,
@@ -31,16 +37,8 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   onAuthStateChanged,
-// eslint-disable-next-line import/no-unresolved
+  // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
-import {
-  getStorage, ref, uploadBytesResumable, getDownloadURL, uploadBytes,
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
-
-// import {
-//   getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
-// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyD9ngpw2YVZK0ZTgYEn2L3kJX2HFlcDK8Q',

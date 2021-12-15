@@ -166,7 +166,7 @@ export const template = (post) => {
       }
 
       if (arrOfUsers.includes(user.uid)) {
-        e.target.classList.toggle('fas');
+        // e.target.classList.toggle('fas');
         removeItemFromArr(arrOfUsers, user.uid);
         console.log('remove fas');
         console.log(`people ${arrOfUsers}`);
@@ -174,7 +174,7 @@ export const template = (post) => {
         console.log('------------------------------------');
         updateLikePost(postId, arrOfUsers);
       } else {
-        e.target.classList.toggle('fas');
+        // e.target.classList.toggle('fas');
         arrOfUsers.push(user.uid);
         console.log('add fas');
         console.log(`people ${arrOfUsers}`);
