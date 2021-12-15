@@ -13,9 +13,6 @@ export const template = (post) => {
   const user = currentUser().currentUser;
 
   post.forEach((onePost) => {
-    const arrOfUsers = onePost.likes[0].users;
-    const likeIcon = arrOfUsers.includes(user.uid) ? 'fas' : '';
-
     nuevoElemento.innerHTML += `
     <div class="postDiv" id="${onePost.idP}">
       <div class="header-post">
@@ -30,7 +27,7 @@ export const template = (post) => {
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
       <div id="postIcon">
-          <i class="${likeIcon} far fa-heart icon"></i> <p class='cant'>${onePost.likes[0].users.length}</p>
+          <i class=" fa-heart icon" id="iconLikes${onePost.idP}"></i> <p id='likes${onePost.idP}'></p>
           <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
           <i class="far fa-paper-plane icon"></i>
       </div>
@@ -47,6 +44,13 @@ export const template = (post) => {
 
   post.forEach((one) => {
     const idPost = one.idP;
+    const arrOfUsers = one.likes[0].users;
+    const likeIcon = arrOfUsers.includes(user.uid) ? 'fas' : 'far';
+    const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
+    const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
+    parrafoCountLikes.innerHTML = `${arrOfUsers.length}`;
+    iconLikes.classList.add(likeIcon);
+
     const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
     readComment((comments) => {
       const num = comments.length;
@@ -98,10 +102,9 @@ export const template = (post) => {
       }
     }
   });
-
+  console.log('hi');
   nuevoElemento.querySelectorAll('.delete').forEach((div) => {
     div.addEventListener('click', (e) => {
-      console.log('hi');
       console.log(e.target.parentNode);
       const id = e.target.parentNode.id;
       console.log(id);
@@ -168,18 +171,10 @@ export const template = (post) => {
       if (arrOfUsers.includes(user.uid)) {
         // e.target.classList.toggle('fas');
         removeItemFromArr(arrOfUsers, user.uid);
-        console.log('remove fas');
-        console.log(`people ${arrOfUsers}`);
-        console.log(postId, arrOfUsers);
-        console.log('------------------------------------');
         updateLikePost(postId, arrOfUsers);
       } else {
         // e.target.classList.toggle('fas');
         arrOfUsers.push(user.uid);
-        console.log('add fas');
-        console.log(`people ${arrOfUsers}`);
-        console.log(postId, arrOfUsers);
-        console.log('------------------------------------');
         updateLikePost(postId, arrOfUsers);
       }
       cant.innerHTML = arrOfUsers.length;
