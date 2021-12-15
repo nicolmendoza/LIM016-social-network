@@ -40,6 +40,8 @@ export const Home = () => {
 };
 
 export const FunctionsHome = () => {
+  readData(template);
+
   // autentificando usuario logueado
   const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
@@ -96,12 +98,6 @@ export const FunctionsHome = () => {
   profileInfo();
   // read the posts
   readData(template);
-
-  // save the post , genera ID automatico
-  // const postDescription = document.getElementById('post-description');
-  // document.getElementById('btn').addEventListener('click', () => {
-  //   savePost(postDescription, userID, '');
-  // });
 
   // LogOut
   window.addEventListener('click', (e) => {

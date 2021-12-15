@@ -9,6 +9,7 @@ export const newPost = () => {
   if (document.querySelector('.containerNewPost')) {
     document.querySelector('.containerNewPost').remove();
   }
+
   const newPostContainer = document.createElement('section');
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
@@ -42,6 +43,7 @@ export const newPost = () => {
       </div>
     </div>
     `;
+
   document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
 };
 export const functionNewPost = () => {
@@ -53,6 +55,7 @@ export const functionNewPost = () => {
   // const userCurrent = currentUser().currentUser;
 
   readPostProfile(userCurrent.uid).then((docUser) => {
+
     document.getElementById('photoUser1').src = `${docUser.data().photo}`;
     const info2 = document.getElementById('namePost');
     info2.innerHTML = docUser.data().name;
