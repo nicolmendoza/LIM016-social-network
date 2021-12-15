@@ -34,6 +34,7 @@ const changeView = (route) => {
       if (user) {
         header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
+        components.navMobile.navChangeView();
         (components.home.Home());
         components.home.FunctionsHome();
       } else {
@@ -46,6 +47,7 @@ const changeView = (route) => {
       if (user) {
         header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
+        components.navMobile.navChangeView();
         components.profile.Profile();
         components.profile.FunctionProfile();
       } else {
@@ -59,6 +61,7 @@ const changeView = (route) => {
       components.resetPassword.resetPasswordInit();
       break;
 
+<<<<<<< HEAD
     case '#/newPost':
       if (user) {
         footer.appendChild(components.navMobile.navMobile());
@@ -68,6 +71,18 @@ const changeView = (route) => {
         window.location.hash = '#/home';
       }
       break;
+=======
+      // case '#/newPost':
+      //   if (user) {
+      //     footer.appendChild(components.navMobile.navMobile());
+      //     components.newPost.newPost();
+      //     // container.appendChild(components.newPost.newPost());
+      //     components.newPost.functionNewPost();
+      //   } else {
+      //     window.location.hash = '#/home';
+      //   }
+      //   break;
+>>>>>>> 12c6856a1bf63865ffbd5e94eeb156e3a1674a54
 
     case '#/editProfile':
       if (user) {

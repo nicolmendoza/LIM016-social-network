@@ -63,8 +63,6 @@ export const FunctionsHome = () => {
   }
 
   profileInfo();
-  // read the posts
-  readData(template);
 
   // LogOut
   window.addEventListener('click', (e) => {
@@ -91,7 +89,6 @@ export const FunctionsHome = () => {
   });
 
   // Crear nuevo post
-
   document.getElementById('btn-newPost').addEventListener('click', () => {
     newPost();
     document.querySelector('.modalNewPost').style.display = 'flex';
@@ -103,4 +100,16 @@ export const FunctionsHome = () => {
     document.querySelector('.modalNewPost').style.display = 'flex';
     functionNewPost();
   });
+
+  // window.addEventListener('click', (e) => {
+  //   const btnNewPost = e.target;
+  //   if (btnNewPost.id === 'btn-newPost') {
+  //     newPost();
+  //     document.querySelector('.modalNewPost').style.display = 'flex';
+  //     functionNewPost();
+  //   } else if (btnNewPost.id === 'btn-post-mobile') {
+  //     newPost();
+  //     document.querySelector('.modalNewPost').style.display = 'flex';
+  //     functionNewPost();
+  //   }
 };
