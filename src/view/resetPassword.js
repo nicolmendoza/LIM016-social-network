@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import { resetPasswordFirebase } from '../firebase.js';
+import { resetPasswordFirebase } from '../firebase/firebase.js';
 
 export const resetPassword = () => {
   const viewResetPassword = document.createElement('div');

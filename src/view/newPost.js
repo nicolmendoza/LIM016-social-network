@@ -1,7 +1,7 @@
 import {
   currentUser, savePost,
   readPostProfile,
-} from '../firebase.js';
+} from '../firebase/firebase.js';
 
 import { getImage } from './get-Image.js';
 

@@ -60,9 +60,23 @@ const db = getFirestore();
 const auth = getAuth();
 // const user = auth.currentUser;
 const storage = getStorage();
+/* ........LOGIN PROVEEDORES....... */
+const providerGoogle = new GoogleAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
+const providerGithub = new GithubAuthProvider();
 
 export const currentUser = () => auth;
+
 /* ----------------------------VISTA CON INICIO DE SESION - AUTH ---------------------------------*/
+/* .............SIGNUP.............. */
+const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+const verificationEmail = () => sendEmailVerification(auth.currentUser);
+
+/* ..........LOGIN............ */
+const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
+const loginGoogle = () => signInWithPopup(auth, providerGoogle);
+const loginFacebook = () => signInWithPopup(auth, providerFacebook);
+const loginGitHub = () => signInWithPopup(auth, providerGithub);
 
 /** ********RESET PASSWORD***** */
 export const resetPasswordFirebase = (email) => sendPasswordResetEmail(auth, email);
@@ -87,20 +101,13 @@ export const updatePost = (id, postEdit) => {
   });
 };
 
-// export const readPostProfile = (uid) => {
-//   const docRef = doc(db, 'usuarios', uid);
-//   const docSnap = getDoc(docRef);
-//   const docUser = docSnap;
-//   return docUser;
-// };
-
 export const obtenerInfo = (ID) => {
   const docRef = doc(db, 'usuarios', ID);
   const docSnap = getDoc(docRef);
   return docSnap;
 };
 
-export const updateLikePost = async (id, people) => {
+export const updateLikePost = (id, people) => {
   const postRef = doc(db, 'post', id);
   return updateDoc(postRef, {
     likes: [{
@@ -238,21 +245,6 @@ export const storagePortada = (imgUpload) => ref(storage, `img-profile/${imgUplo
 export const uploadTask = (storageRef1, imgUpload, metadata) => uploadBytesResumable(storageRef1, imgUpload, metadata);
 
 export const getPhotoURL = (task) => getDownloadURL(task);
-
-/* .............SIGNUP.............. */
-const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-const verificationEmail = () => sendEmailVerification(auth.currentUser);
-
-/* ........LOGIN PROVEEDORES....... */
-const providerGoogle = new GoogleAuthProvider();
-const providerFacebook = new FacebookAuthProvider();
-const providerGithub = new GithubAuthProvider();
-
-/* ..........LOGIN............ */
-const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
-const loginGoogle = () => signInWithPopup(auth, providerGoogle);
-const loginFacebook = () => signInWithPopup(auth, providerFacebook);
-const loginGitHub = () => signInWithPopup(auth, providerGithub);
 
 export {
   createUser,

@@ -1,6 +1,6 @@
 import {
   obtenerInfo, readPostProfile, leerPostProfile, currentUser,
-} from '../firebase.js';
+} from '../firebase/firebase.js';
 
 export const Profile = () => {
   document.getElementById('container').innerHTML = '';

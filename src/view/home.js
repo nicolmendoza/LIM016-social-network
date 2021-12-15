@@ -5,7 +5,7 @@ import {
   userDocRef,
   getUserDoc,
   updateUserDoc,
-} from '../firebase.js';
+} from '../firebase/firebase.js';
 
 import { template } from './post.js';
 

@@ -3,9 +3,7 @@ import {
   loginGoogle,
   loginFacebook,
   loginGitHub,
-} from '../../firebase/firebase.js';
-
-import { verificarUsuario } from '../verificar-usuario.js';
+} from '../firebase/firebase.js';
 
 export const Login = () => {
   const viewHome = document.createElement('div');
@@ -14,11 +12,13 @@ export const Login = () => {
   <section class="bubble">
     <!-- content here -->
   </section>
+
   <div class="section1"><img class="imgInicio"></div>
   <div class="section2">
     <div class="formulario">
       <div class="logo">SOCIAL NETWORK</div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
+
       <div class="form-group-text">
         <div class="textForm clickLogin">
           <a href="#/login">Login</a> 
@@ -27,6 +27,7 @@ export const Login = () => {
           <a href="#/signup" >Sign Up</a>
         </div>
       </div>
+
       <form id="login-form">
         <div class="form-group">
           <span class="icon-input">
@@ -34,12 +35,14 @@ export const Login = () => {
           </span>
           <input type="email" id="login-email" placeholder="correo@example.com" required>
         </div>
+
         <div class="form-group">
           <span class="icon-input" id="icon-eye">
             <i class="fas fa-eye-slash"></i>
           </span>
           <input type="password" id="login-password"  placeholder="****************" required>
         </div>
+
         <p id="generalMessage" class="errorMessage"></p>
         <button type="submit" class="btnLogin">LOGIN</button><br>
         <div class="divResetPassword">
@@ -101,9 +104,7 @@ export const initLogin = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         if (user.emailVerified === true) {
-          verificarUsuario().then(() => {
-            window.location.hash = '#/home';
-          });
+          window.location.hash = '#/home';
         } else {
           alert('Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.');
         }
@@ -116,11 +117,9 @@ export const initLogin = () => {
   /* ........Logearse con Google........ */
   googleLogin.addEventListener('click', () => {
     loginGoogle()
-      .then(() => verificarUsuario())
       .then(() => {
         window.location.hash = '#/home';
-      })
-      .catch((error) => {
+      }).catch((error) => {
         errorOccurs(error);
       });
   });
@@ -128,7 +127,6 @@ export const initLogin = () => {
   /* .......Logearse con Facebook........ */
   facebookLogin.addEventListener('click', () => {
     loginFacebook()
-      .then(() => verificarUsuario())
       .then(() => {
         window.location.hash = '#/home';
       })
@@ -140,7 +138,6 @@ export const initLogin = () => {
   /* .......Logearse con GitHub........ */
   githubLogin.addEventListener('click', () => {
     loginGitHub()
-      .then(() => verificarUsuario())
       .then(() => {
         window.location.hash = '#/home';
       }).catch((error) => {
@@ -164,5 +161,4 @@ export const initLogin = () => {
       icon.classList.add('fa-eye-slash');
     }
   });
-  /* ........Verificar si el usuario existe............. */
 };
