@@ -78,7 +78,7 @@ export const template = (post) => {
     // console.log(imgSrc);
     // console.log(imgSrc.src);
     // eslint-disable-next-line no-plusplus
-    if (imgSrc.src !== 'http://localhost:5000/') {
+    if ((imgSrc.src !== 'http://localhost:5000/') && (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html')) {
       imgSrc.className = 'img-post-home';
     } else {
       imgSrc.className = 'postImg';

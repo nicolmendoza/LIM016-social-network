@@ -1,20 +1,16 @@
 // eslint-disable-next-line import/no-unresolved
 // import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
 import { currentUser } from '../firebase/firebase.js';
 import { components } from '../view/index.js';
-
 // onst auth = getAuth();
-
 const changeView = (route) => {
-  const user = currentUser;
+  const user = currentUser().currentUser;
   const container = document.getElementById('container');
   container.innerHTML = '';
   const footer = document.getElementById('container-footer');
   footer.innerHTML = '';
   const header = document.getElementById('container-header');
   header.innerHTML = '';
-
   switch (route) {
     case '#':
     case '/':
@@ -22,14 +18,11 @@ const changeView = (route) => {
     case '#/':
       container.appendChild(components.login.Login());
       components.login.initLogin();
-
       break;
-
     case '#/signup':
       container.appendChild(components.signup.SignUp());
       components.signup.Register();
       break;
-
     case '#/home': {
       if (user) {
         header.appendChild(components.navLaptop.navLaptop());
@@ -40,7 +33,6 @@ const changeView = (route) => {
       } else {
         window.location.hash = '#/';
       }
-
       break;
     }
     case '#/profile': {
@@ -53,25 +45,12 @@ const changeView = (route) => {
       } else {
         window.location.hash = '#/';
       }
-
       break;
     }
     case '#/resetPassword':
       container.appendChild(components.resetPassword.resetPassword());
       components.resetPassword.resetPasswordInit();
       break;
-
-<<<<<<< HEAD
-    case '#/newPost':
-      if (user) {
-        footer.appendChild(components.navMobile.navMobile());
-        components.newPost.newPost();
-        components.newPost.functionNewPost();
-      } else {
-        window.location.hash = '#/home';
-      }
-      break;
-=======
       // case '#/newPost':
       //   if (user) {
       //     footer.appendChild(components.navMobile.navMobile());
@@ -82,8 +61,6 @@ const changeView = (route) => {
       //     window.location.hash = '#/home';
       //   }
       //   break;
->>>>>>> 12c6856a1bf63865ffbd5e94eeb156e3a1674a54
-
     case '#/editProfile':
       if (user) {
         footer.appendChild(components.navMobile.navMobile());
@@ -92,12 +69,23 @@ const changeView = (route) => {
       } else {
         window.location.hash = '#/';
       }
-
       break;
     default:
       window.location.hash = '#/';
       break;
   }
 };
-
+// export const stateChanged = (callback) => onAuthStateChanged(auth, callback);
+// stateChanged((userOne) => {
+//   if (userOne) {
+//     user = userOne;
+//     const verificar = userOne.emailVerified;
+//     if (verificar) {
+//       changeView('#/home');
+//     }
+//   } else {
+//     user = '';
+//     changeView('#/');
+//   }
+// });
 export { changeView };
