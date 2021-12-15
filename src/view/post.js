@@ -3,10 +3,9 @@
 import {
   deletePost, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
 } from '../firebase/firebase.js';
-import { currentUser } from '../firebase/firebase-auth.js';
 
-import { templateComents }
-  from './comments.js';
+import { currentUser } from '../firebase/firebase-auth.js';
+import { templateComents } from './comments.js';
 
 export const template = (post) => {
   console.log(post);
@@ -103,6 +102,7 @@ export const template = (post) => {
       }
     }
   });
+
   console.log('hi');
   nuevoElemento.querySelectorAll('.delete').forEach((div) => {
     div.addEventListener('click', (e) => {

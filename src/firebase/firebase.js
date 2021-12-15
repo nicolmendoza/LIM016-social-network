@@ -3,6 +3,7 @@
 // Initialize Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 import {
   getFirestore,
@@ -20,8 +21,6 @@ import {
   where,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-
-import { getAuth } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
 import {
   getStorage, ref, uploadBytesResumable, getDownloadURL, uploadBytes,
@@ -175,6 +174,7 @@ export const updateComment = (id, idComment, newComment) => {
 export const deleteComment = (id, idComment) => {
   deleteDoc(doc(db, 'post', id, 'comments', idComment));
 };
+
 /* ---------------------------FUNCIONES RELACIONADAS A STORAGE----------------------------------*/
 export const storageRef = (imgUpload) => ref(storage, `img-post/${imgUpload.name}`);
 export const uploadBytes1 = (storageRef1, imgUpload) => uploadBytes(storageRef1, imgUpload);
@@ -189,6 +189,7 @@ const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);
 const getUserDoc = (docRef) => getDoc(docRef);
 const setUserDoc = (docs, obj) => setDoc(docs, obj);
 const updateUserDoc = (docRef, obj) => updateDoc(docRef, obj);
+
 export {
   userDocRef,
   getUserDoc,

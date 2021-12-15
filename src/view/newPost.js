@@ -4,13 +4,17 @@ import {
 } from '../firebase/firebase.js';
 import { currentUser } from '../firebase/firebase-auth.js';
 
+// import {
+//   currentUser, savePost,
+//   readPostProfile,
+// } from '../firebase/firebase.js';
+
 import { getImage } from './get-Image.js';
 
 export const newPost = () => {
-  // if (document.querySelector('.containerNewPost')) {
-  //   document.querySelector('.containerNewPost').remove();
-  // }
-
+  if (document.querySelector('.containerNewPost')) {
+    document.querySelector('.containerNewPost').remove();
+  }
   const newPostContainer = document.createElement('section');
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
@@ -44,14 +48,15 @@ export const newPost = () => {
       </div>
     </div>
     `;
-
-  document.querySelector('.modalContainer-NewPost').innerHTML = '';
   document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
 };
-
 export const functionNewPost = () => {
+  // userID = () => auth.currentUser.uid;
   const userCurrent = currentUser().currentUser;
-
+  // autentificando usuario logueado
+  // const auth = getAuth();
+  // const user = auth.currentUser;
+  // const userCurrent = currentUser().currentUser;
   readPostProfile(userCurrent.uid).then((docUser) => {
     document.getElementById('photoUser1').src = `${docUser.data().photo}`;
     const info2 = document.getElementById('namePost');
@@ -64,12 +69,16 @@ export const functionNewPost = () => {
   document.querySelector('.addImg').addEventListener('click', () => {
     photoFile.click();
   });
+  // const previewContainer = document.getElementById('container-image-preview');
   const previewImg = document.querySelector('.image-preview');
   let files = [];
   const reader = new FileReader();
   photoFile.onchange = (e) => {
     files = e.target.files;
+    // const extention = GetFileExt(files[0]);
+    // const name = GetFileName(files[0]);
     reader.readAsDataURL(files[0]);
+    // uploadImg(files);
   };
   reader.onload = function () {
     document.querySelector('.image-preview').className = 'image-preview img-prev';
@@ -83,7 +92,7 @@ export const functionNewPost = () => {
       getImage(imgUpload, (downloadURL) => {
         savePost(postDescription, userID, downloadURL);
         console.log(downloadURL);
-        document.querySelector('.modalNewPost').remove();
+        document.querySelector('.modalNewPost').style.display = 'none';
       });
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
       savePost(postDescription, userID, '');
@@ -91,8 +100,11 @@ export const functionNewPost = () => {
     } else {
       alert('su post esta vacio');
     }
+    // savePost(postDescription, userID);
+    // window.location.hash = '#/home';
   });
   document.querySelector('.descart').addEventListener('click', () => {
     document.querySelector('.modalNewPost').style.display = 'none';
   });
 };
+

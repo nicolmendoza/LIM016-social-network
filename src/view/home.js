@@ -6,9 +6,17 @@ import {
 } from '../firebase/firebase.js';
 import { currentUser, logout } from '../firebase/firebase-auth.js';
 
+// import {
+//   logout,
+//   currentUser,
+//   readData,
+//   userDocRef,
+//   getUserDoc,
+//   updateUserDoc,
+// } from '../firebase/firebase.js';
+
 import { template } from './post.js';
 import { newPost, functionNewPost } from './newPost.js';
-
 export const Home = () => {
   const divElement = document.createElement('div');
   divElement.classList.add('container-home');
@@ -22,7 +30,7 @@ export const Home = () => {
   </div>
   <button id="btn-newPost" style="display:none"> Add New Post </button>
   <p id="aboutP"></p>
- <div id="showPost">
+  <div id="showPost">
  </div>
  <section class="modalNewPost" style="display: none">
       <div class="modalDivPost">
@@ -31,10 +39,9 @@ export const Home = () => {
       </div>
   </section>
   `;
-  return document.getElementById('container').appendChild(divElement);
+  return document.querySelector('#container').appendChild(divElement);
 };
 export const FunctionsHome = () => {
-  readData(template);
   // autentificando usuario logueado
   const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
@@ -89,6 +96,7 @@ export const FunctionsHome = () => {
     document.querySelector('.modalNewPost').style.display = 'flex';
     functionNewPost();
   });
+  readData(template);
   // window.addEventListener('click', (e) => {
   //   const btnNewPost = e.target;
   //   if (btnNewPost.id === 'btn-newPost') {
