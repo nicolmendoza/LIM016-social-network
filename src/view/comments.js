@@ -1,5 +1,5 @@
 import {
-  obtenerInfo, auth, updateComment, deleteComment,
+  obtenerInfo, currentUser, updateComment, deleteComment,
 } from '../firebase/firebase.js';
 
 export const templateComents = (comments, id) => {
@@ -17,7 +17,7 @@ export const templateComents = (comments, id) => {
     return divComment;
   });
   Promise.all(commentsElements).then(() => {
-    const user = auth().currentUser;
+    const user = currentUser().currentUser;
     console.log(user);
     divComment.querySelectorAll('.deleteComment').forEach((div) => div.addEventListener('click', (e) => {
       const idComment = e.target.parentNode.id;

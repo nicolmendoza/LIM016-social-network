@@ -1,5 +1,5 @@
 import {
-  obtenerInfo, readPostProfile, leerPostProfile, auth,
+  obtenerInfo, readPostProfile, leerPostProfile, currentUser,
 } from '../firebase/firebase.js';
 
 export const Profile = () => {
@@ -46,7 +46,7 @@ export const Profile = () => {
 };
 export const FunctionProfile = () => {
   // const auth = getAuth();
-  const user = auth().currentUser;
+  const user = currentUser().currentUser;
   // autentificando usuario logueado
 
   readPostProfile(user.uid).then((docUser) => {
@@ -77,7 +77,7 @@ export const FunctionProfile = () => {
     Promise.all(postProfileAll).then(() => PostProfile.appendChild(nuevoElemento));
   }
 
-  leerPostProfile(showPostProfile, auth().currentUser.uid);
+  leerPostProfile(showPostProfile, currentUser().currentUser.uid);
 
   document.getElementById('goEdit').addEventListener('click', () => {
     window.location.hash = '#/editProfile';

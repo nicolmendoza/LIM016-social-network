@@ -21,7 +21,6 @@ export const SignUp = () => {
         <div class="textForm clickSingUp">
           <a href="#/signup" >Sign Up</a> </div>
       </div>
-
       <form id="signup-form">
         <div class="form-group">
           <span class="icon-input">
@@ -43,7 +42,6 @@ export const SignUp = () => {
           <input type="password" id="signup-password"  placeholder="**************" maxlength='16'>
           <p id='passwordMessage' class="errorMessage"></p>
         </div>
-
         <button type="submit" class="btnLogin" >CREATE A COUNT</button>
         <div class="textResetPassword">
         <p class="registerText">Do you have an account?  <a href="#/signup" class="registerText link">Login now</a></p></div>

@@ -12,13 +12,11 @@ export const Login = () => {
   <section class="bubble">
     <!-- content here -->
   </section>
-
   <div class="section1"><img class="imgInicio"></div>
   <div class="section2">
     <div class="formulario">
       <div class="logo">SOCIAL NETWORK</div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
-
       <div class="form-group-text">
         <div class="textForm clickLogin">
           <a href="#/login">Login</a> 
@@ -27,7 +25,6 @@ export const Login = () => {
           <a href="#/signup" >Sign Up</a>
         </div>
       </div>
-
       <form id="login-form">
         <div class="form-group">
           <span class="icon-input">
@@ -35,14 +32,12 @@ export const Login = () => {
           </span>
           <input type="email" id="login-email" placeholder="correo@example.com" required>
         </div>
-
         <div class="form-group">
           <span class="icon-input" id="icon-eye">
             <i class="fas fa-eye-slash"></i>
           </span>
           <input type="password" id="login-password"  placeholder="****************" required>
         </div>
-
         <p id="generalMessage" class="errorMessage"></p>
         <button type="submit" class="btnLogin">LOGIN</button><br>
         <div class="divResetPassword">

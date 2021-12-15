@@ -2,11 +2,11 @@ import {
   userDocRef,
   getUserDoc,
   setUserDoc,
-  auth,
+  currentUser,
 } from '../firebase/firebase.js';
 
 export const verificarUsuario = async function verificarSiExisteUsuario() {
-  const userCurrent = auth().currentUser;
+  const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
   const nameUser = userCurrent.displayName;
   const docRef = userDocRef('usuarios', userID);
