@@ -21,7 +21,7 @@ const providerGoogle = new GoogleAuthProvider();
 const providerFacebook = new FacebookAuthProvider();
 const providerGithub = new GithubAuthProvider();
 
-/* ----------------------------VISTA CON INICIO DE SESION - AUTH ---------------------------------*/
+/* ---------------VISTA CON INICIO DE SESION - AUTH -----------------*/
 /* .............SIGNUP.............. */
 export const createUser = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password);

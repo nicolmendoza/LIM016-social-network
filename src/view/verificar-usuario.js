@@ -1,9 +1,17 @@
+// import {
+//   userDocRef,
+//   getUserDoc,
+//   setUserDoc,
+//   currentUser,
+// } from '../firebase/firebase.js';
+
 import {
   userDocRef,
   getUserDoc,
   setUserDoc,
-  currentUser,
 } from '../firebase/firebase.js';
+
+import { currentUser } from '../firebase/firebase-auth.js';
 
 export const verificarUsuario = async function verificarSiExisteUsuario() {
   const userCurrent = currentUser().currentUser;

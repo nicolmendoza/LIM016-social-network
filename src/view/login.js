@@ -1,9 +1,16 @@
+// import {
+//   loginEmail,
+//   loginGoogle,
+//   loginFacebook,
+//   loginGitHub,
+// } from '../firebase/firebase.js';
+
 import {
   loginEmail,
   loginGoogle,
   loginFacebook,
   loginGitHub,
-} from '../firebase/firebase.js';
+} from '../firebase/firebase-auth.js';
 
 export const Login = () => {
   const viewHome = document.createElement('div');
