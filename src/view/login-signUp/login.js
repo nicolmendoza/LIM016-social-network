@@ -1,10 +1,3 @@
-// import {
-//   loginEmail,
-//   loginGoogle,
-//   loginFacebook,
-//   loginGitHub,
-// } from '../../firebase/firebase.js';
-
 import {
   loginEmail,
   loginGoogle,

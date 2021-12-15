@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
-// import { resetPasswordFirebase } from '../firebase/firebase.js';
 import { resetPasswordFirebase } from '../firebase/firebase-auth.js';
 
 export const resetPassword = () => {

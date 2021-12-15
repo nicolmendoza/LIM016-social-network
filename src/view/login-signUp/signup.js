@@ -1,8 +1,3 @@
-// import {
-//   createUser,
-//   verificationEmail,
-// } from '../../firebase/firebase.js';
-
 import {
   createUser,
   verificationEmail,

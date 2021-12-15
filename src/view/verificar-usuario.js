@@ -1,10 +1,3 @@
-// import {
-//   userDocRef,
-//   getUserDoc,
-//   setUserDoc,
-//   currentUser,
-// } from '../firebase/firebase.js';
-
 import {
   userDocRef,
   getUserDoc,
