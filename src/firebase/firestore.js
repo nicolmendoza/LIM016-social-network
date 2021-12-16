@@ -13,7 +13,7 @@ import {
   updateDoc,
   where,
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-import { db } from './firebase';
+import { db } from './firebase.js';
 
 /* -------------- DATOS DE USUARIO -------------- */
 export const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);
