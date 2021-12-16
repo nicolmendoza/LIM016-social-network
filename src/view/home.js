@@ -25,7 +25,7 @@ export const Home = () => {
   <button id="btn-newPost" style="display:none"> Add New Post </button>
   
   <p id="aboutP"></p>
- <div id="showPost">
+  <div id="showPost">
  </div>
  <section class="modalNewPost" style="display: none">
       <div class="modalDivPost"> 
@@ -35,14 +35,14 @@ export const Home = () => {
   </section>
   `;
 
-  return document.getElementById('container').appendChild(divElement);
+  return document.querySelector('#container').appendChild(divElement);
 };
 
 export const FunctionsHome = () => {
-  readData(template);
-
   // autentificando usuario logueado
-  const userCurrent = currentUser().currentUser;
+  const userCurrent = JSON.parse(localStorage.getItem('user'));
+  console.log(userCurrent);
+  // const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
 
   async function profileInfo() {
@@ -66,29 +66,29 @@ export const FunctionsHome = () => {
 
   profileInfo();
 
-  // LogOut
-  window.addEventListener('click', (e) => {
-    const btnOut = e.target.id;
-    if (btnOut === 'out') {
-      logout()
-        .then(() => {
-          console.log('log out');
-          window.location.hash = '#/';
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else if (btnOut === 'logout-mob') {
-      logout()
-        .then(() => {
-          console.log('log out');
-          window.location.hash = '#/';
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  });
+  // // LogOut
+  // window.addEventListener('click', (e) => {
+  //   const btnOut = e.target.id;
+  //   if (btnOut === 'out') {
+  //     logout()
+  //       .then(() => {
+  //         console.log('log out');
+  //         window.location.hash = '#/';
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   } else if (btnOut === 'logout-mob') {
+  //     logout()
+  //       .then(() => {
+  //         console.log('log out');
+  //         window.location.hash = '#/';
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // });
 
   // Crear nuevo post
   document.getElementById('btn-newPost').addEventListener('click', () => {
@@ -102,7 +102,7 @@ export const FunctionsHome = () => {
     document.querySelector('.modalNewPost').style.display = 'flex';
     functionNewPost();
   });
-
+  readData(template);
   // window.addEventListener('click', (e) => {
   //   const btnNewPost = e.target;
   //   if (btnNewPost.id === 'btn-newPost') {

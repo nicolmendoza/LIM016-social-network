@@ -10,10 +10,9 @@ export const template = (post) => {
   console.log(post);
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
-  nuevoElemento.setAttribute('id', 'holi');
-  const user = currentUser().currentUser;
+  const user = JSON.parse(localStorage.getItem('user'));
 
-  post.forEach((onePost) => {
+  post.map((onePost) => {
     const arrOfUsers = onePost.likes[0].users;
     const likeIcon = arrOfUsers.includes(user.uid) ? 'fas' : '';
 
@@ -72,9 +71,8 @@ export const template = (post) => {
     // console.log(postImgId);
     const imgSrc = postImg;
     // console.log(imgSrc);
-    // console.log(imgSrc.src);
     // eslint-disable-next-line no-plusplus
-    if (imgSrc.src !== 'http://localhost:5000/') {
+    if ((imgSrc.src !== 'http://localhost:5000/') && (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html')) {
       imgSrc.className = 'img-post-home';
     } else {
       imgSrc.className = 'postImg';

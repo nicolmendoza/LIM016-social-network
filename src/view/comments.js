@@ -3,6 +3,7 @@ import {
 } from '../firebase/firebase.js';
 
 export const templateComents = (comments, id) => {
+  console.log(comments);
   const showComment = document.getElementById(`showComment${id}`);
   const divComment = document.createElement('div');
   const commentsElements = comments.map(async (oneComment) => {
@@ -17,7 +18,7 @@ export const templateComents = (comments, id) => {
     return divComment;
   });
   Promise.all(commentsElements).then(() => {
-    const user = currentUser().currentUser;
+    const user = JSON.parse(localStorage.getItem('user'));
     console.log(user);
     divComment.querySelectorAll('.deleteComment').forEach((div) => div.addEventListener('click', (e) => {
       const idComment = e.target.parentNode.id;

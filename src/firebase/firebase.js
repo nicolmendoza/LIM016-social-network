@@ -142,11 +142,30 @@ export const readData = (callback) => {
       objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
       posts.push(objectPost);
-      // return posts;
     });
     callback(posts);
   });
 };
+
+// const unsubscribe = db.collection('post').onSnapshot(() => {
+// });
+
+// unsubscribe();
+// export const readData = (callback) => {
+//   const querySnapshot = getDocs(collection(db, 'post'), orderBy('date', 'desc'));
+//   const posts = [];
+//   querySnapshot.forEach((doct) => {
+//     const objectPost = { };
+//     objectPost.content = doct.data().message;
+//     objectPost.idP = doct.id;
+//     objectPost.userID = doct.data().userId;
+//     objectPost.date = doct.data().date;
+//     objectPost.likes = doct.data().likes;
+//     objectPost.img = doct.data().img;
+//     posts.push(objectPost);
+//   });
+//   callback(posts);
+// };
 
 export const leerPostProfile = (callback, uid) => {
   getDocs(query(collection(db, 'post'), where('userId', '==', `${uid}`))).then((resultado) => {
@@ -206,19 +225,19 @@ export const readComment = (callback, id) => {
   });
 };
 
-export const countComment = (id) => {
-  const qC = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
-  return new Promise((resolve, reject) => {
-    onSnapshot(qC, (querySnapshot) => {
-      const commentsOne = [];
-      querySnapshot.forEach((docC) => {
-        commentsOne.push(docC.data());
-      });
+// export const countComment = (id) => {
+//   const qC = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
+//   return new Promise((resolve, reject) => {
+//     onSnapshot(qC, (querySnapshot) => {
+//       const commentsOne = [];
+//       querySnapshot.forEach((docC) => {
+//         commentsOne.push(docC.data());
+//       });
 
-      resolve(commentsOne.length);
-    });
-  });
-};
+//       resolve(commentsOne.length);
+//     });
+//   });
+// };
 
 export const updateComment = (id, idComment, newComment) => {
   const washingtonRef = doc(db, 'post', id, 'comments', idComment);

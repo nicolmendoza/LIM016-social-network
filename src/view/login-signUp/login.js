@@ -102,6 +102,7 @@ export const initLogin = () => {
         const user = userCredential.user;
         if (user.emailVerified === true) {
           verificarUsuario().then(() => {
+            localStorage.setItem('user', JSON.stringify(user));
             window.location.hash = '#/home';
           });
         } else {
@@ -117,7 +118,8 @@ export const initLogin = () => {
   googleLogin.addEventListener('click', () => {
     loginGoogle()
       .then(() => verificarUsuario())
-      .then(() => {
+      .then((user) => {
+        localStorage.setItem('user', JSON.stringify(user));
         window.location.hash = '#/home';
       })
       .catch((error) => {
