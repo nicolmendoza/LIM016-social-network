@@ -57,24 +57,8 @@ export const updatePost = (id, postEdit) => {
   });
 };
 
-// export const updateComment = (id, idComment, newComment) => {
-//   const washingtonRef = doc(db, 'post', id, 'comments', idComment);
-//   return updateDoc(washingtonRef, {
-//     message: newComment,
-//   });
-// };
-
-// export const updateLikePost = (id, people) => {
-//   const postRef = doc(db, 'post', id);
-//   return updateDoc(postRef, {
-//     likes: [{
-//       users: people,
-//     }],
-//   });
-// };
-
 export const updateLikePost = (id, people) => {
-  const postRef = doc(db, 'post', 'whoLiked', 'users', id);
+  const postRef = doc(db, 'post', id);
   return updateDoc(postRef, {
     likes: [{
       users: people,

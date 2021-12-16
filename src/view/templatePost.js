@@ -26,7 +26,7 @@ export const template = (post) => {
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
       <div id="postIcon">
-          <i class=" fa-heart icon" id="iconLikes${onePost.idP}"></i> <p id='likes${onePost.idP}'></p>
+          <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i> <p id='likes${onePost.idP}'></p>
           <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
           <i class="far fa-paper-plane icon"></i>
       </div>
