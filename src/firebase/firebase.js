@@ -22,9 +22,9 @@ import {
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
-import {
-  getStorage, ref, uploadBytesResumable, getDownloadURL, uploadBytes,
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
+// import {
+//   getStorage, ref, uploadBytesResumable, getDownloadURL, uploadBytes,
+// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
 
 // import {
 //   getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
@@ -47,7 +47,7 @@ const analytics = getAnalytics(app);
 const db = getFirestore();
 export const auth = getAuth();
 // const user = auth.currentUser;
-const storage = getStorage();
+// const storage = getStorage();
 
 /* ----------------FUNCIONES RELACIONADAS A FIRESTORE ------------------- */
 export const deletePost = (id) => deleteDoc(doc(db, 'post', id));
@@ -175,14 +175,14 @@ export const deleteComment = (id, idComment) => {
   deleteDoc(doc(db, 'post', id, 'comments', idComment));
 };
 
-/* ---------------------------FUNCIONES RELACIONADAS A STORAGE----------------------------------*/
-export const storageRef = (imgUpload) => ref(storage, `img-post/${imgUpload.name}`);
-export const uploadBytes1 = (storageRef1, imgUpload) => uploadBytes(storageRef1, imgUpload);
-export const storagePhotoProf = (imgUpload) => ref(storage, `img-profile/${imgUpload.name}`);
-export const storagePortada = (imgUpload) => ref(storage, `img-profile/${imgUpload.name}`);
-// eslint-disable-next-line max-len
-export const uploadTask = (storageRef1, imgUpload, metadata) => uploadBytesResumable(storageRef1, imgUpload, metadata);
-export const getPhotoURL = (task) => getDownloadURL(task);
+// /* -----------------------FUNCIONES RELACIONADAS A STORAGE-------------------------------*/
+// export const storageRef = (imgUpload) => ref(storage, `img-post/${imgUpload.name}`);
+// export const uploadBytes1 = (storageRef1, imgUpload) => uploadBytes(storageRef1, imgUpload);
+// export const storagePhotoProf = (imgUpload) => ref(storage, `img-profile/${imgUpload.name}`);
+// export const storagePortada = (imgUpload) => ref(storage, `img-profile/${imgUpload.name}`);
+// // eslint-disable-next-line max-len
+// export const uploadTask = (storageRef1, imgUpload, metadata) => uploadBytesResumable(storageRef1, imgUpload, metadata);
+// export const getPhotoURL = (task) => getDownloadURL(task);
 
 /* ....ALMACENAR DATOS DE USUARIO.... */
 const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);

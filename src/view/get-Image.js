@@ -1,4 +1,5 @@
-import { storageRef, uploadTask, getPhotoURL /* uploadBytes1, */ } from '../firebase/firebase.js';
+// import { storageRef, uploadTask, getPhotoURL /* uploadBytes1, */ } from'../firebase/firebase.js';
+import { storageRef, uploadTask, getPhotoURL /* uploadBytes1, */ } from '../firebase/firebase-storage.js';
 
 export const getImage = (imgUpload, cb) => {
   const metadata = { content: imgUpload.type };

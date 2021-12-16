@@ -1,8 +1,19 @@
+// import {
+//   obtenerInfo, updateInfoUser, storagePhotoProf,
+//   uploadTask,
+//   getPhotoURL,
+// } from '../firebase/firebase.js';
+
 import {
-  obtenerInfo, updateInfoUser, storagePhotoProf,
+  storagePhotoProf,
   uploadTask,
   getPhotoURL,
+} from '../firebase/firebase-storage.js';
+
+import {
+  obtenerInfo, updateInfoUser,
 } from '../firebase/firebase.js';
+
 import { currentUser } from '../firebase/firebase-auth.js';
 
 export const profileEdit = () => {
