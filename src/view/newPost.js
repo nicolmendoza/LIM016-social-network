@@ -3,8 +3,6 @@ import {
   readPostProfile,
 } from '../firebase/firestore.js';
 
-import { currentUser } from '../firebase/firebase-auth.js';
-
 import { getImage } from './get-Image.js';
 
 export const newPost = () => {
@@ -48,7 +46,7 @@ export const newPost = () => {
 };
 export const functionNewPost = () => {
   // userID = () => auth.currentUser.uid;
-  const userCurrent = currentUser().currentUser;
+  const userCurrent = JSON.parse(localStorage.getItem('user'));
   // autentificando usuario logueado
   // const auth = getAuth();
   // const user = auth.currentUser;
@@ -87,6 +85,7 @@ export const functionNewPost = () => {
       const imgUpload = files[0];
       getImage(imgUpload, (downloadURL) => {
         savePost(postDescription, userID, downloadURL);
+
         console.log(downloadURL);
         document.querySelector('.modalNewPost').style.display = 'none';
       });
@@ -103,4 +102,3 @@ export const functionNewPost = () => {
     document.querySelector('.modalNewPost').style.display = 'none';
   });
 };
-

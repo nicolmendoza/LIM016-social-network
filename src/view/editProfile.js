@@ -8,8 +8,6 @@ import {
   obtenerInfo, updateInfoUser,
 } from '../firebase/firestore.js';
 
-import { currentUser } from '../firebase/firebase-auth.js';
-
 export const profileEdit = () => {
   const EditProfile = document.createElement('div');
   EditProfile.innerHTML = `
@@ -30,7 +28,7 @@ export const profileEdit = () => {
 };
 
 export const FunctionEdit = () => {
-  const user = currentUser().currentUser;
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const newName = document.getElementById('edit-name');
   const newAbout = document.getElementById('edit-about');
@@ -218,13 +216,13 @@ export const FunctionEdit = () => {
         getPhotoURL(task.snapshot.ref).then((downloadURL) => {
         // eslint-disable-next-line max-len
           updateInfoUser(user.uid, newAbout.value, newName.value, downloadURL, newPortada.src, newCareer.value);
-          window.location.hash = '#/profile';
+          window.location.hash = '#/home/profile';
         });
       }));
     } else {
     // eslint-disable-next-line max-len
       updateInfoUser(user.uid, newAbout.value, newName.value, newPhoto.src, newPortada.src, newCareer.value);
-      window.location.hash = '#/profile';
+      window.location.hash = '#/home/profile';
     }
   });
 };

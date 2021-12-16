@@ -3,11 +3,12 @@ import {
   userDocRef,
   getUserDoc,
   updateUserDoc,
+  getUnsubscribe,
 } from '../firebase/firestore.js';
 
-import { currentUser, logout } from '../firebase/firebase-auth.js';
+import { template } from './templatePost.js';
 
-import { template } from './post.js';
+// eslint-disable-next-line import/named
 import { newPost, functionNewPost } from './newPost.js';
 
 export const Home = () => {
@@ -36,7 +37,9 @@ export const Home = () => {
 };
 export const FunctionsHome = () => {
   // autentificando usuario logueado
-  const userCurrent = currentUser().currentUser;
+  const userCurrent = JSON.parse(localStorage.getItem('user'));
+  console.log(userCurrent);
+  // const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
   async function profileInfo() {
     const docRef = userDocRef('usuarios', userID);
@@ -55,12 +58,16 @@ export const FunctionsHome = () => {
     console.log(docSnap.data());
   }
   profileInfo();
+  
+  readData(template);
   // LogOut
   window.addEventListener('click', (e) => {
     const btnOut = e.target.id;
     if (btnOut === 'out') {
       logout()
         .then(() => {
+          const unsb = getUnsubscribe();
+          unsb();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -70,6 +77,8 @@ export const FunctionsHome = () => {
     } else if (btnOut === 'logout-mob') {
       logout()
         .then(() => {
+          const unsb = getUnsubscribe();
+          unsb();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -89,16 +98,4 @@ export const FunctionsHome = () => {
     document.querySelector('.modalNewPost').style.display = 'flex';
     functionNewPost();
   });
-  readData(template);
-  // window.addEventListener('click', (e) => {
-  //   const btnNewPost = e.target;
-  //   if (btnNewPost.id === 'btn-newPost') {
-  //     newPost();
-  //     document.querySelector('.modalNewPost').style.display = 'flex';
-  //     functionNewPost();
-  //   } else if (btnNewPost.id === 'btn-post-mobile') {
-  //     newPost();
-  //     document.querySelector('.modalNewPost').style.display = 'flex';
-  //     functionNewPost();
-  //   }
 };

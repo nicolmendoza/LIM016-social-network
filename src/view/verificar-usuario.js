@@ -1,10 +1,13 @@
+/* eslint-disable max-len */
 import {
   userDocRef,
   getUserDoc,
   setUserDoc,
 } from '../firebase/firestore.js';
 
-import { currentUser } from '../firebase/firebase-auth.js';
+import { currentUser, stateChanged } from '../firebase/firebase-auth';
+
+// let user = JSON.parse(localStorage.getItem('user'));
 
 export const verificarUsuario = async function verificarSiExisteUsuario() {
   const userCurrent = currentUser().currentUser;
@@ -36,4 +39,24 @@ export const verificarUsuario = async function verificarSiExisteUsuario() {
     });
     console.log('No existe');
   }
+  return userCurrent;
+};
+
+// export const stateChanged1 = stateChanged((userOne) => {
+//   if (userOne) {
+//     user = userOne;
+//     const verificar = userOne.emailVerified;
+//     if (verificar) {
+//       window.location.hash = '#/home';
+//     }
+//   } else {
+//     user = '';
+//     window.location.hash = '#/';
+//   }
+// });
+
+export const stateChanged1 = () => {
+  stateChanged((user) => {
+    if (user === null || user === undefined || !user.emailVerified) window.location.hash = '#/login';
+  });
 };

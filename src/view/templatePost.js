@@ -3,15 +3,13 @@ import {
   deletePost, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
 } from '../firebase/firestore.js';
 
-import { currentUser } from '../firebase/firebase-auth.js';
 import { templateComents } from './comments.js';
 
 export const template = (post) => {
   console.log(post);
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
-  nuevoElemento.setAttribute('id', 'holi');
-  const user = currentUser().currentUser;
+  const user = JSON.parse(localStorage.getItem('user'));
 
   post.forEach((onePost) => {
     nuevoElemento.innerHTML += `
@@ -76,7 +74,6 @@ export const template = (post) => {
     // console.log(postImgId);
     const imgSrc = postImg;
     // console.log(imgSrc);
-    // console.log(imgSrc.src);
     // eslint-disable-next-line no-plusplus
     if ((imgSrc.src !== 'http://localhost:5000/') && (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html')) {
       imgSrc.className = 'img-post-home';

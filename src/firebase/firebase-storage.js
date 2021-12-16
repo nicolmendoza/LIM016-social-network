@@ -5,7 +5,6 @@ import {
 
 const storage = getStorage();
 
-/* ---------------------------FUNCIONES RELACIONADAS A STORAGE----------------------------------*/
 export const storageRef = (imgUpload) => ref(storage, `img-post/${imgUpload.name}`);
 export const uploadBytes1 = (storageRef1, imgUpload) => uploadBytes(storageRef1, imgUpload);
 export const storagePhotoProf = (imgUpload) => ref(storage, `img-profile/${imgUpload.name}`);

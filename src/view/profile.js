@@ -1,10 +1,9 @@
 import {
-  obtenerInfo, readPostProfile, leerPostProfile,
+  obtenerInfo, readPostProfile, leerPostProfile, getUnsubscribe,
 } from '../firebase/firestore.js';
 
-import { currentUser } from '../firebase/firebase-auth.js';
-
 export const Profile = () => {
+  // Stop listening to changes
   document.getElementById('container').innerHTML = '';
   const profile = document.createElement('div');
   profile.classList.add('container-profile');
@@ -13,7 +12,7 @@ export const Profile = () => {
   <section class="header-profile">
     <div class='container-portada'>
       <img id="frontPageProfile" width="100px"> 
-      <button id="goEdit">Edit Profile</button>
+      <a id='goEdit' href="#/home/profile/editProfile">Edit Profile</a>
     </div>
     <div class="container-info">
       <img id="photoUserProfile" width="100px">
@@ -42,16 +41,22 @@ export const Profile = () => {
   <p id="aboutP"></p>
   
     <h1> MY POST</h1>
-    <div id="PostProfile"></div>`;
+    <div id="PostProfile"></div>
+    `;
 
-  return document.getElementById('container').appendChild(profile);
+  return document.querySelector('#container').appendChild(profile);
 };
 export const FunctionProfile = () => {
+  // unsb();
+
   // const auth = getAuth();
-  const user = currentUser().currentUser;
+  const userCurrent = JSON.parse(localStorage.getItem('user'));
+  // const userCurrent = currentUser().currentUser;
+  const userID = userCurrent.uid;
+  console.log(userID);
   // autentificando usuario logueado
 
-  readPostProfile(user.uid).then((docUser) => {
+  readPostProfile(userID).then((docUser) => {
     document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
     document.getElementById('frontPageProfile').src = `${docUser.data().portada}`;
     const info = document.getElementById('infoUserProfile');
@@ -79,9 +84,11 @@ export const FunctionProfile = () => {
     Promise.all(postProfileAll).then(() => PostProfile.appendChild(nuevoElemento));
   }
 
-  leerPostProfile(showPostProfile, currentUser().currentUser.uid);
+  leerPostProfile(showPostProfile, userID);
 
-  document.getElementById('goEdit').addEventListener('click', () => {
-    window.location.hash = '#/editProfile';
-  });
+  // document.getElementById('goEdit').addEventListener('click', () => {
+  //   window.location.hash = '#/home/profile/editProfile';
+  // });
+  const unsb = getUnsubscribe();
+  unsb();
 };
