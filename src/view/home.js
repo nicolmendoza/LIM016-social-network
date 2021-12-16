@@ -5,10 +5,12 @@ import {
   userDocRef,
   getUserDoc,
   updateUserDoc,
+  getUnsubscribe,
 } from '../firebase/firebase.js';
 
-import { template } from './post.js';
+import { template } from './templatePost.js';
 
+// eslint-disable-next-line import/named
 import { newPost, functionNewPost } from './newPost.js';
 
 export const Home = () => {
@@ -65,30 +67,35 @@ export const FunctionsHome = () => {
   }
 
   profileInfo();
-
-  // // LogOut
-  // window.addEventListener('click', (e) => {
-  //   const btnOut = e.target.id;
-  //   if (btnOut === 'out') {
-  //     logout()
-  //       .then(() => {
-  //         console.log('log out');
-  //         window.location.hash = '#/';
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   } else if (btnOut === 'logout-mob') {
-  //     logout()
-  //       .then(() => {
-  //         console.log('log out');
-  //         window.location.hash = '#/';
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // });
+  
+  readData(template);
+  // LogOut
+  window.addEventListener('click', (e) => {
+    const btnOut = e.target.id;
+    if (btnOut === 'out') {
+      logout()
+        .then(() => {
+          const unsb = getUnsubscribe();
+          unsb();
+          console.log('log out');
+          window.location.hash = '#/';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (btnOut === 'logout-mob') {
+      logout()
+        .then(() => {
+          const unsb = getUnsubscribe();
+          unsb();
+          console.log('log out');
+          window.location.hash = '#/';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  });
 
   // Crear nuevo post
   document.getElementById('btn-newPost').addEventListener('click', () => {
@@ -102,16 +109,4 @@ export const FunctionsHome = () => {
     document.querySelector('.modalNewPost').style.display = 'flex';
     functionNewPost();
   });
-  readData(template);
-  // window.addEventListener('click', (e) => {
-  //   const btnNewPost = e.target;
-  //   if (btnNewPost.id === 'btn-newPost') {
-  //     newPost();
-  //     document.querySelector('.modalNewPost').style.display = 'flex';
-  //     functionNewPost();
-  //   } else if (btnNewPost.id === 'btn-post-mobile') {
-  //     newPost();
-  //     document.querySelector('.modalNewPost').style.display = 'flex';
-  //     functionNewPost();
-  //   }
 };

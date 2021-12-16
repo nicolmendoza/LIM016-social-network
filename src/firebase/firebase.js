@@ -126,12 +126,13 @@ export const savePost = (postDescription, userID, imgULR) => {
     }],
     date: Date.now(),
   });
-  console.log('Document written with ID: ', docRef);
 };
+
+let unsubscribe;
 
 export const readData = (callback) => {
   const q = query(collection(db, 'post'), orderBy('date', 'desc'));
-  onSnapshot(q, (querySnapshot) => {
+  unsubscribe = onSnapshot(q, (querySnapshot) => {
     const posts = [];
     querySnapshot.forEach((doct) => {
       const objectPost = { };
@@ -144,28 +145,11 @@ export const readData = (callback) => {
       posts.push(objectPost);
     });
     callback(posts);
+    // console.log(posts);
   });
 };
 
-// const unsubscribe = db.collection('post').onSnapshot(() => {
-// });
-
-// unsubscribe();
-// export const readData = (callback) => {
-//   const querySnapshot = getDocs(collection(db, 'post'), orderBy('date', 'desc'));
-//   const posts = [];
-//   querySnapshot.forEach((doct) => {
-//     const objectPost = { };
-//     objectPost.content = doct.data().message;
-//     objectPost.idP = doct.id;
-//     objectPost.userID = doct.data().userId;
-//     objectPost.date = doct.data().date;
-//     objectPost.likes = doct.data().likes;
-//     objectPost.img = doct.data().img;
-//     posts.push(objectPost);
-//   });
-//   callback(posts);
-// };
+export const getUnsubscribe = () => unsubscribe;
 
 export const leerPostProfile = (callback, uid) => {
   getDocs(query(collection(db, 'post'), where('userId', '==', `${uid}`))).then((resultado) => {

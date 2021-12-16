@@ -16,16 +16,19 @@ const changeView = () => {
   header.innerHTML = '';
 
   switch (window.location.hash) {
+    case '':
     case '#':
     case '/':
     case '#/login':
     case '#/':
+      container.innerHTML = '';
       container.appendChild(components.login.Login());
       components.login.initLogin();
 
       break;
 
     case '#/signup':
+      container.innerHTML = '';
       container.appendChild(components.signup.SignUp());
       components.signup.Register();
       break;
@@ -47,20 +50,18 @@ const changeView = () => {
       break;
 
     case '#/resetPassword':
+      container.innerHTML = '';
       container.appendChild(components.resetPassword.resetPassword());
       components.resetPassword.resetPasswordInit();
       break;
 
-      // case '#/newPost':
-      //   if (user) {
-      //     footer.appendChild(components.navMobile.navMobile());
-      //     components.newPost.newPost();
-      //     // container.appendChild(components.newPost.newPost());
-      //     components.newPost.functionNewPost();
-      //   } else {
-      //     window.location.hash = '#/home';
-      //   }
-      //   break;
+    case '#/newPost':
+      container.innerHTML = '';
+      footer.appendChild(components.navMobile.navMobile());
+      components.newPost.newPost();
+      components.newPost.functionNewPost();
+
+      break;
 
     case '#/home/profile/editProfile':
       stateChanged1();
@@ -71,7 +72,7 @@ const changeView = () => {
       break;
 
     default:
-      window.location.hash = '#/';
+
       break;
   }
 };

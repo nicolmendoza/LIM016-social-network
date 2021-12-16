@@ -6,9 +6,9 @@ import {
 import { getImage } from './get-Image.js';
 
 export const newPost = () => {
-  if (document.querySelector('.containerNewPost')) {
-    document.querySelector('.containerNewPost').remove();
-  }
+  // if (document.querySelector('.containerNewPost')) {
+  //   document.querySelector('.containerNewPost').remove();
+  // }
 
   const newPostContainer = document.createElement('section');
   newPostContainer.classList.add('containerNewPost');
@@ -44,8 +44,10 @@ export const newPost = () => {
     </div>
     `;
 
+  document.querySelector('.modalContainer-NewPost').innerHTML = '';
   document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
 };
+
 export const functionNewPost = () => {
   // userID = () => auth.currentUser.uid;
   const userCurrent = JSON.parse(localStorage.getItem('user'));
@@ -66,16 +68,12 @@ export const functionNewPost = () => {
   document.querySelector('.addImg').addEventListener('click', () => {
     photoFile.click();
   });
-  // const previewContainer = document.getElementById('container-image-preview');
   const previewImg = document.querySelector('.image-preview');
   let files = [];
   const reader = new FileReader();
   photoFile.onchange = (e) => {
     files = e.target.files;
-    // const extention = GetFileExt(files[0]);
-    // const name = GetFileName(files[0]);
     reader.readAsDataURL(files[0]);
-    // uploadImg(files);
   };
   reader.onload = function () {
     document.querySelector('.image-preview').className = 'image-preview img-prev';
@@ -88,8 +86,9 @@ export const functionNewPost = () => {
       const imgUpload = files[0];
       getImage(imgUpload, (downloadURL) => {
         savePost(postDescription, userID, downloadURL);
+
         console.log(downloadURL);
-        document.querySelector('.modalNewPost').style.display = 'none';
+        document.querySelector('.modalNewPost').remove();
       });
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
       savePost(postDescription, userID, '');
@@ -97,8 +96,6 @@ export const functionNewPost = () => {
     } else {
       alert('su post esta vacio');
     }
-    // savePost(postDescription, userID);
-    // window.location.hash = '#/home';
   });
   document.querySelector('.descart').addEventListener('click', () => {
     document.querySelector('.modalNewPost').style.display = 'none';
