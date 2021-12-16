@@ -7,6 +7,7 @@ import {
 } from '../firebase/firestore.js';
 
 import { template } from './templatePost.js';
+import { logout } from '../firebase/firebase-auth.js';
 
 // eslint-disable-next-line import/named
 import { newPost, functionNewPost } from './newPost.js';
@@ -58,7 +59,7 @@ export const FunctionsHome = () => {
     console.log(docSnap.data());
   }
   profileInfo();
-  
+
   readData(template);
   // LogOut
   window.addEventListener('click', (e) => {

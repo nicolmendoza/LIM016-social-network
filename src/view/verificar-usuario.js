@@ -5,7 +5,7 @@ import {
   setUserDoc,
 } from '../firebase/firestore.js';
 
-import { currentUser, stateChanged } from '../firebase/firebase-auth';
+import { currentUser, stateChanged } from '../firebase/firebase-auth.js';
 
 // let user = JSON.parse(localStorage.getItem('user'));
 

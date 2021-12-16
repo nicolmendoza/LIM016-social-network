@@ -23,7 +23,6 @@ export const updateUserDoc = (docRef, obj) => updateDoc(docRef, obj);
 
 // /* ------------------  POSTS  --------------------- */
 let unsubscribe;
-
 export const readData = (callback) => {
   const q = query(collection(db, 'post'), orderBy('date', 'desc'));
   unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -42,7 +41,6 @@ export const readData = (callback) => {
     // console.log(posts);
   });
 };
-
 export const getUnsubscribe = () => unsubscribe;
 
 export const obtenerInfo = (ID) => {
@@ -59,8 +57,24 @@ export const updatePost = (id, postEdit) => {
   });
 };
 
+// export const updateComment = (id, idComment, newComment) => {
+//   const washingtonRef = doc(db, 'post', id, 'comments', idComment);
+//   return updateDoc(washingtonRef, {
+//     message: newComment,
+//   });
+// };
+
+// export const updateLikePost = (id, people) => {
+//   const postRef = doc(db, 'post', id);
+//   return updateDoc(postRef, {
+//     likes: [{
+//       users: people,
+//     }],
+//   });
+// };
+
 export const updateLikePost = (id, people) => {
-  const postRef = doc(db, 'post', id);
+  const postRef = doc(db, 'post', 'whoLiked', 'users', id);
   return updateDoc(postRef, {
     likes: [{
       users: people,
@@ -69,7 +83,7 @@ export const updateLikePost = (id, people) => {
 };
 
 export const savePost = (postDescription, userID, imgULR) => {
-  const docRef = addDoc(collection(db, 'post'), {
+  addDoc(collection(db, 'post'), {
     message: postDescription.value,
     userId: userID,
     img: imgULR,
