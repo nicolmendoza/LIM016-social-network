@@ -3,7 +3,7 @@ import {
   getUserDoc,
   setUserDoc,
   currentUser,
-} from '../firebase.js';
+} from '../firebase/firebase.js';
 
 export const verificarUsuario = async function verificarSiExisteUsuario() {
   const userCurrent = currentUser().currentUser;

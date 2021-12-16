@@ -5,10 +5,12 @@ import {
   userDocRef,
   getUserDoc,
   updateUserDoc,
-} from '../firebase.js';
+  getUnsubscribe,
+} from '../firebase/firebase.js';
 
-import { template } from './post.js';
+import { template } from './templatePost.js';
 
+// eslint-disable-next-line import/named
 import { newPost, functionNewPost } from './newPost.js';
 
 export const Home = () => {
@@ -63,15 +65,15 @@ export const FunctionsHome = () => {
   }
 
   profileInfo();
-  // read the posts
   readData(template);
-
   // LogOut
   window.addEventListener('click', (e) => {
     const btnOut = e.target.id;
     if (btnOut === 'out') {
       logout()
         .then(() => {
+          const unsb = getUnsubscribe();
+          unsb();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -81,6 +83,8 @@ export const FunctionsHome = () => {
     } else if (btnOut === 'logout-mob') {
       logout()
         .then(() => {
+          const unsb = getUnsubscribe();
+          unsb();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -91,7 +95,6 @@ export const FunctionsHome = () => {
   });
 
   // Crear nuevo post
-
   document.getElementById('btn-newPost').addEventListener('click', () => {
     newPost();
     document.querySelector('.modalNewPost').style.display = 'flex';

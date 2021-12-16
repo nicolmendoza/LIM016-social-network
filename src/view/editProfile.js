@@ -8,7 +8,7 @@ import {
   obtenerInfo, currentUser, updateInfoUser, storagePhotoProf,
   uploadTask,
   getPhotoURL,
-} from '../firebase.js';
+} from '../firebase/firebase.js';
 
 export const profileEdit = () => {
   const EditProfile = document.createElement('div');

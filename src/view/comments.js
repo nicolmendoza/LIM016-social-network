@@ -1,6 +1,6 @@
 import {
   obtenerInfo, currentUser, updateComment, deleteComment,
-} from '../firebase.js';
+} from '../firebase/firebase.js';
 
 export const templateComents = (comments, id) => {
   const showComment = document.getElementById(`showComment${id}`);

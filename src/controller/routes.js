@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 // import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
-import { currentUser } from '../firebase.js';
+import { currentUser } from '../firebase/firebase.js';
 
 import { components } from '../view/index.js';
 
@@ -21,20 +21,24 @@ const changeView = (route) => {
     case '/':
     case '#/login':
     case '#/':
+      container.innerHTML = '';
       container.appendChild(components.login.Login());
       components.login.initLogin();
 
       break;
 
     case '#/signup':
+      container.innerHTML = '';
       container.appendChild(components.signup.SignUp());
       components.signup.Register();
       break;
 
     case '#/home': {
       if (user) {
+        container.innerHTML = '';
         header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
+        components.navMobile.navChangeView();
         (components.home.Home());
         components.home.FunctionsHome();
       } else {
@@ -45,8 +49,10 @@ const changeView = (route) => {
     }
     case '#/profile': {
       if (user) {
+        container.innerHTML = '';
         header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
+        components.navMobile.navChangeView();
         components.profile.Profile();
         components.profile.FunctionProfile();
       } else {
@@ -56,22 +62,22 @@ const changeView = (route) => {
       break;
     }
     case '#/resetPassword':
+      container.innerHTML = '';
       container.appendChild(components.resetPassword.resetPassword());
       components.resetPassword.resetPasswordInit();
       break;
 
     case '#/newPost':
-      if (user) {
-        footer.appendChild(components.navMobile.navMobile());
-        components.newPost.newPost();
-        components.newPost.functionNewPost();
-      } else {
-        window.location.hash = '#/home';
-      }
+      container.innerHTML = '';
+      footer.appendChild(components.navMobile.navMobile());
+      components.newPost.newPost();
+      components.newPost.functionNewPost();
+
       break;
 
     case '#/editProfile':
       if (user) {
+        container.innerHTML = '';
         footer.appendChild(components.navMobile.navMobile());
         container.appendChild(components.edit.profileEdit());
         components.edit.FunctionEdit();
@@ -81,7 +87,7 @@ const changeView = (route) => {
 
       break;
     default:
-      window.location.hash = '#/';
+
       break;
   }
 };

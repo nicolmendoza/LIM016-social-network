@@ -1,7 +1,7 @@
 import {
   currentUser, savePost,
   readPostProfile,
-} from '../firebase.js';
+} from '../firebase/firebase.js';
 
 import { getImage } from './get-Image.js';
 
@@ -75,12 +75,13 @@ export const functionNewPost = () => {
     previewImg.src = reader.result;
   };
   const postDescription = document.getElementById('post-description');
-  document.querySelector('.publish').addEventListener('click', (e) => {
-    e.preventDefault();
+  document.querySelector('.publish').addEventListener('click', () => {
+    // eslint-disable-next-line max-len
     if ((postDescription.value !== '' && photoFile.files[0]) || (postDescription.value === '' && photoFile.files[0])) {
       const imgUpload = files[0];
       getImage(imgUpload, (downloadURL) => {
         savePost(postDescription, userID, downloadURL);
+
         console.log(downloadURL);
         document.querySelector('.modalNewPost').remove();
       });

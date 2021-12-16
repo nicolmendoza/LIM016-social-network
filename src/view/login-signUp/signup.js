@@ -1,7 +1,7 @@
 import {
   createUser,
   verificationEmail,
-} from '../../firebase.js';
+} from '../../firebase/firebase.js';
 
 export const SignUp = () => {
   const viewSignUp = document.createElement('div');

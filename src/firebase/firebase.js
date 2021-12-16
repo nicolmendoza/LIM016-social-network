@@ -60,9 +60,23 @@ const db = getFirestore();
 const auth = getAuth();
 // const user = auth.currentUser;
 const storage = getStorage();
+/* ........LOGIN PROVEEDORES....... */
+const providerGoogle = new GoogleAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
+const providerGithub = new GithubAuthProvider();
 
 export const currentUser = () => auth;
+
 /* ----------------------------VISTA CON INICIO DE SESION - AUTH ---------------------------------*/
+/* .............SIGNUP.............. */
+const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+const verificationEmail = () => sendEmailVerification(auth.currentUser);
+
+/* ..........LOGIN............ */
+const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
+const loginGoogle = () => signInWithPopup(auth, providerGoogle);
+const loginFacebook = () => signInWithPopup(auth, providerFacebook);
+const loginGitHub = () => signInWithPopup(auth, providerGithub);
 
 /** ********RESET PASSWORD***** */
 export const resetPasswordFirebase = (email) => sendPasswordResetEmail(auth, email);
@@ -86,13 +100,6 @@ export const updatePost = (id, postEdit) => {
     message: postEdit,
   });
 };
-
-// export const readPostProfile = (uid) => {
-//   const docRef = doc(db, 'usuarios', uid);
-//   const docSnap = getDoc(docRef);
-//   const docUser = docSnap;
-//   return docUser;
-// };
 
 export const obtenerInfo = (ID) => {
   const docRef = doc(db, 'usuarios', ID);
@@ -119,12 +126,13 @@ export const savePost = (postDescription, userID, imgULR) => {
     }],
     date: Date.now(),
   });
-  console.log('Document written with ID: ', docRef);
 };
+
+let unsubscribe;
 
 export const readData = (callback) => {
   const q = query(collection(db, 'post'), orderBy('date', 'desc'));
-  onSnapshot(q, (querySnapshot) => {
+  unsubscribe = onSnapshot(q, (querySnapshot) => {
     const posts = [];
     querySnapshot.forEach((doct) => {
       const objectPost = { };
@@ -135,11 +143,13 @@ export const readData = (callback) => {
       objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
       posts.push(objectPost);
-      return posts;
     });
     callback(posts);
+    // console.log(posts);
   });
 };
+
+export const getUnsubscribe = () => unsubscribe;
 
 export const leerPostProfile = (callback, uid) => {
   getDocs(query(collection(db, 'post'), where('userId', '==', `${uid}`))).then((resultado) => {
@@ -238,21 +248,6 @@ export const storagePortada = (imgUpload) => ref(storage, `img-profile/${imgUplo
 export const uploadTask = (storageRef1, imgUpload, metadata) => uploadBytesResumable(storageRef1, imgUpload, metadata);
 
 export const getPhotoURL = (task) => getDownloadURL(task);
-
-/* .............SIGNUP.............. */
-const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-const verificationEmail = () => sendEmailVerification(auth.currentUser);
-
-/* ........LOGIN PROVEEDORES....... */
-const providerGoogle = new GoogleAuthProvider();
-const providerFacebook = new FacebookAuthProvider();
-const providerGithub = new GithubAuthProvider();
-
-/* ..........LOGIN............ */
-const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);
-const loginGoogle = () => signInWithPopup(auth, providerGoogle);
-const loginFacebook = () => signInWithPopup(auth, providerFacebook);
-const loginGitHub = () => signInWithPopup(auth, providerGithub);
 
 export {
   createUser,

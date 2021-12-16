@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 import {
   deletePost, currentUser, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
-} from '../firebase.js';
+} from '../firebase/firebase.js';
 
 import { templateComents }
   from './comments.js';
@@ -10,6 +10,7 @@ export const template = (post) => {
   console.log(post);
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
+  nuevoElemento.setAttribute('id', 'holi');
   const user = currentUser().currentUser;
 
   post.forEach((onePost) => {
@@ -77,12 +78,10 @@ export const template = (post) => {
     // console.log(imgSrc);
     // console.log(imgSrc.src);
     // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < post.length; i++) {
-      if (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html') {
-        imgSrc.className = 'img-post-home';
-      } else {
-        imgSrc.className = 'postImg';
-      }
+    if (imgSrc.src !== 'http://localhost:5000/' && imgSrc.src !== 'http://127.0.0.1:5500/src/index.html') {
+      imgSrc.className = 'img-post-home';
+    } else {
+      imgSrc.className = 'postImg';
     }
   });
 
