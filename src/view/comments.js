@@ -1,6 +1,6 @@
 import {
-  obtenerInfo, currentUser, updateComment, deleteComment,
-} from '../firebase/firebase.js';
+  obtenerInfo, updateComment, deleteComment,
+} from '../firebase/firestore.js';
 
 export const templateComents = (comments, id) => {
   console.log(comments);

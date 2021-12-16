@@ -3,9 +3,9 @@ import {
   userDocRef,
   getUserDoc,
   setUserDoc,
-  currentUser,
-  stateChanged,
-} from '../firebase/firebase.js';
+} from '../firebase/firestore.js';
+
+import { currentUser, stateChanged } from '../firebase/firebase-auth.js';
 
 // let user = JSON.parse(localStorage.getItem('user'));
 

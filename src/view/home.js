@@ -1,14 +1,13 @@
 import {
-  logout,
-  currentUser,
   readData,
   userDocRef,
   getUserDoc,
   updateUserDoc,
   getUnsubscribe,
-} from '../firebase/firebase.js';
+} from '../firebase/firestore.js';
 
 import { template } from './templatePost.js';
+import { logout } from '../firebase/firebase-auth.js';
 
 // eslint-disable-next-line import/named
 import { newPost, functionNewPost } from './newPost.js';
@@ -16,7 +15,7 @@ import { newPost, functionNewPost } from './newPost.js';
 export const Home = () => {
   const divElement = document.createElement('div');
   divElement.classList.add('container-home');
-  divElement.innerHTML = ` 
+  divElement.innerHTML = `
   <div class='header-home'>
     <img id="photoUser" class="photoHome" width="100px">
     <div class="header-text">
@@ -25,32 +24,27 @@ export const Home = () => {
     </div>
   </div>
   <button id="btn-newPost" style="display:none"> Add New Post </button>
-  
   <p id="aboutP"></p>
   <div id="showPost">
  </div>
  <section class="modalNewPost" style="display: none">
-      <div class="modalDivPost"> 
+      <div class="modalDivPost">
       <div class="modalContainer-NewPost">
       </div>
       </div>
   </section>
   `;
-
   return document.querySelector('#container').appendChild(divElement);
 };
-
 export const FunctionsHome = () => {
   // autentificando usuario logueado
   const userCurrent = JSON.parse(localStorage.getItem('user'));
   console.log(userCurrent);
   // const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
-
   async function profileInfo() {
     const docRef = userDocRef('usuarios', userID);
     const docSnap = await getUserDoc(docRef);
-
     if (docSnap.exists()) {
       const userInfo = docSnap.data();
       if (userInfo.name == null) {
@@ -62,12 +56,10 @@ export const FunctionsHome = () => {
       info.innerHTML = `${userInfo.name}`;
       document.getElementById('photoUser').src = `${userInfo.photo}`;
     }
-
     console.log(docSnap.data());
   }
-
   profileInfo();
-  
+
   readData(template);
   // LogOut
   window.addEventListener('click', (e) => {
@@ -96,14 +88,12 @@ export const FunctionsHome = () => {
         });
     }
   });
-
   // Crear nuevo post
   document.getElementById('btn-newPost').addEventListener('click', () => {
     newPost();
     document.querySelector('.modalNewPost').style.display = 'flex';
     functionNewPost();
   });
-
   document.getElementById('btn-post-mobile').addEventListener('click', () => {
     newPost();
     document.querySelector('.modalNewPost').style.display = 'flex';

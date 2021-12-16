@@ -1,10 +1,9 @@
 /* eslint-disable no-plusplus */
 import {
   deletePost, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
-} from '../firebase/firebase.js';
+} from '../firebase/firestore.js';
 
-import { templateComents }
-  from './comments.js';
+import { templateComents } from './comments.js';
 
 export const template = (post) => {
   console.log(post);
@@ -27,7 +26,7 @@ export const template = (post) => {
       <button class="delete">DELETE</button>
       <button class="edit">EDIT</button>
       <div id="postIcon">
-          <i class=" fa-heart icon" id="iconLikes${onePost.idP}"></i> <p id='likes${onePost.idP}'></p>
+          <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i> <p id='likes${onePost.idP}'></p>
           <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
           <i class="far fa-paper-plane icon"></i>
       </div>
@@ -99,6 +98,7 @@ export const template = (post) => {
       }
     }
   });
+
   console.log('hi');
   nuevoElemento.querySelectorAll('.delete').forEach((div) => {
     div.addEventListener('click', (e) => {

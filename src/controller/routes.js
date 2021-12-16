@@ -1,11 +1,5 @@
-// eslint-disable-next-line import/no-unresolved
-// import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
 import { components } from '../view/index.js';
-
 import { stateChanged1 } from '../view/verificar-usuario.js';
-
-// onst auth = getAuth();
 
 const changeView = () => {
   const container = document.getElementById('container');

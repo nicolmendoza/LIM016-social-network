@@ -3,7 +3,7 @@ import {
   loginGoogle,
   loginFacebook,
   loginGitHub,
-} from '../../firebase/firebase.js';
+} from '../../firebase/firebase-auth.js';
 
 import { verificarUsuario } from '../verificar-usuario.js';
 
@@ -59,6 +59,31 @@ export const Login = () => {
   return viewHome;
 };
 
+export const handleSubmit = (e) => {
+  e.preventDefault();
+  const email = e.target.querySelector('#login-email').value;
+  // const email = document.querySelector('#login-email').value;
+  const password = e.target.querySelector('#login-password').value;
+  // const password = document.querySelector('#login-password').value;
+
+  loginEmail(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      if (user.emailVerified === true) {
+        verificarUsuario().then(() => {
+          localStorage.setItem('user', JSON.stringify(user));
+          window.location.hash = '#/home';
+        });
+      } else {
+        alert('Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.');
+      }
+    })
+    .catch((error) => {
+      // errorOccurs(error);
+      console.error(error);
+    });
+};
+
 export const initLogin = () => {
   const signInForm = document.querySelector('#login-form');
   /* ................................... */
@@ -90,29 +115,7 @@ export const initLogin = () => {
   }
 
   /* .........Logearse con correo........ */
-  signInForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = e.target.childNodes[1].childNodes[3].value;
-    // const email = document.querySelector('#login-email').value;
-    const password = e.target.childNodes[3].childNodes[3].value;
-    // const password = document.querySelector('#login-password').value;
-
-    loginEmail(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        if (user.emailVerified === true) {
-          verificarUsuario().then(() => {
-            localStorage.setItem('user', JSON.stringify(user));
-            window.location.hash = '#/home';
-          });
-        } else {
-          alert('Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.');
-        }
-      })
-      .catch((error) => {
-        errorOccurs(error);
-      });
-  });
+  signInForm.addEventListener('submit', handleSubmit);
 
   /* ........Logearse con Google........ */
   googleLogin.addEventListener('click', () => {

@@ -1,10 +1,9 @@
 import {
   obtenerInfo, readPostProfile, leerPostProfile, getUnsubscribe,
-} from '../firebase/firebase.js';
+} from '../firebase/firestore.js';
 
 export const Profile = () => {
   // Stop listening to changes
-
   document.getElementById('container').innerHTML = '';
   const profile = document.createElement('div');
   profile.classList.add('container-profile');

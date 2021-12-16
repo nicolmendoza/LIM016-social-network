@@ -1,14 +1,12 @@
-// eslint-disable-next-line import/no-unresolved
-// import {
-//   getAuth,
-//   // eslint-disable-next-line import/no-unresolved
-// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
 import {
-  obtenerInfo, currentUser, updateInfoUser, storagePhotoProf,
+  storagePhotoProf,
   uploadTask,
   getPhotoURL,
-} from '../firebase/firebase.js';
+} from '../firebase/firebase-storage.js';
+
+import {
+  obtenerInfo, updateInfoUser,
+} from '../firebase/firestore.js';
 
 export const profileEdit = () => {
   const EditProfile = document.createElement('div');
