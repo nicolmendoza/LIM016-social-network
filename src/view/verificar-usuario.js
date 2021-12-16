@@ -1,8 +1,14 @@
+// import {
+//   userDocRef,
+//   getUserDoc,
+//   setUserDoc,
+// } from '../firebase/firebase.js';
+
 import {
   userDocRef,
   getUserDoc,
   setUserDoc,
-} from '../firebase/firebase.js';
+} from '../firebase/firestore.js';
 
 import { currentUser } from '../firebase/firebase-auth.js';
 

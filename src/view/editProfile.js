@@ -4,9 +4,13 @@ import {
   getPhotoURL,
 } from '../firebase/firebase-storage.js';
 
+// import {
+//   obtenerInfo, updateInfoUser,
+// } from '../firebase/firebase.js';
+
 import {
   obtenerInfo, updateInfoUser,
-} from '../firebase/firebase.js';
+} from '../firebase/firestore.js';
 
 import { currentUser } from '../firebase/firebase-auth.js';
 

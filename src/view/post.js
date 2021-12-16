@@ -1,8 +1,12 @@
 /* eslint-disable no-plusplus */
 
+// import {
+//   deletePost, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
+// } from '../firebase/firebase.js';
+
 import {
   deletePost, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
-} from '../firebase/firebase.js';
+} from '../firebase/firestore.js';
 
 import { currentUser } from '../firebase/firebase-auth.js';
 import { templateComents } from './comments.js';

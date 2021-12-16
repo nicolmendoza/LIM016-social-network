@@ -1,9 +1,17 @@
+// import {
+//   readData,
+//   userDocRef,
+//   getUserDoc,
+//   updateUserDoc,
+// } from '../firebase/firebase.js';
+
 import {
   readData,
   userDocRef,
   getUserDoc,
   updateUserDoc,
-} from '../firebase/firebase.js';
+} from '../firebase/firestore.js';
+
 import { currentUser, logout } from '../firebase/firebase-auth.js';
 
 import { template } from './post.js';

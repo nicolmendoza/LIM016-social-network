@@ -1,6 +1,11 @@
+// import {
+//   obtenerInfo, readPostProfile, leerPostProfile,
+// } from '../firebase/firebase.js';
+
 import {
   obtenerInfo, readPostProfile, leerPostProfile,
-} from '../firebase/firebase.js';
+} from '../firebase/firestore.js';
+
 import { currentUser } from '../firebase/firebase-auth.js';
 
 export const Profile = () => {
