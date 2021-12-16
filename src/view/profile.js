@@ -1,7 +1,3 @@
-// import {
-//   obtenerInfo, readPostProfile, leerPostProfile,
-// } from '../firebase/firebase.js';
-
 import {
   obtenerInfo, readPostProfile, leerPostProfile,
 } from '../firebase/firestore.js';

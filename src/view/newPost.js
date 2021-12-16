@@ -1,8 +1,3 @@
-// import {
-//   savePost,
-//   readPostProfile,
-// } from '../firebase/firebase.js';
-
 import {
   savePost,
   readPostProfile,

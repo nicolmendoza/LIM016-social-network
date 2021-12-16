@@ -1,7 +1,3 @@
-// import {
-//   obtenerInfo, updateComment, deleteComment,
-// } from '../firebase/firebase.js';
-
 import {
   obtenerInfo, updateComment, deleteComment,
 } from '../firebase/firestore.js';
