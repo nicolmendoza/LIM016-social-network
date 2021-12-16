@@ -1,9 +1,10 @@
 import { changeView } from './controller/routes.js';
 
-window.addEventListener('load', () => {
+const init = () => {
   changeView(window.location.hash);
-});
+  window.addEventListener('hashchange', () => {
+    changeView(window.location.hash);
+  });
+};
 
-window.addEventListener('hashchange', () => {
-  changeView(window.location.hash);
-});
+window.addEventListener('load', init);

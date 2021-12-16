@@ -21,18 +21,21 @@ const changeView = (route) => {
     case '/':
     case '#/login':
     case '#/':
+      container.innerHTML = '';
       container.appendChild(components.login.Login());
       components.login.initLogin();
 
       break;
 
     case '#/signup':
+      container.innerHTML = '';
       container.appendChild(components.signup.SignUp());
       components.signup.Register();
       break;
 
     case '#/home': {
       if (user) {
+        container.innerHTML = '';
         header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
         components.navMobile.navChangeView();
@@ -46,6 +49,7 @@ const changeView = (route) => {
     }
     case '#/profile': {
       if (user) {
+        container.innerHTML = '';
         header.appendChild(components.navLaptop.navLaptop());
         footer.appendChild(components.navMobile.navMobile());
         components.navMobile.navChangeView();
@@ -58,23 +62,22 @@ const changeView = (route) => {
       break;
     }
     case '#/resetPassword':
+      container.innerHTML = '';
       container.appendChild(components.resetPassword.resetPassword());
       components.resetPassword.resetPasswordInit();
       break;
 
-      // case '#/newPost':
-      //   if (user) {
-      //     footer.appendChild(components.navMobile.navMobile());
-      //     components.newPost.newPost();
-      //     // container.appendChild(components.newPost.newPost());
-      //     components.newPost.functionNewPost();
-      //   } else {
-      //     window.location.hash = '#/home';
-      //   }
-      //   break;
+    case '#/newPost':
+      container.innerHTML = '';
+      footer.appendChild(components.navMobile.navMobile());
+      components.newPost.newPost();
+      components.newPost.functionNewPost();
+
+      break;
 
     case '#/editProfile':
       if (user) {
+        container.innerHTML = '';
         footer.appendChild(components.navMobile.navMobile());
         container.appendChild(components.edit.profileEdit());
         components.edit.FunctionEdit();
@@ -84,24 +87,9 @@ const changeView = (route) => {
 
       break;
     default:
-      window.location.hash = '#/';
+
       break;
   }
 };
-
-// export const stateChanged = (callback) => onAuthStateChanged(auth, callback);
-
-// stateChanged((userOne) => {
-//   if (userOne) {
-//     user = userOne;
-//     const verificar = userOne.emailVerified;
-//     if (verificar) {
-//       changeView('#/home');
-//     }
-//   } else {
-//     user = '';
-//     changeView('#/');
-//   }
-// });
 
 export { changeView };

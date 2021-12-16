@@ -5,7 +5,6 @@ import { resetPassword, resetPasswordInit } from './resetPassword.js';
 import { Profile, FunctionProfile } from './profile.js';
 import { navMobile, navChangeView } from './navegador/navMobile.js';
 import { newPost, functionNewPost } from './newPost.js';
-// import { newPost, functionNewPost } from './newPost.js';
 import { profileEdit, FunctionEdit } from './editProfile.js';
 import { navLaptop } from './navegador/navLaptop.js';
 
@@ -18,6 +17,5 @@ export const components = {
   navMobile: { navMobile, navChangeView },
   navLaptop: { navLaptop },
   newPost: { newPost, functionNewPost },
-  // newPost: { newPost, functionNewPost },
   edit: { profileEdit, FunctionEdit },
 };

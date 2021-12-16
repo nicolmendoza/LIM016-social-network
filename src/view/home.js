@@ -5,10 +5,12 @@ import {
   userDocRef,
   getUserDoc,
   updateUserDoc,
+  getUnsubscribe,
 } from '../firebase/firebase.js';
 
-import { template } from './post.js';
+import { template } from './templatePost.js';
 
+// eslint-disable-next-line import/named
 import { newPost, functionNewPost } from './newPost.js';
 
 export const Home = () => {
@@ -39,8 +41,6 @@ export const Home = () => {
 };
 
 export const FunctionsHome = () => {
-  readData(template);
-
   // autentificando usuario logueado
   const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
@@ -65,13 +65,15 @@ export const FunctionsHome = () => {
   }
 
   profileInfo();
-
+  readData(template);
   // LogOut
   window.addEventListener('click', (e) => {
     const btnOut = e.target.id;
     if (btnOut === 'out') {
       logout()
         .then(() => {
+          const unsb = getUnsubscribe();
+          unsb();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -81,6 +83,8 @@ export const FunctionsHome = () => {
     } else if (btnOut === 'logout-mob') {
       logout()
         .then(() => {
+          const unsb = getUnsubscribe();
+          unsb();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -102,16 +106,4 @@ export const FunctionsHome = () => {
     document.querySelector('.modalNewPost').style.display = 'flex';
     functionNewPost();
   });
-
-  // window.addEventListener('click', (e) => {
-  //   const btnNewPost = e.target;
-  //   if (btnNewPost.id === 'btn-newPost') {
-  //     newPost();
-  //     document.querySelector('.modalNewPost').style.display = 'flex';
-  //     functionNewPost();
-  //   } else if (btnNewPost.id === 'btn-post-mobile') {
-  //     newPost();
-  //     document.querySelector('.modalNewPost').style.display = 'flex';
-  //     functionNewPost();
-  //   }
 };

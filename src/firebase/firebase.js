@@ -126,12 +126,13 @@ export const savePost = (postDescription, userID, imgULR) => {
     }],
     date: Date.now(),
   });
-  console.log('Document written with ID: ', docRef);
 };
+
+let unsubscribe;
 
 export const readData = (callback) => {
   const q = query(collection(db, 'post'), orderBy('date', 'desc'));
-  onSnapshot(q, (querySnapshot) => {
+  unsubscribe = onSnapshot(q, (querySnapshot) => {
     const posts = [];
     querySnapshot.forEach((doct) => {
       const objectPost = { };
@@ -142,11 +143,13 @@ export const readData = (callback) => {
       objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
       posts.push(objectPost);
-      // return posts;
     });
     callback(posts);
+    // console.log(posts);
   });
 };
+
+export const getUnsubscribe = () => unsubscribe;
 
 export const leerPostProfile = (callback, uid) => {
   getDocs(query(collection(db, 'post'), where('userId', '==', `${uid}`))).then((resultado) => {

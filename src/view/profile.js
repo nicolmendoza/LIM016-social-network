@@ -1,8 +1,10 @@
 import {
-  obtenerInfo, readPostProfile, leerPostProfile, currentUser,
+  obtenerInfo, readPostProfile, leerPostProfile, currentUser, getUnsubscribe,
 } from '../firebase/firebase.js';
 
 export const Profile = () => {
+  // Stop listening to changes
+
   document.getElementById('container').innerHTML = '';
   const profile = document.createElement('div');
   profile.classList.add('container-profile');
@@ -45,6 +47,8 @@ export const Profile = () => {
   return document.getElementById('container').appendChild(profile);
 };
 export const FunctionProfile = () => {
+  // unsb();
+
   // const auth = getAuth();
   const user = currentUser().currentUser;
   // autentificando usuario logueado
@@ -82,4 +86,6 @@ export const FunctionProfile = () => {
   document.getElementById('goEdit').addEventListener('click', () => {
     window.location.hash = '#/editProfile';
   });
+  const unsb = getUnsubscribe();
+  unsb();
 };
