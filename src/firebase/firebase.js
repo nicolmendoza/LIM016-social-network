@@ -40,12 +40,18 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db = getFirestore();
+export const db = getFirestore();
 export const auth = getAuth();
 // const user = auth.currentUser;
 // const storage = getStorage();
 
-/* ----------------FUNCIONES RELACIONADAS A FIRESTORE ------------------- */
+/* -------------- DATOS DE USUARIO -------------- */
+export const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);
+export const getUserDoc = (docRef) => getDoc(docRef);
+export const setUserDoc = (docs, obj) => setDoc(docs, obj);
+export const updateUserDoc = (docRef, obj) => updateDoc(docRef, obj);
+
+/* ------------------  POSTS  --------------------- */
 export const deletePost = (id) => deleteDoc(doc(db, 'post', id));
 export const updatePost = (id, postEdit) => {
   const washingtonRef = doc(db, 'post', id);
@@ -53,11 +59,13 @@ export const updatePost = (id, postEdit) => {
     message: postEdit,
   });
 };
+
 export const obtenerInfo = (ID) => {
   const docRef = doc(db, 'usuarios', ID);
   const docSnap = getDoc(docRef);
   return docSnap;
 };
+
 export const updateLikePost = (id, people) => {
   const postRef = doc(db, 'post', id);
   return updateDoc(postRef, {
@@ -66,6 +74,7 @@ export const updateLikePost = (id, people) => {
     }],
   });
 };
+
 export const savePost = (postDescription, userID, imgULR) => {
   const docRef = addDoc(collection(db, 'post'), {
     message: postDescription.value,
@@ -78,6 +87,7 @@ export const savePost = (postDescription, userID, imgULR) => {
   });
   console.log('Document written with ID: ', docRef);
 };
+
 export const readData = (callback) => {
   const q = query(collection(db, 'post'), orderBy('date', 'desc'));
   onSnapshot(q, (querySnapshot) => {
@@ -96,36 +106,8 @@ export const readData = (callback) => {
     callback(posts);
   });
 };
-export const leerPostProfile = (callback, uid) => {
-  getDocs(query(collection(db, 'post'), where('userId', '==', `${uid}`))).then((resultado) => {
-    const postP = [];
-    resultado.forEach((doctP) => {
-      const objectPostProfile = { };
-      objectPostProfile.content = doctP.data().message;
-      objectPostProfile.userID = doctP.data().userId;
-      postP.push(objectPostProfile);
-      return postP;
-    });
-    callback(postP);
-    console.log(postP);
-  });
-};
-export const readPostProfile = (uid) => {
-  const docRef = doc(db, 'usuarios', uid);
-  const docSnap = getDoc(docRef);
-  const docUser = docSnap;
-  return docUser;
-};
-export const updateInfoUser = (uid, newAbout, newName, newPhoto, URLportada, newCareer) => {
-  const infoUser = doc(db, 'usuarios', uid);
-  return updateDoc(infoUser, {
-    about: newAbout,
-    name: newName,
-    photo: newPhoto,
-    portada: URLportada,
-    career: newCareer,
-  });
-};
+
+/* ----------------- COMENTARIOS ----------------- */
 export const saveComment = (id, comentario, uid) => {
   addDoc(collection(db, 'post', id, 'comments'), {
     userID: uid,
@@ -133,6 +115,7 @@ export const saveComment = (id, comentario, uid) => {
     date: Date.now(),
   });
 };
+
 export const readComment = (callback, id) => {
   const q = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
   return new Promise((resolve, reject) => {
@@ -149,6 +132,7 @@ export const readComment = (callback, id) => {
     });
   });
 };
+
 export const countComment = (id) => {
   const qC = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
   return new Promise((resolve, reject) => {
@@ -161,6 +145,7 @@ export const countComment = (id) => {
     });
   });
 };
+
 export const updateComment = (id, idComment, newComment) => {
   const washingtonRef = doc(db, 'post', id, 'comments', idComment);
   return updateDoc(washingtonRef, {
@@ -171,15 +156,36 @@ export const deleteComment = (id, idComment) => {
   deleteDoc(doc(db, 'post', id, 'comments', idComment));
 };
 
-/* ....ALMACENAR DATOS DE USUARIO.... */
-const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);
-const getUserDoc = (docRef) => getDoc(docRef);
-const setUserDoc = (docs, obj) => setDoc(docs, obj);
-const updateUserDoc = (docRef, obj) => updateDoc(docRef, obj);
+/* -------------------- PERFIL -------------------- */
+export const leerPostProfile = (callback, uid) => {
+  getDocs(query(collection(db, 'post'), where('userId', '==', `${uid}`))).then((resultado) => {
+    const postP = [];
+    resultado.forEach((doctP) => {
+      const objectPostProfile = { };
+      objectPostProfile.content = doctP.data().message;
+      objectPostProfile.userID = doctP.data().userId;
+      postP.push(objectPostProfile);
+      return postP;
+    });
+    callback(postP);
+    console.log(postP);
+  });
+};
 
-export {
-  userDocRef,
-  getUserDoc,
-  setUserDoc,
-  updateUserDoc,
+export const readPostProfile = (uid) => {
+  const docRef = doc(db, 'usuarios', uid);
+  const docSnap = getDoc(docRef);
+  const docUser = docSnap;
+  return docUser;
+};
+
+export const updateInfoUser = (uid, newAbout, newName, newPhoto, URLportada, newCareer) => {
+  const infoUser = doc(db, 'usuarios', uid);
+  return updateDoc(infoUser, {
+    about: newAbout,
+    name: newName,
+    photo: newPhoto,
+    portada: URLportada,
+    career: newCareer,
+  });
 };
