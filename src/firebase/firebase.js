@@ -23,10 +23,6 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 // import {
-//   getStorage, ref, uploadBytesResumable, getDownloadURL, uploadBytes,
-// } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
-
-// import {
 //   getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
 // } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-storage.js';
 
@@ -174,15 +170,6 @@ export const updateComment = (id, idComment, newComment) => {
 export const deleteComment = (id, idComment) => {
   deleteDoc(doc(db, 'post', id, 'comments', idComment));
 };
-
-// /* -----------------------FUNCIONES RELACIONADAS A STORAGE-------------------------------*/
-// export const storageRef = (imgUpload) => ref(storage, `img-post/${imgUpload.name}`);
-// export const uploadBytes1 = (storageRef1, imgUpload) => uploadBytes(storageRef1, imgUpload);
-// export const storagePhotoProf = (imgUpload) => ref(storage, `img-profile/${imgUpload.name}`);
-// export const storagePortada = (imgUpload) => ref(storage, `img-profile/${imgUpload.name}`);
-// // eslint-disable-next-line max-len
-// export const uploadTask = (storageRef1, imgUpload, metadata) => uploadBytesResumable(storageRef1, imgUpload, metadata);
-// export const getPhotoURL = (task) => getDownloadURL(task);
 
 /* ....ALMACENAR DATOS DE USUARIO.... */
 const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);

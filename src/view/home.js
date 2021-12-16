@@ -6,17 +6,9 @@ import {
 } from '../firebase/firebase.js';
 import { currentUser, logout } from '../firebase/firebase-auth.js';
 
-// import {
-//   logout,
-//   currentUser,
-//   readData,
-//   userDocRef,
-//   getUserDoc,
-//   updateUserDoc,
-// } from '../firebase/firebase.js';
-
 import { template } from './post.js';
 import { newPost, functionNewPost } from './newPost.js';
+
 export const Home = () => {
   const divElement = document.createElement('div');
   divElement.classList.add('container-home');

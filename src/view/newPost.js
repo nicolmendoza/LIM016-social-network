@@ -4,11 +4,6 @@ import {
 } from '../firebase/firebase.js';
 import { currentUser } from '../firebase/firebase-auth.js';
 
-// import {
-//   currentUser, savePost,
-//   readPostProfile,
-// } from '../firebase/firebase.js';
-
 import { getImage } from './get-Image.js';
 
 export const newPost = () => {

@@ -1,9 +1,3 @@
-// import {
-//   obtenerInfo, updateInfoUser, storagePhotoProf,
-//   uploadTask,
-//   getPhotoURL,
-// } from '../firebase/firebase.js';
-
 import {
   storagePhotoProf,
   uploadTask,
