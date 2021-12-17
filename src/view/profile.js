@@ -47,14 +47,8 @@ export const Profile = () => {
   return document.querySelector('#container').appendChild(profile);
 };
 export const FunctionProfile = () => {
-  // unsb();
-
-  // const auth = getAuth();
   const userCurrent = JSON.parse(localStorage.getItem('user'));
-  // const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
-  console.log(userID);
-  // autentificando usuario logueado
 
   readPostProfile(userID).then((docUser) => {
     document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
@@ -72,23 +66,18 @@ export const FunctionProfile = () => {
     const PostProfile = document.getElementById('PostProfile');
     const nuevoElemento = document.createElement('div');
 
-    const postProfileAll = post.map((onePost) => {
-      obtenerInfo(onePost.userID).then((dataUser) => {
-        nuevoElemento.innerHTML += `<div class="postDiv">
+    post.forEach(async (onePost) => {
+      const dataUser = await obtenerInfo(onePost.userID);
+      nuevoElemento.innerHTML += `<div class="postDiv">
       <div>${dataUser.data().name}</div>
       <div>${onePost.content}</div>
       <div>`;
-      });
-      return nuevoElemento;
     });
-    Promise.all(postProfileAll).then(() => PostProfile.appendChild(nuevoElemento));
+    PostProfile.appendChild(nuevoElemento);
   }
 
   leerPostProfile(showPostProfile, userID);
 
-  // document.getElementById('goEdit').addEventListener('click', () => {
-  //   window.location.hash = '#/home/profile/editProfile';
-  // });
   const unsb = getUnsubscribe();
   unsb();
 };
