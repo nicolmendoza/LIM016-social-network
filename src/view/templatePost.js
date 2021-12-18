@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
 import {
-  deletePost, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
+  deletePost, obtenerInfo, updatePost, readComment, saveComment,
+  saveLikes, readLikes, updateLikes,
 } from '../firebase/firestore.js';
 
 import { templateComents } from './comments.js';
@@ -43,12 +44,23 @@ export const template = (post) => {
 
   post.forEach((one) => {
     const idPost = one.idP;
-    const arrOfUsers = one.likes[0].users;
-    const likeIcon = arrOfUsers.includes(user.uid) ? 'fas' : 'far';
+    saveLikes(idPost);
+    // const arrOfUsers = one.likes[0].users;
+    // const likeIcon = arrOfUsers.includes(user.uid) ? 'fas' : 'far';
+    // const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
+    // const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
+    // parrafoCountLikes.innerHTML = `${arrOfUsers.length}`;
+    // iconLikes.classList.add(likeIcon);
+
     const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
     const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
-    parrafoCountLikes.innerHTML = `${arrOfUsers.length}`;
-    iconLikes.classList.add(likeIcon);
+
+    readLikes((likes) => {
+      const users = likes[0].users;
+      parrafoCountLikes.innerHTML = `${users.length}`;
+      const likeIcon = users.includes(user.uid) ? 'fas' : 'far';
+      iconLikes.classList.add(likeIcon);
+    }, idPost);
 
     const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
     readComment((comments) => {
@@ -154,27 +166,36 @@ export const template = (post) => {
   nuevoElemento.querySelectorAll('.fa-heart').forEach((like) => {
     like.addEventListener('click', (e) => {
       const postId = e.target.parentNode.parentNode.id;
-      const currentPost = post.filter((postElement) => postElement.idP === postId);
-      const arrOfUsers = currentPost[0].likes[0].users;
+      // const currentPost = post.filter((postElement) => postElement.idP === postId);
+      // const arrOfUsers = currentPost[0].likes[0].users;
       const cant = e.target.nextElementSibling;
 
-      function removeItemFromArr(arr, item) {
-        const j = arr.indexOf(item);
-        if (j !== -1) {
-          arr.splice(j, 1);
-        }
-      }
+      readLikes((likes) => {
+        const arrOfUsers = likes[0].users;
+        const idLike = ;
 
-      if (arrOfUsers.includes(user.uid)) {
-        // e.target.classList.toggle('fas');
-        removeItemFromArr(arrOfUsers, user.uid);
-        updateLikePost(postId, arrOfUsers);
-      } else {
-        // e.target.classList.toggle('fas');
-        arrOfUsers.push(user.uid);
-        updateLikePost(postId, arrOfUsers);
-      }
-      cant.innerHTML = arrOfUsers.length;
+        function removeItemFromArr(arr, item) {
+          const j = arr.indexOf(item);
+          if (j !== -1) {
+            arr.splice(j, 1);
+          }
+        }
+
+        console.log(arrOfUsers);
+        console.log(arrOfUsers.includes(user.uid));
+        console.log(user.uid);
+
+        if (arrOfUsers.includes(user.uid)) {
+          removeItemFromArr(arrOfUsers, user.uid);
+          console.log(postId, idLike, arrOfUsers);
+          // updateLikes(postId, idLike, arrOfUsers);
+        } else {
+          arrOfUsers.push(user.uid);
+          console.log(postId, idLike, arrOfUsers);
+          // updateLikes(postId, idLike, arrOfUsers);
+        }
+        cant.innerHTML = arrOfUsers.length;
+      }, postId);
     });
   });
 

@@ -57,14 +57,48 @@ export const updatePost = (id, postEdit) => {
   });
 };
 
-export const updateLikePost = (id, people) => {
-  const postRef = doc(db, 'post', id);
-  return updateDoc(postRef, {
-    likes: [{
-      users: people,
-    }],
+// -----------------------------------------------------------------------------
+// export const updateLikePost = (id, people) => {
+//   const postRef = doc(db, 'post', id);
+//   return updateDoc(postRef, {
+//     likes: [{
+//       users: people,
+//     }],
+//   });
+// };
+
+export const saveLikes = (id) => {
+  addDoc(collection(db, 'post', id, 'likes'), {
+    users: [],
+    date: Date.now(),
   });
 };
+
+export const readLikes = (callback, id) => {
+  const q = query(collection(db, 'post', id, 'likes'), orderBy('date', 'desc'));
+  return new Promise((resolve, reject) => {
+    onSnapshot(q, (querySnapshot) => {
+      const likes = [];
+      querySnapshot.forEach((docC) => {
+        const objectLikes = { };
+        // objectLikes.content = docC.data().message;
+        objectLikes.users = docC.data().users;
+        // objectLikes.ID = docC.id;
+        likes.push(objectLikes);
+      });
+      resolve(callback(likes, id));
+    });
+  });
+};
+
+export const updateLikes = (id, idLike, arr) => {
+  const docLikesRef = doc(db, 'post', id, 'likes', idLike);
+  return updateDoc(docLikesRef, {
+    users: arr,
+  });
+};
+
+// -----------------------------------------------------------------------------
 
 export const savePost = (postDescription, userID, imgULR) => {
   addDoc(collection(db, 'post'), {
