@@ -1,7 +1,4 @@
-import {
-  savePost,
-  readPostProfile,
-} from '../firebase/firestore.js';
+import { savePost, readPostProfile } from '../firebase/firestore.js';
 
 import { getImage } from './get-Image.js';
 
@@ -21,10 +18,17 @@ export const newPost = () => {
         <div class="photo"><img id="photoUser1"></div>
         <div class="name-user">
             <div id='namePost'></div>
-            <select class="privacity">
-                <option value="amigos"><i class="fas fa-bell"></i>Amigos
-                <option value="solo yo"><i class="fas fa-bell"></i>Solo yo
+            <select class="privacity" required>
+                <option value="amigos"><i class="fas fa-bell"></i>Amigos</option>
+                <option value="solo yo"><i class="fas fa-bell"></i>Solo yo</option>
             </select>
+            <select class="type" required>
+            <option value="preguntas"><i></i>Preguntas</option>
+            <option value="trabajo"><i></i>Oferta Laboral</option>
+            <option value="evento"><i></i>Eventos</option>
+            <option value="curso" ><i></i>Cursos</option>
+            <option value="tutorial"><i></i>Tutorial</option>
+        </select>
         </div>
     </div>
     <textarea namePost="textarea" id="post-description" rows="10" cols="50" placeholder="What's on you mind?"></textarea>
@@ -42,15 +46,33 @@ export const newPost = () => {
       </div>
     </div>
     `;
-  document.querySelector('.modalContainer-NewPost').appendChild(newPostContainer);
+  document
+    .querySelector('.modalContainer-NewPost')
+    .appendChild(newPostContainer);
 };
 export const functionNewPost = () => {
   // userID = () => auth.currentUser.uid;
   const userCurrent = JSON.parse(localStorage.getItem('user'));
-  // autentificando usuario logueado
-  // const auth = getAuth();
-  // const user = auth.currentUser;
-  // const userCurrent = currentUser().currentUser;
+
+  //   <select class="privacity">
+  //   <option value="amigos"><i class="fas fa-bell"></i>Amigos
+  //   <option value="solo yo"><i class="fas fa-bell"></i>Solo yo m
+  // </select>
+
+  let privacity = 'amigos';
+  document.querySelector('.privacity').addEventListener('change', (e) => {
+    privacity = e.target.value;
+    console.log(privacity);
+  });
+
+  let types = 'preguntas';
+  document.querySelector('.type').addEventListener('change', (e) => {
+    types = e.target.value;
+    console.log(types);
+  });
+
+  console.log(privacity);
+  console.log(types);
   readPostProfile(userCurrent.uid).then((docUser) => {
     document.getElementById('photoUser1').src = `${docUser.data().photo}`;
     const info2 = document.getElementById('namePost');
@@ -81,16 +103,19 @@ export const functionNewPost = () => {
   const postDescription = document.getElementById('post-description');
   document.querySelector('.publish').addEventListener('click', () => {
     // eslint-disable-next-line max-len
-    if ((postDescription.value !== '' && photoFile.files[0]) || (postDescription.value === '' && photoFile.files[0])) {
+    if (
+      (postDescription.value !== '' && photoFile.files[0])
+      || (postDescription.value === '' && photoFile.files[0])
+    ) {
       const imgUpload = files[0];
       getImage(imgUpload, (downloadURL) => {
-        savePost(postDescription, userID, downloadURL);
+        savePost(postDescription, userID, downloadURL, privacity, types);
 
         console.log(downloadURL);
         document.querySelector('.modalNewPost').style.display = 'none';
       });
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
-      savePost(postDescription, userID, '');
+      savePost(postDescription, userID, '', privacity, types);
       document.querySelector('.modalNewPost').style.display = 'none';
     } else {
       alert('su post esta vacio');

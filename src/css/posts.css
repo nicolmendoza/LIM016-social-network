@@ -13,6 +13,7 @@
 }
 #showPost{
     margin: 0px 4%;
+    width: 40%;
 }
 .postDiv{
     background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
