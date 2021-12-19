@@ -4,11 +4,15 @@ import {
   getUserDoc,
   updateUserDoc,
   getUnsubscribe,
+  getUnsubscribeComments,
+  getUsers,
+  getUnsubscribePostProfile,
+  getDataPostType,
 } from '../firebase/firestore.js';
 
 import { template } from './templatePost.js';
 import { logout } from '../firebase/firebase-auth.js';
-
+import { templateUsers } from './templateUsers.js';
 // eslint-disable-next-line import/named
 import { newPost, functionNewPost } from './newPost.js';
 
@@ -16,17 +20,63 @@ export const Home = () => {
   const divElement = document.createElement('div');
   divElement.classList.add('container-home');
   divElement.innerHTML = `
-  <div class='header-home'>
-    <img id="photoUser" class="photoHome" width="100px">
-    <div class="header-text">
-      <h>Hello,</h>
-      <p id="infoUser"></p>
-    </div>
-  </div>
+
+
   <button id="btn-newPost" style="display:none"> Add New Post </button>
-  <p id="aboutP"></p>
+
+  <div class="section-home">
+
+  <div id="section-User">
+  <div id="infoUserHome">
+  <div class='header-home'>
+  <img id="photoUser" class="photoHome" width="100px">
+  <div class="header-text">
+    <h>Hello,</h>
+    <p id="infoUser"></p>
+  </div>
+</div>
+  </div>
+  <div id="sectionUsers" >
+  </div>
+</div>
+
   <div id="showPost">
  </div>
+
+<div class="sectionTypes">
+  <div id="todos" >Ver todos</div>
+  <div id="botones-types">
+
+  <div class="div-type">
+  <img class="img-preguntas img-types">
+  <button value="preguntas" class="btn-type" >Preguntas</button>
+  </div>
+
+  <div class="div-type">
+  <img class="img-preguntas img-types">
+  <button value="trabajo"  class="btn-type"  >Oferta Laboral</button>
+  </div>
+
+  <div class="div-type">
+  <img class="img-preguntas img-types">
+  <button value="evento"  class="btn-type"  >Eventos</button>
+  </div>
+
+  <div class="div-type">
+  <img class="img-preguntas img-types">
+  <button value="curso"  class="btn-type"  >Cursos</button>
+  </div>
+
+  <div class="div-type">
+  <img class="img-preguntas img-types">
+  <button value="tutorial" class="btn-type"   >Tutorial</button>
+  </div>
+  
+  </div>
+  </div>
+
+</div>
+
  <section class="modalNewPost" style="display: none">
       <div class="modalDivPost">
       <div class="modalContainer-NewPost">
@@ -53,6 +103,7 @@ export const Home = () => {
   return document.querySelector('#container').appendChild(divElement);
 };
 export const FunctionsHome = () => {
+  templateUsers();
   // autentificando usuario logueado
   const userCurrent = JSON.parse(localStorage.getItem('user'));
   console.log(userCurrent);
@@ -74,9 +125,21 @@ export const FunctionsHome = () => {
     }
     console.log(docSnap.data());
   }
+
+  document.querySelector('#botones-types').addEventListener('click', (e) => {
+    const type = e.target.value;
+    console.log(type);
+    getDataPostType(template, type);
+  });
+
   profileInfo();
 
   readData(template);
+
+  document.getElementById('todos').addEventListener('click', () => {
+    readData(template);
+  });
+
   // LogOut
   window.addEventListener('click', (e) => {
     const btnOut = e.target.id;
@@ -85,6 +148,8 @@ export const FunctionsHome = () => {
         .then(() => {
           const unsb = getUnsubscribe();
           unsb();
+          const unsbComments = getUnsubscribeComments();
+          unsbComments();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -96,6 +161,8 @@ export const FunctionsHome = () => {
         .then(() => {
           const unsb = getUnsubscribe();
           unsb();
+          const unsbComments = getUnsubscribeComments();
+          unsbComments();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -120,4 +187,6 @@ export const FunctionsHome = () => {
   document.querySelector('#closeDelete').addEventListener('click', () => {
     document.querySelector('.modalDelete').classList.remove('revelar');
   });
+  const Unsubscribe = getUnsubscribePostProfile();
+  Unsubscribe();
 };

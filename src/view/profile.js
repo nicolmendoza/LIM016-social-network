@@ -1,8 +1,11 @@
 import {
-  obtenerInfo, readPostProfile, leerPostProfile, getUnsubscribe,
+  readPostProfile, getUnsubscribe, leerPostProfile,
 } from '../firebase/firestore.js';
 
 import { profileEdit, FunctionEdit } from './editProfile.js';
+import {
+  showPostProfile,
+} from './templatePostProfile.js';
 
 export const Profile = () => {
   // Stop listening to changes
@@ -53,15 +56,11 @@ export const Profile = () => {
 
   return document.querySelector('#container').appendChild(profile);
 };
-export const FunctionProfile = () => {
-  // unsb();
 
-  // const auth = getAuth();
+export const FunctionProfile = () => {
   const userCurrent = JSON.parse(localStorage.getItem('user'));
-  // const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
-  console.log(userID);
-  // autentificando usuario logueado
+  leerPostProfile(showPostProfile, userID);
 
   readPostProfile(userID).then((docUser) => {
     document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
@@ -75,24 +74,6 @@ export const FunctionProfile = () => {
     console.log('Current data: ', docUser.data());
   });
 
-  function showPostProfile(post) {
-    const PostProfile = document.getElementById('PostProfile');
-    const nuevoElemento = document.createElement('div');
-
-    const postProfileAll = post.map((onePost) => {
-      obtenerInfo(onePost.userID).then((dataUser) => {
-        nuevoElemento.innerHTML += `<div class="postDiv">
-      <div>${dataUser.data().name}</div>
-      <div>${onePost.content}</div>
-      <div>`;
-      });
-      return nuevoElemento;
-    });
-    Promise.all(postProfileAll).then(() => PostProfile.appendChild(nuevoElemento));
-  }
-
-  leerPostProfile(showPostProfile, userID);
-
   document.getElementById('goEdit').addEventListener('click', () => {
     profileEdit();
     document.querySelector('.modalEditProfile').style.display = 'flex';
@@ -100,9 +81,6 @@ export const FunctionProfile = () => {
     document.getElementById('container-footer').style.display = 'none';
   });
 
-  // document.getElementById('goEdit').addEventListener('click', () => {
-  //   window.location.hash = '#/home/profile/editProfile';
-  // });
   const unsb = getUnsubscribe();
   unsb();
 };
