@@ -4,7 +4,6 @@ import {
   getDoc,
   setDoc,
   collection,
-  getDocs,
   addDoc,
   onSnapshot,
   query,
@@ -146,7 +145,7 @@ let unsubscribeComments;
 
 export const readComment = (callback, id) => {
   const q = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     unsubscribeComments = onSnapshot(q, (querySnapshot) => {
       const comments = [];
       querySnapshot.forEach((docC) => {
