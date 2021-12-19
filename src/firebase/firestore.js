@@ -33,7 +33,6 @@ export const readData = (callback) => {
       objectPost.idP = doct.id;
       objectPost.userID = doct.data().userId;
       objectPost.date = doct.data().date;
-      objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
       posts.push(objectPost);
     });
@@ -43,11 +42,21 @@ export const readData = (callback) => {
 };
 export const getUnsubscribe = () => unsubscribe;
 
+export const savePost = (postDescription, userID, imgULR) => {
+  addDoc(collection(db, 'post'), {
+    message: postDescription.value,
+    userId: userID,
+    img: imgULR,
+    date: Date.now(),
+  });
+};
+
 export const obtenerInfo = (ID) => {
   const docRef = doc(db, 'usuarios', ID);
   const docSnap = getDoc(docRef);
   return docSnap;
 };
+
 export const deletePost = (id) => deleteDoc(doc(db, 'post', id));
 
 export const updatePost = (id, postEdit) => {
@@ -57,19 +66,11 @@ export const updatePost = (id, postEdit) => {
   });
 };
 
-// -----------------------------------------------------------------------------
-// export const updateLikePost = (id, people) => {
-//   const postRef = doc(db, 'post', id);
-//   return updateDoc(postRef, {
-//     likes: [{
-//       users: people,
-//     }],
-//   });
-// };
+// /* ----------------- LIKES ----------------- */
 
-export const saveLikes = (id) => {
-  addDoc(collection(db, 'post', id, 'likes'), {
-    users: [],
+export const saveLike = (id, userId, userName) => {
+  setDoc(doc(db, 'post', id, 'likes', userId), {
+    user: userName,
     date: Date.now(),
   });
 };
@@ -81,35 +82,18 @@ export const readLikes = (callback, id) => {
       const likes = [];
       querySnapshot.forEach((docC) => {
         const objectLikes = { };
-        // objectLikes.content = docC.data().message;
-        objectLikes.users = docC.data().users;
-        // objectLikes.ID = docC.id;
+        objectLikes.user = docC.data().user;
+        objectLikes.date = docC.data().date;
         likes.push(objectLikes);
       });
       resolve(callback(likes, id));
+      // reject(console.log('error'));
     });
   });
 };
 
-export const updateLikes = (id, idLike, arr) => {
-  const docLikesRef = doc(db, 'post', id, 'likes', idLike);
-  return updateDoc(docLikesRef, {
-    users: arr,
-  });
-};
-
-// -----------------------------------------------------------------------------
-
-export const savePost = (postDescription, userID, imgULR) => {
-  addDoc(collection(db, 'post'), {
-    message: postDescription.value,
-    userId: userID,
-    img: imgULR,
-    likes: [{
-      users: [],
-    }],
-    date: Date.now(),
-  });
+export const deleteLike = (id, userId) => {
+  deleteDoc(doc(db, 'post', id, 'likes', userId));
 };
 
 // /* ----------------- COMENTARIOS ----------------- */
@@ -134,6 +118,7 @@ export const readComment = (callback, id) => {
         comments.push(objectComment);
       });
       resolve(callback(comments, id));
+      // reject(console.log('error'));
     });
   });
 };
