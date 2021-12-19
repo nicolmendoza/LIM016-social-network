@@ -4,7 +4,7 @@ export const navLaptop = () => {
   viewNavLaptop.innerHTML = `
     <div class="logo-full-screen"> QUEEN CODERS </div>
     <div class="container-search">
-        <input type="text" class="search" placeholder="Search for people, tag, ..."> 
+        <input type="text" class="search" placeholder="Buscar personas, etiquetas, ..."> 
         <button class="btn-search"> <ion-icon name="search-outline"></ion-icon> </button>
     </div>
         <ul class="menuFull">

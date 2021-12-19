@@ -5,7 +5,6 @@ import {
   updateUserDoc,
   getUnsubscribe,
   getUnsubscribeComments,
-  getUsers,
   getUnsubscribePostProfile,
   getDataPostType,
 } from '../firebase/firestore.js';
@@ -20,9 +19,7 @@ export const Home = () => {
   const divElement = document.createElement('div');
   divElement.classList.add('container-home');
   divElement.innerHTML = `
-
-
-  <button id="btn-newPost" style="display:none"> Add New Post </button>
+  <button id="btn-newPost" style="display:none"> Agregar publicación </button>
 
   <div class="section-home">
 
@@ -31,7 +28,7 @@ export const Home = () => {
   <div class='header-home'>
   <img id="photoUser" class="photoHome" width="100px">
   <div class="header-text">
-    <h>Hello,</h>
+    <h>Hola,</h>
     <p id="infoUser"></p>
   </div>
 </div>
