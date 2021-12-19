@@ -14,27 +14,43 @@ export const template = (post) => {
   post.forEach((onePost) => {
     nuevoElemento.innerHTML += `
     <div class="postDiv" id="${onePost.idP}">
-      <div class="header-post">
+    <div class="div-options">
+      <div class="icon-options">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </div>
+      <div class='box-options' id="box-options-${onePost.idP}" style="display:none">
+        <div class='edit content-icon'>
+          <span>
+            <i class="fas fa-pencil-alt"></i>Editar
+          </span>
+        </div>
+        <div class='delete content-icon'>
+          <span>
+            <i class="far fa-trash-alt"></i>Borrar
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="header-post">
         <img  id="post-img${onePost.idP}" width="100px" >
         <div class="header-info">
           <div class="post-name${onePost.idP}"></div>
           <div class="date"><p></p></div> 
         </div>
-      </div>
-      <div class="text-post-home" id="contentPost${onePost.idP}">${onePost.content}</div>
-      <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
-      <button class="delete">DELETE</button>
-      <button class="edit">EDIT</button>
-      <div id="postIcon">
-          <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i> <p id='likes${onePost.idP}'></p>
-          <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
-          <i class="far fa-paper-plane icon"></i>
-      </div>
-      <div id="comments${onePost.idP}">
-        <div id="contentComment${onePost.idP}"></div>
-        <div id="showComment${onePost.idP}"></div>
-      </div>
-    </div>`;
+    </div>
+    <div class="text-post-home" id="contentPost${onePost.idP}">${onePost.content}</div>
+    <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
+    <div id="postIcon">
+        <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i> <p id='likes${onePost.idP}'></p>
+        <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
+        <i class="far fa-paper-plane icon"></i>
+    </div>
+    <div id="comments${onePost.idP}">
+      <div id="contentComment${onePost.idP}"></div>
+      <div id="showComment${onePost.idP}"></div>
+    </div>
+    </div>
+    `;
 
     return nuevoElemento;
   });
@@ -43,12 +59,12 @@ export const template = (post) => {
 
   post.forEach((one) => {
     const idPost = one.idP;
-    const arrOfUsers = one.likes[0].users;
-    const likeIcon = arrOfUsers.includes(user.uid) ? 'fas' : 'far';
-    const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
-    const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
-    parrafoCountLikes.innerHTML = `${arrOfUsers.length}`;
-    iconLikes.classList.add(likeIcon);
+    // const arrOfUsers = one.likes[0].users;
+    // const likeIcon = arrOfUsers.includes(user.uid) ? 'fas' : 'far';
+    // const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
+    // const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
+    // parrafoCountLikes.innerHTML = `${arrOfUsers.length}`;
+    // iconLikes.classList.add(likeIcon);
 
     const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
     readComment((comments) => {
@@ -73,7 +89,7 @@ export const template = (post) => {
     // const postImgId = postImg.parentElement.id;
     // console.log(postImgId);
     const imgSrc = postImg;
-    // console.log(imgSrc);
+    console.log(imgSrc.src);
     // eslint-disable-next-line no-plusplus
     if ((imgSrc.src !== 'http://localhost:5000/') && (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html')) {
       imgSrc.className = 'img-post-home';
@@ -98,32 +114,38 @@ export const template = (post) => {
       }
     }
   });
-
-  console.log('hi');
+  nuevoElemento.querySelectorAll('.icon-options').forEach((div) => {
+    div.addEventListener('click', (e) => {
+      const id = e.target.parentNode.parentNode.parentNode.id;
+      console.log(e.target.parentNode.parentNode.parentNode);
+      for (let i = 0; i < post.length; i++) {
+        if (post[i].userID === user.uid && post[i].idP === id) {
+          document.querySelector(`#box-options-${id}`).classList.toggle('show');
+          console.log('holi');
+          break;
+        }
+      }
+    });
+  });
   nuevoElemento.querySelectorAll('.delete').forEach((div) => {
     div.addEventListener('click', (e) => {
-      console.log(e.target.parentNode);
-      const id = e.target.parentNode.id;
-      console.log(id);
-
+      const id = e.target.parentNode.parentNode.parentNode.parentNode.id;
+      document.querySelector('.modalDelete').classList.add('revelar');
       for (let i = 0; i < post.length; i++) {
-        console.log(post[i].userID === user.uid, post[i].idP === id);
-        if (post[i].userID === user.uid && post[i].idP === id) {
-          deletePost(id);
-          break;
-          // } else {
-          //   alert('no puedes borrar un post ajeno');
-          //   break;
-        }
-        // }
+        document.querySelector('.aceptDelete').addEventListener('click', () => {
+          console.log(post[i].userID === user.uid, post[i].idP === id);
+          if (post[i].userID === user.uid && post[i].idP === id) {
+            deletePost(id);
+            document.querySelector('.modalDelete').classList.remove('revelar');
+          }
+        });
       }
     });
   });
 
   nuevoElemento.querySelectorAll('.edit').forEach((div) => {
     div.addEventListener('click', (e) => {
-      const id = e.target.parentNode.id;
-      console.log(id);
+      const id = e.target.parentNode.parentNode.parentNode.parentNode.id;
 
       for (let i = 0; i < post.length; i++) {
         console.log(post[i].userID === user.uid, post[i].idP === id);

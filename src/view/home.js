@@ -33,6 +33,22 @@ export const Home = () => {
       </div>
       </div>
   </section>
+  <section class="modalDelete" style="display: none">
+    <div class="modalDivDelete">
+    <div class="modalContainer-Delete">
+      <div id="closeDelete">
+        <i class="far fa-times-circle"></i>
+      </div>
+      <div>
+        <h1>Eliminar publicación</h1>
+        <div class="modal-parrafo">
+          ¿Estás seguro que quieres eliminar esta publicación de <b class="emailText">Queen Coders</b> para siembre?
+        </div>
+        <button class="aceptDelete">ELIMINAR</button>
+      </div>
+    </div>
+    </div>
+  </section>
   `;
   return document.querySelector('#container').appendChild(divElement);
 };
@@ -98,5 +114,10 @@ export const FunctionsHome = () => {
     newPost();
     document.querySelector('.modalNewPost').style.display = 'flex';
     functionNewPost();
+  });
+
+  // Ocultar modal delete
+  document.querySelector('#closeDelete').addEventListener('click', () => {
+    document.querySelector('.modalDelete').classList.remove('revelar');
   });
 };

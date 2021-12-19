@@ -25,6 +25,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^24.1.0",
+    "firestore-jest-mock": "^0.17.0",
     "htmlhint": "^0.15.1",
     "jest": "^27.0.1",
     "regenerator-runtime": "^0.13.1",

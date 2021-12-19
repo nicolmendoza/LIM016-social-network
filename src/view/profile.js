@@ -2,6 +2,8 @@ import {
   obtenerInfo, readPostProfile, leerPostProfile, getUnsubscribe,
 } from '../firebase/firestore.js';
 
+import { profileEdit, FunctionEdit } from './editProfile.js';
+
 export const Profile = () => {
   // Stop listening to changes
   document.getElementById('container').innerHTML = '';
@@ -12,7 +14,7 @@ export const Profile = () => {
   <section class="header-profile">
     <div class='container-portada'>
       <img id="frontPageProfile" width="100px"> 
-      <a id='goEdit' href="#/home/profile/editProfile">Edit Profile</a>
+      <button id='goEdit'>Edit Profile</button>
     </div>
     <div class="container-info">
       <img id="photoUserProfile" width="100px">
@@ -37,11 +39,16 @@ export const Profile = () => {
       </div>
     </div>
   </section>
-  <div id="infoUserProfile"></div>
-  <p id="aboutP"></p>
-  
+  <section>
     <h1> MY POST</h1>
     <div id="PostProfile"></div>
+  </section>
+  <section class="modalEditProfile" style="display:none">
+    <div class="modalDiv-editProf">
+    <div class="modalContainer-edit">
+    </div>
+    </div>
+  </section>
     `;
 
   return document.querySelector('#container').appendChild(profile);
@@ -86,9 +93,24 @@ export const FunctionProfile = () => {
 
   leerPostProfile(showPostProfile, userID);
 
+  document.getElementById('goEdit').addEventListener('click', () => {
+    profileEdit();
+    document.querySelector('.modalEditProfile').style.display = 'flex';
+    FunctionEdit();
+    document.getElementById('container-footer').style.display = 'none';
+  });
+
   // document.getElementById('goEdit').addEventListener('click', () => {
   //   window.location.hash = '#/home/profile/editProfile';
   // });
   const unsb = getUnsubscribe();
   unsb();
 };
+
+// export const showPostProfile = () => {
+//   document.getElementById('goEdit').addEventListener('click', () => {
+//     profileEdit();
+//     document.querySelector('.modalNewPost').style.display = 'flex';
+//     FunctionEdit();
+//   });
+// };

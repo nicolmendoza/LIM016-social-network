@@ -68,6 +68,64 @@
     font-weight: bold;
 }
 
+/*-----CSS MODAL DELETE------*/
+.modalDelete{
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(44, 44, 44, 0.371);
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.modalDivDelete{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.modalContainer-Delete{
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to bottom, #bebdff 0%, #c6fcff 100%);
+    width: 500px;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 6px 3px #46464673;
+}
+
+#closeDelete{
+    text-align: end !important;
+    margin: 7px 13px;
+    font-size: 20px;
+}
+
+.modalContainer-Delete h1{
+    border-bottom: 1px solid #adadad;
+    border-radius: 9px;
+    padding-bottom: 6px;
+    margin-bottom: 9px;
+}
+.aceptDelete{
+    height: 40px;
+    width: 146px;
+    border-radius: 15px;
+    margin: 10px 0px 25px 0px;
+    padding-left: 10px;
+    border: 1.5px transparent;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    color: #6CC5DE;
+    font-size: 14px;
+    box-shadow: 1px 1px 2px 1px #8888;
+    font-weight: bold;
+}
+.revelar{
+    display:flex !important
+}
 
 @media (min-width: 768px){
     .container-home{
