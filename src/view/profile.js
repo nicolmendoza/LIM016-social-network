@@ -14,44 +14,43 @@ export const Profile = () => {
   profile.classList.add('container-profile');
   profile.innerHTML = `
   <!-- <button id="home">Home</button> -->
-  <section class="header-profile">
-    <div class='container-portada'>
-      <img id="frontPageProfile" width="100px"> 
-      <button id='goEdit'>Edit Profile</button>
-    </div>
-    <div class="container-info">
-      <img id="photoUserProfile" width="100px">
-      <div class="info-profile">
-        <div id="infoUserProfile"></div>
-        <p id="career"></p>
-        <p id="aboutP"></p>
-        <ul class="container-follower">
-          <li class="follower">
-            <p class="li-number">1.2 M</p>
-            <p class="li-description">Seguidores</p>
-          </li>
-          <li class="follow">
-            <p class="li-number">98</p>
-            <p class="li-description">Seguidos</p>
-          </li>
-          <li class="posts-li">
-            <p class="li-number">250</p>
-            <p class="li-description">Posts</p>
-          </li>
-        </ul>
+    <section class="header-profile">
+      <div class='container-portada'>
+        <img id="frontPageProfile" width="100px"> 
+        <button id='goEdit'>Edit Profile</button>
       </div>
-    </div>
-  </section>
-  <section>
-    <h1> MY POST</h1>
-    <div id="PostProfile"></div>
-  </section>
-  <section class="modalEditProfile" style="display:none">
-    <div class="modalDiv-editProf">
-    <div class="modalContainer-edit">
-    </div>
-    </div>
-  </section>
+      <div class="container-info">
+        <img id="photoUserProfile" width="100px">
+        <div class="info-profile">
+          <div id="infoUserProfile"></div>
+          <p id="career"></p>
+          <p id="aboutP"></p>
+          <ul class="container-follower">
+            <li class="follower">
+              <p class="li-number">1.2 M</p>
+              <p class="li-description">Seguidores</p>
+            </li>
+            <li class="follow">
+              <p class="li-number">98</p>
+              <p class="li-description">Seguidos</p>
+            </li>
+            <li class="posts-li">
+              <p class="li-number">250</p>
+              <p class="li-description">Posts</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div id="PostProfile"></div>
+    </section>
+    <section class="modalEditProfile" style="display:none">
+      <div class="modalDiv-editProf">
+      <div class="modalContainer-edit">
+      </div>
+      </div>
+    </section>
     `;
 
   return document.querySelector('#container').appendChild(profile);
@@ -81,8 +80,7 @@ export const FunctionProfile = () => {
     document.getElementById('container-footer').style.display = 'none';
   });
 
-  const unsb = getUnsubscribe();
-  unsb();
+  getUnsubscribe();
 };
 
 // export const showPostProfile = () => {

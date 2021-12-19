@@ -80,16 +80,16 @@
     /* align-items: center; */
 }
 .follower{
-    width: 36%;
+    width: 33%;
     padding-right: 6px;
 }
 
 .follow{
-    width: 36%;
+    width: 33%;
 }
 
 .posts-li{
-    width: 30%;
+    width: 33%;
     border: none !important;
 }
 
@@ -105,6 +105,47 @@
     color: #484860;
     font-family: 'Outfit';
     margin-top: 6px;
+}
+
+#PostProfile{
+    margin: 1em;
+}
+
+.postProfileDiv{
+    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+    margin: 14px auto;
+    border-radius: 6px;
+    background: #ffffffb3;
+    box-shadow: 1px 2px 4px 2px rgb(163 163 163 / 45%);
+    width: 80%;
+}
+.div-options{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: calc(100% - 95%);
+    margin-top: 6px;
+    align-items: flex-end;
+}
+.box-options{
+    background-image: linear-gradient(to bottom, #e0f5ff 35%, #FFFFFF 100%);
+    box-shadow: 1px 1px 5px 0px lightgrey;
+    border: 1px solid gray;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    margin-right: 4px;
+}
+.content-icon{
+    margin: 6px;
+}
+.box-options .fas,
+.box-options .far{
+    margin-right: 6px;
+}
+.show{
+    display: flex !important;
 }
 
 @media (min-width: 768px){
