@@ -21,10 +21,36 @@ export const getUserDoc = (docRef) => getDoc(docRef);
 export const setUserDoc = (docs, obj) => setDoc(docs, obj);
 export const updateUserDoc = (docRef, obj) => updateDoc(docRef, obj);
 
+export const getUsers = () => {
+  const q = query(collection(db, 'usuarios'));
+  return new Promise((resolve) => {
+    onSnapshot(q, (querySnapshot) => {
+      const users = [];
+      querySnapshot.forEach((docUser) => {
+        const objectUser = { };
+        objectUser.name = docUser.data().name;
+        objectUser.userUID = docUser.id;
+        objectUser.photo = docUser.data().photo;
+        users.push(objectUser);
+      });
+      resolve(users);
+    });
+  });
+};
+
 // /* ------------------  POSTS  --------------------- */
+export const savePost = (postDescription, userID, imgULR) => {
+  addDoc(collection(db, 'post'), {
+    message: postDescription.value,
+    userId: userID,
+    img: imgULR,
+    date: Date.now(),
+  });
+};
+
 let unsubscribe;
 export const readData = (callback) => {
-  const q = query(collection(db, 'post'), orderBy('date', 'desc'));
+  const q = query(collection(db, 'post'), where('privacity', '==', 'amigos'), orderBy('date', 'desc'));
   unsubscribe = onSnapshot(q, (querySnapshot) => {
     const posts = [];
     querySnapshot.forEach((doct) => {
@@ -42,12 +68,23 @@ export const readData = (callback) => {
 };
 export const getUnsubscribe = () => unsubscribe;
 
-export const savePost = (postDescription, userID, imgULR) => {
-  addDoc(collection(db, 'post'), {
-    message: postDescription.value,
-    userId: userID,
-    img: imgULR,
-    date: Date.now(),
+export const getDataPostType = (callback, type) => {
+  const q = query(collection(db, 'post'), where('privacity', '==', 'amigos'), orderBy('date', 'desc'), where('type', '==', type));
+  unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const posts = [];
+    querySnapshot.forEach((doct) => {
+      const objectPost = { };
+      objectPost.content = doct.data().message;
+      objectPost.idP = doct.id;
+      objectPost.userID = doct.data().userId;
+      objectPost.date = doct.data().date;
+      objectPost.likes = doct.data().likes;
+      objectPost.img = doct.data().img;
+      objectPost.type = doct.data().type;
+      posts.push(objectPost);
+    });
+    callback(posts);
+    // console.log(posts);
   });
 };
 
@@ -105,10 +142,12 @@ export const saveComment = (id, comentario, uid) => {
   });
 };
 
+let unsubscribeComments;
+
 export const readComment = (callback, id) => {
   const q = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
-  return new Promise((resolve, reject) => {
-    onSnapshot(q, (querySnapshot) => {
+  return new Promise((resolve) => {
+    unsubscribeComments = onSnapshot(q, (querySnapshot) => {
       const comments = [];
       querySnapshot.forEach((docC) => {
         const objectComment = { };
@@ -122,6 +161,8 @@ export const readComment = (callback, id) => {
     });
   });
 };
+
+export const getUnsubscribeComments = () => unsubscribeComments;
 
 // export const countComment = (id) => {
 //   const qC = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
@@ -148,21 +189,25 @@ export const deleteComment = (id, idComment) => {
   deleteDoc(doc(db, 'post', id, 'comments', idComment));
 };
 
+let unsubscribePostProfile;
 // /* -------------------- PERFIL -------------------- */
 export const leerPostProfile = (callback, uid) => {
-  getDocs(query(collection(db, 'post'), where('userId', '==', `${uid}`))).then((resultado) => {
+  const qP = query(collection(db, 'post'), where('userId', '==', `${uid}`));
+  unsubscribePostProfile = onSnapshot(qP, (querySnapshot) => {
     const postP = [];
-    resultado.forEach((doctP) => {
+    querySnapshot.forEach((doctP) => {
       const objectPostProfile = { };
       objectPostProfile.content = doctP.data().message;
       objectPostProfile.userID = doctP.data().userId;
+      objectPostProfile.postID = doctP.id;
       postP.push(objectPostProfile);
-      return postP;
     });
     callback(postP);
     console.log(postP);
   });
 };
+
+export const getUnsubscribePostProfile = () => unsubscribePostProfile;
 
 export const readPostProfile = (uid) => {
   const docRef = doc(db, 'usuarios', uid);

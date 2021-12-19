@@ -1,6 +1,11 @@
 import {
-  obtenerInfo, readPostProfile, leerPostProfile, getUnsubscribe,
+  readPostProfile, getUnsubscribe, leerPostProfile,
 } from '../firebase/firestore.js';
+
+import { profileEdit, FunctionEdit } from './editProfile.js';
+import {
+  showPostProfile,
+} from './templatePostProfile.js';
 
 export const Profile = () => {
   // Stop listening to changes
@@ -12,7 +17,7 @@ export const Profile = () => {
   <section class="header-profile">
     <div class='container-portada'>
       <img id="frontPageProfile" width="100px"> 
-      <a id='goEdit' href="#/home/profile/editProfile">Edit Profile</a>
+      <button id='goEdit'>Edit Profile</button>
     </div>
     <div class="container-info">
       <img id="photoUserProfile" width="100px">
@@ -37,24 +42,25 @@ export const Profile = () => {
       </div>
     </div>
   </section>
-  <div id="infoUserProfile"></div>
-  <p id="aboutP"></p>
-  
+  <section>
     <h1> MY POST</h1>
     <div id="PostProfile"></div>
+  </section>
+  <section class="modalEditProfile" style="display:none">
+    <div class="modalDiv-editProf">
+    <div class="modalContainer-edit">
+    </div>
+    </div>
+  </section>
     `;
 
   return document.querySelector('#container').appendChild(profile);
 };
-export const FunctionProfile = () => {
-  // unsb();
 
-  // const auth = getAuth();
+export const FunctionProfile = () => {
   const userCurrent = JSON.parse(localStorage.getItem('user'));
-  // const userCurrent = currentUser().currentUser;
   const userID = userCurrent.uid;
-  console.log(userID);
-  // autentificando usuario logueado
+  leerPostProfile(showPostProfile, userID);
 
   readPostProfile(userID).then((docUser) => {
     document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
@@ -68,27 +74,21 @@ export const FunctionProfile = () => {
     console.log('Current data: ', docUser.data());
   });
 
-  function showPostProfile(post) {
-    const PostProfile = document.getElementById('PostProfile');
-    const nuevoElemento = document.createElement('div');
+  document.getElementById('goEdit').addEventListener('click', () => {
+    profileEdit();
+    document.querySelector('.modalEditProfile').style.display = 'flex';
+    FunctionEdit();
+    document.getElementById('container-footer').style.display = 'none';
+  });
 
-    const postProfileAll = post.map((onePost) => {
-      obtenerInfo(onePost.userID).then((dataUser) => {
-        nuevoElemento.innerHTML += `<div class="postDiv">
-      <div>${dataUser.data().name}</div>
-      <div>${onePost.content}</div>
-      <div>`;
-      });
-      return nuevoElemento;
-    });
-    Promise.all(postProfileAll).then(() => PostProfile.appendChild(nuevoElemento));
-  }
-
-  leerPostProfile(showPostProfile, userID);
-
-  // document.getElementById('goEdit').addEventListener('click', () => {
-  //   window.location.hash = '#/home/profile/editProfile';
-  // });
   const unsb = getUnsubscribe();
   unsb();
 };
+
+// export const showPostProfile = () => {
+//   document.getElementById('goEdit').addEventListener('click', () => {
+//     profileEdit();
+//     document.querySelector('.modalNewPost').style.display = 'flex';
+//     FunctionEdit();
+//   });
+// };
