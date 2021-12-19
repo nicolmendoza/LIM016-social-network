@@ -1,6 +1,10 @@
 import {
-  obtenerInfo, readPostProfile, leerPostProfile, getUnsubscribe,
+  readPostProfile, getUnsubscribe, leerPostProfile,
 } from '../firebase/firestore.js';
+
+import {
+  showPostProfile,
+} from './templatePostProfile.js';
 
 export const Profile = () => {
   // Stop listening to changes
@@ -49,6 +53,7 @@ export const Profile = () => {
 export const FunctionProfile = () => {
   const userCurrent = JSON.parse(localStorage.getItem('user'));
   const userID = userCurrent.uid;
+  leerPostProfile(showPostProfile, userID);
 
   readPostProfile(userID).then((docUser) => {
     document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
@@ -61,22 +66,6 @@ export const FunctionProfile = () => {
     aboutParrafo.innerHTML = `${docUser.data().about}`;
     console.log('Current data: ', docUser.data());
   });
-
-  function showPostProfile(post) {
-    const PostProfile = document.getElementById('PostProfile');
-    const nuevoElemento = document.createElement('div');
-
-    post.forEach(async (onePost) => {
-      const dataUser = await obtenerInfo(onePost.userID);
-      nuevoElemento.innerHTML += `<div class="postDiv">
-      <div>${dataUser.data().name}</div>
-      <div>${onePost.content}</div>
-      <div>`;
-    });
-    PostProfile.appendChild(nuevoElemento);
-  }
-
-  leerPostProfile(showPostProfile, userID);
 
   const unsb = getUnsubscribe();
   unsb();

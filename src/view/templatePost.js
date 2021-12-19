@@ -3,7 +3,7 @@ import {
   deletePost, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
 } from '../firebase/firestore.js';
 
-import { templateComents } from './comments.js';
+import { templateComents } from './templateComments.js';
 
 export const template = (post) => {
   console.log(post);
