@@ -17,7 +17,7 @@ export const navLaptop = () => {
     </ul>
     `;
 
-    viewNavLaptop.querySelector('#myID').addEventListener('click', (e) => {
+  viewNavLaptop.querySelector('#myID').addEventListener('click', (e) => {
     const idUser = e.target.dataset.id;
     localStorage.setItem('idUserRedirecionar', idUser); // almacenar el id del usuario a redireccionar
     window.location.href = `#/home/profile/${idUser}`;
