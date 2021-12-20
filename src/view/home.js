@@ -22,56 +22,80 @@ export const Home = () => {
   divElement.innerHTML = `
 
 
-  <button id="btn-newPost" style="display:none"> Add New Post </button>
+  
 
   <div class="section-home">
-
-  <div id="section-User">
-  <div id="infoUserHome">
-  <div class='header-home'>
-  <img id="photoUser" class="photoHome" width="100px">
-  <div class="header-text">
-    <h>Hello,</h>
-    <p id="infoUser"></p>
-  </div>
-</div>
-  </div>
-  <div id="sectionUsers" >
-  </div>
-</div>
-
+    <div id="section-User">
+      <div class="container-info-users">
+      <div id="infoUserHome">
+        <div class='header-home'>
+          <img id="photoUser" class="photoHome" width="100px">
+          <div class="header-text">
+            <h>Hello,</h>
+            <p id="infoUser"></p>
+          </div>
+        </div>
+      </div>
+      <div id="sectionDescription">
+        <h1>Description</h1>
+        <div id="infoDescription">
+          <p id="ocupation"></p>
+          <p id="about"></p>
+          <div id="div-etiqueta">
+            <p class="etiqueta">Javascript</p>
+            <p class="etiqueta">CSS</p>
+            <p class="etiqueta">Html</p>
+            <p class="etiqueta">Node</p>
+          </div>
+        </div>
+      </div>
+      <div id="divParent-users">
+      <h1>Queen Coders Users</h1>
+      <div id="sectionUsers" >
+      </div>
+      </div>
+      </div>
+    </div>
+  <div class="div-showPost">
+  <button id="btn-newPost" style="display:none"> Add New Post </button>
   <div id="showPost">
- </div>
+  </div>
+  </div>
 
 <div class="sectionTypes">
-  <div id="todos" >Ver todos</div>
+<div class="container-info-users">
+  <div id="header-categories" >
+  <p>Categories</p>
+  <p id="todos">See All</p>
+  </div>
   <div id="botones-types">
 
-  <div class="div-type">
-  <img class="img-preguntas img-types">
-  <button value="preguntas" class="btn-type" >Preguntas</button>
-  </div>
+    <div class="div-type">
+    <img class="img-types" src="./img/ofertaLaboral.jpg">
+    <button value="trabajo"  class="btn-type">Job Offer</button>
+    </div>
 
-  <div class="div-type">
-  <img class="img-preguntas img-types">
-  <button value="trabajo"  class="btn-type"  >Oferta Laboral</button>
-  </div>
+    <div class="div-type">
+    <img class="img-types" src="./img/evento.jpg">
+    <button value="evento"  class="btn-type">Events</button>
+    </div>
 
-  <div class="div-type">
-  <img class="img-preguntas img-types">
-  <button value="evento"  class="btn-type"  >Eventos</button>
-  </div>
+    <div class="div-type">
+    <img class="img-types" src="./img/cursos.jpg">
+    <button value="curso"  class="btn-type">Courses</button>
+    </div>
 
-  <div class="div-type">
-  <img class="img-preguntas img-types">
-  <button value="curso"  class="btn-type"  >Cursos</button>
-  </div>
+    <div class="div-type">
+    <img class="img-types" src="./img/tutorial.jpg">
+    <button value="tutorial" class="btn-type">Tutorials</button>
+    </div>
 
-  <div class="div-type">
-  <img class="img-preguntas img-types">
-  <button value="tutorial" class="btn-type"   >Tutorial</button>
-  </div>
+    <div class="div-type">
+    <img class="img-types" src="./img/preguntas.jpg">
+    <button value="preguntas" class="btn-type">Questions</button>
+    </div>
   
+  </div>
   </div>
   </div>
 
@@ -122,6 +146,8 @@ export const FunctionsHome = () => {
       const info = document.getElementById('infoUser');
       info.innerHTML = `${userInfo.name}`;
       document.getElementById('photoUser').src = `${userInfo.photo}`;
+      document.getElementById('ocupation').innerHTML=`${userInfo.career}`;
+      document.getElementById('about').innerHTML=`${userInfo.about}`;
     }
     console.log(docSnap.data());
   }
@@ -139,7 +165,6 @@ export const FunctionsHome = () => {
   document.getElementById('todos').addEventListener('click', () => {
     readData(template);
   });
-
   // LogOut
   window.addEventListener('click', (e) => {
     const btnOut = e.target.id;

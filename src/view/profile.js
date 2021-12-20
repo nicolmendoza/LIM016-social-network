@@ -58,11 +58,14 @@ export const Profile = () => {
 };
 
 export const FunctionProfile = () => {
+  const idUserRedirect = window.localStorage.getItem('idUserRedirecionar');
+  console.log(idUserRedirect);
   const userCurrent = JSON.parse(localStorage.getItem('user'));
-  const userID = userCurrent.uid;
-  leerPostProfile(showPostProfile, userID);
+  console.log(userCurrent);
+  // const userID = userCurrent.uid;
+  leerPostProfile(showPostProfile, idUserRedirect);
 
-  readPostProfile(userID).then((docUser) => {
+  readPostProfile(idUserRedirect).then((docUser) => {
     document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
     document.getElementById('frontPageProfile').src = `${docUser.data().portada}`;
     const info = document.getElementById('infoUserProfile');

@@ -3,28 +3,29 @@
   flex-direction: column;
   margin: auto;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
+
 }
 .oneDivUser {
   display: flex;
   flex-direction: row;
-  background: cornflowerblue;
-  justify-content: center;
-  margin: 10px;
+  /* background: cornflowerblue; */
+  justify-content: flex-start;
+  align-items: center;
+  margin: 15px 0px 0px 8%;
   width: 100%;
 }
-.div {
-  width: 80%;
-  justify-content: center;
-  margin: auto;
+.link-user {
+  width: 100%;
 }
 .img-user {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  margin-right: 5%;
 }
 .oneDivUser-parrafo {
-  width: 100%;
-  font-size: 15px;
+      /* width: 100%; */
+      font-size: 15px;
 }

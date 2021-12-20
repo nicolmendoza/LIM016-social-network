@@ -6,15 +6,33 @@ export const templateUsers = () => {
   const arrayUsers = getUsers();
   arrayUsers.then((users) => users.forEach((user) => {
     divUsers.innerHTML += `
-  <div  id="${user.userUID}" class="div">
-  <div class="oneDivUser">
-  <p class="oneDivUser-parrafo">${user.name}</p>
-  <img src=${user.photo} class="img-user" >
+  <div class="link-user" >
+  <div class="oneDivUser" >
+  <img src=${user.photo} data-id="${user.userUID}" class="img-user" >
+  <p class="oneDivUser-parrafo"  data-id="${user.userUID}">${user.name}</p>
   </div>
   </div>
   `;
+    document.querySelectorAll('.oneDivUser-parrafo').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const idUser = e.target.dataset.id;
+        localStorage.setItem('idUserRedirecionar', idUser); // almacenar el id del usuario a redireccionar
+        window.location.href = `#/home/profile/${idUser}`;
+        console.log('holi');
+        console.log(idUser);
+      });
+    });
 
     document.getElementById('sectionUsers').innerHTML = '';
     document.getElementById('sectionUsers').appendChild(divUsers);
   }));
 };
+
+// export const addEventLinkUser = () => {
+
+//       // localStorage.setItem('idUserRedirecionar', idUser); // almacenar el id del usuario a redireccionar
+//       // window.location.href = `#/profile/${idUser}`;
+//       // window.location.reload();
+//     });
+//   });
+// };

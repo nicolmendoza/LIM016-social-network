@@ -8,6 +8,7 @@ import { newPost, functionNewPost } from './newPost.js';
 import { profileEdit, FunctionEdit } from './editProfile.js';
 import { navLaptop } from './navegador/navLaptop.js';
 
+
 export const components = {
   login: { Login, initLogin },
   signup: { SignUp, Register },

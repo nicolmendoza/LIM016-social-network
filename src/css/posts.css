@@ -11,11 +11,16 @@
     margin: 0.5em;
     cursor: pointer;
 }
+.div-showPost{
+    width: 100%;
+    /* margin: 0px 4%; */
+}
 #showPost{
-    margin: 0px 4%;
-    width: 40%;
+    margin: 0px 2.5%;
+    width: 95%;
 }
 .postDiv{
+    position: relative;
     background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
     margin: 14px 0px;
     border-radius: 6px;
@@ -51,6 +56,10 @@
     font-size: 17px;
 }
 
+.namePost{
+    font-weight: bold;
+}
+
 .date{
     font-size: 12px;
     color: gray;
@@ -63,9 +72,28 @@
     height: 180px;
 }
 .text-post-home{
+    display: flex;
+    align-items: center;
     margin: 20px 6%;
     text-align: start !important;
 }
+
+.editPost{
+    width: 87%;
+    margin-right: 9px;
+    border-radius: 8px;
+    border: 0.5px solid #bfbebe;
+}
+.save{
+    height: 23px;
+    width: 54px;
+    border-radius: 9px;
+    border: transparent;
+    background-image: linear-gradient(120deg, #da5afa99 0%, #3570ec8a 100%);
+    color: beige;
+    font-size: 13px;
+}
+
 .fa-heart{
     color: deeppink;
 }
@@ -81,7 +109,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    right: calc(100% - 95%);
+    right: calc(100% - 98%);
     margin-top: 6px;
     align-items: flex-end;
 }
@@ -109,6 +137,14 @@
 @media (min-width: 768px){
     .img-post-home{
         height: 410px;
+    }
+    .div-showPost{
+        width: 50%;
+        /* margin: 0px 4%; */
+    }
+    #showPost{
+        width: 100%;
+        margin: 0px;
     }
     
 }
