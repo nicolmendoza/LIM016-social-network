@@ -77,6 +77,13 @@ export const FunctionProfile = () => {
     console.log('Current data: ', docUser.data());
   });
 
+  if (idUserRedirect === userCurrent.uid) {
+    document.getElementById('goEdit').style.display = 'block';
+    // document.querySelector('.modalDelete').classList.remove('revelar');
+  } else {
+    document.getElementById('goEdit').style.display = 'none';
+  }
+
   document.getElementById('goEdit').addEventListener('click', () => {
     profileEdit();
     document.querySelector('.modalEditProfile').style.display = 'flex';

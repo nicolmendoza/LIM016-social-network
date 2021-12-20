@@ -43,12 +43,10 @@ export const showPostProfile = (post) => {
     div.addEventListener('click', (e) => {
       const idPost = e.target.parentNode.id;
       const id = idPost.slice(2);
-      console.log(id);
-      console.log(idPost);
       for (let i = 0; i < post.length; i++) {
         document.querySelector('.deleteProfile').addEventListener('click', () => {
-          console.log(post[i].userID === user.uid, post[i].idP === id);
-          if (post[i].userID === user.uid && post[i].idP === id) {
+          console.log(post[i].userID === user.uid);
+          if (post[i].userID === user.uid) {
             deletePost(id);
             // document.querySelector('.modalDelete').classList.remove('revelar');
           }
