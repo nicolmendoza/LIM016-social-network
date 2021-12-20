@@ -59,14 +59,14 @@ export const template = (post) => {
 
   post.forEach((one) => {
     const idPost = one.idP;
-    const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
+    // const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
     const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
     readLikes((likes) => {
       const num = likes.length;
       parrafoCountLikes.innerHTML = num;
-      if (num > 0) {
+      /*       if (num > 0) {
         iconLikes.className = 'fas fa-heart icon';
-      }
+      } */
     }, idPost);
     const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
     readComment((comments) => {
