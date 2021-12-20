@@ -17,14 +17,14 @@ export const Login = () => {
   <div class="section1"><img class="imgInicio"></div>
   <div class="section2">
     <div class="formulario">
-      <div class="logo">QUEEN CODERS</div>
+      <div class="logo">SOCIAL NETWORK</div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
       <div class="form-group-text">
         <div class="textForm clickLogin">
           <a href="#/login">Login</a> 
         </div>
         <div class="textForm">
-          <a href="#/signup" >Sign up</a>
+          <a href="#/signup" >Sign Up</a>
         </div>
       </div>
       <form id="login-form">
@@ -41,16 +41,16 @@ export const Login = () => {
           <input type="password" id="login-password"  placeholder="****************" required>
         </div>
         <p id="generalMessage" class="errorMessage"></p>
-        <button type="submit" class="btnLogin">Iniciar sesión</button><br>
+        <button type="submit" class="btnLogin">LOGIN</button><br>
         <div class="divResetPassword">
-          <a href="#/resetPassword" id="resetPass"> ¿Olvidaste tu contraseña?</a>
+          <a href="#/resetPassword" id="resetPass"> Forgot password?</a>
         </div>
         
         <button type="button" class="icon-login" id="googleLogin"><img src="img/google.png"></i></button>
         <button type="button" class="icon-login" id="facebookLogin"><img src="img/facebook.png"></button>
         <button type="button" class="icon-login" id="githubLogin"><img src="img/github.png"></button>
         <div class="textResetPassword">
-          <p class="registerText">¿No tienes una cuenta? <a href="#/signup" class="registerText link">Crea una aquí</a></p>
+          <p class="registerText">Don't you have an account? <a href="#/signup" class="registerText link">Register now</a></p>
         </div>
       </form>
     </div>

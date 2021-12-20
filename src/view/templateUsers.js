@@ -30,7 +30,6 @@ export const templateUsers = () => {
 
 // export const addEventLinkUser = () => {
 
-// eslint-disable-next-line max-len
 //       // localStorage.setItem('idUserRedirecionar', idUser); // almacenar el id del usuario a redireccionar
 //       // window.location.href = `#/profile/${idUser}`;
 //       // window.location.reload();

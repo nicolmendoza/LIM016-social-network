@@ -13,7 +13,7 @@ export const SignUp = () => {
   <div class="section1"><img class="imgInicio"></div>
   <div class="section2">
     <div class="formulario">
-      <div class="logo">QUEEN CODERS</div>
+      <div class="logo">SOCIAL NETWORK</div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png' ></div>
       <div class="form-group-text">
         <div class="textForm">
@@ -26,7 +26,7 @@ export const SignUp = () => {
           <span class="icon-input">
             <i class="far fa-user-circle"></i>
           </span>
-        <input type="text" id="signup-name"  placeholder="Nombre de usuaria" required>
+        <input type="text" id="signup-name"  placeholder="Name" required>
         </div>
         <div class="form-group">
           <span class="icon-input">
@@ -42,9 +42,9 @@ export const SignUp = () => {
           <input type="password" id="signup-password"  placeholder="**************" maxlength='16'>
           <p id='passwordMessage' class="errorMessage"></p>
         </div>
-        <button type="submit" class="btnLogin" >Crear cuenta</button>
+        <button type="submit" class="btnLogin" >CREATE A COUNT</button>
         <div class="textResetPassword">
-        <p class="registerText">¿Ya tienes una cuenta?  <a href="#/signup" class="registerText link">Inicia sesión aquí</a></p></div>
+        <p class="registerText">Do you have an account?  <a href="#/signup" class="registerText link">Login now</a></p></div>
       </form>
     </div>
   </div>`;

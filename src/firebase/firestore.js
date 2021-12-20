@@ -4,6 +4,7 @@ import {
   getDoc,
   setDoc,
   collection,
+  getDocs,
   addDoc,
   onSnapshot,
   query,
@@ -20,33 +21,7 @@ export const getUserDoc = (docRef) => getDoc(docRef);
 export const setUserDoc = (docs, obj) => setDoc(docs, obj);
 export const updateUserDoc = (docRef, obj) => updateDoc(docRef, obj);
 
-export const getUsers = () => {
-  const q = query(collection(db, 'usuarios'));
-  return new Promise((resolve) => {
-    onSnapshot(q, (querySnapshot) => {
-      const users = [];
-      querySnapshot.forEach((docUser) => {
-        const objectUser = { };
-        objectUser.name = docUser.data().name;
-        objectUser.userUID = docUser.id;
-        objectUser.photo = docUser.data().photo;
-        users.push(objectUser);
-      });
-      resolve(users);
-    });
-  });
-};
-
 // /* ------------------  POSTS  --------------------- */
-export const savePost = (postDescription, userID, imgULR) => {
-  addDoc(collection(db, 'post'), {
-    message: postDescription.value,
-    userId: userID,
-    img: imgULR,
-    date: Date.now(),
-  });
-};
-
 let unsubscribe;
 export const readData = (callback) => {
   const q = query(collection(db, 'post'), where('privacity', '==', 'amigos'), orderBy('date', 'desc'));
@@ -58,6 +33,7 @@ export const readData = (callback) => {
       objectPost.idP = doct.id;
       objectPost.userID = doct.data().userId;
       objectPost.date = doct.data().date;
+      objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
       posts.push(objectPost);
     });
@@ -65,7 +41,6 @@ export const readData = (callback) => {
     // console.log(posts);
   });
 };
-export const getUnsubscribe = () => unsubscribe;
 
 export const getDataPostType = (callback, type) => {
   const q = query(collection(db, 'post'), where('privacity', '==', 'amigos'), orderBy('date', 'desc'), where('type', '==', type));
@@ -87,12 +62,30 @@ export const getDataPostType = (callback, type) => {
   });
 };
 
+export const getUnsubscribe = () => unsubscribe;
+
+export const getUsers = () => {
+  const q = query(collection(db, 'usuarios'));
+  return new Promise((resolve) => {
+    onSnapshot(q, (querySnapshot) => {
+      const users = [];
+      querySnapshot.forEach((docUser) => {
+        const objectUser = { };
+        objectUser.name = docUser.data().name;
+        objectUser.userUID = docUser.id;
+        objectUser.photo = docUser.data().photo;
+        users.push(objectUser);
+      });
+      resolve(users);
+    });
+  });
+};
+
 export const obtenerInfo = (ID) => {
   const docRef = doc(db, 'usuarios', ID);
   const docSnap = getDoc(docRef);
   return docSnap;
 };
-
 export const deletePost = (id) => deleteDoc(doc(db, 'post', id));
 
 export const updatePost = (id, postEdit) => {
@@ -102,15 +95,12 @@ export const updatePost = (id, postEdit) => {
   });
 };
 
-// /* ----------------- LIKES ----------------- */
-
 export const saveLike = (id, userId, userName) => {
   setDoc(doc(db, 'post', id, 'likes', userId), {
     user: userName,
     date: Date.now(),
   });
 };
-
 export const readLikes = (callback, id) => {
   const q = query(collection(db, 'post', id, 'likes'), orderBy('date', 'desc'));
   return new Promise((resolve, reject) => {
@@ -127,9 +117,21 @@ export const readLikes = (callback, id) => {
     });
   });
 };
-
 export const deleteLike = (id, userId) => {
   deleteDoc(doc(db, 'post', id, 'likes', userId));
+};
+export const savePost = (postDescription, userID, imgULR, Privacity, Type) => {
+  addDoc(collection(db, 'post'), {
+    message: postDescription.value,
+    userId: userID,
+    img: imgULR,
+    likes: [{
+      users: [],
+    }],
+    date: Date.now(),
+    privacity: Privacity,
+    type: Type,
+  });
 };
 
 // /* ----------------- COMENTARIOS ----------------- */
@@ -145,7 +147,7 @@ let unsubscribeComments;
 
 export const readComment = (callback, id) => {
   const q = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     unsubscribeComments = onSnapshot(q, (querySnapshot) => {
       const comments = [];
       querySnapshot.forEach((docC) => {
@@ -156,7 +158,6 @@ export const readComment = (callback, id) => {
         comments.push(objectComment);
       });
       resolve(callback(comments, id));
-      // reject(console.log('error'));
     });
   });
 };

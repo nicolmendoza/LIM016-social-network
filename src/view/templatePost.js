@@ -1,7 +1,6 @@
 /* eslint-disable no-plusplus */
 import {
-  deletePost, obtenerInfo, updatePost, readComment, saveComment,
-  saveLike, readLikes, deleteLike,
+  deletePost, obtenerInfo, updatePost, readComment, saveComment, saveLike, readLikes, deleteLike,
 } from '../firebase/firestore.js';
 
 import { templateComents } from './templateComments.js';
@@ -56,13 +55,10 @@ export const template = (post) => {
     return nuevoElemento;
   });
 
-  const uidUser = user.uid;
-  const nameUser = user.displayName;
-  console.log(uidUser, nameUser);
+  const uidUser = (user.uid);
 
   post.forEach((one) => {
     const idPost = one.idP;
-
     const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
     const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
     readLikes((likes) => {
@@ -72,7 +68,6 @@ export const template = (post) => {
         iconLikes.className = 'fas fa-heart icon';
       }
     }, idPost);
-
     const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
     readComment((comments) => {
       const num = comments.length;
@@ -181,10 +176,11 @@ export const template = (post) => {
     });
   });
 
+  const nameUser = user.displayName;
+
   nuevoElemento.querySelectorAll('.fa-heart').forEach((like) => {
     like.addEventListener('click', (e) => {
       const postId = e.target.parentNode.parentNode.id;
-
       if (e.target.className === 'far fa-heart icon') {
         e.target.className = 'fas fa-heart icon';
         console.log(e.target.className);
