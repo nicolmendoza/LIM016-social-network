@@ -9,26 +9,9 @@ export const showPostProfile = (post) => {
   const sectionPostProfile = document.createElement('div');
 
   post.forEach((onePost) => {
+    console.log(onePost);
     sectionPostProfile.innerHTML += `
     <div class="postProfileDiv" id="ID${onePost.postID}">
-      
-      <div class="div-options">
-        <div class="icon-options">
-          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-        </div>
-        <div class='box-options' id="box-options-${onePost.postID}" style="display:none">
-          <div class='edit content-icon'>
-            <span>
-              <i class="fas fa-pencil-alt"></i>Editar
-            </span>
-          </div>
-          <div class='delete content-icon'>
-            <span>
-              <i class="far fa-trash-alt"></i>Borrar
-            </span>
-          </div>
-        </div>
-      </div>
 
       <div class="header-post">
         <img class="post-img${user.uid}" width="100px" >
@@ -39,7 +22,9 @@ export const showPostProfile = (post) => {
       </div>
 
       <div>${onePost.content}</div>
-      <img class="postImg" id="img-${user.uid}">
+
+      <button class="deleteProfile">DELETE</button>
+      <button class="edit">EDIT</button>
 
       <div id="postIcon">
         <i class="far fa-heart icon" id="iconLikes${onePost.postID}"></i> <p id='likes${onePost.postID}'></p>
@@ -88,7 +73,7 @@ export const showPostProfile = (post) => {
     }, idPost);
   });
 
-  sectionPostProfile.querySelectorAll('.delete content-icon').forEach((div) => {
+  sectionPostProfile.querySelectorAll('.deleteProfile').forEach((div) => {
     div.addEventListener('click', (e) => {
       const idPost = e.target.parentNode.id;
       const cadena = idPost.slice(2);
