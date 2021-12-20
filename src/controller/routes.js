@@ -8,6 +8,8 @@ const changeView = () => {
   footer.innerHTML = '';
   const header = document.getElementById('container-header');
   header.innerHTML = '';
+  // eslint-disable-next-line prefer-const
+  let idUser = localStorage.getItem('idUserRedirecionar');
 
   switch (window.location.hash) {
     case '':
@@ -35,6 +37,7 @@ const changeView = () => {
       components.home.FunctionsHome();
       break;
 
+    case `#/home/profile/${idUser}`:
     case '#/home/profile':
       stateChanged1();
       header.appendChild(components.navLaptop.navLaptop());

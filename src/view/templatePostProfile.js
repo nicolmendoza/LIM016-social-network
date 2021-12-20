@@ -1,9 +1,12 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable max-len */
 import {
   obtenerInfo, deletePost, readLikes, readComment,
 } from '../firebase/firestore.js';
 
 export const showPostProfile = (post) => {
   console.log(post);
+  const idUserRedirect = window.localStorage.getItem('idUserRedirecionar');
   const user = JSON.parse(localStorage.getItem('user'));
   const PostProfile = document.getElementById('PostProfile');
   const sectionPostProfile = document.createElement('div');
@@ -40,49 +43,62 @@ export const showPostProfile = (post) => {
   });
   //   PostProfile.appendChild(sectionPostProfile);
 
-  obtenerInfo(user.uid)
-    .then((userInfo) => {
-      sectionPostProfile.querySelectorAll(`.nameUserPostProfile${user.uid}`).forEach((nameUser) => {
-        // eslint-disable-next-line no-param-reassign
-        nameUser.innerHTML = `${userInfo.data().name}`;
-      });
-      sectionPostProfile.querySelectorAll(`.post-img${user.uid}`).forEach((photoUser) => {
-        // eslint-disable-next-line no-param-reassign
-        const imgUser = photoUser;
-        imgUser.src = `${userInfo.data().photo}`;
+  obtenerInfo(idUserRedirect).then((userInfo) => {
+    sectionPostProfile.querySelectorAll(`.nameUserPostProfile${user.uid}`).forEach((nameUser) => {
+      // eslint-disable-next-line no-param-reassign
+      nameUser.innerHTML = `${userInfo.data().name}`;
+    });
+
+    post.forEach((one) => {
+      const idPost = one.postID;
+
+      const iconLikes = sectionPostProfile.querySelector(`#iconLikes${idPost}`);
+      const parrafoCountLikes = sectionPostProfile.querySelector(`#likes${idPost}`);
+      readLikes((likes) => {
+        const num = likes.length;
+        parrafoCountLikes.innerHTML = num;
+        if (num > 0) {
+          iconLikes.className = 'fas fa-heart icon';
+        }
+      }, idPost);
+
+      const parrafoCountComment = sectionPostProfile.querySelector(`.countComment${idPost}`);
+      readComment((comments) => {
+        const num = comments.length;
+        parrafoCountComment.innerHTML = num;
+      }, idPost);
+    });
+
+    // post.forEach(async (one) => {
+    //   const idPost = one.idP;
+    //   const idUser = one.userID;
+    //   const parrafoNameProfile = sectionPostProfile.querySelector(`.nameUserPostProfile${idUser}`);
+    //   // const divPhotoUser = sectionPostProfile.querySelector(`#post-img${idPost}`);
+    //   const dataUser = await obtenerInfo(idUser);
+    //   parrafoNameProfile.innerHTML = dataUser.data().name;
+    //   // divPhotoUser.src = dataUser.data().photo;
+    //   // divPhotoUser= dataUser.data().photo;
+    // });
+
+    sectionPostProfile.querySelectorAll('.deleteProfile').forEach((div) => {
+      div.addEventListener('click', (e) => {
+        const idPost = e.target.parentNode.id;
+        const id = idPost.slice(2);
+        console.log(id);
+        console.log(idPost);
+        for (let i = 0; i < post.length; i++) {
+          document.querySelector('.deleteProfile').addEventListener('click', () => {
+            console.log(post[i].userID === user.uid, post[i].idP === id);
+            if (post[i].userID === user.uid && post[i].idP === id) {
+              deletePost(id);
+            // document.querySelector('.modalDelete').classList.remove('revelar');
+            }
+          });
+        }
       });
     });
 
-  post.forEach((one) => {
-    const idPost = one.postID;
-
-    const iconLikes = sectionPostProfile.querySelector(`#iconLikes${idPost}`);
-    const parrafoCountLikes = sectionPostProfile.querySelector(`#likes${idPost}`);
-    readLikes((likes) => {
-      const num = likes.length;
-      parrafoCountLikes.innerHTML = num;
-      if (num > 0) {
-        iconLikes.className = 'fas fa-heart icon';
-      }
-    }, idPost);
-
-    const parrafoCountComment = sectionPostProfile.querySelector(`.countComment${idPost}`);
-    readComment((comments) => {
-      const num = comments.length;
-      parrafoCountComment.innerHTML = num;
-    }, idPost);
+    PostProfile.innerHTML = '';
+    PostProfile.appendChild(sectionPostProfile);
   });
-
-  sectionPostProfile.querySelectorAll('.deleteProfile').forEach((div) => {
-    div.addEventListener('click', (e) => {
-      const idPost = e.target.parentNode.id;
-      const cadena = idPost.slice(2);
-      console.log(cadena);
-      console.log(idPost);
-      deletePost(cadena);
-    });
-  });
-
-  PostProfile.innerHTML = '';
-  PostProfile.appendChild(sectionPostProfile);
 };

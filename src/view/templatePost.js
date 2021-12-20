@@ -35,7 +35,7 @@ export const template = (post) => {
     <div class="header-post">
         <img  id="post-img${onePost.idP}" width="100px" >
         <div class="header-info">
-          <div class="post-name${onePost.idP}"></div>
+          <div class="post-name${onePost.idP} namePost"></div>
           <div class="date"><p></p></div> 
         </div>
     </div>
@@ -153,11 +153,12 @@ export const template = (post) => {
   nuevoElemento.querySelectorAll('.edit').forEach((div) => {
     div.addEventListener('click', (e) => {
       const id = e.target.parentNode.parentNode.parentNode.parentNode.id;
+      document.querySelector(`#box-options-${id}`).classList.toggle('show');
 
       for (let i = 0; i < post.length; i++) {
-        console.log(post[i].userID === uidUser, post[i].idP === id);
-        if (post[i].userID === uidUser && post[i].idP === id) {
-          document.querySelector(`#contentPost${id}`).innerHTML = `<textarea id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
+        console.log(post[i].userID === user.uid, post[i].idP === id);
+        if (post[i].userID === user.uid && post[i].idP === id) {
+          document.querySelector(`#contentPost${id}`).innerHTML = `<textarea class="editPost" id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
             <button class="save">SAVE</button>`;
           document.querySelector('.save').addEventListener('click', () => {
             const postEdit = document.getElementById(`contentEdit${post[i].idP}`).value;

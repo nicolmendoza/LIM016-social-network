@@ -8,7 +8,7 @@
 
 .header-home{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding: 0px 2.5%;
 }
@@ -42,6 +42,57 @@
     height: 70px;
 }
 
+/*SECTION DE DESCRPCION HOME*/
+
+#sectionDescription{
+    display: none;
+    padding: 7% 0px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10px;
+    width: 100%;
+}
+
+#sectionDescription h1{
+    font-family: ui-serif;
+    font-size: 19px;
+    font-weight: 100;
+    color: #484860;
+    margin-bottom: 8px;
+}
+
+#infoDescription{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.8;
+    padding-left: 6%;
+    width: 100%;
+}
+
+#infoDescription p{
+    font-size: 14px;
+}
+
+#div-etiqueta{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    margin-top: 5px;
+    width: 100%;
+}
+
+#div-etiqueta p{
+    border: transparent;
+    background: #B495E7;
+    border-radius: 13px;
+    padding: 1px 5px;
+    font-size: 12px;
+    /* margin: 2px 5px; */
+    margin-right: 5px;
+    margin-block-end: 5px;
+    color: white
+}
 #logout{
     background: none;
     border: none;
@@ -55,6 +106,7 @@
 }
 
 #btn-newPost{
+    display: none;
     height: 40px;
     width: 9em;
     border-radius: 15px;
@@ -127,10 +179,7 @@
     display:flex !important
 }
 .sectionTypes{
-    border: 1px solid black;
-    border-radius: 20px;
-    background-image: linear-gradient(to bottom, #BEBDFF 0%, #C6FCFF 100% );
-    width: 20%;
+display: none;
 }
 
 .img-preguntas{
@@ -138,50 +187,154 @@
 }
 
 .div-type{
+    width: 100%;
+    justify-content: center;
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    margin: 10px 0px;
+    position: relative;
 }
 
 .img-types{
-    width: 50%;
-    border-radius: 40px;
+    width: 90%;
+    border-radius: 9px;
+    height: 90px;
 }
 .btn-type{
-    background: none;
-    border:none;
-    padding: 10px;
+    background: #ebf9ffa6;
+    width: 90%;
+    height: 100%;
     cursor: pointer;
+    position: absolute;
+    border: transparent;
 } 
+
+.btn-type{
+    font-size: 20px;
+    /* font-weight: 700; */
+    font-family: 'Outfit';
+}
 
 .section-home{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     justify-content: space-around;
     margin: auto;
 }
 
+#divParent-users{   
+    /* padding: 7% 10px; */
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    /* margin-left: 10px; */
+    width: 100%;
+    border-top: 2px solid #94A4F5;
+    padding-top: 7%;
+}
+
+#divParent-users h1{
+    font-family: ui-serif;
+    font-size: 19px;
+    font-weight: 100;
+    color: #484860;
+    margin-bottom: 8px;
+    margin-left: 10px;
+}
+
+#sectionUsers{
+    display: none;
+    width: 100%;
+}
+
 #section-User{
-    width: 20%;
-    border:1px solid black;
-    border-radius: 20px;
-padding: 10px;
-background-image: linear-gradient(to bottom, #BEBDFF 0%, #C6FCFF 100% );
+    width: 100%;
+}
+.container-info-users{
+        /* position: fixed; */
+    /* width: 23%; */
+    /* padding: 10px; */
+    /* background-image: linear-gradient(to bottom, #BEBDFF 0%, #C6FCFF 100% ); */
+    border: transparent;
+    /* border-radius: 20px; */
+    top: 6em;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#header-categories{
+    display: flex;
+    justify-content: space-around;
+}
+#header-categories p{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#todos{
+    color: #3570EC;
 }
 
 #botones-types{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
-
 
 @media (min-width: 768px){
     .container-home{
         padding-top: 7em;
     }
+    .section-home{
+        flex-direction: row;
+    }
     #btn-newPost{
         display: block !important;
-        margin-left: calc(100% - 10em);
+        width: 100%;
     }
+    .header-home{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 2.5%;
+        border-bottom: 2px solid #94A4F5;
+    }
+    #section-User{
+        width: 23%;
+        position: relative;
+    }
+    .container-info-users{
+        position: fixed;
+        width: 23%;
+        padding: 10px;
+        /* background-image: linear-gradient(to bottom, #BEBDFF 0%, #C6FCFF 100% ); */
+        border: transparent;
+        /* border-radius: 20px; */
+        top: 6em;
+        bottom: 0;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    #sectionUsers{
+        display: block;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .sectionTypes{
+        width: 23%;
+        position: relative;
+        display: block;
+    }
+
+    #sectionDescription{
+        display: flex;
+    }
+
+    #divParent-users{
+        display: flex;
+    }
+
 }

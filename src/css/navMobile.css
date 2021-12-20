@@ -51,6 +51,7 @@
     position: fixed;
     width: 100%;
     box-shadow: 4px 5px 10px 4px rgb(189 189 189 / 54%);
+    z-index: 1;
 }
 
 .logo-full-screen{

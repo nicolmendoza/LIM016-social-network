@@ -10,8 +10,8 @@ export const newPost = () => {
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
     <div class="header-newPost">
-        <button class="descart"><a href="#/home"> Descartar </a></button>
-        <div> CREAR </div>
+        <button class="descart"><a href="#/home"> CANCEL </a></button>
+        <div id="newPost"> NEW POST </div>
         <button type="submit" class="publish">PUBLISH</button>
     </div>
     <div class="info-user">
@@ -19,14 +19,14 @@ export const newPost = () => {
         <div class="name-user">
             <div id='namePost'></div>
             <select class="privacity" required>
-                <option value="amigos"><i class="fas fa-bell"></i>Amigos</option>
-                <option value="solo yo"><i class="fas fa-bell"></i>Solo yo</option>
+                <option value="amigos"><i class="fas fa-bell"></i>Public</option>
+                <option value="solo yo"><i class="fas fa-bell"></i>Private</option>
             </select>
             <select class="type" required>
-            <option value="preguntas"><i></i>Preguntas</option>
-            <option value="trabajo"><i></i>Oferta Laboral</option>
-            <option value="evento"><i></i>Eventos</option>
-            <option value="curso" ><i></i>Cursos</option>
+            <option value="preguntas"><i></i>Question</option>
+            <option value="trabajo"><i></i>Job offer</option>
+            <option value="evento"><i></i>Event</option>
+            <option value="curso" ><i></i>Course</option>
             <option value="tutorial"><i></i>Tutorial</option>
         </select>
         </div>
