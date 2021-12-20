@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import {
-  deletePost, obtenerInfo, updatePost, readComment, saveComment, updateLikePost,
+  deletePost, obtenerInfo, updatePost, readComment, saveComment, saveLike, readLikes, deleteLike,
 } from '../firebase/firestore.js';
 
 import { templateComents } from './templateComments.js';
@@ -59,13 +59,15 @@ export const template = (post) => {
 
   post.forEach((one) => {
     const idPost = one.idP;
-    // const arrOfUsers = one.likes[0].users;
-    // const likeIcon = arrOfUsers.includes(user.uid) ? 'fas' : 'far';
-    // const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
-    // const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
-    // parrafoCountLikes.innerHTML = `${arrOfUsers.length}`;
-    // iconLikes.classList.add(likeIcon);
-
+    const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
+    const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
+    readLikes((likes) => {
+      const num = likes.length;
+      parrafoCountLikes.innerHTML = num;
+      if (num > 0) {
+        iconLikes.className = 'fas fa-heart icon';
+      }
+    }, idPost);
     const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
     readComment((comments) => {
       const num = comments.length;
@@ -174,30 +176,22 @@ export const template = (post) => {
     });
   });
 
+  const nameUser = user.displayName;
+
   nuevoElemento.querySelectorAll('.fa-heart').forEach((like) => {
     like.addEventListener('click', (e) => {
       const postId = e.target.parentNode.parentNode.id;
-      const currentPost = post.filter((postElement) => postElement.idP === postId);
-      const arrOfUsers = currentPost[0].likes[0].users;
-      const cant = e.target.nextElementSibling;
-
-      function removeItemFromArr(arr, item) {
-        const j = arr.indexOf(item);
-        if (j !== -1) {
-          arr.splice(j, 1);
-        }
-      }
-
-      if (arrOfUsers.includes(user.uid)) {
-        // e.target.classList.toggle('fas');
-        removeItemFromArr(arrOfUsers, user.uid);
-        updateLikePost(postId, arrOfUsers);
+      if (e.target.className === 'far fa-heart icon') {
+        e.target.className = 'fas fa-heart icon';
+        console.log(e.target.className);
+        saveLike(postId, uidUser, nameUser);
+        console.log('crea');
       } else {
-        // e.target.classList.toggle('fas');
-        arrOfUsers.push(user.uid);
-        updateLikePost(postId, arrOfUsers);
+        e.target.className = 'far fa-heart icon';
+        console.log(e.target.className);
+        deleteLike(postId, uidUser);
+        console.log('borra');
       }
-      cant.innerHTML = arrOfUsers.length;
     });
   });
 

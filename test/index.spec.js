@@ -1,21 +1,44 @@
+/**
+ * @jest-environment jsdom
+ */
 // importamos la funcion que vamos a testear
+import MockFirebase from 'mock-cloud-firestore';
 import { loginEmail, loginGoogle } from '../src/firebase/firebase-auth.js';
+// firebase es una variable global
 
-const firebasemock = require('firebase-mock');
+jest.mock('../src/firebase/firebase-auth.js', () => ({
+  loginEmail: jest.fn(() => Promise.resolve({
+    user: {
+      emailVerified: true,
+    },
 
-const mockauth = new firebasemock.MockFirebase();
-mockauth.autoFlush();
+  })),
+  loginGoogle: jest.fn(() => Promise.resolve()),
+}));
 
-global.firebase = firebasemock.MockFirebaseSdk(
-  // use null if your code does not use RTDB
-  () => null,
-  () => mockauth,
-);
+const fixtureData = {
+  __collection__: {
+    user: {
+      __doc__: {
+        user_a: {
+          about: 'about',
+          name: 'user_a',
+        },
+      },
+    },
+  },
+};
 
+window.firebase = new MockFirebase(fixtureData);
 describe('myFunction', () => {
   it('debería ser una función', () => {
     expect(typeof loginEmail).toBe('function');
   });
+  it('Debería estar verificado', () => loginEmail('nicol@gmail.com', '123456')
+    .then((userCredential) => {
+      const user = userCredential.user;
+      expect(user.emailVerified).toBe(true);
+    }));
 });
 
 describe('Function', () => {
