@@ -4,7 +4,6 @@ import {
   getDoc,
   setDoc,
   collection,
-  getDocs,
   addDoc,
   onSnapshot,
   query,
@@ -21,8 +20,26 @@ export const getUserDoc = (docRef) => getDoc(docRef);
 export const setUserDoc = (docs, obj) => setDoc(docs, obj);
 export const updateUserDoc = (docRef, obj) => updateDoc(docRef, obj);
 
+export const getUsers = () => {
+  const q = query(collection(db, 'usuarios'));
+  return new Promise((resolve) => {
+    onSnapshot(q, (querySnapshot) => {
+      const users = [];
+      querySnapshot.forEach((docUser) => {
+        const objectUser = { };
+        objectUser.name = docUser.data().name;
+        objectUser.userUID = docUser.id;
+        objectUser.photo = docUser.data().photo;
+        users.push(objectUser);
+      });
+      resolve(users);
+    });
+  });
+};
+
 // /* ------------------  POSTS  --------------------- */
 let unsubscribe;
+
 export const readData = (callback) => {
   const q = query(collection(db, 'post'), where('privacity', '==', 'amigos'), orderBy('date', 'desc'));
   unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -61,23 +78,19 @@ export const getDataPostType = (callback, type) => {
     // console.log(posts);
   });
 };
-
 export const getUnsubscribe = () => unsubscribe;
 
-export const getUsers = () => {
-  const q = query(collection(db, 'usuarios'));
-  return new Promise((resolve) => {
-    onSnapshot(q, (querySnapshot) => {
-      const users = [];
-      querySnapshot.forEach((docUser) => {
-        const objectUser = { };
-        objectUser.name = docUser.data().name;
-        objectUser.userUID = docUser.id;
-        objectUser.photo = docUser.data().photo;
-        users.push(objectUser);
-      });
-      resolve(users);
-    });
+export const savePost = (postDescription, userID, imgULR, Privacity, Type) => {
+  addDoc(collection(db, 'post'), {
+    message: postDescription.value,
+    userId: userID,
+    img: imgULR,
+    likes: [{
+      users: [],
+    }],
+    date: Date.now(),
+    privacity: Privacity,
+    type: Type,
   });
 };
 
@@ -95,16 +108,19 @@ export const updatePost = (id, postEdit) => {
   });
 };
 
+// /* ----------------- LIKES ----------------- */
 export const saveLike = (id, userId, userName) => {
   setDoc(doc(db, 'post', id, 'likes', userId), {
     user: userName,
     date: Date.now(),
   });
 };
+
+let unsubscribeLikes;
 export const readLikes = (callback, id) => {
   const q = query(collection(db, 'post', id, 'likes'), orderBy('date', 'desc'));
-  return new Promise((resolve, reject) => {
-    onSnapshot(q, (querySnapshot) => {
+  return new Promise((resolve) => {
+    unsubscribeLikes = onSnapshot(q, (querySnapshot) => {
       const likes = [];
       querySnapshot.forEach((docC) => {
         const objectLikes = { };
@@ -113,25 +129,13 @@ export const readLikes = (callback, id) => {
         likes.push(objectLikes);
       });
       resolve(callback(likes, id));
-      // reject(console.log('error'));
     });
   });
 };
+export const getUnsubscribeLikes = () => unsubscribeLikes;
+
 export const deleteLike = (id, userId) => {
   deleteDoc(doc(db, 'post', id, 'likes', userId));
-};
-export const savePost = (postDescription, userID, imgULR, Privacity, Type) => {
-  addDoc(collection(db, 'post'), {
-    message: postDescription.value,
-    userId: userID,
-    img: imgULR,
-    likes: [{
-      users: [],
-    }],
-    date: Date.now(),
-    privacity: Privacity,
-    type: Type,
-  });
 };
 
 // /* ----------------- COMENTARIOS ----------------- */
@@ -144,7 +148,6 @@ export const saveComment = (id, comentario, uid) => {
 };
 
 let unsubscribeComments;
-
 export const readComment = (callback, id) => {
   const q = query(collection(db, 'post', id, 'comments'), orderBy('date', 'desc'));
   return new Promise((resolve) => {
@@ -161,7 +164,6 @@ export const readComment = (callback, id) => {
     });
   });
 };
-
 export const getUnsubscribeComments = () => unsubscribeComments;
 
 // export const countComment = (id) => {
@@ -189,8 +191,8 @@ export const deleteComment = (id, idComment) => {
   deleteDoc(doc(db, 'post', id, 'comments', idComment));
 };
 
-let unsubscribePostProfile;
 // /* -------------------- PERFIL -------------------- */
+let unsubscribePostProfile;
 export const leerPostProfile = (callback, uid) => {
   const qP = query(collection(db, 'post'), where('userId', '==', `${uid}`));
   unsubscribePostProfile = onSnapshot(qP, (querySnapshot) => {
@@ -206,7 +208,6 @@ export const leerPostProfile = (callback, uid) => {
     console.log(postP);
   });
 };
-
 export const getUnsubscribePostProfile = () => unsubscribePostProfile;
 
 export const readPostProfile = (uid) => {
