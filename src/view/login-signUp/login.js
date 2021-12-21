@@ -62,9 +62,7 @@ export const Login = () => {
 export const handleSubmit = (e) => {
   e.preventDefault();
   const email = e.target.querySelector('#login-email').value;
-  // const email = document.querySelector('#login-email').value;
   const password = e.target.querySelector('#login-password').value;
-  // const password = document.querySelector('#login-password').value;
 
   loginEmail(email, password)
     .then((userCredential) => {
