@@ -5,7 +5,7 @@ import {
   updateUserDoc,
   getUnsubscribe,
   getUnsubscribeComments,
-  getUsers,
+  getUnsubscribeLikes,
   getUnsubscribePostProfile,
   getDataPostType,
 } from '../firebase/firestore.js';
@@ -135,8 +135,8 @@ export const FunctionsHome = () => {
       const info = document.getElementById('infoUser');
       info.innerHTML = `${userInfo.name}`;
       document.getElementById('photoUser').src = `${userInfo.photo}`;
-      document.getElementById('ocupation').innerHTML=`${userInfo.career}`;
-      document.getElementById('about').innerHTML=`${userInfo.about}`;
+      document.getElementById('ocupation').innerHTML = `${userInfo.career}`;
+      document.getElementById('about').innerHTML = `${userInfo.about}`;
     }
     console.log(docSnap.data());
   }
@@ -160,10 +160,9 @@ export const FunctionsHome = () => {
     if (btnOut === 'out') {
       logout()
         .then(() => {
-          const unsb = getUnsubscribe();
-          unsb();
-          const unsbComments = getUnsubscribeComments();
-          unsbComments();
+          getUnsubscribe();
+          getUnsubscribeComments();
+          getUnsubscribeLikes();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -173,10 +172,9 @@ export const FunctionsHome = () => {
     } else if (btnOut === 'logout-mob') {
       logout()
         .then(() => {
-          const unsb = getUnsubscribe();
-          unsb();
-          const unsbComments = getUnsubscribeComments();
-          unsbComments();
+          getUnsubscribe();
+          getUnsubscribeComments();
+          getUnsubscribeLikes();
           console.log('log out');
           window.location.hash = '#/';
         })
@@ -201,6 +199,5 @@ export const FunctionsHome = () => {
   document.querySelector('#closeDelete').addEventListener('click', () => {
     document.querySelector('.modalDelete').classList.remove('revelar');
   });
-  const Unsubscribe = getUnsubscribePostProfile();
-  Unsubscribe();
+  getUnsubscribePostProfile();
 };

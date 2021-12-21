@@ -91,8 +91,7 @@ export const FunctionProfile = () => {
     document.getElementById('container-footer').style.display = 'none';
   });
 
-  const unsb = getUnsubscribe();
-  unsb();
+  getUnsubscribe();
 };
 
 // export const showPostProfile = () => {
