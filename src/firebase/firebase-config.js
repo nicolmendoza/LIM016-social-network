@@ -5,7 +5,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js';
 import { getAuth } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+import { getFirestore, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 // import {
 //   getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
@@ -27,3 +27,5 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const db = getFirestore();
 export const auth = getAuth();
+
+export { signInWithEmailAndPassword };

@@ -20,10 +20,7 @@ export const Home = () => {
   const divElement = document.createElement('div');
   divElement.classList.add('container-home');
   divElement.innerHTML = `
-
-
   
-
   <div class="section-home">
     <div id="section-User">
       <div class="container-info-users">
@@ -61,7 +58,6 @@ export const Home = () => {
   <div id="showPost">
   </div>
   </div>
-
 <div class="sectionTypes">
 <div class="container-info-users">
   <div id="header-categories" >
@@ -69,27 +65,22 @@ export const Home = () => {
   <p id="todos">See All</p>
   </div>
   <div id="botones-types">
-
     <div class="div-type">
     <img class="img-types" src="./img/ofertaLaboral.jpg">
     <button value="trabajo"  class="btn-type">Job Offer</button>
     </div>
-
     <div class="div-type">
     <img class="img-types" src="./img/evento.jpg">
     <button value="evento"  class="btn-type">Events</button>
     </div>
-
     <div class="div-type">
     <img class="img-types" src="./img/cursos.jpg">
     <button value="curso"  class="btn-type">Courses</button>
     </div>
-
     <div class="div-type">
     <img class="img-types" src="./img/tutorial.jpg">
     <button value="tutorial" class="btn-type">Tutorials</button>
     </div>
-
     <div class="div-type">
     <img class="img-types" src="./img/preguntas.jpg">
     <button value="preguntas" class="btn-type">Questions</button>
@@ -98,9 +89,7 @@ export const Home = () => {
   </div>
   </div>
   </div>
-
 </div>
-
  <section class="modalNewPost" style="display: none">
       <div class="modalDivPost">
       <div class="modalContainer-NewPost">
