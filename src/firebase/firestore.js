@@ -11,8 +11,8 @@ import {
   deleteDoc,
   updateDoc,
   where,
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
-import { db } from './firebase-config.js';
+  db,
+} from './firebase-config.js';
 
 export { doc, setDoc };
 

@@ -18,7 +18,21 @@ import {
   onAuthStateChanged,
   // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy,
+  deleteDoc,
+  updateDoc,
+  where,
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 // import {
 //   getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
@@ -56,3 +70,17 @@ export {
   getAnalytics,
   getAuth,
 };
+export {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy,
+  deleteDoc,
+  updateDoc,
+  where,
+}
