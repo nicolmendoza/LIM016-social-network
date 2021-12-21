@@ -1,0 +1,35 @@
+// // import { saveAbout } from '../../src/lib/crud';
+// // import {
+// //   setDoc,
+// //   doc
+// // } from '../../src/firebase';
+
+// // jest.mock('../../src/firebase');
+
+// // describe('saveAbout', () => {
+// //   fit('funciona', (done) => {
+// //     const res = saveAbout('Fake about');
+// //     res.then((result) => {
+// //       expect(result).toStrictEqual({ about: 'Fake about' });
+
+// //       expect(doc.mock.calls[0][1]).toBe('usuarios');
+// //       expect(doc.mock.calls[0][2]).toBe('fake-user-id');
+
+// //       expect(typeof setDoc.mock.calls[0][0]).toBe('object');
+
+// //     });
+// //     done();
+// //   });
+// //   it('funciona', async () => {
+// //     const result = await saveAbout('Fake about');
+// //     expect(result).toStrictEqual({ about: 'Fake about' });
+
+// //     expect(doc.mock.calls[0][1]).toBe('usuarios');
+// //     expect(doc.mock.calls[0][2]).toBe('fake-user-id');
+
+// //     expect(typeof setDoc.mock.calls[0][0]).toBe('object');
+// //   });
+// //   it('falla si no recibe argumentos', () => {
+
+// //   });
+// // });

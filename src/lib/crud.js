@@ -11,3 +11,8 @@
 //     about: About,
 //   });
 // };
+// import { auth } from '../firebase/firebase-config.js';
+
+// import { signInWithEmailAndPassword } from '../firebase/firebase-auth';
+
+// export const loginEmail = (email, password) => signInWithEmailAndPassword(auth, email, password);

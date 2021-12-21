@@ -15,6 +15,8 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 import { db } from './firebase-config.js';
 
+export { doc, setDoc };
+
 // /* -------------- DATOS DE USUARIO -------------- */
 export const userDocRef = (nameDoc, currentUserId) => doc(db, nameDoc, currentUserId);
 export const getUserDoc = (docRef) => getDoc(docRef);
