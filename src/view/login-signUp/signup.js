@@ -51,36 +51,35 @@ export const SignUp = () => {
   return viewSignUp;
 };
 
-export const Register = () => {
-  const signupForm = document.querySelector('#signup-form');
+/* ...........Errores para registrase.......... */
+function errorOccurs(typeError) {
   const emailMessage = document.getElementById('emailMessage');
   const passwordMessage = document.getElementById('passwordMessage');
-
-  /* ...........Errores para registrase.......... */
-  function errorOccurs(typeError) {
-    const errorCode = typeError.code;
-    switch (errorCode) {
-      case 'auth/invalid-email':
-        emailMessage.innerHTML = 'La dirección de correo electrónico no es válida';
-        break;
-      case 'auth/email-already-in-use':
-        emailMessage.innerHTML = 'Esta dirección de correo está en uso.';
-        break;
-      case 'auth/weak-password':
-        passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
-        break;
-      default:
-        console.log(typeError);
-        alert('Lo sentimos, se ha producido un error en la página.');
-    }
+  const errorCode = typeError.code;
+  switch (errorCode) {
+    case 'auth/invalid-email':
+      emailMessage.innerHTML = 'La dirección de correo electrónico no es válida';
+      break;
+    case 'auth/email-already-in-use':
+      emailMessage.innerHTML = 'Esta dirección de correo está en uso.';
+      break;
+    case 'auth/weak-password':
+      passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
+      break;
+    default:
+      console.log(typeError);
+      alert('Lo sentimos, se ha producido un error en la página.');
   }
+}
+
+export const Register = () => {
+  const signupForm = document.querySelector('#signup-form');
 
   /* .......Registrarse con correo y contraseña...... */
   signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.querySelector('#signup-email').value;
     const password = document.querySelector('#signup-password').value;
-    // const name = document.querySelector('#signup-password').value;
 
     createUser(email, password)
       .then((userCredential) => {
@@ -95,7 +94,6 @@ export const Register = () => {
       })
       .catch((error) => {
         errorOccurs(error);
-        console.log(error.code);
       });
   });
 

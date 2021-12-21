@@ -59,12 +59,31 @@ export const Login = () => {
   return viewHome;
 };
 
+function errorOccurs(typeError) {
+  const message = document.getElementById('generalMessage');
+  const errorCode = typeError.code;
+  switch (errorCode) {
+    case 'auth/user-not-found':
+      message.innerHTML = 'Usuario no encontrado';
+      break;
+    case 'auth/wrong-password':
+      message.innerHTML = 'Contraseña incorrecta.';
+      break;
+    case 'auth/too-many-requests':
+      message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+      break;
+    case 'auth/invalid-email':
+      message.innerHTML = 'La dirección de correo electrónico no es válida';
+      break;
+    default:
+      message.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
+  }
+}
+
 export const handleSubmit = (e) => {
   e.preventDefault();
   const email = e.target.querySelector('#login-email').value;
-  // const email = document.querySelector('#login-email').value;
   const password = e.target.querySelector('#login-password').value;
-  // const password = document.querySelector('#login-password').value;
 
   loginEmail(email, password)
     .then((userCredential) => {
@@ -79,40 +98,15 @@ export const handleSubmit = (e) => {
       }
     })
     .catch((error) => {
-      // errorOccurs(error);
-      console.error(error);
+      errorOccurs(error);
     });
 };
 
 export const initLogin = () => {
   const signInForm = document.querySelector('#login-form');
-  /* ................................... */
   const googleLogin = document.querySelector('#googleLogin');
   const facebookLogin = document.querySelector('#facebookLogin');
   const githubLogin = document.getElementById('githubLogin');
-  /* ................................... */
-  const message = document.getElementById('generalMessage');
-
-  /* ........Errorres para ingresar....... */
-  function errorOccurs(typeError) {
-    const errorCode = typeError.code;
-    switch (errorCode) {
-      case 'auth/user-not-found':
-        message.innerHTML = 'Usuario no encontrado';
-        break;
-      case 'auth/wrong-password':
-        message.innerHTML = 'Contraseña incorrecta.';
-        break;
-      case 'auth/too-many-requests':
-        message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
-        break;
-      case 'auth/invalid-email':
-        message.innerHTML = 'La dirección de correo electrónico no es válida';
-        break;
-      default:
-        message.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
-    }
-  }
 
   /* .........Logearse con correo........ */
   signInForm.addEventListener('submit', handleSubmit);
@@ -169,5 +163,4 @@ export const initLogin = () => {
       icon.classList.add('fa-eye-slash');
     }
   });
-  /* ........Verificar si el usuario existe............. */
 };
