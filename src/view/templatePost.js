@@ -59,15 +59,16 @@ export const template = (post) => {
 
   post.forEach((one) => {
     const idPost = one.idP;
-    // const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
+    const iconLikes = nuevoElemento.querySelector(`#iconLikes${idPost}`);
     const parrafoCountLikes = nuevoElemento.querySelector(`#likes${idPost}`);
     readLikes((likes) => {
       const num = likes.length;
       parrafoCountLikes.innerHTML = num;
-      /*       if (num > 0) {
+      if (likes[0] !== undefined) {
         iconLikes.className = 'fas fa-heart icon';
-      } */
+      }
     }, idPost);
+
     const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
     readComment((comments) => {
       const num = comments.length;
@@ -183,12 +184,10 @@ export const template = (post) => {
       const postId = e.target.parentNode.parentNode.id;
       if (e.target.className === 'far fa-heart icon') {
         e.target.className = 'fas fa-heart icon';
-        console.log(e.target.className);
         saveLike(postId, uidUser, nameUser);
         console.log('crea');
       } else {
         e.target.className = 'far fa-heart icon';
-        console.log(e.target.className);
         deleteLike(postId, uidUser);
         console.log('borra');
       }

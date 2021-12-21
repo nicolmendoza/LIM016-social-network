@@ -4,8 +4,21 @@
 // Initialize Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-import { getFirestore, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
+import {
+  getAuth,
+  signOut,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
+  sendPasswordResetEmail,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  onAuthStateChanged,
+  // eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
+import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js';
 
 // import {
 //   getStorage, ref as sRef, uploadBytesResumable, getDownloadURL,
@@ -23,9 +36,23 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const app = initializeApp(firebaseConfig);
+export const analytics = getAnalytics(app);
 export const db = getFirestore();
 export const auth = getAuth();
 
-export { signInWithEmailAndPassword };
+export {
+  signOut,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
+  sendPasswordResetEmail,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  onAuthStateChanged,
+  initializeApp,
+  getAnalytics,
+  getAuth,
+};
