@@ -1,4 +1,5 @@
 import {
+  auth,
   signOut,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -10,9 +11,7 @@ import {
   sendEmailVerification,
   onAuthStateChanged,
   // eslint-disable-next-line import/no-unresolved
-} from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
-
-import { auth } from './firebase-config.js';
+} from './firebase-config.js';
 
 export const currentUser = () => auth;
 
