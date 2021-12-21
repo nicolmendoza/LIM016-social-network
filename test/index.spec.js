@@ -29,12 +29,12 @@ describe('myFunction', () => {
 
 describe('Function', () => {
   it('debería ser una función', (done) => {
-    const res = loginGoogle(GoogleAuthProvider);
+    const providerGoogle = GoogleAuthProvider;
+    const res = loginGoogle(providerGoogle);
     res.then(() => {
       console.log(signInWithPopup.mock);
       console.log(signInWithPopup.mock.calls);
-      expect(signInWithPopup.mock.calls[0][1]).toBe('merly');
-      expect(signInWithPopup.mock.calls[0][2]).toBe('merly@gmail.com');
+      expect(signInWithPopup.mock.calls[0][1]).toBe('google');
     });
     done();
   });
