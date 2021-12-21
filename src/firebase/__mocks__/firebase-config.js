@@ -24,18 +24,24 @@ const auth = {
     uid: 'fake-user-id',
   },
 };
+const userCurrent = auth.currentUser;
 // export const setDoc = jest.fn((document, values) => Promise.resolve(values));
 // export const doc = jest.fn((db, collection, docId) => Promise.resolve({}));
 // export const db = {};
 
 // eslint-disable-next-line max-len
+const sendEmailVerification = jest.fn((userCurrent) => Promise.resolve());
+const sendPasswordResetEmail = jest.fn((auth, email) => Promise.resolve());
 const signInWithEmailAndPassword = jest.fn((auth, email, password) => Promise.resolve({}));
-
+const signOut = jest.fn((auth) => Promise.resolve());
 export {
+  signOut,
   signInWithEmailAndPassword,
   signInWithPopup,
   auth,
   GithubAuthProvider,
   FacebookAuthProvider,
   GoogleAuthProvider,
+  sendEmailVerification,
+  sendPasswordResetEmail,
 };
