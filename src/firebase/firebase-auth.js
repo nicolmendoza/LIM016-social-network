@@ -38,8 +38,5 @@ export const resetPasswordFirebase = (email) => sendPasswordResetEmail(auth, ema
 /** ********SIGN OUT***** */
 export const logout = () => signOut(auth);
 
-/** ********VERIFICAR EMAIL***** */
-export const emailVerify = () => sendEmailVerification(auth.currentUser);
-
 /** ********CAMBIO DE SESION***** */
 export const stateChanged = (callback) => onAuthStateChanged(auth, callback);
