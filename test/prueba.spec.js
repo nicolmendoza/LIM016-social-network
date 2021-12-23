@@ -1,4 +1,7 @@
-import { loginEmail } from '../src/firebase/__mocks__/firebase-config.js';
+import {
+  loginEmail,
+  signInWithEmailAndPassword,
+} from '../src/firebase/firebase-config';
 
 import { handleSubmit } from '../src/view/login-signUp/login.js';
 
@@ -23,13 +26,6 @@ describe('SignIn', () => {
             return 'password';
           }
           loginEmail('email', 'password').then((userCredential) => {
-            console.log(userCredential);
-            const user = userCredential.user;
-            if (user.emailVerified === true) {
-              console.log(userCre);
-            } else {
-              alert('Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.');
-            }
             expect(signInWithEmailAndPassword.mock.calls[0][1]).toBe('email');
             expect(signInWithEmailAndPassword.mock.calls[0][2]).toBe('password');
           });
