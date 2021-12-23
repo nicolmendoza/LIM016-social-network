@@ -64,7 +64,7 @@ export const handleSubmit = (e) => {
   const email = e.target.querySelector('#login-email').value;
   const password = e.target.querySelector('#login-password').value;
 
-  loginEmail(email, password)
+  return loginEmail(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       if (user.emailVerified === true) {
@@ -77,7 +77,6 @@ export const handleSubmit = (e) => {
       }
     })
     .catch((error) => {
-      // errorOccurs(error);
       console.log(error);
     });
 };

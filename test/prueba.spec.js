@@ -1,42 +1,36 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import {
   loginEmail,
-  signInWithEmailAndPassword,
-} from '../src/firebase/firebase-config';
+} from '../src/firebase/firebase-auth';
 
 import { handleSubmit } from '../src/view/login-signUp/login.js';
 
-const jsdom = require('jsdom');
-
-const { JSDOM } = jsdom;
-
 jest.mock('../src/firebase/firebase-config');
+jest.mock('../src/firebase/firebase-auth');
 
-describe('SignIn', () => {
-//   it('Al hacer click se llama func sign in', () => {
-//     const dom = new JSDOM(`<! DOCTYPE html>
-//     <form  id="login-form"></form>`);
-  it('handleSubmit', () => {
+describe('handleSubmit', () => {
+  beforeAll((done) => {
+    document.body.innerHTML = '';
+    done();
+  });
+
+  it('handleSubmit', (done) => {
+    document.body.innerHTML = `
+    <input type="email" id="login-email"   value='email@gmail.com' >
+    <input type="password" id="login-password"   value='password'> `;
+    console.log(document.querySelector('#login-password'));
     handleSubmit({
       preventDefault: () => {},
-      target: {
-        querySelector: (sel) => {
-          if (sel === '#login-email') {
-            return 'correo@email.com';
-          } if (sel === '#login-password') {
-            return 'password';
-          }
-          loginEmail('email', 'password').then((userCredential) => {
-            expect(signInWithEmailAndPassword.mock.calls[0][1]).toBe('email');
-            expect(signInWithEmailAndPassword.mock.calls[0][2]).toBe('password');
-          });
-        },
-      },
+
+    }).then(() => {
+      console.log(document.querySelector('#login-password'));
+      console.log(loginEmail.mock.calls);
+      // expect(loginEmail.mock.calls[0][1]).toBe('email@gmail.com');
+      // expect(loginEmail.mock.calls[0][2]).toBe('password');
+      done();
     });
   });
-  // dom.window.document.querySelector('#login-form').addEventListener('submit',
-  //   loginEmail('email', 'password').then((userCredential) => {
-  //     expect(signInWithEmailAndPassword.mock.calls[0][1]).toBe('email');
-  //     expect(signInWithEmailAndPassword.mock.calls[0][2]).toBe('password');
-  //   })); // "Hola Mundo"
 });
-// });

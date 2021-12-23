@@ -34,24 +34,27 @@ export const resetPassword = () => {
   return viewResetPassword;
 };
 
+export const handleReset = (e) => {
+  e.preventDefault();
+
+  const email = document.querySelector('#resetEmail').value;
+  resetPasswordFirebase(email)
+    .then(() => {
+      console.log('Reset Password successful');
+      document.querySelector('.modalReset').style.display = 'flex';
+      const emailText = document.querySelector('.emailText');
+      emailText.innerHTML = `${email}`;
+    })
+    .catch((err) => {
+      const error = err.code;
+      console.log(error);
+    });
+};
+
 export const resetPasswordInit = () => {
   const resetP = document.querySelector('#resetPasswordBtn');
 
-  resetP.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.querySelector('#resetEmail').value;
-    resetPasswordFirebase(email)
-      .then(() => {
-        console.log('Reset Password successful');
-        document.querySelector('.modalReset').style.display = 'flex';
-        const emailText = document.querySelector('.emailText');
-        emailText.innerHTML = `${email}`;
-      })
-      .catch((err) => {
-        const error = err.code;
-        console.log(error);
-      });
-  });
+  resetP.addEventListener('submit', handleReset);
 
   document.querySelector('.far').addEventListener('click', () => {
     document.querySelector('.modalReset').style.display = 'none';

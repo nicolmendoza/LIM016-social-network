@@ -45,7 +45,6 @@ describe('Function logout', () => {
       } catch (error) {
         console.log(error);
       }
-      console.log(signOut.mock);
       // expect(logout.mock.calls).toBe(undefined);
     });
     done();
@@ -73,13 +72,33 @@ describe('Function reset', () => {
     const res = resetPasswordFirebase('email@gmail.com');
     res.then(() => {
       expect(sendPasswordResetEmail.mock.calls[0][1]).toBe('email@gmail.com');
-
-      console.log(sendPasswordResetEmail.mock);
     });
     done();
   });
 });
 
+// test de firestore.js';'
+// describe('savePost', () => {
+//   it('funciona', () => {
+//     const result = savePost('Fake post', 'fake user', 'fake img', 'public', 'event');
+//     expect(result).toBe({
+//       message: 'Fake post',
+//       userId: 'fake user',
+//       img: 'fake img',
+//       likes: [{
+//         users: [],
+//       }],
+//       date: Date.now(),
+//       privacity: 'public',
+//       type: 'event',
+//     });
+
+//     expect(collection.mock.calls[0][1]).toBe('post');
+//     expect(collection.mock.calls[0][2]).toBe('fake-user-id');
+
+//     expect(typeof addDoc.mock.calls[0][0]).toBe('object');
+//   });
+// });
 describe('Function onAuth', () => {
   it('debería ser una función', (done) => {
     const res = stateChanged('callback');
