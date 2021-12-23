@@ -38,7 +38,7 @@ const signInWithEmailAndPassword = jest.fn((auth, email, password) => Promise.re
         emailVerified: true,
       },
     },
-  }
+  },
 ));
 // const loginEmail = jest.fn(() => Promise.resolve({
 //   userCredential: {
@@ -68,5 +68,4 @@ export {
   sendPasswordResetEmail,
   sendEmailVerification,
   onAuthStateChanged,
-  loginEmail,
 };
