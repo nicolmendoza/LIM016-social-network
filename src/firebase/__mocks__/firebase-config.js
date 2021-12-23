@@ -31,14 +31,22 @@ const userCurrent = auth.currentUser;
 // eslint-disable-next-line max-len
 const sendEmailVerification = jest.fn((userCurrent) => Promise.resolve());
 const sendPasswordResetEmail = jest.fn((auth, email) => Promise.resolve());
-const signInWithEmailAndPassword = jest.fn((auth, email, password) => Promise.resolve());
-const loginEmail = jest.fn(() => Promise.resolve({
-  userCredential: {
-    user: {
-      emailVerified: true,
+const signInWithEmailAndPassword = jest.fn((auth, email, password) => Promise.resolve(
+  {
+    userCredential: {
+      user: {
+        emailVerified: true,
+      },
     },
-  },
-}));
+  }
+));
+// const loginEmail = jest.fn(() => Promise.resolve({
+//   userCredential: {
+//     user: {
+//       emailVerified: true,
+//     },
+//   },
+// }));
 
 const onAuthStateChanged = jest.fn((auth, callback) => Promise.resolve({}));
 const currentUser = jest.fn((auth) => Promise.resolve());
