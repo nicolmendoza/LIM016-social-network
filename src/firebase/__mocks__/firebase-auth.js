@@ -4,7 +4,7 @@ const auth = {
   },
 };
 
-const resetPasswordFirebase = jest.fn(() => Promise.resolve({}));
+const resetPasswordFirebase = jest.fn(() => Promise.resolve());
 
 // export const loginEmail = jest.fn(() => Promise.resolve({
 //   user: {

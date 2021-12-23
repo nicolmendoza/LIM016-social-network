@@ -51,6 +51,8 @@ export const SignUp = () => {
   return viewSignUp;
 };
 
+
+
 export const Register = () => {
   const signupForm = document.querySelector('#signup-form');
   const emailMessage = document.getElementById('emailMessage');
