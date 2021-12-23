@@ -17,3 +17,26 @@ jest.mock('../../../src/firebase/firestore.js');
 //     },
 //   });
 // });
+
+// test de firestore.js';'
+// describe('savePost', () => {
+//   it('funciona', () => {
+//     const result = savePost('Fake post', 'fake user', 'fake img', 'public', 'event');
+//     expect(result).toBe({
+//       message: 'Fake post',
+//       userId: 'fake user',
+//       img: 'fake img',
+//       likes: [{
+//         users: [],
+//       }],
+//       date: Date.now(),
+//       privacity: 'public',
+//       type: 'event',
+//     });
+
+//     expect(collection.mock.calls[0][1]).toBe('post');
+//     expect(collection.mock.calls[0][2]).toBe('fake-user-id');
+
+//     expect(typeof addDoc.mock.calls[0][0]).toBe('object');
+//   });
+// });

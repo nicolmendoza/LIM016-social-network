@@ -78,7 +78,7 @@ export const handleSubmit = (e) => {
     })
     .catch((error) => {
       // errorOccurs(error);
-      console.error(error);
+      console.log(error);
     });
 };
 

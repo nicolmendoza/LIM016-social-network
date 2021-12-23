@@ -2,19 +2,13 @@
 // import { loginEmail, loginGoogle } from '../src/firebase/firebase-auth.js';
 
 import {
-  loginEmail, logout, emailVerify, resetPasswordFirebase,
+  loginEmail, logout, verificationEmail, resetPasswordFirebase, stateChanged,
 } from '../src/firebase/firebase-auth';
 
 import {
   signInWithEmailAndPassword,
-  signOut, sendEmailVerification, sendPasswordResetEmail,
-  addDoc,
-  collection,
+  signOut, sendEmailVerification, sendPasswordResetEmail, onAuthStateChanged,
 } from '../src/firebase/firebase-config';
-
-import {
-  savePost,
-} from '../src/firebase/firestore';
 
 jest.mock('../src/firebase/firebase-config');
 
@@ -60,7 +54,7 @@ describe('Function logout', () => {
 
 describe('Function emailVeri', () => {
   it('debería ser una función', (done) => {
-    const res = emailVerify();
+    const res = verificationEmail();
     res.then(() => {
       try {
         expect(sendEmailVerification.mock).toBe(undefined);
@@ -86,25 +80,13 @@ describe('Function reset', () => {
   });
 });
 
-// test de firestore.js';'
-describe('savePost', () => {
-  it('funciona', () => {
-    const result = savePost('Fake post', 'fake user', 'fake img', 'public', 'event');
-    expect(result).toBe({
-      message: 'Fake post',
-      userId: 'fake user',
-      img: 'fake img',
-      likes: [{
-        users: [],
-      }],
-      date: Date.now(),
-      privacity: 'public',
-      type: 'event',
+describe('Function onAuth', () => {
+  it('debería ser una función', (done) => {
+    const res = stateChanged('callback');
+    res.then(() => {
+      expect(onAuthStateChanged.mock.calls[0][1]).toBe('callback');
+      console.log(onAuthStateChanged.mock);
     });
-
-    expect(collection.mock.calls[0][1]).toBe('post');
-    expect(collection.mock.calls[0][2]).toBe('fake-user-id');
-
-    expect(typeof addDoc.mock.calls[0][0]).toBe('object');
+    done();
   });
 });
