@@ -72,30 +72,32 @@ function errorOccurs(typeError) {
   }
 }
 
+export const handleRegister = (e) => {
+  e.preventDefault();
+  const email = document.querySelector('#signup-email').value;
+  const password = document.querySelector('#signup-password').value;
+
+  createUser(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      if (!user.emailVerified) {
+        alert('Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja');
+        verificationEmail()
+          .then(() => {
+            window.location.hash = '#/';
+          });
+      }
+    })
+    .catch((error) => {
+      errorOccurs(error);
+    });
+};
+
 export const Register = () => {
   const signupForm = document.querySelector('#signup-form');
 
   /* .......Registrarse con correo y contraseña...... */
-  signupForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.querySelector('#signup-email').value;
-    const password = document.querySelector('#signup-password').value;
-
-    createUser(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        if (!user.emailVerified) {
-          alert('Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja');
-          verificationEmail()
-            .then(() => {
-              window.location.hash = '#/';
-            });
-        }
-      })
-      .catch((error) => {
-        errorOccurs(error);
-      });
-  });
+  signupForm.addEventListener('submit', handleRegister);
 
   /* .....Función ocultar y mostrar contraseña..... */
   const iconEye = document.querySelector('#icon-eye');

@@ -59,24 +59,24 @@ export const Login = () => {
   return viewHome;
 };
 
-function errorOccurs(typeError) {
-  const message = document.getElementById('generalMessage');
+function errorOccurs(typeError, text) {
   const errorCode = typeError.code;
+  const textMessage = text;
   switch (errorCode) {
     case 'auth/user-not-found':
-      message.innerHTML = 'Usuario no encontrado';
+      textMessage.innerHTML = 'Usuario no encontrado';
       break;
     case 'auth/wrong-password':
-      message.innerHTML = 'Contraseña incorrecta.';
+      textMessage.innerHTML = 'Contraseña incorrecta.';
       break;
     case 'auth/too-many-requests':
-      message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+      textMessage.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
       break;
     case 'auth/invalid-email':
-      message.innerHTML = 'La dirección de correo electrónico no es válida';
+      textMessage.innerHTML = 'La dirección de correo electrónico no es válida';
       break;
     default:
-      message.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
+      textMessage.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
   }
 }
 
@@ -98,7 +98,8 @@ export const handleSubmit = (e) => {
       }
     })
     .catch((error) => {
-      errorOccurs(error);
+      const message = document.getElementById('generalMessage');
+      errorOccurs(error, message);
     });
 };
 
@@ -120,7 +121,8 @@ export const initLogin = () => {
         window.location.hash = '#/home';
       })
       .catch((error) => {
-        errorOccurs(error);
+        const message = document.getElementById('generalMessage');
+        errorOccurs(error, message);
       });
   });
 
@@ -132,7 +134,8 @@ export const initLogin = () => {
         window.location.hash = '#/home';
       })
       .catch((error) => {
-        errorOccurs(error);
+        const message = document.getElementById('generalMessage');
+        errorOccurs(error, message);
       });
   });
 
@@ -143,7 +146,8 @@ export const initLogin = () => {
       .then(() => {
         window.location.hash = '#/home';
       }).catch((error) => {
-        errorOccurs(error);
+        const message = document.getElementById('generalMessage');
+        errorOccurs(error, message);
       });
   });
 
