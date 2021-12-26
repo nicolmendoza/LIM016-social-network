@@ -40,15 +40,20 @@ export const template = (post) => {
     </div>
     <div class="text-post-home" id="contentPost${onePost.idP}">${onePost.content}</div>
     <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
-    <div id="postIcon">
-        <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i> <p id='likes${onePost.idP}'></p>
-        <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
-        <i class="far fa-paper-plane icon"></i>
+
+    <div id="postIcons">
+      <div class="likes">
+        <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i>
+        <p id='likes${onePost.idP}'></p>
+      </div>
+      <div class="comments">
+        <i class="far fa-comment icon"></i>
+        <p class="countComment${onePost.idP}"></p>
+      </div>
     </div>
     <div id="comments${onePost.idP}">
       <div id="contentComment${onePost.idP}"></div>
       <div id="showComment${onePost.idP}"></div>
-    </div>
     </div>
     `;
 
@@ -181,7 +186,7 @@ export const template = (post) => {
 
   nuevoElemento.querySelectorAll('.fa-heart').forEach((like) => {
     like.addEventListener('click', (e) => {
-      const postId = e.target.parentNode.parentNode.id;
+      const postId = e.target.parentNode.parentNode.parentNode.id;
       if (e.target.className === 'far fa-heart icon') {
         e.target.className = 'fas fa-heart icon';
         saveLike(postId, uidUser, nameUser);
@@ -196,7 +201,7 @@ export const template = (post) => {
 
   nuevoElemento.querySelectorAll('.fa-comment').forEach((icon) => {
     icon.addEventListener('click', (e) => {
-      const id = e.target.parentNode.parentNode.id;
+      const id = e.target.parentNode.parentNode.parentNode.id;
       const showComment = document.getElementById(`showComment${id}`);
       showComment.innerHTML = '';
       readComment(templateComents, id);
