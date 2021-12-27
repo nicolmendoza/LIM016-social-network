@@ -33,8 +33,11 @@ export const showPostProfile = (post) => {
         </div>
       </div>
       <div class="header-post">
-        <div  class="nameUserPostProfile${user.uid} namePost post-name"></div>
-        <div class="date"><p></p></div>
+        <img  id="post-img${onePost.idP}" width="100px" >
+        <div class="header-info">
+          <div  class="nameUserPostProfile${user.uid} namePost post-name"></div>
+          <div class="date"><p></p></div>
+        </div>
       </div>
       <div class="text-post-home" id="contentPost${onePost.postID}">${onePost.content}</div>
       <img class="postImg" id="img-${onePost.postID}" src="${onePost.img}">
@@ -102,7 +105,7 @@ export const showPostProfile = (post) => {
   });
 
   sectionPostProfile.querySelectorAll('.date').forEach((date) => {
-    const postId = date.parentElement.parentElement.id;
+    const postId = date.parentElement.parentElement.parentElement.id;
     const pElement = date.firstChild;
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < post.length; i++) {
