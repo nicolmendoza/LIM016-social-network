@@ -125,6 +125,7 @@
     width: 100%;
     min-height: 100vh;
     background-color: rgba(44, 44, 44, 0.371);
+    z-index: 1000;
     position: fixed;
     left: 0;
     top: 0;

@@ -52,7 +52,6 @@ export const readData = (callback) => {
       objectPost.idP = doct.id;
       objectPost.userID = doct.data().userId;
       objectPost.date = doct.data().date;
-      objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
       posts.push(objectPost);
     });
@@ -86,9 +85,6 @@ export const savePost = (postDescription, userID, imgULR, Privacity, Type) => ad
   message: postDescription.value,
   userId: userID,
   img: imgULR,
-  likes: [{
-    users: [],
-  }],
   date: Date.now(),
   privacity: Privacity,
   type: Type,
@@ -194,6 +190,7 @@ export const leerPostProfile = (callback, uid) => {
       objectPostProfile.content = doctP.data().message;
       objectPostProfile.userID = doctP.data().userId;
       objectPostProfile.postID = doctP.id;
+      objectPostProfile.date = doctP.data().date;
       postP.push(objectPostProfile);
     });
     return callback(postP);

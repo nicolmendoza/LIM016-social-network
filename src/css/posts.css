@@ -2,7 +2,7 @@
     width: 100%;
     /* margin: 0px 4%; */
 }
-#showPost{
+#showPost, #PostProfile{
     margin: 0px 2.5%;
     width: 95%;
 }
@@ -144,6 +144,7 @@
 .show{
     display: flex !important;
 }
+
 @media (min-width: 768px){
     .img-post-home{
         height: 410px;
@@ -155,9 +156,5 @@
     #showPost{
         width: 100%;
         margin: 0px;
-    }
-/*     .likes, .comments {
-        width: 25%;
-    } */
-    
+    }    
 }

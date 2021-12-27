@@ -50,18 +50,17 @@ export const template = (post) => {
         <i class="far fa-comment icon"></i>
         <p class="countComment${onePost.idP}"></p>
       </div>
-    </div>
-    <div id="comments${onePost.idP}">
-      <div id="contentComment${onePost.idP}"></div>
-      <div id="showComment${onePost.idP}"></div>
-    </div>
+      <div id="comments${onePost.idP}">
+        <div id="contentComment${onePost.idP}"></div>
+        <div id="showComment${onePost.idP}"></div>
+      </div>
     </div>
     `;
 
     return nuevoElemento;
   });
 
-  const uidUser = (user.uid);
+  const uidUser = user.uid;
 
   post.forEach((one) => {
     const idPost = one.idP;
