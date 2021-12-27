@@ -33,7 +33,7 @@ export const showPostProfile = (post) => {
         </div>
       </div>
       <div class="header-post">
-        <img  id="post-img${onePost.idP}" width="100px" >
+        <img  id="post-img" width="100px">
         <div class="header-info">
           <div  class="nameUserPostProfile${user.uid} namePost post-name"></div>
           <div class="date"><p></p></div>
@@ -78,6 +78,19 @@ export const showPostProfile = (post) => {
   });
   //   PostProfile.appendChild(sectionPostProfile);
 
+  obtenerInfo(idUserRedirect).then((userInfo) => {
+    sectionPostProfile.querySelectorAll(`.nameUserPostProfile${user.uid}`).forEach((nameUser) => {
+      // eslint-disable-next-line no-param-reassign
+      nameUser.innerHTML = `${userInfo.data().name}`;
+    });
+
+    sectionPostProfile.querySelectorAll('#post-img').forEach((photoUser) => {
+      // eslint-disable-next-line no-param-reassign
+      photoUser.src = `${userInfo.data().photo}`;
+      console.log(photoUser);
+    });
+  });
+
   post.forEach((one) => {
     const idPost = one.postID;
     const iconLikes = sectionPostProfile.querySelector(`#iconLikes${idPost}`);
@@ -95,13 +108,6 @@ export const showPostProfile = (post) => {
       const num = comments.length;
       parrafoCountComment.innerHTML = num;
     }, idPost);
-  });
-
-  obtenerInfo(idUserRedirect).then((userInfo) => {
-    sectionPostProfile.querySelectorAll(`.nameUserPostProfile${user.uid}`).forEach((nameUser) => {
-      // eslint-disable-next-line no-param-reassign
-      nameUser.innerHTML = `${userInfo.data().name}`;
-    });
   });
 
   sectionPostProfile.querySelectorAll('.date').forEach((date) => {
