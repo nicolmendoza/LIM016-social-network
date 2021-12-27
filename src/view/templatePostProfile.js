@@ -12,12 +12,16 @@ export const showPostProfile = (post) => {
   const sectionPostProfile = document.createElement('div');
 
   post.forEach((onePost) => {
-    sectionPostProfile.innerHTML += `<div class="postDiv" id="ID${onePost.postID}">
-      <div  class="nameUserPostProfile${user.uid}"></div>
-      <div>${onePost.content}</div>
+    sectionPostProfile.innerHTML += `
+    <div class="postDiv" id="ID${onePost.postID}">
+      
+      <div class="header-post">
+        <div  class="nameUserPostProfile${user.uid} namePost post-name"></div>
+      </div>
+      <div class="text-post-home">${onePost.content}</div>
       <button class="deleteProfile">DELETE</button>
       <button class="edit">EDIT</button>
-      <div>`;
+    </div>`;
     return sectionPostProfile;
   });
   //   PostProfile.appendChild(sectionPostProfile);

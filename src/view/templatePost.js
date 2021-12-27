@@ -55,6 +55,7 @@ export const template = (post) => {
       <div id="contentComment${onePost.idP}"></div>
       <div id="showComment${onePost.idP}"></div>
     </div>
+    </div>
     `;
 
     return nuevoElemento;
@@ -122,6 +123,7 @@ export const template = (post) => {
       }
     }
   });
+
   nuevoElemento.querySelectorAll('.icon-options').forEach((div) => {
     div.addEventListener('click', (e) => {
       const id = e.target.parentNode.parentNode.parentNode.id;
@@ -135,6 +137,7 @@ export const template = (post) => {
       }
     });
   });
+
   nuevoElemento.querySelectorAll('.delete').forEach((div) => {
     div.addEventListener('click', (e) => {
       const id = e.target.parentNode.parentNode.parentNode.parentNode.id;
