@@ -16,9 +16,6 @@ export const showPostProfile = (post) => {
     sectionPostProfile.innerHTML += `
     <div class="postDiv" id="${onePost.postID}">
       <div class="div-options">
-        <div class="icon-options">
-          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-        </div>
         <div class='box-options' id="box-options-${onePost.postID}" style="display:none">
           <div class='edit content-icon'>
             <span>
@@ -37,6 +34,9 @@ export const showPostProfile = (post) => {
         <div class="header-info">
           <div  class="nameUserPostProfile${user.uid} namePost post-name"></div>
           <div class="date"><p></p></div>
+        </div>
+        <div class="icon-options">
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
         </div>
       </div>
       <div class="text-post-home" id="contentPost${onePost.postID}">${onePost.content}</div>

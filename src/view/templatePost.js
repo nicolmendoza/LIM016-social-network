@@ -15,9 +15,6 @@ export const template = (post) => {
     nuevoElemento.innerHTML += `
     <div class="postDiv" id="${onePost.idP}">
     <div class="div-options">
-      <div class="icon-options">
-        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-      </div>
       <div class='box-options' id="box-options-${onePost.idP}" style="display:none">
         <div class='edit content-icon'>
           <span>
@@ -32,11 +29,14 @@ export const template = (post) => {
       </div>
     </div>
     <div class="header-post">
-        <img  id="post-img${onePost.idP}" width="100px" >
-        <div class="header-info">
-          <div class="post-name${onePost.idP} namePost"></div>
-          <div class="date"><p></p></div> 
-        </div>
+      <img  id="post-img${onePost.idP}" width="100px" >
+      <div class="header-info">
+        <div class="post-name${onePost.idP} namePost"></div>
+        <div class="date"><p></p></div>
+      </div>
+      <div class="icon-options">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </div>
     </div>
     <div class="text-post-home" id="contentPost${onePost.idP}">${onePost.content}</div>
     <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
