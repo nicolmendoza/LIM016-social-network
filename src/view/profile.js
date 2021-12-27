@@ -42,8 +42,8 @@ export const Profile = () => {
       </div>
     </div>
   </section>
-  <section>
-    <h1> MY POST</h1>
+  <section id="post-section">
+    <h1>Posts</h1>
     <div id="PostProfile"></div>
   </section>
   <section class="modalEditProfile" style="display:none">
