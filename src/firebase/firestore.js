@@ -189,8 +189,9 @@ export const leerPostProfile = (callback, uid) => {
       const objectPostProfile = { };
       objectPostProfile.content = doctP.data().message;
       objectPostProfile.userID = doctP.data().userId;
-      objectPostProfile.postID = doctP.id;
       objectPostProfile.date = doctP.data().date;
+      objectPostProfile.img = doctP.data().img;
+      objectPostProfile.postID = doctP.id;
       postP.push(objectPostProfile);
     });
     return callback(postP);

@@ -33,7 +33,7 @@ export const showPostProfile = (post) => {
         </div>
       </div>
       <div class="header-post">
-        <img  id="post-img" width="100px">
+        <img  id="photo-profile" width="100px">
         <div class="header-info">
           <div  class="nameUserPostProfile${user.uid} namePost post-name"></div>
           <div class="date"><p></p></div>
@@ -84,7 +84,7 @@ export const showPostProfile = (post) => {
       nameUser.innerHTML = `${userInfo.data().name}`;
     });
 
-    sectionPostProfile.querySelectorAll('#post-img').forEach((photoUser) => {
+    sectionPostProfile.querySelectorAll('#photo-profile').forEach((photoUser) => {
       // eslint-disable-next-line no-param-reassign
       photoUser.src = `${userInfo.data().photo}`;
       console.log(photoUser);
@@ -123,6 +123,19 @@ export const showPostProfile = (post) => {
         pElement.innerHTML = dateData;
       }
     }
+  });
+
+  console.log(post);
+  sectionPostProfile.querySelectorAll('.postImg').forEach((postImg) => {
+    const imgSrc = postImg;
+    console.log(imgSrc.src);
+    // eslint-disable-next-line no-plusplus
+    if ((imgSrc.src !== 'http://localhost:5000/') && (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html')) {
+      imgSrc.className = 'img-post-home';
+    } else {
+      imgSrc.className = 'postImg';
+    }
+    console.log(imgSrc.className);
   });
 
   sectionPostProfile.querySelectorAll('.icon-options').forEach((div) => {
