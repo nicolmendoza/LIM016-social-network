@@ -18,8 +18,8 @@
 
 .header-post{
     display: flex;
-    padding: 0.8em;
-    padding-left: 1em;
+    padding: 0.4em;
+    padding-left: 0.5em;
     border-bottom: 0.5px solid #c3c3c3;
     align-items: center;
 }
@@ -58,14 +58,14 @@
     object-fit: fill;
     height: 180px;
 }
-.text-post-home, .contentWriteComment{
+.text-post-home{
     display: flex;
     align-items: center;
     margin: 20px 6%;
     text-align: start !important;
 }
 
-.editPost, .write-comment{
+.editPost{
     width: 87%;
     margin-right: 9px;
     border-radius: 8px;
@@ -81,13 +81,7 @@
     font-size: 13px;
 }
 
-.contentComment{
-    width: 98%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.icon-options, .icon-options-comment{
+.icon-options{
     margin-left: auto;
     padding-left: 1em;
 }
@@ -96,8 +90,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0.6em;
-    padding-left: 1em;
+    padding: 0.1em;
+    padding-left: 0.5em;
     border-top: 0.5px solid #c1c1c1;
 }
 
@@ -111,7 +105,7 @@
     margin-left: 0.5em;
 }
 .comments{
-    margin-left: 3em;
+    margin-left: 1.5em;
 }
 
 .icon{
@@ -125,8 +119,11 @@
 .fa-comment{
     color: #3D3DF2;
 }
+.amount{
+    font-size: 14px;
+}
 
-.div-options, .div-options-comment{
+.div-options{
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -144,6 +141,7 @@
     flex-direction: column;
     font-size: 13px;
     margin-right: 4px;
+    z-index: 1000;
 }
 .content-icon{
     margin: 6px;

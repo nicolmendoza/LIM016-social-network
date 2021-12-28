@@ -1,3 +1,58 @@
+.contentWriteComment{
+    display: flex;
+    align-items: center;
+    padding: 0px 5px 8px 5px;
+    text-align: start !important;
+}
+
+.contentComment{
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.write-comment{
+    width: 87%;
+    height: 35px;
+    margin-right: 9px;
+    border-radius: 8px;
+    border: 0.5px solid #bfbebe;
+}
+
 .pruebaDivComment{
     border:1px black solid
+}
+.divComment{
+    display: flex;
+    flex-direction: column;
+    margin: 0.6em;
+    border-bottom: 0.5px solid #c3c3c3;
+}
+.infoUser{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    margin-bottom: 0.2em;
+}
+.infoUser > img{
+    border-radius: 50%;
+}
+.name-comment{
+    font-size: 14px;
+    margin-left: 0.6em;
+    font-weight: 700;
+}
+
+.icon-options-comment{
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+}
+
+.commentText{
+    display: flex;
+    font-size: 13px;
+    margin-left: 2.5em;
+    margin-bottom: 0.7em;
 }

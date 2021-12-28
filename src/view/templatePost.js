@@ -44,15 +44,15 @@ export const template = (post) => {
     <div id="postIcons">
       <div class="likes">
         <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i>
-        <p id='likes${onePost.idP}'></p>
+        <p id='likes${onePost.idP}' class="amount"></p>
       </div>
       <div class="comments">
         <i class="far fa-comment icon"></i>
-        <p class="countComment${onePost.idP}"></p>
+        <p class="countComment${onePost.idP} amount"></p>
       </div>
       </div>
-      <div id="comments${onePost.idP}" class="contentComment">
-        <div id="contentComment${onePost.idP}"></div>
+      <div id="comments${onePost.idP}">
+        <div id="contentComment${onePost.idP}" class="contentComment"></div>
         <div id="showComment${onePost.idP}"></div>
       </div>
     `;
@@ -211,7 +211,7 @@ export const template = (post) => {
       const divComment = document.createElement('div');
       divComment.classList = 'contentWriteComment';
       divComment.innerHTML = `
-      <textarea id="textComent${id}" class="write-comment" placeholder="Write a comment..."></textarea>
+        <textarea id="textComent${id}" class="write-comment" placeholder="Write a comment..."></textarea>
         <button id="saveComment${id}" class="save">SAVE</button>`;
       nuevoElemento.querySelector(`#contentComment${id}`).appendChild(divComment);
       document.getElementById(`saveComment${id}`).addEventListener('click', () => {

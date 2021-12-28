@@ -45,11 +45,11 @@ export const showPostProfile = (post) => {
       <div id="postIcons">
         <div class="likes">
           <i class="far fa-heart icon" id="iconLikes${onePost.postID}"></i>
-          <p id='likes${onePost.postID}'></p>
+          <p id="likes${onePost.postID}" class="amount"></p>
         </div>
         <div class="comments">
           <i class="far fa-comment icon"></i>
-          <p class="countComment${onePost.postID}"></p>
+          <p class="countComment${onePost.postID} amount"></p>
         </div>
         </div>
         <div id="comments${onePost.postID}">
@@ -230,7 +230,8 @@ export const showPostProfile = (post) => {
 
       const divComment = document.createElement('div');
       divComment.classList = 'contentWriteComment';
-      divComment.innerHTML = `<textarea id="textComent${id}" class="write-comment"></textarea>
+      divComment.innerHTML = `
+        <textarea id="textComent${id}" class="write-comment" placeholder="Write a comment..."></textarea>
         <button id="saveComment${id}" class="save">SAVE</button>`;
       sectionPostProfile.querySelector(`#contentComment${id}`).appendChild(divComment);
       document.getElementById(`saveComment${id}`).addEventListener('click', () => {
