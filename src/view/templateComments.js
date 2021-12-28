@@ -66,7 +66,7 @@ export const templateComents = (comments, id) => {
         console.log(comments[i].ID, idComment);
         if (comments[i].ID === idComment && comments[i].userID === user.uid) {
           document.querySelector(`#contentEdit-${idComment}`).innerHTML = `<textarea id="edit-${idComment}">${comments[i].content}</textarea>
-            <button id="save-${idComment}">SAVE</button>`;
+            <button id="save-${idComment}" class="save">SAVE</button>`;
           document.querySelector(`#save-${idComment}`).addEventListener('click', () => {
             const commentEdit = document.getElementById(`edit-${idComment}`);
             updateComment(id, idComment, commentEdit.value);

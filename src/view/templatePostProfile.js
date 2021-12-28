@@ -188,7 +188,7 @@ export const showPostProfile = (post) => {
         if (post[i].userID === user.uid && post[i].postID === id) {
           sectionPostProfile.querySelector(`
           #contentPost${id}`).innerHTML = `<textarea class="editPost" id="contentEdit${post[i].postID}" placeholder="Write a comment..."}>${post[i].content}</textarea>
-            <button class="save">SAVE</button>`;
+            <button class="save" class="save">SAVE</button>`;
           sectionPostProfile.querySelector('.save').addEventListener('click', () => {
             const postEdit = document.getElementById(`contentEdit${post[i].postID}`).value;
             if (postEdit === `${post[i].content}`) {

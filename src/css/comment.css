@@ -1,4 +1,4 @@
-.contentWriteComment{
+.contentWriteComment, .commentText{
     display: flex;
     align-items: center;
     padding: 8px 5px 8px 5px;
@@ -8,7 +8,7 @@
     margin-right: auto;
 }
 
-.write-comment{
+.write-comment, .commentText > textarea{
     width: 87%;
     height: 35px;
     margin-right: 9px;
@@ -43,10 +43,4 @@
     display: flex;
     margin-left: auto;
     align-items: center;
-}
-
-.commentText{
-    display: flex;
-    font-size: 15px;
-    margin: 0em 2.5em 0.7em 2.5em;
 }
