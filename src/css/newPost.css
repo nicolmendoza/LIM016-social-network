@@ -187,7 +187,12 @@
     border-color: rgb(87, 87, 87);
     background: #ffffffbf;
     padding: 1.5px;
+    margin: 2.4px;
     width: 100%;
+}
+#selects option{
+    font-size: 12px;
+    padding: 3px;
 }
 
 /*MODAL PARA PANTALLA GRANDE*/
