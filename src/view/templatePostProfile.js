@@ -52,6 +52,12 @@ export const showPostProfile = (post) => {
           <p class="countComment${onePost.postID} amount"></p>
         </div>
         </div>
+        <div class="contentComment">
+          <div class="contentWriteComment">
+            <textarea id="textComent${onePost.postID}" class="write-comment" placeholder="Write a comment..."></textarea>
+            <button class="saveComment save">SAVE</button>
+          </div>
+        </div >
         <div id="comments${onePost.postID}">
           <div id="contentComment${onePost.postID}" class="contentComment"></div>
           <div id="showComment${onePost.postID}"></div>
@@ -225,24 +231,31 @@ export const showPostProfile = (post) => {
     icon.addEventListener('click', (e) => {
       const id = e.target.parentNode.parentNode.parentNode.id;
       const showComment = document.getElementById(`showComment${id}`);
-      showComment.innerHTML = '';
-      readComment(templateComents, id);
+      if (showComment.className !== 'showContent') {
+        showComment.className = 'showContent';
+        showComment.innerHTML = '';
+        readComment(templateComents, id);
+      } else {
+        showComment.className = '';
+        showComment.innerHTML = '';
+      }
+    });
+  });
 
-      const divComment = document.createElement('div');
-      divComment.classList = 'contentWriteComment';
-      divComment.innerHTML = `
-        <textarea id="textComent${id}" class="write-comment" placeholder="Write a comment..."></textarea>
-        <button id="saveComment${id}" class="save">SAVE</button>`;
-      sectionPostProfile.querySelector(`#contentComment${id}`).appendChild(divComment);
-      document.getElementById(`saveComment${id}`).addEventListener('click', () => {
-        const commentOne = document.getElementById(`textComent${id}`).value;
-        if (commentOne === '') {
-          alert('Comentario vacío.');
-        } else {
-          saveComment(id, commentOne, uidUser);
-          document.getElementById(`textComent${id}`).value = '';
-        }
-      });
+  sectionPostProfile.querySelectorAll('.saveComment').forEach((save) => {
+    save.addEventListener('click', (e) => {
+      const id = e.target.parentNode.parentNode.parentNode.id;
+      console.log(id);
+      const showComment = document.getElementById(`showComment${id}`);
+      const commentOne = document.getElementById(`textComent${id}`).value;
+      if (commentOne === '') {
+        alert('Comentario vacío.');
+      } else {
+        saveComment(id, commentOne, uidUser);
+        document.getElementById(`textComent${id}`).value = '';
+        showComment.className = 'showContent';
+        readComment(templateComents, id);
+      }
     });
   });
 
