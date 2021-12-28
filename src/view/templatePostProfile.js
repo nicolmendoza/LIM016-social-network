@@ -51,11 +51,11 @@ export const showPostProfile = (post) => {
           <i class="far fa-comment icon"></i>
           <p class="countComment${onePost.postID}"></p>
         </div>
+        </div>
         <div id="comments${onePost.postID}">
-          <div id="contentComment${onePost.postID}"></div>
+          <div id="contentComment${onePost.postID}" class="contentComment"></div>
           <div id="showComment${onePost.postID}"></div>
         </div>
-      </div>
     </div>
 
     <section class="modalDelete" style="display: none">
@@ -180,7 +180,8 @@ export const showPostProfile = (post) => {
       for (let i = 0; i < post.length; i++) {
         console.log(post[i].userID === user.uid, post[i].postID === id);
         if (post[i].userID === user.uid && post[i].postID === id) {
-          sectionPostProfile.querySelector(`#contentPost${id}`).innerHTML = `<textarea class="editPost" id="contentEdit${post[i].postID}"}>${post[i].content}</textarea>
+          sectionPostProfile.querySelector(`
+          #contentPost${id}`).innerHTML = `<textarea class="editPost" id="contentEdit${post[i].postID}" placeholder="Write a comment..."}>${post[i].content}</textarea>
             <button class="save">SAVE</button>`;
           sectionPostProfile.querySelector('.save').addEventListener('click', () => {
             const postEdit = document.getElementById(`contentEdit${post[i].postID}`).value;
@@ -228,13 +229,18 @@ export const showPostProfile = (post) => {
       readComment(templateComents, id);
 
       const divComment = document.createElement('div');
-      divComment.innerHTML = `<textarea id="textComent${id}"></textarea>
-        <button id="saveComment${id}">SAVE</button>`;
+      divComment.classList = 'contentWriteComment';
+      divComment.innerHTML = `<textarea id="textComent${id}" class="write-comment"></textarea>
+        <button id="saveComment${id}" class="save">SAVE</button>`;
       sectionPostProfile.querySelector(`#contentComment${id}`).appendChild(divComment);
       document.getElementById(`saveComment${id}`).addEventListener('click', () => {
         const commentOne = document.getElementById(`textComent${id}`).value;
-        saveComment(id, commentOne, uidUser);
-        document.getElementById(`textComent${id}`).value = '';
+        if (commentOne === '') {
+          alert('Comentario vacío.');
+        } else {
+          saveComment(id, commentOne, uidUser);
+          document.getElementById(`textComent${id}`).value = '';
+        }
       });
     });
   });

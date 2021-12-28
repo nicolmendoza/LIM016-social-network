@@ -58,14 +58,14 @@
     object-fit: fill;
     height: 180px;
 }
-.text-post-home{
+.text-post-home, .contentWriteComment{
     display: flex;
     align-items: center;
     margin: 20px 6%;
     text-align: start !important;
 }
 
-.editPost{
+.editPost, .write-comment{
     width: 87%;
     margin-right: 9px;
     border-radius: 8px;
@@ -81,7 +81,13 @@
     font-size: 13px;
 }
 
-.icon-options{
+.contentComment{
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icon-options, .icon-options-comment{
     margin-left: auto;
     padding-left: 1em;
 }
@@ -120,7 +126,7 @@
     color: #3D3DF2;
 }
 
-.div-options{
+.div-options, .div-options-comment{
     display: flex;
     flex-direction: column;
     position: absolute;

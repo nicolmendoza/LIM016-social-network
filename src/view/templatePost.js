@@ -50,11 +50,11 @@ export const template = (post) => {
         <i class="far fa-comment icon"></i>
         <p class="countComment${onePost.idP}"></p>
       </div>
-      <div id="comments${onePost.idP}">
+      </div>
+      <div id="comments${onePost.idP}" class="contentComment">
         <div id="contentComment${onePost.idP}"></div>
         <div id="showComment${onePost.idP}"></div>
       </div>
-    </div>
     `;
 
     return nuevoElemento;
@@ -209,11 +209,16 @@ export const template = (post) => {
       readComment(templateComents, id);
 
       const divComment = document.createElement('div');
-      divComment.innerHTML = `<textarea id="textComent${id}"></textarea>
-        <button id="saveComment${id}">SAVE</button>`;
+      divComment.classList = 'contentWriteComment';
+      divComment.innerHTML = `
+      <textarea id="textComent${id}" class="write-comment" placeholder="Write a comment..."></textarea>
+        <button id="saveComment${id}" class="save">SAVE</button>`;
       nuevoElemento.querySelector(`#contentComment${id}`).appendChild(divComment);
       document.getElementById(`saveComment${id}`).addEventListener('click', () => {
         const commentOne = document.getElementById(`textComent${id}`).value;
+        if (commentOne === '') {
+          alert('Comentario vacío.');
+        } else {
         // if (commentOne !== '') {
         //   console.log(commentOne);
         //   saveComment(id, commentOne, uidUser);
@@ -221,8 +226,9 @@ export const template = (post) => {
         //   divComment.remove(`<textarea id="textComent${id}"></textarea>
         //   <button id="saveComment${id}">SAVE</button>`);
         // }
-        saveComment(id, commentOne, uidUser);
-        document.getElementById(`textComent${id}`).value = '';
+          saveComment(id, commentOne, uidUser);
+          document.getElementById(`textComent${id}`).value = '';
+        }
       });
     });
   });
