@@ -14,53 +14,61 @@ export const template = (post) => {
   post.forEach((onePost) => {
     nuevoElemento.innerHTML += `
     <div class="postDiv" id="${onePost.idP}">
-    <div class="div-options">
-      <div class='box-options' id="box-options-${onePost.idP}" style="display:none">
-        <div class='edit content-icon'>
-          <span>
-            <i class="fas fa-pencil-alt"></i>Editar
-          </span>
-        </div>
-        <div class='delete content-icon'>
-          <span>
-            <i class="far fa-trash-alt"></i>Borrar
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="header-post">
-      <img  id="post-img${onePost.idP}" width="100px" >
-      <div class="header-info">
-        <div class="post-name${onePost.idP} namePost"></div>
-        <div class="date"><p></p></div>
-      </div>
-      <div class="icon-options">
-        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-      </div>
-    </div>
-    <div class="text-post-home" id="contentPost${onePost.idP}">${onePost.content}</div>
-    <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
+      <div class="div-options">
+        <div class='box-options' id="box-options-${onePost.idP}" style="display:none">
+          <div class='edit content-icon'>
+            <span>
+              <i class="fas fa-pencil-alt"></i>Editar
+            </span>
+          </div>
 
-    <div id="postIcons">
-      <div class="likes">
-        <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i>
-        <p id='likes${onePost.idP}' class="amount"></p>
+          <div class='delete content-icon'>
+            <span>
+              <i class="far fa-trash-alt"></i>Borrar
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="comments">
-        <i class="far fa-comment icon"></i>
-        <p class="countComment${onePost.idP} amount"></p>
+
+      <div class="header-post">
+        <img  id="post-img${onePost.idP}" width="100px" >
+        <div class="header-info">
+          <div class="post-name${onePost.idP} namePost"></div>
+          <div class="date"><p></p></div>
+        </div>
+
+        <div class="icon-options">
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </div>
       </div>
+
+      <div class="text-post-home" id="contentPost${onePost.idP}">${onePost.content}</div>
+      <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
+
+      <div id="postIcons">
+        <div class="likes">
+          <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i>
+          <p id='likes${onePost.idP}' class="amount"></p>
+        </div>
+
+        <div class="comments">
+          <i class="far fa-comment icon"></i>
+          <p class="countComment${onePost.idP} amount"></p>
+        </div>
       </div>
+
       <div class="contentComment">
         <div class="contentWriteComment">
           <textarea id="textComent${onePost.idP}" class="write-comment" placeholder="Write a comment..."></textarea>
           <button class="saveComment save">SAVE</button>
         </div>
       </div >
+
       <div id="comments${onePost.idP}">
         <div id="contentComment${onePost.idP}"></div>
         <div id="showComment${onePost.idP}"></div>
       </div>
+    </div>
     `;
 
     return nuevoElemento;
@@ -167,7 +175,8 @@ export const template = (post) => {
       for (let i = 0; i < post.length; i++) {
         console.log(post[i].userID === user.uid, post[i].idP === id);
         if (post[i].userID === user.uid && post[i].idP === id) {
-          document.querySelector(`#contentPost${id}`).innerHTML = `<textarea class="editPost" id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
+          document.querySelector(`#contentPost${id}`).innerHTML = `
+            <textarea class="editPost" id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
             <button class="save">SAVE</button>`;
           document.querySelector('.save').addEventListener('click', () => {
             const postEdit = document.getElementById(`contentEdit${post[i].idP}`).value;

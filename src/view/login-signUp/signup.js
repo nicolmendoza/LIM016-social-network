@@ -10,17 +10,23 @@ export const SignUp = () => {
   <section class="bubble">
     <!-- content here -->
   </section>
-  <div class="section1"><img class="imgInicio"></div>
-  <div class="section2">
+
+  <section class="section1"><img class="imgInicio"></section>
+
+  <section class="section2">
     <div class="formulario">
       <div class="logo">SOCIAL NETWORK</div>
-      <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png' ></div>
+      <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
+
       <div class="form-group-text">
         <div class="textForm">
-          <a href="#/login">Login</a> </div>
+          <a href="#/login">Login</a>
+        </div>
         <div class="textForm clickSingUp">
-          <a href="#/signup" >Sign Up</a> </div>
+          <a href="#/signup" >Sign Up</a>
+        </div>
       </div>
+
       <form id="signup-form">
         <div class="form-group">
           <span class="icon-input">
@@ -28,6 +34,7 @@ export const SignUp = () => {
           </span>
         <input type="text" id="signup-name"  placeholder="Name" required>
         </div>
+
         <div class="form-group">
           <span class="icon-input">
             <i class="far fa-envelope"></i>
@@ -35,6 +42,7 @@ export const SignUp = () => {
           <input type="text" id="signup-email"  placeholder="correo@example.com" required>
           <p id='emailMessage' class="errorMessage"></p>
         </div>
+
         <div class="form-group">
           <span class="icon-input" id="icon-eye">
             <i class="fas fa-eye-slash"></i>
@@ -42,12 +50,15 @@ export const SignUp = () => {
           <input type="password" id="signup-password"  placeholder="**************" maxlength='16'>
           <p id='passwordMessage' class="errorMessage"></p>
         </div>
+
         <button type="submit" class="btnLogin" >CREATE A COUNT</button>
+
         <div class="textResetPassword">
-        <p class="registerText">Do you have an account?  <a href="#/signup" class="registerText link">Login now</a></p></div>
+          <p class="registerText">Do you have an account?  <a href="#/signup" class="registerText link">Login now</a></p>
+        </div>
       </form>
     </div>
-  </div>`;
+  </section>`;
   return viewSignUp;
 };
 

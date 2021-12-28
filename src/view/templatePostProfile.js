@@ -15,6 +15,7 @@ export const showPostProfile = (post) => {
   post.forEach((onePost) => {
     sectionPostProfile.innerHTML += `
     <div class="postDiv" id="${onePost.postID}">
+
       <div class="div-options">
         <div class='box-options' id="box-options-${onePost.postID}" style="display:none">
           <div class='edit content-icon'>
@@ -22,6 +23,7 @@ export const showPostProfile = (post) => {
               <i class="fas fa-pencil-alt"></i>Editar
             </span>
           </div>
+
           <div class='delete content-icon'>
             <span>
               <i class="far fa-trash-alt"></i>Borrar
@@ -29,6 +31,7 @@ export const showPostProfile = (post) => {
           </div>
         </div>
       </div>
+
       <div class="header-post">
         <img  id="photo-profile" width="100px">
         <div class="header-info">
@@ -39,6 +42,7 @@ export const showPostProfile = (post) => {
           <ion-icon name="ellipsis-vertical-outline"></ion-icon>
         </div>
       </div>
+
       <div class="text-post-home" id="contentPost${onePost.postID}">${onePost.content}</div>
       <img class="postImg" id="img-${onePost.postID}" src="${onePost.img}">
 
@@ -47,39 +51,44 @@ export const showPostProfile = (post) => {
           <i class="far fa-heart icon" id="iconLikes${onePost.postID}"></i>
           <p id="likes${onePost.postID}" class="amount"></p>
         </div>
+
         <div class="comments">
           <i class="far fa-comment icon"></i>
           <p class="countComment${onePost.postID} amount"></p>
         </div>
+        
         </div>
         <div class="contentComment">
           <div class="contentWriteComment">
             <textarea id="textComent${onePost.postID}" class="write-comment" placeholder="Write a comment..."></textarea>
             <button class="saveComment save">SAVE</button>
           </div>
-        </div >
-        <div id="comments${onePost.postID}">
-          <div id="contentComment${onePost.postID}" class="contentComment"></div>
-          <div id="showComment${onePost.postID}"></div>
         </div>
+      </div> 
+
+      <div id="comments${onePost.postID}">
+        <div id="contentComment${onePost.postID}" class="contentComment"></div>
+        <div id="showComment${onePost.postID}"></div>
+      </div>
     </div>
 
     <section class="modalDelete" style="display: none">
-    <div class="modalDivDelete">
-    <div class="modalContainer-Delete">
-      <div id="closeDelete">
-        <i class="far fa-times-circle"></i>
-      </div>
-      <div>
-        <h1>Eliminar publicación</h1>
-        <div class="modal-parrafo">
-          ¿Estás seguro que quieres eliminar esta publicación de <b class="emailText">Queen Coders</b> para siembre?
+      <div class="modalDivDelete">
+        <div class="modalContainer-Delete">
+          <div id="closeDelete">
+            <i class="far fa-times-circle"></i>
+          </div>
+          
+          <div>
+            <h1>Eliminar publicación</h1>
+            <div class="modal-parrafo">
+              ¿Estás seguro que quieres eliminar esta publicación de <b class="emailText">Queen Coders</b> para siembre?
+            </div>
+            <button class="aceptDelete">ELIMINAR</button>
+          </div>
         </div>
-        <button class="aceptDelete">ELIMINAR</button>
       </div>
-    </div>
-    </div>
-  </section>`;
+    </section>`;
     return sectionPostProfile;
   });
   //   PostProfile.appendChild(sectionPostProfile);
@@ -187,7 +196,8 @@ export const showPostProfile = (post) => {
         console.log(post[i].userID === user.uid, post[i].postID === id);
         if (post[i].userID === user.uid && post[i].postID === id) {
           sectionPostProfile.querySelector(`
-          #contentPost${id}`).innerHTML = `<textarea class="editPost" id="contentEdit${post[i].postID}" placeholder="Write a comment..."}>${post[i].content}</textarea>
+          #contentPost${id}`).innerHTML = `
+            <textarea class="editPost" id="contentEdit${post[i].postID}" placeholder="Write a comment...">${post[i].content}</textarea>
             <button class="save" class="save">SAVE</button>`;
           sectionPostProfile.querySelector('.save').addEventListener('click', () => {
             const postEdit = document.getElementById(`contentEdit${post[i].postID}`).value;

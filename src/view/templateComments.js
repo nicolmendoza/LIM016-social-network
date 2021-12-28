@@ -13,11 +13,14 @@ export const templateComents = (comments, id) => {
       <div class="infoUser">
         <img  id="photo-profile" src="${dataUser.data().photo}" width="24px">
         <div class="name-comment">${dataUser.data().name}</div>
+
         <div class="icon-options">
           <ion-icon name="ellipsis-vertical-outline"></ion-icon>
         </div>
       </div>
+
       <div id="contentEdit-${oneComment.ID}" class="commentText">${oneComment.content}</div>
+
       <div class="div-options">
         <div class='box-options' id="box-options-${oneComment.ID}" style="display:none">
           <div class='editComment content-icon'>
@@ -25,6 +28,7 @@ export const templateComents = (comments, id) => {
               <i class="fas fa-pencil-alt"></i>Editar
             </span>
           </div>
+          
           <div class='deleteComment content-icon'>
             <span>
               <i class="far fa-trash-alt"></i>Borrar
@@ -65,7 +69,8 @@ export const templateComents = (comments, id) => {
       for (let i = 0; i < comments.length; i += 1) {
         console.log(comments[i].ID, idComment);
         if (comments[i].ID === idComment && comments[i].userID === user.uid) {
-          document.querySelector(`#contentEdit-${idComment}`).innerHTML = `<textarea id="edit-${idComment}">${comments[i].content}</textarea>
+          document.querySelector(`#contentEdit-${idComment}`).innerHTML = `
+            <textarea id="edit-${idComment}">${comments[i].content}</textarea>
             <button id="save-${idComment}" class="save">SAVE</button>`;
           document.querySelector(`#save-${idComment}`).addEventListener('click', () => {
             const commentEdit = document.getElementById(`edit-${idComment}`);

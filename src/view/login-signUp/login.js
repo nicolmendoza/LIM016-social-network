@@ -14,19 +14,24 @@ export const Login = () => {
   <section class="bubble">
     <!-- content here -->
   </section>
-  <div class="section1"><img class="imgInicio"></div>
-  <div class="section2">
+
+  <section class="section1"><img class="imgInicio"></section>
+
+  <section class="section2">
     <div class="formulario">
       <div class="logo">SOCIAL NETWORK</div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
+
       <div class="form-group-text">
         <div class="textForm clickLogin">
           <a href="#/login">Login</a> 
         </div>
+
         <div class="textForm">
           <a href="#/signup" >Sign Up</a>
         </div>
       </div>
+
       <form id="login-form">
         <div class="form-group">
           <span class="icon-input">
@@ -34,14 +39,17 @@ export const Login = () => {
           </span>
           <input type="email" id="login-email" placeholder="correo@example.com" required>
         </div>
+
         <div class="form-group">
           <span class="icon-input" id="icon-eye">
             <i class="fas fa-eye-slash"></i>
           </span>
           <input type="password" id="login-password"  placeholder="****************" required>
         </div>
+
         <p id="generalMessage" class="errorMessage"></p>
         <button type="submit" class="btnLogin">LOGIN</button><br>
+
         <div class="divResetPassword">
           <a href="#/resetPassword" id="resetPass"> Forgot password?</a>
         </div>
@@ -49,12 +57,13 @@ export const Login = () => {
         <button type="button" class="icon-login" id="googleLogin"><img src="img/google.png"></i></button>
         <button type="button" class="icon-login" id="facebookLogin"><img src="img/facebook.png"></button>
         <button type="button" class="icon-login" id="githubLogin"><img src="img/github.png"></button>
+        
         <div class="textResetPassword">
           <p class="registerText">Don't you have an account? <a href="#/signup" class="registerText link">Register now</a></p>
         </div>
       </form>
     </div>
-  </div>`;
+  </section>`;
 
   return viewHome;
 };
