@@ -49,14 +49,14 @@ export const Home = () => {
       </div>
 
       <div id="divParent-users">
-        <h1>Queen Coders Users</h1>
+        <h1>Other users</h1>
         <div id="sectionUsers"></div>
       </div>
     </div>
   </div>
 
   <div class="div-showPost">
-    <button id="btn-newPost" style="display:none"> Add New Post </button>
+    <button id="btn-newPost" style="display:none"> ADD NEW POST </button>
     <div id="showPost"></div>
   </div>
 
