@@ -61,12 +61,14 @@
 .text-post-home{
     display: flex;
     align-items: center;
-    margin: 20px 6%;
+    padding: 3px 3px 6px 3px;
     text-align: start !important;
+    margin: 12px;
 }
 
 .editPost{
     width: 87%;
+    height: 35px;
     margin-right: 9px;
     border-radius: 8px;
     border: 0.5px solid #bfbebe;
@@ -79,6 +81,8 @@
     background-image: linear-gradient(120deg, #da5afa99 0%, #3570ec8a 100%);
     color: beige;
     font-size: 13px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .icon-options{
