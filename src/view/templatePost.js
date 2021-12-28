@@ -51,8 +51,14 @@ export const template = (post) => {
         <p class="countComment${onePost.idP} amount"></p>
       </div>
       </div>
+      <div class="contentComment">
+        <div class="contentWriteComment">
+          <textarea id="textComent${onePost.idP}" class="write-comment" placeholder="Write a comment..."></textarea>
+          <button class="saveComment save">SAVE</button>
+        </div>
+      </div >
       <div id="comments${onePost.idP}">
-        <div id="contentComment${onePost.idP}" class="contentComment"></div>
+        <div id="contentComment${onePost.idP}"></div>
         <div id="showComment${onePost.idP}"></div>
       </div>
     `;
@@ -205,33 +211,34 @@ export const template = (post) => {
     icon.addEventListener('click', (e) => {
       const id = e.target.parentNode.parentNode.parentNode.id;
       const showComment = document.getElementById(`showComment${id}`);
-      showComment.innerHTML = '';
-      readComment(templateComents, id);
-
-      const divComment = document.createElement('div');
-      divComment.classList = 'contentWriteComment';
-      divComment.innerHTML = `
-        <textarea id="textComent${id}" class="write-comment" placeholder="Write a comment..."></textarea>
-        <button id="saveComment${id}" class="save">SAVE</button>`;
-      nuevoElemento.querySelector(`#contentComment${id}`).appendChild(divComment);
-      document.getElementById(`saveComment${id}`).addEventListener('click', () => {
-        const commentOne = document.getElementById(`textComent${id}`).value;
-        if (commentOne === '') {
-          alert('Comentario vacío.');
-        } else {
-        // if (commentOne !== '') {
-        //   console.log(commentOne);
-        //   saveComment(id, commentOne, uidUser);
-        // } else {
-        //   divComment.remove(`<textarea id="textComent${id}"></textarea>
-        //   <button id="saveComment${id}">SAVE</button>`);
-        // }
-          saveComment(id, commentOne, uidUser);
-          document.getElementById(`textComent${id}`).value = '';
-        }
-      });
+      if (showComment.className !== 'showContent') {
+        showComment.className = 'showContent';
+        showComment.innerHTML = '';
+        readComment(templateComents, id);
+      } else {
+        showComment.className = '';
+        showComment.innerHTML = '';
+      }
     });
   });
+
+  nuevoElemento.querySelectorAll('.saveComment').forEach((save) => {
+    save.addEventListener('click', (e) => {
+      const id = e.target.parentNode.parentNode.parentNode.id;
+      const showComment = document.getElementById(`showComment${id}`);
+      console.log(id);
+      const commentOne = document.getElementById(`textComent${id}`).value;
+      if (commentOne === '') {
+        alert('Comentario vacío.');
+      } else {
+        saveComment(id, commentOne, uidUser);
+        document.getElementById(`textComent${id}`).value = '';
+        showComment.className = 'showContent';
+        readComment(templateComents, id);
+      }
+    });
+  });
+
   showPost.innerHTML = '';
   showPost.appendChild(nuevoElemento);
 };
