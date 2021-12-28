@@ -27,15 +27,17 @@
 
 .containerNewPost{
     background: #ffffff8f;
-    min-height: 95vh;
-    width: 95%;
-    /* border-radius: 14px; */
-    margin: 11px 2.5%;
+    min-height: 92vh;
+    width: 96%;
+    border-radius: 14px;
+    /* margin: 11px 2.5%; */
+    margin: 8px auto;
     padding: 6% 5%;
 }
 
 .header-newPost{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     /* background: burlywood; */
     padding-bottom: 26px;
@@ -44,13 +46,13 @@
 .info-user{
     display: flex;
     padding-bottom: 16px;
-    /* align-items: center; */
+    align-items: center;
 }
 
 #photoUser1{
     border-radius: 50%;
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
 }
 
 .name-user{
@@ -66,11 +68,13 @@
 
 #namePost{
     text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .containerNewPost textarea{
-    width: 100%;
-    height: 17vh;
+    width: 97%;
+    height: 15vh;
     border-radius: 12px;
     border: transparent;
     background: #ffffffbf;
@@ -83,7 +87,8 @@
 }
 .publish{
     height: 36px;
-    width: 114px;
+    width: 90px;
+    margin: 1px;
     border-radius: 30px;
     border: transparent;
     background-image: linear-gradient(120deg, #da5afa99 0%, #3570ec8a 100%);
@@ -93,7 +98,7 @@
 
 .descart{
     height: 36px;
-    width: 114px;
+    width: 90px;
     border-radius: 30px;
     border: transparent;
     background-image: linear-gradient(120deg, #da5afa99 0%, #3570ec8a 100%);
@@ -134,7 +139,7 @@
     justify-content: space-around;
     height: 34px;
     border-radius: 24px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 }
 
 .addImage button{
@@ -156,9 +161,10 @@
 }
 
 .image-preview{
-    width: 95%;
-    border-radius: 15px;
-    box-shadow: 0px 0px 6px 1.5px rgb(0 0 0 / 25%);
+    width: 100%;
+    border-radius: 14px;
+    margin: 5px;
+   /*  box-shadow: 0px 0px 6px 1.5px rgb(0 0 0 / 25%); */
 }
 
 
@@ -169,6 +175,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#selects{
+    width: 85px;
+    margin-left: auto;
+}
+.privacity, .type{
+    border-radius: 3px;
+    border: 1px;
+    border-color: rgb(87, 87, 87);
+    background: #ffffffbf;
+    padding: 1.5px;
+    width: 100%;
 }
 
 /*MODAL PARA PANTALLA GRANDE*/

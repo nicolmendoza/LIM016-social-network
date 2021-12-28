@@ -1,11 +1,8 @@
 .contentWriteComment{
     display: flex;
     align-items: center;
-    padding: 0px 5px 8px 5px;
+    padding: 8px 5px 8px 5px;
     text-align: start !important;
-}
-
-.contentComment{
     width: 98%;
     margin-left: auto;
     margin-right: auto;
@@ -22,8 +19,8 @@
 .divComment{
     display: flex;
     flex-direction: column;
-    margin: 0.8em;
     border-bottom: 0.5px solid #c3c3c3;
+    padding: 5px;
 }
 .infoUser{
     display: flex;
@@ -31,16 +28,17 @@
     align-items: center;
     width: auto;
     margin-bottom: 0.2em;
+    padding: 0 0.4px;
 }
 .infoUser > img{
     border-radius: 50%;
+    margin: 3px;
 }
 .name-comment{
-    font-size: 14px;
+    font-size: 15px;
     margin-left: 0.6em;
-    font-weight: 700;
+    font-weight: bold;
 }
-
 .icon-options-comment{
     display: flex;
     margin-left: auto;
@@ -49,7 +47,6 @@
 
 .commentText{
     display: flex;
-    font-size: 13px;
-    margin-left: 2.5em;
-    margin-bottom: 0.7em;
+    font-size: 15px;
+    margin: 0em 2.5em 0.7em 2.5em;
 }

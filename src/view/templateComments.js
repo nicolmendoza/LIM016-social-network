@@ -13,7 +13,7 @@ export const templateComents = (comments, id) => {
       <div class="infoUser">
         <img  id="photo-profile" src="${dataUser.data().photo}" width="24px">
         <div class="name-comment">${dataUser.data().name}</div>
-        <div class="icon-options-comment">
+        <div class="icon-options">
           <ion-icon name="ellipsis-vertical-outline"></ion-icon>
         </div>
       </div>
@@ -38,7 +38,7 @@ export const templateComents = (comments, id) => {
   Promise.all(commentsElements).then(() => {
     const user = JSON.parse(localStorage.getItem('user'));
 
-    divComment.querySelectorAll('.icon-options-comment').forEach((div) => div.addEventListener('click', (e) => {
+    divComment.querySelectorAll('.icon-options').forEach((div) => div.addEventListener('click', (e) => {
       const idComment = e.target.parentNode.parentNode.parentNode.id;
       console.log(idComment);
       for (let i = 0; i < comments.length; i += 1) {
