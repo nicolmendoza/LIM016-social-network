@@ -10,55 +10,49 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 0px 2.5%;
 }
 
 .header-text{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    text-align: initial;
     padding-left: 17px;
     line-height: 0.9cm;
     align-items: flex-start;
-    font-family: cursive;
-    margin-top: -14px;  
+    margin-bottom: 14px;
 }
 
 .header-text h{
-    font-size: 15px;
-    color: #517fe3;
+    font-size: 14px;
+    line-height : 20px;
 }
 
 .header-text p{
-    font-size: 20px;
-    color: #3570EC;
+    font-size: 16px;
+    line-height : 20px;
+    text-align: start;
 }
 
 .photoHome{
     margin: 12px 0;
     border-radius: 50%;
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
 }
 
 /*SECTION DE DESCRPCION HOME*/
 
 #sectionDescription{
+    padding: 8px;
     display: none;
-    padding: 7% 0px;
     flex-direction: column;
-    align-items: flex-start;
-    margin-left: 10px;
     width: 100%;
 }
 
 #sectionDescription h1{
-    font-family: ui-serif;
     font-size: 19px;
-    font-weight: 100;
+    font-weight: bold;
     color: #484860;
-    margin-bottom: 8px;
+    margin: 8px auto;
 }
 
 #infoDescription{
@@ -66,23 +60,28 @@
     flex-direction: column;
     align-items: flex-start;
     line-height: 1.8;
-    padding-left: 6%;
     width: 100%;
 }
 
-#infoDescription p{
+#infoDescription > p{
     font-size: 14px;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #div-etiqueta{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    margin-top: 5px;
-    width: 100%;
+    margin-top: 6px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #div-etiqueta p{
+    width: auto;
     border: transparent;
     background: #B495E7;
     border-radius: 13px;
@@ -225,23 +224,20 @@ display: none;
 }
 
 #divParent-users{   
-    /* padding: 7% 10px; */
     display: none;
     flex-direction: column;
+    justify-content: center;
     align-items: flex-start;
-    /* margin-left: 10px; */
     width: 100%;
     border-top: 2px solid #94A4F5;
-    padding-top: 7%;
+    padding: 8px;
 }
 
 #divParent-users h1{
-    font-family: ui-serif;
     font-size: 19px;
-    font-weight: 100;
+    font-weight: bold;
     color: #484860;
-    margin-bottom: 8px;
-    margin-left: 10px;
+    margin: 8px auto;
 }
 
 #sectionUsers{
