@@ -1,3 +1,5 @@
+/* -----CONTAINER POSTS----- */
+
 .div-showPost{
     width: 100%;
     /* margin: 0px 4%; */
@@ -6,6 +8,8 @@
     margin: 0px 2.5%;
     /* width: 95%; */
 }
+
+/* -----INF OF PUBLICATION----- */
 
 .postDiv{
     position: relative;
@@ -22,14 +26,12 @@
     align-items: center;
     padding: 2px 4px;
 }
-
 .header-post img{
     width: 48px;
     height: 48px;
     border-radius: 50%;
     border: 3px solid white;
 }
-
 .header-info{
     display: flex;
     flex-direction: column;
@@ -37,19 +39,18 @@
     justify-content: space-around;
     margin-left: 8px;
 }
-
 .post-name, .namePost{
-/*     font-weight: bold; */
     font-size: 16px;
     width: auto;
     text-align: start !important;
     margin: 5px 0;
 }
-
 .date{
     font-size: 12px;
     color: gray;
 }
+
+/* -----CONTENT POST----- */
 
 .img-post-home{
     width: 100%;
@@ -57,6 +58,7 @@
     height: 180px;
     padding: 4px;
 }
+
 .text-post-home{
     display: flex;
     align-items: center;
@@ -64,6 +66,47 @@
     margin: 10px 20px;
     font-size: 15px;
 }
+
+/* -----OPTIONS POST----- */
+
+.icon-options-comment{
+    padding: 5px;
+}
+.icon-options{
+    margin-left: auto;
+    padding-left: 1em;
+}
+.div-options{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: calc(100% - 98%);
+    margin-top: 6px;
+    align-items: flex-end;
+}
+.box-options{
+    background-image: linear-gradient(to bottom, #e0f5ff 35%, #FFFFFF 100%);
+    box-shadow: 1px 1px 5px 0px lightgrey;
+    border: 1px solid gray;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    margin-right: 14px;
+}
+.content-icon{
+    margin: 6px;
+}
+
+.box-options .fas,
+.box-options .far{
+    margin-right: 6px;
+}
+.show{
+    display: flex !important;
+}
+
+/* -----EDIT POST----- */
 
 .editPost{
     width: 87%;
@@ -85,83 +128,8 @@
     margin-left: auto;
 }
 
-.icon-options-comment{
-    padding: 5px;
-}
-.icon-options{
-    margin-left: auto;
-    padding-left: 1em;
-}
+/* -----DELETE POST MODAL----- */
 
-#postIcons{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0.1em;
-    padding-left: 0.5em;
-    border-bottom: 0.5px solid #c1c1c1;
-}
-
-.likes, .comments {
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    align-items: center;
-    margin-right: 18px;
-}
-.likes{
-    margin-left: 0.5em;
-}
-.comments{
-    margin-left: 1.5em;
-}
-
-.icon{
-    margin: 0.5em;
-    cursor: pointer;
-}
-.fa-heart{
-    color: deeppink;
-}
-
-.fa-comment{
-    color: #3D3DF2;
-}
-.amount{
-    font-size: 12px;
-}
-
-.div-options{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    right: calc(100% - 98%);
-    margin-top: 6px;
-    align-items: flex-end;
-}
-
-.box-options{
-    background-image: linear-gradient(to bottom, #e0f5ff 35%, #FFFFFF 100%);
-    box-shadow: 1px 1px 5px 0px lightgrey;
-    border: 1px solid gray;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    font-size: 13px;
-    margin-right: 14px;
-}
-.content-icon{
-    margin: 6px;
-}
-.box-options .fas,
-.box-options .far{
-    margin-right: 6px;
-}
-.show{
-    display: flex !important;
-}
-
-/*-----CSS MODAL DELETE------*/
 .modalDelete{
     width: 100%;
     min-height: 100vh;
@@ -219,6 +187,46 @@
 }
 .revelar{
     display: flex !important;
+}
+
+/* -----LIKE AND COMMENT POST----- */
+
+#postIcons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.1em;
+    padding-left: 0.5em;
+    border-bottom: 0.5px solid #c1c1c1;
+}
+
+.likes, .comments {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    align-items: center;
+    margin-right: 18px;
+}
+.likes{
+    margin-left: 0.5em;
+}
+.comments{
+    margin-left: 1.5em;
+}
+
+.icon{
+    margin: 0.5em;
+    cursor: pointer;
+}
+.fa-heart{
+    color: deeppink;
+}
+
+.fa-comment{
+    color: #3D3DF2;
+}
+.amount{
+    font-size: 12px;
 }
 
 @media (min-width: 768px){

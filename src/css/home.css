@@ -13,7 +13,7 @@
     margin: auto;
 }
 
-/*WELCOME TO USER*/
+/* -----WELCOME TO USER----- */
 
 .header-home{
     display: flex;
@@ -45,7 +45,7 @@
 }
 
 
-/*SECTION DE DESCRIPTION OF USER*/
+/* -----SECTION DE DESCRIPTION OF USER----- */
 
 #sectionDescription{
     padding: 8px;
@@ -97,7 +97,7 @@
     color: white
 }
 
-/*SECTION OTHER USERS*/
+/* -----SECTION OTHER USERS----- */
 
 #divParent-users{   
     display: none;
@@ -166,7 +166,7 @@
     text-align: start !important;
 }
 
-/*BUTTON FOR CREATE A NEW POST*/
+/* -----BUTTON FOR CREATE A NEW POST----- */
 
 #btn-newPost{
     display: none;
@@ -181,7 +181,7 @@
     margin-left: auto;
 }
 
-/*SECTION TYPES OF POST*/
+/* -----SECTION TYPES OF POST----- */
 
 .sectionTypes{
 display: none;
