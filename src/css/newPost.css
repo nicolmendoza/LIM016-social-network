@@ -1,4 +1,5 @@
-/*MODAL NEW POST MOBILE */
+/* -----MODAL NEW POST MOBILE----- */
+
 .modalNewPost{
     width: 100%;
     min-height: 100vh;
@@ -35,6 +36,8 @@
     padding: 6% 5%;
 }
 
+/* -----OPTIONS FOR NEW POST----- */
+
 .header-newPost{
     display: flex;
     align-items: center;
@@ -43,48 +46,6 @@
     padding-bottom: 26px;
 }
 
-.info-user{
-    display: flex;
-    padding-bottom: 16px;
-    align-items: center;
-}
-
-#photoUser1{
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-}
-
-.name-user{
-    display: flex;
-    flex-direction: column;
-    padding: 0px 10px;
-    justify-content: space-around;
-}
-
-.name-user select{
-    width: 7em;
-}
-
-#namePost{
-    text-transform: capitalize;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.containerNewPost textarea{
-    width: 97%;
-    height: 15vh;
-    border-radius: 12px;
-    border: transparent;
-    background: #ffffffbf;
-    padding: 9px 10px;
-    font-size: 16px;
-}
-#newPost{
-    font-size: 18px;
-    font-weight: bold;
-}
 .publish{
     height: 36px;
     width: 90px;
@@ -109,6 +70,70 @@
     text-decoration: none;
     color: beige;
 }
+
+/* -----INFO OF USER----- */
+
+.info-user{
+    display: flex;
+    padding-bottom: 16px;
+    align-items: center;
+}
+#photoUser1{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+.name-user{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    justify-content: space-around;
+}
+.name-user select{
+    width: 7em;
+}
+#namePost{
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* -----OPTIONS POST----- */
+
+#selects{
+    width: 85px;
+    margin-left: auto;
+}
+.privacity, .type{
+    border-radius: 3px;
+    border: 1px;
+    border-color: rgb(87, 87, 87);
+    background: #ffffffbf;
+    padding: 1.5px;
+    margin: 2.4px;
+    width: 100%;
+}
+#selects option{
+    font-size: 12px;
+    padding: 3px;
+}
+
+/* -----CONTENT COMMENT----- */
+
+.containerNewPost textarea{
+    width: 97%;
+    height: 15vh;
+    border-radius: 12px;
+    border: transparent;
+    background: #ffffffbf;
+    padding: 9px 10px;
+    font-size: 16px;
+}
+#newPost{
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .plus-image{
     display: flex;
     justify-content: center;
@@ -142,18 +167,6 @@
     /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 }
 
-.addImage button{
-    border: none;
-    background: none;
-    /* width: 33%; */
-    color: white;
-    font-size: 24px;
-}
-
-.addImage ion-icon{
-    display: block;
-}
-
 #container-image-preview{
     display: flex;
     justify-content: center;
@@ -167,6 +180,17 @@
    /*  box-shadow: 0px 0px 6px 1.5px rgb(0 0 0 / 25%); */
 }
 
+.addImage button{
+    border: none;
+    background: none;
+    /* width: 33%; */
+    color: white;
+    font-size: 24px;
+}
+
+.addImage ion-icon{
+    display: block;
+}
 
 .container-profile{
     width: 100%;
@@ -175,24 +199,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-#selects{
-    width: 85px;
-    margin-left: auto;
-}
-.privacity, .type{
-    border-radius: 3px;
-    border: 1px;
-    border-color: rgb(87, 87, 87);
-    background: #ffffffbf;
-    padding: 1.5px;
-    margin: 2.4px;
-    width: 100%;
-}
-#selects option{
-    font-size: 12px;
-    padding: 3px;
 }
 
 /*MODAL PARA PANTALLA GRANDE*/
