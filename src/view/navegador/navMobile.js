@@ -5,11 +5,11 @@ export const navMobile = () => {
   viewNavMobile.classList.add('nav-mobile');
   viewNavMobile.innerHTML = `
     <ul class="menu">
-    <li><a href="#/home"><i class="fas fa-home"></i></a></li>
-    <li><a href="#/home"><i id="btn-search" class="fas fa-bell"></i></a></li>
-    <li><span class = "btn-newPost-mobile"><i id="btn-post-mobile" class="fas fa-plus-circle"></i></span></li>
-    <li><a href="#/home/profile/${userCurrent.uid}"><i class="fas fa-user-circle" id="myID" data-id="${userCurrent.uid}"></i></a></li>
-    <li><i id="logout-mob" class="fas fa-sign-out-alt"></i></li>
+      <li><a href="#/home"><i class="fas fa-home"></i></a></li>
+      <li><a href="#/home"><i id="btn-search" class="fas fa-bell"></i></a></li>
+      <li><span class = "btn-newPost-mobile"><i id="btn-post-mobile" class="fas fa-plus-circle"></i></span></li>
+      <li><a href="#/home/profile/${userCurrent.uid}"><i class="fas fa-user-circle" id="myID" data-id="${userCurrent.uid}"></i></a></li>
+      <li><i id="logout-mob" class="fas fa-sign-out-alt"></i></li>
     </ul>
     `;
 

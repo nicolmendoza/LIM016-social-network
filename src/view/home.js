@@ -33,6 +33,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
+
       <div id="sectionDescription">
         <h1>Description</h1>
         <div id="infoDescription">
@@ -46,70 +47,71 @@ export const Home = () => {
           </div>
         </div>
       </div>
+
       <div id="divParent-users">
-      <h1>Queen Coders Users</h1>
-      <div id="sectionUsers" >
-      </div>
-      </div>
+        <h1>Other users</h1>
+        <div id="sectionUsers"></div>
       </div>
     </div>
+  </div>
+
   <div class="div-showPost">
-  <button id="btn-newPost" style="display:none"> Add New Post </button>
-  <div id="showPost">
+    <button id="btn-newPost" style="display:none"> ADD NEW POST </button>
+    <div id="showPost"></div>
   </div>
-  </div>
-<div class="sectionTypes">
-<div class="container-info-users">
-  <div id="header-categories" >
-  <p>Categories</p>
-  <p id="todos">See All</p>
-  </div>
-  <div id="botones-types">
-    <div class="div-type">
-    <img class="img-types" src="./img/ofertaLaboral.jpg">
-    <button value="trabajo"  class="btn-type">Job Offer</button>
-    </div>
-    <div class="div-type">
-    <img class="img-types" src="./img/evento.jpg">
-    <button value="evento"  class="btn-type">Events</button>
-    </div>
-    <div class="div-type">
-    <img class="img-types" src="./img/cursos.jpg">
-    <button value="curso"  class="btn-type">Courses</button>
-    </div>
-    <div class="div-type">
-    <img class="img-types" src="./img/tutorial.jpg">
-    <button value="tutorial" class="btn-type">Tutorials</button>
-    </div>
-    <div class="div-type">
-    <img class="img-types" src="./img/preguntas.jpg">
-    <button value="preguntas" class="btn-type">Questions</button>
-    </div>
-  
-  </div>
-  </div>
-  </div>
-</div>
- <section class="modalNewPost" style="display: none">
-      <div class="modalDivPost">
-      <div class="modalContainer-NewPost">
+
+  <div class="sectionTypes">
+    <div class="container-info-users">
+      <div id="header-categories">
+        <p>Categories</p>
+        <p id="todos">See All</p>
       </div>
+
+      <div id="botones-types">
+        <div class="div-type">
+          <img class="img-types" src="./img/ofertaLaboral.jpg">
+          <button value="trabajo"  class="btn-type">Job Offer</button>
+        </div>
+        <div class="div-type">
+          <img class="img-types" src="./img/evento.jpg">
+          <button value="evento"  class="btn-type">Events</button>
+        </div>
+        <div class="div-type">
+          <img class="img-types" src="./img/cursos.jpg">
+          <button value="curso"  class="btn-type">Courses</button>
+        </div>
+        <div class="div-type">
+          <img class="img-types" src="./img/tutorial.jpg">
+          <button value="tutorial" class="btn-type">Tutorials</button>
+        </div>
+        <div class="div-type">
+          <img class="img-types" src="./img/preguntas.jpg">
+          <button value="preguntas" class="btn-type">Questions</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="modalNewPost" style="display: none">
+      <div class="modalDivPost">
+        <div class="modalContainer-NewPost"></div>
       </div>
   </section>
+
   <section class="modalDelete" style="display: none">
     <div class="modalDivDelete">
-    <div class="modalContainer-Delete">
-      <div id="closeDelete">
-        <i class="far fa-times-circle"></i>
-      </div>
-      <div>
-        <h1>Eliminar publicación</h1>
-        <div class="modal-parrafo">
-          ¿Estás seguro que quieres eliminar esta publicación de <b class="emailText">Queen Coders</b> para siembre?
+      <div class="modalContainer-Delete">
+        <div id="closeDelete">
+          <i class="far fa-times-circle"></i>
         </div>
-        <button class="aceptDelete">ELIMINAR</button>
+        <div>
+          <h1>Eliminar publicación</h1>
+          <div class="modal-parrafo">
+            ¿Estás seguro que quieres eliminar esta publicación de <b class="emailText">Queen Coders</b> para siembre?
+          </div>
+          <button class="aceptDelete">ELIMINAR</button>
+        </div>
       </div>
-    </div>
     </div>
   </section>
   `;

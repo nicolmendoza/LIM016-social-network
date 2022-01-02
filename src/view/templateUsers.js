@@ -6,12 +6,12 @@ export const templateUsers = () => {
   const arrayUsers = getUsers();
   arrayUsers.then((users) => users.forEach((user) => {
     divUsers.innerHTML += `
-  <div class="link-user" >
-  <div class="oneDivUser" >
-  <img src=${user.photo} data-id="${user.userUID}" class="img-user" >
-  <p class="oneDivUser-parrafo"  data-id="${user.userUID}">${user.name}</p>
-  </div>
-  </div>
+    <div class="link-user" >
+      <div class="oneDivUser" >
+        <img src=${user.photo} data-id="${user.userUID}" class="img-user" >
+        <p class="oneDivUser-parrafo"  data-id="${user.userUID}">${user.name}</p>
+      </div>
+    </div>
   `;
     document.querySelectorAll('.oneDivUser-parrafo').forEach((link) => {
       link.addEventListener('click', (e) => {

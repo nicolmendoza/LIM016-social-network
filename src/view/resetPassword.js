@@ -17,17 +17,18 @@ export const resetPassword = () => {
     
     <section class="modalReset" style="display: none">
       <div class="modalDiv"> 
-      <div class="modalContainer">
-      <div id="far">
-        <i class="far fa-times-circle"></i>
-      </div>
-      <div>
-        <h1>Correo electronico enviado</h1>
-        <div class="modal-parrafo">
-        Te hemos enviado un correo electrónico <b class="emailText"></b> con instrucciones para volver a establecer tu contraseña.</div>
-        <button class="aceptReset"><a href="#/login">ACEPTAR</a></button>
-      </div>
-      </div>
+        <div class="modalContainer">
+          <div id="far">
+            <i class="far fa-times-circle"></i>
+          </div>
+          
+          <div>
+            <h1>Correo electronico enviado</h1>
+            <div class="modal-parrafo">
+            Te hemos enviado un correo electrónico <b class="emailText"></b> con instrucciones para volver a establecer tu contraseña.</div>
+            <button class="aceptReset"><a href="#/login">ACEPTAR</a></button>
+          </div>
+        </div>
       </div>
     </section>`;
 
