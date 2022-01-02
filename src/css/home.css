@@ -91,7 +91,8 @@
     /* margin: 2px 5px; */
     margin-right: 5px;
     margin-block-end: 5px;
-    color: white
+    color: white;
+    text-transform: capitalize;
 }
 #logout{
     background: none;
@@ -179,7 +180,7 @@
     display:flex !important
 }
 .sectionTypes{
-display: none;
+    order: -1;
 }
 
 .img-preguntas{
@@ -198,7 +199,7 @@ display: none;
 .img-types{
     width: 90%;
     border-radius: 9px;
-    height: 90px;
+    height: 30px;
 }
 .btn-type{
     background: #ebf9ffa6;
@@ -210,7 +211,7 @@ display: none;
 } 
 
 .btn-type{
-    font-size: 20px;
+    font-size: 15px;
     /* font-weight: 700; */
     font-family: 'Outfit';
 }
@@ -250,6 +251,7 @@ display: none;
 
 #section-User{
     width: 100%;
+    order: -2;
 }
 .container-info-users{
         /* position: fixed; */
@@ -266,7 +268,7 @@ display: none;
 
 #header-categories{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 #header-categories p{
     font-size: 18px;
@@ -279,9 +281,12 @@ display: none;
 
 #botones-types{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     width: 100%;
+}
+.categoryMobile{
+    padding: 0px 2.5%;
 }
 
 @media (min-width: 768px){
@@ -327,6 +332,7 @@ display: none;
         width: 23%;
         position: relative;
         display: block;
+        order: initial;
     }
 
     #sectionDescription{
@@ -336,5 +342,25 @@ display: none;
     #divParent-users{
         display: flex;
     }
+    #header-categories{
+        display: flex;
+        justify-content: space-around;
+    }
 
+    #botones-types{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .img-types{
+        width: 90%;
+        border-radius: 9px;
+        height: 90px;
+    }
+    .btn-type{
+        font-size: 20px;
+        /* font-weight: 700; */
+        font-family: 'Outfit';
+    }
 }

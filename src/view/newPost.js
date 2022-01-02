@@ -10,7 +10,7 @@ export const newPost = () => {
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
     <div class="header-newPost">
-        <button class="descart"><a href="#/home"> CANCEL </a></button>
+        <button class="descart"> CANCEL </button>
         <div id="newPost"> NEW POST </div>
         <button type="submit" class="publish">PUBLISH</button>
     </div>

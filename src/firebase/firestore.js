@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-unresolved */
 import {
   doc,
@@ -219,7 +220,7 @@ export const readPostProfile = (uid) => {
   return docUser;
 };
 
-export const updateInfoUser = (uid, newAbout, newName, newPhoto, URLportada, newCareer) => {
+export const updateInfoUser = (uid, newAbout, newName, newPhoto, URLportada, newCareer, arrayInterest) => {
   const infoUser = doc(db, 'usuarios', uid);
   return updateDoc(infoUser, {
     about: newAbout,
@@ -227,5 +228,6 @@ export const updateInfoUser = (uid, newAbout, newName, newPhoto, URLportada, new
     photo: newPhoto,
     portada: URLportada,
     career: newCareer,
+    interest: arrayInterest,
   });
 };

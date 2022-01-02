@@ -39,10 +39,6 @@ export const Home = () => {
           <p id="ocupation"></p>
           <p id="about"></p>
           <div id="div-etiqueta">
-            <p class="etiqueta">Javascript</p>
-            <p class="etiqueta">CSS</p>
-            <p class="etiqueta">Html</p>
-            <p class="etiqueta">Node</p>
           </div>
         </div>
       </div>
@@ -59,7 +55,7 @@ export const Home = () => {
   </div>
   </div>
 <div class="sectionTypes">
-<div class="container-info-users">
+<div class="container-info-users categoryMobile">
   <div id="header-categories" >
   <p>Categories</p>
   <p id="todos">See All</p>
@@ -135,8 +131,13 @@ export const FunctionsHome = () => {
       const info = document.getElementById('infoUser');
       info.innerHTML = `${userInfo.name}`;
       document.getElementById('photoUser').src = `${userInfo.photo}`;
-      document.getElementById('ocupation').innerHTML = `${userInfo.career}`;
-      document.getElementById('about').innerHTML = `${userInfo.about}`;
+      console.log(userInfo.interest);
+      for (let i = 0; i < userInfo.interest.length; i++) {
+        const pEtiqueta = document.createElement('p');
+        pEtiqueta.classList.add('etiqueta');
+        pEtiqueta.innerHTML = `${userInfo.interest[i]}`;
+        document.getElementById('div-etiqueta').appendChild(pEtiqueta);
+      }
     }
     console.log(docSnap.data());
   }

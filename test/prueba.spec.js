@@ -1,10 +1,16 @@
 import { handleSubmit } from '../src/view/login-signUp/login.js';
+import { verificarUsuario } from '../src/view/verificar-usuario';
+
+import {
+  loginEmail,
+} from '../src/firebase/firebase-auth';
 
 jest.mock('../src/firebase/firebase-config');
-jest.mock('../verificar-usuario.js');
+jest.mock('../src/view/verificar-usuario');
+
 
 describe('SignIn', () => {
-  it('handleSubmit', () => {
+  it('handleSubmit', (done) => {
     global.localStorage = {
       setItem(key, value) {
         expect(key).toBe('user');
@@ -28,6 +34,9 @@ describe('SignIn', () => {
           }
         },
       },
+    }).then(() => {
+      expect(loginEmail.mock.calls[0][0]).toBe('correo@email.com');
+      done();
     });
   });
 });
