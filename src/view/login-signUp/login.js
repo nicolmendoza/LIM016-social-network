@@ -14,19 +14,24 @@ export const Login = () => {
   <section class="bubble">
     <!-- content here -->
   </section>
-  <div class="section1"><img class="imgInicio"></div>
-  <div class="section2">
+
+  <section class="section1"><img class="imgInicio"></section>
+
+  <section class="section2">
     <div class="formulario">
       <div class="logo">SOCIAL NETWORK</div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
+
       <div class="form-group-text">
         <div class="textForm clickLogin">
           <a href="#/login">Login</a> 
         </div>
+
         <div class="textForm">
           <a href="#/signup" >Sign Up</a>
         </div>
       </div>
+
       <form id="login-form">
         <div class="form-group">
           <span class="icon-input">
@@ -34,14 +39,17 @@ export const Login = () => {
           </span>
           <input type="email" id="login-email" placeholder="correo@example.com" required>
         </div>
+
         <div class="form-group">
           <span class="icon-input" id="icon-eye">
             <i class="fas fa-eye-slash"></i>
           </span>
           <input type="password" id="login-password"  placeholder="****************" required>
         </div>
+
         <p id="generalMessage" class="errorMessage"></p>
         <button type="submit" class="btnLogin">LOGIN</button><br>
+
         <div class="divResetPassword">
           <a href="#/resetPassword" id="resetPass"> Forgot password?</a>
         </div>
@@ -49,15 +57,37 @@ export const Login = () => {
         <button type="button" class="icon-login" id="googleLogin"><img src="img/google.png"></i></button>
         <button type="button" class="icon-login" id="facebookLogin"><img src="img/facebook.png"></button>
         <button type="button" class="icon-login" id="githubLogin"><img src="img/github.png"></button>
+        
         <div class="textResetPassword">
           <p class="registerText">Don't you have an account? <a href="#/signup" class="registerText link">Register now</a></p>
         </div>
       </form>
     </div>
-  </div>`;
+  </section>`;
 
   return viewHome;
 };
+
+function errorOccurs(typeError, text) {
+  const errorCode = typeError.code;
+  const textMessage = text;
+  switch (errorCode) {
+    case 'auth/user-not-found':
+      textMessage.innerHTML = 'Usuario no encontrado';
+      break;
+    case 'auth/wrong-password':
+      textMessage.innerHTML = 'Contraseña incorrecta.';
+      break;
+    case 'auth/too-many-requests':
+      textMessage.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
+      break;
+    case 'auth/invalid-email':
+      textMessage.innerHTML = 'La dirección de correo electrónico no es válida';
+      break;
+    default:
+      textMessage.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
+  }
+}
 
 export const handleSubmit = (e) => {
   e.preventDefault();
@@ -77,40 +107,16 @@ export const handleSubmit = (e) => {
       }
     })
     .catch((error) => {
-      // errorOccurs(error);
-      console.log(error);
+      const message = document.getElementById('generalMessage');
+      errorOccurs(error, message);
     });
 };
 
 export const initLogin = () => {
   const signInForm = document.querySelector('#login-form');
-  /* ................................... */
   const googleLogin = document.querySelector('#googleLogin');
   const facebookLogin = document.querySelector('#facebookLogin');
   const githubLogin = document.getElementById('githubLogin');
-  /* ................................... */
-  const message = document.getElementById('generalMessage');
-
-  /* ........Errorres para ingresar....... */
-  function errorOccurs(typeError) {
-    const errorCode = typeError.code;
-    switch (errorCode) {
-      case 'auth/user-not-found':
-        message.innerHTML = 'Usuario no encontrado';
-        break;
-      case 'auth/wrong-password':
-        message.innerHTML = 'Contraseña incorrecta.';
-        break;
-      case 'auth/too-many-requests':
-        message.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
-        break;
-      case 'auth/invalid-email':
-        message.innerHTML = 'La dirección de correo electrónico no es válida';
-        break;
-      default:
-        message.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
-    }
-  }
 
   /* .........Logearse con correo........ */
   signInForm.addEventListener('submit', handleSubmit);
@@ -124,7 +130,8 @@ export const initLogin = () => {
         window.location.hash = '#/home';
       })
       .catch((error) => {
-        errorOccurs(error);
+        const message = document.getElementById('generalMessage');
+        errorOccurs(error, message);
       });
   });
 
@@ -136,7 +143,8 @@ export const initLogin = () => {
         window.location.hash = '#/home';
       })
       .catch((error) => {
-        errorOccurs(error);
+        const message = document.getElementById('generalMessage');
+        errorOccurs(error, message);
       });
   });
 
@@ -147,7 +155,8 @@ export const initLogin = () => {
       .then(() => {
         window.location.hash = '#/home';
       }).catch((error) => {
-        errorOccurs(error);
+        const message = document.getElementById('generalMessage');
+        errorOccurs(error, message);
       });
   });
 
@@ -167,5 +176,4 @@ export const initLogin = () => {
       icon.classList.add('fa-eye-slash');
     }
   });
-  /* ........Verificar si el usuario existe............. */
 };

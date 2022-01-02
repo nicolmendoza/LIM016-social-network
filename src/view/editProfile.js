@@ -18,35 +18,41 @@ export const profileEdit = () => {
         <i class="far fa-times-circle"></i>
       </div>
     </div>
+
     <div class="container-infoEdit">
       <div class="container-editPhoto">
         <img id="photoUserEdit" width="100px">
         <label for="edit-file"><i class="fas fa-edit"></i></label>
         <input type="file" id="edit-file" name="edit-file" multiple/>
       </div>
+
       <div class="container-editPortada">
         <img id="portadaUserEdit" width="100px">
         <label for="edit-portada"><i class="fas fa-edit"></i></label>
         <input type="file" id="edit-portada" name="edit-portada" multiple/>
       </div>
-    <div class="form-group">
-    <ion-icon name="person-outline"></ion-icon>
-    <label for="edit-name">Edita tu Nombre</label>
-    <input type="text" id="edit-name" name="edit-name"  placeholder="Name" >
-    </div>
-    <div class="form-group">
-    <ion-icon name="briefcase-outline"></ion-icon>
-    <label for="edit-career">Edita tu Ocupación</label>
-    <input type="text" id="edit-career"  name="edit-career" placeholder="Ocupation" >
-    </div>
-    <div class="form-group">
-    <label for="edit-about">Edita tu about</label>
-    <textarea  id="edit-about" name="edit-about" row="3" placeholder="¡Cuentanos más sobre ti, o escribe una frase que te describe!" ></textarea>
-    </div>
-    <div class="btns-editProfile">
-    <input type="reset" id="resetForm" value="Borrar"/>
-    <button id="btn-edit">Save</button>
-    </div>
+
+      <div class="form-group">
+        <ion-icon name="person-outline"></ion-icon>
+        <label for="edit-name">Edita tu Nombre</label>
+        <input type="text" id="edit-name" name="edit-name"  placeholder="Name">
+      </div>
+
+      <div class="form-group">
+        <ion-icon name="briefcase-outline"></ion-icon>
+        <label for="edit-career">Edita tu Ocupación</label>
+        <input type="text" id="edit-career"  name="edit-career" placeholder="Ocupation">
+      </div>
+
+      <div class="form-group">
+        <label for="edit-about">Edita tu about</label>
+        <textarea  id="edit-about" name="edit-about" row="3" placeholder="¡Cuentanos más sobre ti, o escribe una frase que te describe!" ></textarea>
+      </div>
+
+      <div class="btns-editProfile">
+        <input type="reset" id="resetForm" value="Borrar"/>
+        <button id="btn-edit">Save</button>
+      </div>
     </div>
     `;
   return document.querySelector('.modalContainer-edit').appendChild(editProfile);
