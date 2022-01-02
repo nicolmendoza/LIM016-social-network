@@ -14,13 +14,11 @@ export const Login = () => {
   <section class="bubble">
     <!-- content here -->
   </section>
-
-  <section class="section1"><img class="imgInicio"></section>
-
-  <section class="section2">
+  <div class="section1"><img class="imgInicio" name="imgInicio" ></div>
+  <div class="section2">
     <div class="formulario">
       <div class="logo">SOCIAL NETWORK</div>
-      <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
+      <div><img id="logoLogin" class="imgInicioPequeño" name="imgInicioPequeño"></div>
 
       <div class="form-group-text">
         <div class="textForm clickLogin">
@@ -91,19 +89,22 @@ function errorOccurs(typeError, text) {
 
 export const handleSubmit = (e) => {
   e.preventDefault();
-  const email = e.target.querySelector('#login-email').value;
-  const password = e.target.querySelector('#login-password').value;
+  const email = document.querySelector('#login-email').value;
+  const password = document.querySelector('#login-password').value;
 
-  loginEmail(email, password)
+  return loginEmail(email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      console.log(user);
       if (user.emailVerified === true) {
         verificarUsuario().then(() => {
           localStorage.setItem('user', JSON.stringify(user));
           window.location.hash = '#/home';
         });
       } else {
-        alert('Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.');
+        alert(
+          'Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.',
+        );
       }
     })
     .catch((error) => {
@@ -157,6 +158,7 @@ export const initLogin = () => {
       }).catch((error) => {
         const message = document.getElementById('generalMessage');
         errorOccurs(error, message);
+
       });
   });
 
@@ -166,7 +168,7 @@ export const initLogin = () => {
   iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 
-    if ((this.nextElementSibling).type === 'password') {
+    if (this.nextElementSibling.type === 'password') {
       this.nextElementSibling.type = 'text';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
@@ -176,4 +178,40 @@ export const initLogin = () => {
       icon.classList.add('fa-eye-slash');
     }
   });
+  /* ........Imagen grande de Login............. */
+
+  const imagenes = [];
+  imagenes[0] = 'img/loginnew.png';
+  imagenes[1] = 'img/logoLogin.png';
+  imagenes[2] = 'img/imgLogo.png';
+
+  let indice = 0;
+
+  function cambiarImagenes() {
+    document.imgInicio.src = imagenes[indice];
+
+    if (indice < 2) {
+      // eslint-disable-next-line no-plusplus
+      indice++;
+    } else {
+      indice = 0;
+    }
+  }
+
+  setInterval(cambiarImagenes, 2000);
+
+  /* ........Imagen pequeña de Login............. */
+
+  function cambiarImagenes2() {
+    document.imgInicioPequeño.src = imagenes[indice];
+
+    if (indice < 2) {
+      // eslint-disable-next-line no-plusplus
+      indice++;
+    } else {
+      indice = 0;
+    }
+  }
+  setInterval(cambiarImagenes2, 2000);
+
 };

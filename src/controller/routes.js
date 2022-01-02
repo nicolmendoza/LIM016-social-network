@@ -69,7 +69,8 @@ const changeView = () => {
       break;
 
     default:
-
+      components.view.view404();
+      components.view.view404Functions();
       break;
   }
 };
