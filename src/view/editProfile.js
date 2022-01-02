@@ -19,6 +19,7 @@ export const profileEdit = () => {
         <i class="far fa-times-circle"></i>
       </div>
     </div>
+
     <div class="container-infoEdit">
 
       <div class="container-editPhoto">
@@ -26,6 +27,7 @@ export const profileEdit = () => {
         <label for="edit-file"><i class="fas fa-edit"></i></label>
         <input type="file" id="edit-file" name="edit-file" multiple/>
       </div>
+
       <div class="container-editPortada">
         <img id="portadaUserEdit" width="100px">
         <label for="edit-portada"><i class="fas fa-edit"></i></label>

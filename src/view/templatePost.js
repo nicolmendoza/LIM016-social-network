@@ -14,48 +14,67 @@ export const template = (post) => {
   post.forEach((onePost) => {
     nuevoElemento.innerHTML += `
     <div class="postDiv" id="${onePost.idP}">
-    <div class="div-options">
-      <div class="icon-options">
-        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-      </div>
-      <div class='box-options' id="box-options-${onePost.idP}" style="display:none">
-        <div class='edit content-icon'>
-          <span>
-            <i class="fas fa-pencil-alt"></i>Editar
-          </span>
+      <div class="div-options">
+        <div class='box-options' id="box-options-${onePost.idP}" style="display:none">
+          <div class='edit content-icon'>
+            <span>
+              <i class="fas fa-pencil-alt"></i>Editar
+            </span>
+          </div>
+
+          <div class='delete content-icon'>
+            <span>
+              <i class="far fa-trash-alt"></i>Borrar
+            </span>
+          </div>
         </div>
-        <div class='delete content-icon'>
-          <span>
-            <i class="far fa-trash-alt"></i>Borrar
-          </span>
-        </div>
       </div>
-    </div>
-    <div class="header-post">
+
+      <div class="header-post">
         <img  id="post-img${onePost.idP}" width="100px" >
         <div class="header-info">
           <div class="post-name${onePost.idP} namePost"></div>
-          <div class="date"><p></p></div> 
+          <div class="date"><p></p></div>
         </div>
-    </div>
-    <div class="text-post-home" id="contentPost${onePost.idP}">${onePost.content}</div>
-    <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
-    <div id="postIcon">
-        <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i> <p id='likes${onePost.idP}'></p>
-        <i class="far fa-comment icon"></i><p class="countComment${onePost.idP}"></p>
-        <i class="far fa-paper-plane icon"></i>
-    </div>
-    <div id="comments${onePost.idP}">
-      <div id="contentComment${onePost.idP}"></div>
-      <div id="showComment${onePost.idP}"></div>
-    </div>
+
+        <div class="icon-options">
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </div>
+      </div>
+
+      <div class="text-post-home" id="contentPost${onePost.idP}">${onePost.content}</div>
+      <img class="postImg" id="img-${onePost.idP}" src="${onePost.img}">
+
+      <div id="postIcons">
+        <div class="likes">
+          <i class="far fa-heart icon" id="iconLikes${onePost.idP}"></i>
+          <p id='likes${onePost.idP}' class="amount"></p>
+        </div>
+
+        <div class="comments">
+          <i class="far fa-comment icon"></i>
+          <p class="countComment${onePost.idP} amount"></p>
+        </div>
+      </div>
+
+      <div class="contentComment">
+        <div class="contentWriteComment">
+          <textarea id="textComent${onePost.idP}" class="write-comment" placeholder="Write a comment..."></textarea>
+          <button class="saveComment save">SAVE</button>
+        </div>
+      </div >
+
+      <div id="comments${onePost.idP}">
+        <div id="contentComment${onePost.idP}"></div>
+        <div id="showComment${onePost.idP}"></div>
+      </div>
     </div>
     `;
 
     return nuevoElemento;
   });
 
-  const uidUser = (user.uid);
+  const uidUser = user.uid;
 
   post.forEach((one) => {
     const idPost = one.idP;
@@ -117,6 +136,7 @@ export const template = (post) => {
       }
     }
   });
+
   nuevoElemento.querySelectorAll('.icon-options').forEach((div) => {
     div.addEventListener('click', (e) => {
       const id = e.target.parentNode.parentNode.parentNode.id;
@@ -130,6 +150,7 @@ export const template = (post) => {
       }
     });
   });
+
   nuevoElemento.querySelectorAll('.delete').forEach((div) => {
     div.addEventListener('click', (e) => {
       const id = e.target.parentNode.parentNode.parentNode.parentNode.id;
@@ -154,7 +175,8 @@ export const template = (post) => {
       for (let i = 0; i < post.length; i++) {
         console.log(post[i].userID === user.uid, post[i].idP === id);
         if (post[i].userID === user.uid && post[i].idP === id) {
-          document.querySelector(`#contentPost${id}`).innerHTML = `<textarea class="editPost" id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
+          document.querySelector(`#contentPost${id}`).innerHTML = `
+            <textarea class="editPost" id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
             <button class="save">SAVE</button>`;
           document.querySelector('.save').addEventListener('click', () => {
             const postEdit = document.getElementById(`contentEdit${post[i].idP}`).value;
@@ -181,7 +203,7 @@ export const template = (post) => {
 
   nuevoElemento.querySelectorAll('.fa-heart').forEach((like) => {
     like.addEventListener('click', (e) => {
-      const postId = e.target.parentNode.parentNode.id;
+      const postId = e.target.parentNode.parentNode.parentNode.id;
       if (e.target.className === 'far fa-heart icon') {
         e.target.className = 'fas fa-heart icon';
         saveLike(postId, uidUser, nameUser);
@@ -196,29 +218,36 @@ export const template = (post) => {
 
   nuevoElemento.querySelectorAll('.fa-comment').forEach((icon) => {
     icon.addEventListener('click', (e) => {
-      const id = e.target.parentNode.parentNode.id;
+      const id = e.target.parentNode.parentNode.parentNode.id;
       const showComment = document.getElementById(`showComment${id}`);
-      showComment.innerHTML = '';
-      readComment(templateComents, id);
-
-      const divComment = document.createElement('div');
-      divComment.innerHTML = `<textarea id="textComent${id}"></textarea>
-        <button id="saveComment${id}">SAVE</button>`;
-      nuevoElemento.querySelector(`#contentComment${id}`).appendChild(divComment);
-      document.getElementById(`saveComment${id}`).addEventListener('click', () => {
-        const commentOne = document.getElementById(`textComent${id}`).value;
-        // if (commentOne !== '') {
-        //   console.log(commentOne);
-        //   saveComment(id, commentOne, uidUser);
-        // } else {
-        //   divComment.remove(`<textarea id="textComent${id}"></textarea>
-        //   <button id="saveComment${id}">SAVE</button>`);
-        // }
-        saveComment(id, commentOne, uidUser);
-        document.getElementById(`textComent${id}`).value = '';
-      });
+      if (showComment.className !== 'showContent') {
+        showComment.className = 'showContent';
+        showComment.innerHTML = '';
+        readComment(templateComents, id);
+      } else {
+        showComment.className = '';
+        showComment.innerHTML = '';
+      }
     });
   });
+
+  nuevoElemento.querySelectorAll('.saveComment').forEach((save) => {
+    save.addEventListener('click', (e) => {
+      const id = e.target.parentNode.parentNode.parentNode.id;
+      const showComment = document.getElementById(`showComment${id}`);
+      console.log(id);
+      const commentOne = document.getElementById(`textComent${id}`).value;
+      if (commentOne === '') {
+        alert('Comentario vacío.');
+      } else {
+        saveComment(id, commentOne, uidUser);
+        document.getElementById(`textComent${id}`).value = '';
+        showComment.className = 'showContent';
+        readComment(templateComents, id);
+      }
+    });
+  });
+
   showPost.innerHTML = '';
   showPost.appendChild(nuevoElemento);
 };

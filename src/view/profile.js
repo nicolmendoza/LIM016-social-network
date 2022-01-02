@@ -16,11 +16,13 @@ export const Profile = () => {
   profile.classList.add('container-profile');
   profile.innerHTML = `
   <!-- <button id="home">Home</button> -->
+
   <section class="header-profile">
     <div class='container-portada'>
       <img id="frontPageProfile" width="100px"> 
       <button id='goEdit'>Edit Profile</button>
     </div>
+    
     <div class="container-info">
       <img id="photoUserProfile" width="100px">
       <div class="info-profile">
@@ -63,11 +65,13 @@ export const Profile = () => {
       </div>
       </div>
     </div>
-    <section id="container-postProfile">
+    <section id="post-section" class="container-postProfile">
       <button id="btn-newPost" style="display:none"> Add New Post </button>
+      <h1>Posts</h1>
       <div id="PostProfile"></div>
     </section>
   </section>
+
   <section class="modalEditProfile" style="display:none">
     <div class="modalDiv-editProf">
     <div class="modalContainer-edit">
