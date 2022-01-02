@@ -7,7 +7,7 @@ import { navMobile } from './navegador/navMobile.js';
 import { newPost, functionNewPost } from './newPost.js';
 import { profileEdit, FunctionEdit } from './editProfile.js';
 import { navLaptop } from './navegador/navLaptop.js';
-
+import { view404, view404Functions } from './404.js';
 
 export const components = {
   login: { Login, initLogin },
@@ -19,4 +19,5 @@ export const components = {
   navLaptop: { navLaptop },
   newPost: { newPost, functionNewPost },
   edit: { profileEdit, FunctionEdit },
+  view: { view404, view404Functions },
 };

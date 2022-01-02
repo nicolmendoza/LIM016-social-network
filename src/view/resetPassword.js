@@ -38,7 +38,7 @@ export const handleReset = (e) => {
   e.preventDefault();
 
   const email = document.querySelector('#resetEmail').value;
-  resetPasswordFirebase(email)
+  return resetPasswordFirebase(email)
     .then(() => {
       console.log('Reset Password successful');
       document.querySelector('.modalReset').style.display = 'flex';

@@ -37,11 +37,24 @@ const sendPasswordResetEmail = jest.fn((auth, email) => Promise.resolve());
 //       user: {
 //         emailVerified: true,
 //       },
+const signInWithEmailAndPassword = jest.fn((auth, email, password) => Promise.resolve(
+  {
+    userCredential: {
+      user: {
+        emailVerified: true,
+      },
+    },
+  },
+));
+// const loginEmail = jest.fn(() => Promise.resolve({
+//   userCredential: {
+//     user: {
+//       emailVerified: true,
 //     },
 //   },
 // ));
 
-const loginEmail = jest.fn(() => Promise.resolve({}));
+const loginEmail = jest.fn(() => Promise.resolve());
 
 const onAuthStateChanged = jest.fn((auth, callback) => Promise.resolve({}));
 const currentUser = jest.fn((auth) => Promise.resolve());
@@ -63,5 +76,4 @@ export {
   sendPasswordResetEmail,
   sendEmailVerification,
   onAuthStateChanged,
-  loginEmail,
 };

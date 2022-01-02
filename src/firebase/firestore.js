@@ -196,7 +196,7 @@ export const deleteComment = (id, idComment) => {
 // /* -------------------- PERFIL -------------------- */
 let unsubscribePostProfile;
 export const leerPostProfile = (callback, uid) => {
-  const qP = query(collection(db, 'post'), where('userId', '==', `${uid}`));
+  const qP = query(collection(db, 'post'), where('userId', '==', `${uid}`), orderBy('date', 'desc'));
   unsubscribePostProfile = onSnapshot(qP, (querySnapshot) => {
     const postP = [];
     querySnapshot.forEach((doctP) => {

@@ -67,6 +67,7 @@
     /* position: relative; */
     align-items: center;
     justify-content: flex-end;
+    flex-direction: column;
 }
 
 .container-search input{
@@ -105,6 +106,32 @@
     color: gray;
     padding: 0px 15px;
     margin-top: 3px;
+}
+
+.container-result-search{
+    width: 100%;
+
+}
+.result-search {
+    list-style-type: none;
+    position: absolute;
+    top: 70px;
+    width: 30%;
+    border-radius: 15px;
+    padding: 10px;
+    background-image: linear-gradient(to bottom, #BEBDFF 0%, #C6FCFF 100% );
+    overflow-y: auto;
+    z-index: 2;
+}
+
+.result-search li {
+    color: black;
+}
+
+.li-user{
+    padding: 10px;
+    font-size: 17px;
+    cursor: pointer;
 }
 
 @media (min-width: 768px){
