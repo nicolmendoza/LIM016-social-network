@@ -78,8 +78,8 @@ function errorOccurs(typeError) {
       passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
       break;
     default:
+      alert('Lo sentimos, se ha producido un error en la página. Vuelve a intentarlo más tarde.');
       console.log(typeError);
-      alert('Lo sentimos, se ha producido un error en la página.');
   }
 }
 

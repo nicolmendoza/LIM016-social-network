@@ -82,8 +82,12 @@ function errorOccurs(typeError, text) {
     case 'auth/invalid-email':
       textMessage.innerHTML = 'La dirección de correo electrónico no es válida';
       break;
+    case 'auth/account-exists-with-different-credential':
+      textMessage.innerHTML = 'La dirección de correo electrónico ya es usada en una credencial diferente.';
+      break;
     default:
-      textMessage.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
+      console.log(errorCode);
+      textMessage.innerHTML = 'Lo sentimos, se ha producido un error en la página. Vuelve a intentarlo más tarde.';
   }
 }
 

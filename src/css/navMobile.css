@@ -54,11 +54,23 @@
     z-index: 1;
 }
 
+.divLogo{
+    display: flex;
+    flex-direction: column;
+}
 .logo-full-screen{
     color: #356fec8c;
     font-weight: bold;
     font-size: 24px;
-    letter-spacing: 7px;
+    letter-spacing: 2px;
+    padding-left: 12px;
+    line-height : 15px;
+}
+.fa-crown{
+    color: #356fec8c;
+    transform: rotate(-30deg);
+    align-self: flex-start;
+    font-size: 17px;
 }
 
 .container-search{

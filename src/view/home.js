@@ -21,7 +21,6 @@ export const Home = () => {
   const divElement = document.createElement('div');
   divElement.classList.add('container-home');
   divElement.innerHTML = `
-  
   <div class="section-home">
     <div id="section-User">
       <div class="container-info-users">

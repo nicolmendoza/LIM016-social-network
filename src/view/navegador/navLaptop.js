@@ -6,7 +6,10 @@ export const navLaptop = () => {
   const viewNavLaptop = document.createElement('nav');
   viewNavLaptop.classList.add('nav-full');
   viewNavLaptop.innerHTML = `
-    <div class="logo-full-screen"> QUEEN CODERS </div>
+    <div class="divLogo">
+      <i class="fas fa-crown"></i>
+      <p class="logo-full-screen"> QUEEN CODERS </p>
+    </div>
     
     <div class="container-search">
         <input type="text" class="search" id="search" placeholder="Search for people, tag, ..." autocomplete="off">
