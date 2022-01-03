@@ -81,7 +81,7 @@ export const showPostProfile = (post) => {
           <div>
             <h1>Eliminar publicación</h1>
             <div class="modal-parrafo">
-              ¿Estás seguro que quieres eliminar esta publicación de <b class="emailText">Queen Coders</b> para siembre?
+              ¿Estás seguro que quieres eliminar esta publicación de <b class="emailText">Queen Coders</b> para siempre?
             </div>
             <button class="aceptDelete">ELIMINAR</button>
           </div>
