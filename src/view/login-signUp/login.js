@@ -14,10 +14,12 @@ export const Login = () => {
   <section class="bubble">
     <!-- content here -->
   </section>
-  <div class="section1"><img class="imgInicio" name="imgInicio" ></div>
-  <div class="section2">
+
+  <section class="section1"><img class="imgInicio" name="imgInicio" ></section>
+
+  <section class="section2">
     <div class="formulario">
-      <div class="logo">SOCIAL NETWORK</div>
+      <div class="logo">QUEEN CODERS</div>
       <div><img id="logoLogin" class="imgInicioPequeño" name="imgInicioPequeño"></div>
 
       <div class="form-group-text">

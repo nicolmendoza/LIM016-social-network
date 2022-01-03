@@ -11,11 +11,11 @@ export const SignUp = () => {
     <!-- content here -->
   </section>
 
-  <section class="section1"><img class="imgInicio"></section>
+  <section class="section1"><img class="imgInicio" name="imgInicio" ></section>
 
   <section class="section2">
     <div class="formulario">
-      <div class="logo">SOCIAL NETWORK</div>
+      <div class="logo">QUEEN CODERS</div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
 
       <div class="form-group-text">
