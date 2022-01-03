@@ -24,11 +24,24 @@
   #logoLogin {
     width: 300px;
   }
+  #inicioLogo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 15px auto;
+  }
   .logo {
-    font-size: 35px;
+    font-size: 30px;
     font-family: sans-serif;
     font-weight: 900;
     color: white;
+    line-height : 20px;
+  }
+  #inicioLogo > i{
+    color: white !important;
+    font-size: 18px;
+    align-self: flex-start;
+    margin-left: 5px;
   }
   #botonesLogin {
     justify-content: space-evenly;
@@ -241,3 +254,28 @@
       text-decoration: none;
       color: cornflowerblue;
   }
+
+@media (min-width: 767px){
+    .logo {
+      font-size: 40px;
+    }
+    #inicioLogo > i{
+        font-size: 24px;
+        padding-bottom: 5px;
+        margin-left: 3px;
+    }
+}
+@media (min-width: 1020px){
+    #inicioLogo{
+        width: 385px;
+        margin: 30px auto;
+      }
+}
+@media (max-width: 280px){
+      .logo {
+        font-size: 28px;
+      }
+      #inicioLogo > i{
+        margin-left: 15px;
+      }
+}

@@ -21,7 +21,6 @@
   overflow: hidden;
 }
 
-
 @media (max-width: 768px) {
   .imgInicio {
     display: none;
