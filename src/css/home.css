@@ -5,84 +5,87 @@
     min-height: 100vh;
     padding-top: 1em;
 }
+.section-home{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+    margin: auto;
+}
+
+/* -----WELCOME TO USER----- */
 
 .header-home{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 0px 2.5%;
 }
-
-.header-text{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    text-align: initial;
-    padding-left: 17px;
-    line-height: 0.9cm;
-    align-items: flex-start;
-    font-family: cursive;
-    margin-top: -14px;  
-}
-
-.header-text h{
-    font-size: 15px;
-    color: #517fe3;
-}
-
-.header-text p{
-    font-size: 20px;
-    color: #3570EC;
-}
-
 .photoHome{
     margin: 12px 0;
     border-radius: 50%;
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
+}
+.header-text{
+    display: flex;
+    flex-direction: column;
+    padding-left: 17px;
+    line-height: 0.9cm;
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+.header-text h{
+    font-size: 14px;
+    line-height : 20px;
+}
+.header-text p{
+    font-size: 16px;
+    line-height : 20px;
+    text-align: start;
 }
 
-/*SECTION DE DESCRPCION HOME*/
+
+/* -----SECTION DE DESCRIPTION OF USER----- */
 
 #sectionDescription{
+    padding: 8px;
     display: none;
-    padding: 7% 0px;
     flex-direction: column;
-    align-items: flex-start;
-    margin-left: 10px;
     width: 100%;
 }
-
 #sectionDescription h1{
-    font-family: ui-serif;
-    font-size: 19px;
-    font-weight: 100;
+    font-size: 17px;
+    font-weight: bold;
     color: #484860;
-    margin-bottom: 8px;
+    margin: 8px auto;
 }
 
 #infoDescription{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
     line-height: 1.8;
-    padding-left: 6%;
     width: 100%;
 }
-
-#infoDescription p{
+#infoDescription > p{
     font-size: 14px;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #div-etiqueta{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    margin-top: 5px;
-    width: 100%;
+    margin-top: 6px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 #div-etiqueta p{
+    width: auto;
     border: transparent;
     background: #B495E7;
     border-radius: 13px;
@@ -91,101 +94,119 @@
     /* margin: 2px 5px; */
     margin-right: 5px;
     margin-block-end: 5px;
-    color: white
-}
-#logout{
-    background: none;
-    border: none;
-    font-size: 28px;
     color: white;
-    outline: none;
-    /* margin-left: 90%; */
-    margin-top: 9px;
-    position: absolute;
-    right: 9px;
+    text-transform: capitalize;
 }
+
+/* -----SECTION OTHER USERS----- */
+
+#divParent-users{   
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    border-top: 2px solid #94A4F5;
+    padding: 8px;
+}
+#divParent-users h1{
+    font-size: 17px;
+    font-weight: bold;
+    color: #484860;
+    margin: 8px auto;
+}
+
+#sectionUsers{
+    display: none;
+    width: 100%;
+}
+#section-User{
+    width: 100%;
+}
+.container-info-users{
+    /* position: fixed; */
+    /* width: 23%; */
+    /* padding: 10px; */
+    /* background-image: linear-gradient(to bottom, #BEBDFF 0%, #C6FCFF 100% ); */
+    border: transparent;
+    /* border-radius: 20px; */
+    top: 6em;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.divUsers {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+.oneDivUser {
+    display: flex;
+    flex-direction: row;
+    /* background: cornflowerblue; */
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 2px;
+}
+.link-user {
+    width: 100%;
+}
+.img-user {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 5%;
+}
+.oneDivUser-parrafo {
+    font-size: 14px;
+    text-align: start !important;
+}
+
+/* -----BUTTON FOR CREATE A NEW POST----- */
 
 #btn-newPost{
     display: none;
     height: 40px;
     width: 9em;
-    border-radius: 15px;
-    /* margin: 10px 0px 6px 0px; */
-    /* padding-left: 10px; */
+    border-radius: 15px;;
     border: transparent;
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    color: #6CC5DE;
-    font-size: 14px;
-    box-shadow: 0px 0px 3px 1px #8888;
+    background-image: linear-gradient(120deg, #da5afa99 0%, #3570ec8a 100%);
+    color: beige;
+    font-size: 12px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* -----SECTION TYPES OF POST----- */
+
+.sectionTypes{
+    order: -1;
+}
+
+#header-categories{
+    display: flex;
+    justify-content: space-around;
+}
+#header-categories p{
+    font-size: 18px;
     font-weight: bold;
 }
 
-/*-----CSS MODAL DELETE------*/
-.modalDelete{
-    width: 100%;
-    min-height: 100vh;
-    background-color: rgba(44, 44, 44, 0.371);
-    position: fixed;
-    left: 0;
-    top: 0;
-    display: flex;
-    align-items: center;
+#todos{
+    color: #3570EC;
 }
 
-.modalDivDelete{
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: center;
-    width: 100%;
-    align-items: center;
-}
-
-.modalContainer-Delete{
+#botones-types{
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(to bottom, #bebdff 0%, #c6fcff 100%);
-    width: 500px;
-    height: 100%;
-    border-radius: 20px;
-    box-shadow: 0px 0px 6px 3px #46464673;
+    align-items: center;
+    width: 100%;
 }
-
-#closeDelete{
-    text-align: end !important;
-    margin: 7px 13px;
-    font-size: 20px;
-}
-
-.modalContainer-Delete h1{
-    border-bottom: 1px solid #adadad;
-    border-radius: 9px;
-    padding-bottom: 6px;
-    margin-bottom: 9px;
-}
-.aceptDelete{
-    height: 40px;
-    width: 146px;
-    border-radius: 15px;
-    margin: 10px 0px 25px 0px;
-    padding-left: 10px;
-    border: 1.5px transparent;
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    color: #6CC5DE;
-    font-size: 14px;
-    box-shadow: 1px 1px 2px 1px #8888;
-    font-weight: bold;
-}
-.revelar{
-    display:flex !important
-}
-.sectionTypes{
-display: none;
-}
-
-.img-preguntas{
-    content: url("../img/imgLogo.png");
-}
-
 .div-type{
     width: 100%;
     justify-content: center;
@@ -194,12 +215,12 @@ display: none;
     margin: 10px 0px;
     position: relative;
 }
-
 .img-types{
     width: 90%;
     border-radius: 9px;
-    height: 90px;
+    height: 30px;
 }
+
 .btn-type{
     background: #ebf9ffa6;
     width: 90%;
@@ -208,9 +229,8 @@ display: none;
     position: absolute;
     border: transparent;
 } 
-
 .btn-type{
-    font-size: 20px;
+    font-size: 15px;
     /* font-weight: 700; */
     font-family: 'Outfit';
 }
@@ -250,6 +270,7 @@ display: none;
 
 #section-User{
     width: 100%;
+    order: -2;
 }
 .container-info-users{
         /* position: fixed; */
@@ -266,7 +287,7 @@ display: none;
 
 #header-categories{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 #header-categories p{
     font-size: 18px;
@@ -279,9 +300,12 @@ display: none;
 
 #botones-types{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     width: 100%;
+}
+.categoryMobile{
+    padding: 0px 2.5%;
 }
 
 @media (min-width: 768px){
@@ -327,14 +351,36 @@ display: none;
         width: 23%;
         position: relative;
         display: block;
+        order: initial;
     }
-
     #sectionDescription{
         display: flex;
     }
-
     #divParent-users{
         display: flex;
     }
+<<<<<<< HEAD
+    #header-categories{
+        display: flex;
+        justify-content: space-around;
+    }
 
+    #botones-types{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .img-types{
+        width: 90%;
+        border-radius: 9px;
+        height: 90px;
+    }
+    .btn-type{
+        font-size: 20px;
+        /* font-weight: 700; */
+        font-family: 'Outfit';
+    }
+=======
+>>>>>>> 59352c7d4c189400e0ef4e4cc6ced765c38ec166
 }

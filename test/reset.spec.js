@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import {
   resetPasswordFirebase,
 } from '../src/firebase/firebase-auth';

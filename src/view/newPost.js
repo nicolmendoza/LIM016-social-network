@@ -10,33 +10,38 @@ export const newPost = () => {
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
     <div class="header-newPost">
-        <button class="descart"><a href="#/home"> CANCEL </a></button>
+        <button class="descart"> CANCEL </button>
         <div id="newPost"> NEW POST </div>
         <button type="submit" class="publish">PUBLISH</button>
     </div>
+
     <div class="info-user">
-        <div class="photo"><img id="photoUser1"></div>
-        <div class="name-user">
-            <div id='namePost'></div>
-            <select class="privacity" required>
-                <option value="amigos"><i class="fas fa-bell"></i>Public</option>
-                <option value="solo yo"><i class="fas fa-bell"></i>Private</option>
-            </select>
-            <select class="type" required>
-            <option value="preguntas"><i></i>Question</option>
-            <option value="trabajo"><i></i>Job offer</option>
-            <option value="evento"><i></i>Event</option>
-            <option value="curso" ><i></i>Course</option>
-            <option value="tutorial"><i></i>Tutorial</option>
+      <div class="photo"><img id="photoUser1"></div>
+      <div class="name-user">
+        <div id='namePost'></div>
+      </div>
+      <div id="selects">  
+        <select class="privacity" required>
+          <option value="amigos"><i class="fas fa-bell"></i>Public</option>
+          <option value="solo yo"><i class="fas fa-bell"></i>Private</option>
         </select>
-        </div>
+        <select class="type" required>
+          <option value="preguntas"><i></i>Question</option>
+          <option value="trabajo"><i></i>Job offer</option>
+          <option value="evento"><i></i>Event</option>
+          <option value="curso" ><i></i>Course</option>
+          <option value="tutorial"><i></i>Tutorial</option>
+        </select>
+      </div>  
     </div>
+
     <textarea namePost="textarea" id="post-description" rows="10" cols="50" placeholder="What's on you mind?"></textarea>
     <div id="container-image-preview">
       <img src="" class="image-preview" alt=""/>
     </div>
+
     <div class="add-element">
-    <div class="plus-image"><b>+</b></div>
+      <div class="plus-image"><b>+</b></div>
       <div class="addImage">
         <button class= "addImg"><ion-icon name="image-outline"></ion-icon></ion-icon></button>
         <input type="file" id="input-file" style="display:none" multiple/>

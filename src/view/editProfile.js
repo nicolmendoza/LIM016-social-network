@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import {
   storagePhotoProf,
   uploadTask,
@@ -18,17 +19,21 @@ export const profileEdit = () => {
         <i class="far fa-times-circle"></i>
       </div>
     </div>
+
     <div class="container-infoEdit">
+
       <div class="container-editPhoto">
         <img id="photoUserEdit" width="100px">
         <label for="edit-file"><i class="fas fa-edit"></i></label>
         <input type="file" id="edit-file" name="edit-file" multiple/>
       </div>
+
       <div class="container-editPortada">
         <img id="portadaUserEdit" width="100px">
         <label for="edit-portada"><i class="fas fa-edit"></i></label>
         <input type="file" id="edit-portada" name="edit-portada" multiple/>
       </div>
+
     <div class="form-group">
     <ion-icon name="person-outline"></ion-icon>
     <label for="edit-name">Edita tu Nombre</label>
@@ -42,6 +47,53 @@ export const profileEdit = () => {
     <div class="form-group">
     <label for="edit-about">Edita tu about</label>
     <textarea  id="edit-about" name="edit-about" row="3" placeholder="¡Cuentanos más sobre ti, o escribe una frase que te describe!" ></textarea>
+    </div>
+    <div class="form-group icons-programming">
+      <label for="edit-about">Edita tus intereses</label>
+      <div class="img-programming">
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/html.png" name="html" title="Html">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/css.png" name="css" title="CSS">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/js.png" name="javascript" title="Javascript">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/react.png" name="react" title="React">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/vue.png" name="vue" title="Vue">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/java.png" name="java" title="Java">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/php.png" name="php" title="PHP">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/python.png" name="python" title="Python">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/cpp.png" name="cpp" title="CPP">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/docker.png" name="docker" title="Docker">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/jest.png" name="jest" title="Jest">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/node.png" name="node" title="Node js">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/typescript.png" name="typescript" title="Typescript">
+        </div>
+        <div class="interest-programming">
+        <img class="img-prog" src="./img/gopher.png" name="gopher" title="Go Gopher">
+        </div>
+      </div>
     </div>
     <div class="btns-editProfile">
     <input type="reset" id="resetForm" value="Borrar"/>
@@ -60,6 +112,29 @@ export const FunctionEdit = () => {
   const newPhoto = document.getElementById('photoUserEdit');
   const newPortada = document.getElementById('portadaUserEdit');
   const newCareer = document.getElementById('edit-career');
+  const arrayInterest = [];
+
+  const arrayImg = document.querySelectorAll('.img-prog');
+  arrayImg.forEach((interest) => {
+    interest.addEventListener('click', () => {
+      const icoProgramming = interest.name;
+      if (arrayInterest.length < 6) {
+        if (arrayInterest.includes(icoProgramming)) {
+          console.log('ya eligio este');
+          arrayInterest.splice(arrayInterest.indexOf(icoProgramming), 1);
+          console.log(arrayInterest);
+        } else {
+          arrayInterest.push(icoProgramming);
+          console.log(arrayInterest);
+        }
+      } else if (arrayInterest.includes(icoProgramming)) {
+        console.log('ya eligio este');
+        arrayInterest.splice(arrayInterest.indexOf(icoProgramming), 1);
+        console.log(arrayInterest);
+      }
+    });
+  });
+  console.log(arrayInterest);
 
   (() => {
     obtenerInfo(user.uid).then((userInfo) => {
@@ -245,7 +320,7 @@ export const FunctionEdit = () => {
       // eslint-disable-next-line max-len
         getPhotoURL(task.snapshot.ref).then((downloadURL) => {
         // eslint-disable-next-line max-len
-          updateInfoUser(user.uid, newAbout.value, newName.value, downloadURL, newPortada.src, newCareer.value)
+          updateInfoUser(user.uid, newAbout.value, newName.value, downloadURL, newPortada.src, newCareer.value, arrayInterest.value)
             .then(() => {
               window.location.reload();
             });
@@ -253,7 +328,7 @@ export const FunctionEdit = () => {
       }));
     } else {
     // eslint-disable-next-line max-len
-      updateInfoUser(user.uid, newAbout.value, newName.value, newPhoto.src, newPortada.src, newCareer.value)
+      updateInfoUser(user.uid, newAbout.value, newName.value, newPhoto.src, newPortada.src, newCareer.value, arrayInterest)
         .then(() => {
           window.location.reload();
         });

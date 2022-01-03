@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-unresolved */
 import {
   doc,
@@ -52,11 +53,10 @@ export const readData = (callback) => {
       objectPost.idP = doct.id;
       objectPost.userID = doct.data().userId;
       objectPost.date = doct.data().date;
-      objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
       posts.push(objectPost);
     });
-    callback(posts);
+    return callback(posts);
     // console.log(posts);
   });
 };
@@ -76,25 +76,20 @@ export const getDataPostType = (callback, type) => {
       objectPost.type = doct.data().type;
       posts.push(objectPost);
     });
-    callback(posts);
+    return callback(posts);
     // console.log(posts);
   });
 };
 export const getUnsubscribe = () => unsubscribe;
 
-export const savePost = (postDescription, userID, imgULR, Privacity, Type) => {
-  addDoc(collection(db, 'post'), {
-    message: postDescription.value,
-    userId: userID,
-    img: imgULR,
-    likes: [{
-      users: [],
-    }],
-    date: Date.now(),
-    privacity: Privacity,
-    type: Type,
-  });
-};
+export const savePost = (postDescription, userID, imgULR, Privacity, Type) => addDoc(collection(db, 'post'), {
+  message: postDescription.value,
+  userId: userID,
+  img: imgULR,
+  date: Date.now(),
+  privacity: Privacity,
+  type: Type,
+});
 
 export const obtenerInfo = (ID) => {
   const docRef = doc(db, 'usuarios', ID);
@@ -111,12 +106,10 @@ export const updatePost = (id, postEdit) => {
 };
 
 // /* ----------------- LIKES ----------------- */
-export const saveLike = (id, userId, userName) => {
-  setDoc(doc(db, 'post', id, 'likes', userId), {
-    user: userName,
-    date: Date.now(),
-  });
-};
+export const saveLike = (id, userId, userName) => setDoc(doc(db, 'post', id, 'likes', userId), {
+  user: userName,
+  date: Date.now(),
+});
 
 let unsubscribeLikes;
 export const readLikes = (callback, id) => {
@@ -136,18 +129,14 @@ export const readLikes = (callback, id) => {
 };
 export const getUnsubscribeLikes = () => unsubscribeLikes;
 
-export const deleteLike = (id, userId) => {
-  deleteDoc(doc(db, 'post', id, 'likes', userId));
-};
+export const deleteLike = (id, userId) => deleteDoc(doc(db, 'post', id, 'likes', userId));
 
 // /* ----------------- COMENTARIOS ----------------- */
-export const saveComment = (id, comentario, uid) => {
-  addDoc(collection(db, 'post', id, 'comments'), {
-    userID: uid,
-    message: comentario,
-    date: Date.now(),
-  });
-};
+export const saveComment = (id, comentario, uid) => addDoc(collection(db, 'post', id, 'comments'), {
+  userID: uid,
+  message: comentario,
+  date: Date.now(),
+});
 
 let unsubscribeComments;
 export const readComment = (callback, id) => {
@@ -189,9 +178,7 @@ export const updateComment = (id, idComment, newComment) => {
   });
 };
 
-export const deleteComment = (id, idComment) => {
-  deleteDoc(doc(db, 'post', id, 'comments', idComment));
-};
+export const deleteComment = (id, idComment) => deleteDoc(doc(db, 'post', id, 'comments', idComment));
 
 // /* -------------------- PERFIL -------------------- */
 let unsubscribePostProfile;
@@ -203,11 +190,13 @@ export const leerPostProfile = (callback, uid) => {
       const objectPostProfile = { };
       objectPostProfile.content = doctP.data().message;
       objectPostProfile.userID = doctP.data().userId;
+      objectPostProfile.date = doctP.data().date;
+      objectPostProfile.img = doctP.data().img;
       objectPostProfile.postID = doctP.id;
       postP.push(objectPostProfile);
     });
-    callback(postP);
-    console.log(postP);
+    return callback(postP);
+    // console.log(postP);
   });
 };
 export const getUnsubscribePostProfile = () => unsubscribePostProfile;
@@ -219,7 +208,7 @@ export const readPostProfile = (uid) => {
   return docUser;
 };
 
-export const updateInfoUser = (uid, newAbout, newName, newPhoto, URLportada, newCareer) => {
+export const updateInfoUser = (uid, newAbout, newName, newPhoto, URLportada, newCareer, arrayInterest) => {
   const infoUser = doc(db, 'usuarios', uid);
   return updateDoc(infoUser, {
     about: newAbout,
@@ -227,5 +216,6 @@ export const updateInfoUser = (uid, newAbout, newName, newPhoto, URLportada, new
     photo: newPhoto,
     portada: URLportada,
     career: newCareer,
+    interest: arrayInterest,
   });
 };

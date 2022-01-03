@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import {
   readPostProfile, getUnsubscribe, leerPostProfile,
 } from '../firebase/firestore.js';
@@ -6,6 +7,8 @@ import { profileEdit, FunctionEdit } from './editProfile.js';
 import {
   showPostProfile,
 } from './templatePostProfile.js';
+import { templateUsers } from './templateUsers.js';
+import { newPost, functionNewPost } from './newPost.js';
 
 export const Profile = () => {
   // Stop listening to changes
@@ -14,11 +17,13 @@ export const Profile = () => {
   profile.classList.add('container-profile');
   profile.innerHTML = `
   <!-- <button id="home">Home</button> -->
+
   <section class="header-profile">
     <div class='container-portada'>
       <img id="frontPageProfile" width="100px"> 
       <button id='goEdit'>Edit Profile</button>
     </div>
+    
     <div class="container-info">
       <img id="photoUserProfile" width="100px">
       <div class="info-profile">
@@ -42,15 +47,43 @@ export const Profile = () => {
       </div>
     </div>
   </section>
-  <section>
-    <h1> MY POST</h1>
-    <div id="PostProfile"></div>
+  <section id="section-infoUser">
+    <div id="section-User" class=" fullUser">
+      <div class="info-user-full">
+      <div id="sectionDescription">
+        <h1>Description</h1>
+        <div id="infoDescription">
+          <p id="ocupation"></p>
+          <p id="about"></p>
+          <div id="div-etiqueta">
+          </div>
+        </div>
+      </div>
+      <div id="divParent-users">
+      <h1>Queen Coders Users</h1>
+      <div id="sectionUsers" >
+      </div>
+      </div>
+      </div>
+    </div>
+    <section id="post-section" class="container-postProfile">
+      <button id="btn-newPost" style="display:none"> Add New Post </button>
+      <h1>Posts</h1>
+      <div id="PostProfile"></div>
+    </section>
   </section>
+
   <section class="modalEditProfile" style="display:none">
     <div class="modalDiv-editProf">
     <div class="modalContainer-edit">
     </div>
     </div>
+  </section>
+  <section class="modalNewPost" style="display: none">
+      <div class="modalDivPost">
+      <div class="modalContainer-NewPost">
+      </div>
+      </div>
   </section>
     `;
 
@@ -63,6 +96,7 @@ export const FunctionProfile = () => {
   const userCurrent = JSON.parse(localStorage.getItem('user'));
   console.log(userCurrent);
   // const userID = userCurrent.uid;
+  templateUsers();
   leerPostProfile(showPostProfile, idUserRedirect);
 
   readPostProfile(idUserRedirect).then((docUser) => {
@@ -75,6 +109,15 @@ export const FunctionProfile = () => {
     const aboutParrafo = document.getElementById('aboutP');
     aboutParrafo.innerHTML = `${docUser.data().about}`;
     console.log('Current data: ', docUser.data());
+    console.log(docUser.data().interest);
+    document.getElementById('ocupation').innerHTML = `${docUser.data().career}`;
+    document.getElementById('about').innerHTML = `${docUser.data().about}`;
+    for (let i = 0; i < docUser.data().interest.length; i++) {
+      const pEtiqueta = document.createElement('p');
+      pEtiqueta.classList.add('etiqueta');
+      pEtiqueta.innerHTML = `${docUser.data().interest[i]}`;
+      document.getElementById('div-etiqueta').appendChild(pEtiqueta);
+    }
   });
 
   if (idUserRedirect === userCurrent.uid) {
@@ -89,6 +132,18 @@ export const FunctionProfile = () => {
     document.querySelector('.modalEditProfile').style.display = 'flex';
     FunctionEdit();
     document.getElementById('container-footer').style.display = 'none';
+  });
+
+  // Crear nuevo post
+  document.getElementById('btn-newPost').addEventListener('click', () => {
+    newPost();
+    document.querySelector('.modalNewPost').style.display = 'flex';
+    functionNewPost();
+  });
+  document.getElementById('btn-post-mobile').addEventListener('click', () => {
+    newPost();
+    document.querySelector('.modalNewPost').style.display = 'flex';
+    functionNewPost();
   });
 
   getUnsubscribe();

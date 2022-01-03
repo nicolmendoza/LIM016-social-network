@@ -11,6 +11,6 @@ export const view404 = () => {
 
 export const view404Functions = () => {
   document.querySelector('#error').addEventListener('click', () => {
-    window.location.hash = '#/';
+    window.location.hash = '#/home';
   });
 };
