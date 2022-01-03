@@ -56,14 +56,13 @@ export const showPostProfile = (post) => {
           <i class="far fa-comment icon"></i>
           <p class="countComment${onePost.postID} amount"></p>
         </div>
-        
-        </div>
-        <div class="contentComment">
+      </div>
+
+      <div class="contentComment">
           <div class="contentWriteComment">
             <textarea id="textComent${onePost.postID}" class="write-comment" placeholder="Write a comment..."></textarea>
             <button class="saveComment save">SAVE</button>
           </div>
-        </div>
       </div> 
 
       <div id="comments${onePost.postID}">

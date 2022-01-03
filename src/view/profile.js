@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import {
   readPostProfile, getUnsubscribe, leerPostProfile,
 } from '../firebase/firestore.js';

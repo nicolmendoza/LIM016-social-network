@@ -31,6 +31,12 @@ const userCurrent = auth.currentUser;
 // eslint-disable-next-line max-len
 const sendEmailVerification = jest.fn((userCurrent) => Promise.resolve());
 const sendPasswordResetEmail = jest.fn((auth, email) => Promise.resolve());
+// const signInWithEmailAndPassword = jest.fn((auth, email, password) => Promise.resolve(
+//   {
+//     userCredential: {
+//       user: {
+//         emailVerified: true,
+//       },
 const signInWithEmailAndPassword = jest.fn((auth, email, password) => Promise.resolve(
   {
     userCredential: {
@@ -46,7 +52,9 @@ const signInWithEmailAndPassword = jest.fn((auth, email, password) => Promise.re
 //       emailVerified: true,
 //     },
 //   },
-// }));
+// ));
+
+const loginEmail = jest.fn(() => Promise.resolve());
 
 const onAuthStateChanged = jest.fn((auth, callback) => Promise.resolve({}));
 const currentUser = jest.fn((auth) => Promise.resolve());
@@ -57,9 +65,9 @@ export const addDoc = jest.fn(() => Promise.resolve({}));
 export const db = {};
 
 const signOut = jest.fn((auth) => Promise.resolve());
+
 export {
   signOut,
-  signInWithEmailAndPassword,
   signInWithPopup,
   auth,
   GithubAuthProvider,

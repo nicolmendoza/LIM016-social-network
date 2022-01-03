@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import {
   readData,
   userDocRef,
@@ -135,7 +136,7 @@ export const FunctionsHome = () => {
       document.getElementById('photoUser').src = `${userInfo.photo}`;
       console.log(userInfo.interest);
       document.getElementById('ocupation').innerHTML = `${userInfo.career}`;
-    document.getElementById('about').innerHTML = `${userInfo.about}`;
+      document.getElementById('about').innerHTML = `${userInfo.about}`;
       for (let i = 0; i < userInfo.interest.length; i++) {
         const pEtiqueta = document.createElement('p');
         pEtiqueta.classList.add('etiqueta');
