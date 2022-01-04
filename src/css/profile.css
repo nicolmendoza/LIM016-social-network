@@ -2,6 +2,7 @@
     background-image: linear-gradient(to bottom, #e0f5ff 0%, #FFFFFF 100%);
     min-height: 100vh;
     padding-bottom: 7em;
+    padding-top: 3em;
 }
 #frontPageProfile{
     width: 100%;
