@@ -21,16 +21,16 @@ export const newPost = () => {
         <div id='namePost'></div>
       </div>
       <div id="selects">  
-        <select class="privacity" required>
-          <option value="amigos"><i class="fas fa-bell"></i>Public</option>
-          <option value="solo yo"><i class="fas fa-bell"></i>Private</option>
+        <select class="privacityPost" required>
+          <option value="amigos">Public</option>
+          <option value="soloYo">Private</option>
         </select>
         <select class="type" required>
-          <option value="preguntas"><i></i>Question</option>
-          <option value="trabajo"><i></i>Job offer</option>
-          <option value="evento"><i></i>Event</option>
-          <option value="curso" ><i></i>Course</option>
-          <option value="tutorial"><i></i>Tutorial</option>
+          <option value="Question"><i></i>Question</option>
+          <option value="Job Offer"><i></i>Job offer</option>
+          <option value="Event"><i></i>Event</option>
+          <option value="Courses" ><i></i>Course</option>
+          <option value="Tutorial"><i></i>Tutorial</option>
         </select>
       </div>  
     </div>
@@ -60,18 +60,13 @@ export const functionNewPost = () => {
   // userID = () => auth.currentUser.uid;
   const userCurrent = JSON.parse(localStorage.getItem('user'));
 
-  //   <select class="privacity">
-  //   <option value="amigos"><i class="fas fa-bell"></i>Amigos
-  //   <option value="solo yo"><i class="fas fa-bell"></i>Solo yo m
-  // </select>
-
   let privacity = 'amigos';
-  document.querySelector('.privacity').addEventListener('change', (e) => {
+  document.querySelector('.privacityPost').addEventListener('change', (e) => {
     privacity = e.target.value;
     console.log(privacity);
   });
 
-  let types = 'preguntas';
+  let types = 'Question';
   document.querySelector('.type').addEventListener('change', (e) => {
     types = e.target.value;
     console.log(types);

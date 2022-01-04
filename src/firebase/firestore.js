@@ -54,6 +54,8 @@ export const readData = (callback) => {
       objectPost.userID = doct.data().userId;
       objectPost.date = doct.data().date;
       objectPost.img = doct.data().img;
+      objectPost.type = doct.data().type;
+      objectPost.privacity = doct.data().privacity;
       posts.push(objectPost);
     });
     return callback(posts);
@@ -193,6 +195,9 @@ export const leerPostProfile = (callback, uid) => {
       objectPostProfile.date = doctP.data().date;
       objectPostProfile.img = doctP.data().img;
       objectPostProfile.postID = doctP.id;
+      objectPostProfile.type = doctP.data().type;
+      objectPostProfile.privacity = doctP.data().privacity;
+
       postP.push(objectPostProfile);
     });
     return callback(postP);

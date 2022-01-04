@@ -77,6 +77,21 @@
     margin-left: auto;
     padding-left: 1em;
     cursor:pointer;
+    /* padding-left: 0.5em; */
+    display: flex;
+    flex-direction: row;
+}
+
+.nameType{
+    background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);   
+        width: 5em;
+    border-radius: 15px;
+    /* background-image: linear-gradient(
+120deg, #da5afa99 0%, #3570ec8a 100%); */
+    color: beige;
+    font-size: 16px;
+    margin-right: auto;
+    margin-left: auto;
 }
 .div-options{
     display: flex;
@@ -238,6 +253,18 @@
     font-size: 12px;
 }
 
+.privacityIcons {
+    padding: 10px;
+    color: lightslategray;
+}
+
+/*types*/
+.amigos{
+    background: yellow;
+} 
+.solo yo{
+    
+}
 @media (min-width: 768px){
     .img-post-home{
         height: 410px;
