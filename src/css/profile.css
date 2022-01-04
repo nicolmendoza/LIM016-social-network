@@ -237,4 +237,8 @@
         width: 40%;
         text-align: start;
     }
+    .container-follower{
+        width: 50%;
+        margin-top: 0px;
+    }
 }
