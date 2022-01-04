@@ -8,7 +8,7 @@ export const navLaptop = () => {
   viewNavLaptop.innerHTML = `
     <div class="divLogo">
       <i class="fas fa-crown"></i>
-      <p class="logo-full-screen"> Queen Coders </p>
+      <p class="logo-full-screen"><a class="logo-full-screen" href="#/home"> Queen Coders </a> </p>
     </div>
     
     <div class="container-search">
