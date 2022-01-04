@@ -172,8 +172,29 @@
 }
 
 @media (max-width: 767px){
-    .nav-full{
+    .logo-full-screen{
+        display: none;
+
+    }
+    .menuFull{
         display: none;
     }
-    
+    .container-search{
+
+        width: 70%;
+        justify-content: center;
+        margin: auto;
+ 
+    }
+    .nav-full{
+        height: 3em;
+        align-items: center;
+        padding: 0px 3.5%;
+        position: absolute;
+        width: 100%;
+    }
+    .result-search {
+        width: 60%;
+
+    }
 }

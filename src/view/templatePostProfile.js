@@ -37,8 +37,10 @@ export const showPostProfile = (post) => {
         <div class="header-info">
           <div  class="nameUserPostProfile${user.uid} namePost post-name"></div>
           <div class="date"><p></p></div>
+          <div class="privacityIcons privacity${onePost.postID} fas"></div>
         </div>
         <div class="icon-options">
+        <div class="nameType">${onePost.type}</div>
           <ion-icon name="ellipsis-vertical-outline"></ion-icon>
         </div>
       </div>
@@ -91,6 +93,16 @@ export const showPostProfile = (post) => {
     return sectionPostProfile;
   });
   //   PostProfile.appendChild(sectionPostProfile);
+
+  post.forEach((one) => {
+    const idPost = one.postID;
+    const privacityIcon = sectionPostProfile.querySelector(`.privacity${idPost}`);
+    if (one.privacity === 'amigos') {
+      privacityIcon.classList.add('fa-globe-americas');
+    } else {
+      privacityIcon.classList.add('fa-lock');
+    }
+  });
 
   obtenerInfo(idUserRedirect).then((userInfo) => {
     sectionPostProfile.querySelectorAll(`.nameUserPostProfile${user.uid}`).forEach((nameUser) => {
