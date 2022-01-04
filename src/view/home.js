@@ -67,23 +67,23 @@ export const Home = () => {
       <div id="botones-types">
         <div class="div-type">
           <img class="img-types" src="./img/ofertaLaboral.jpg">
-          <button value="trabajo"  class="btn-type">Job Offer</button>
+          <button value="Job Offer"  class="btn-type">Job Offer</button>
         </div>
         <div class="div-type">
           <img class="img-types" src="./img/evento.jpg">
-          <button value="evento"  class="btn-type">Events</button>
+          <button value="Event"  class="btn-type">Events</button>
         </div>
         <div class="div-type">
           <img class="img-types" src="./img/cursos.jpg">
-          <button value="curso"  class="btn-type">Courses</button>
+          <button value="Courses"  class="btn-type">Courses</button>
         </div>
         <div class="div-type">
           <img class="img-types" src="./img/tutorial.jpg">
-          <button value="tutorial" class="btn-type">Tutorials</button>
+          <button value="Tutorial" class="btn-type">Tutorials</button>
         </div>
         <div class="div-type">
           <img class="img-types" src="./img/preguntas.jpg">
-          <button value="preguntas" class="btn-type">Questions</button>
+          <button value="Question" class="btn-type">Questions</button>
         </div>
       </div>
     </div>

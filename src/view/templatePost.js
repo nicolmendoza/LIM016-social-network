@@ -1,6 +1,13 @@
 /* eslint-disable no-plusplus */
 import {
-  deletePost, obtenerInfo, updatePost, readComment, saveComment, saveLike, readLikes, deleteLike,
+  deletePost,
+  obtenerInfo,
+  updatePost,
+  readComment,
+  saveComment,
+  saveLike,
+  readLikes,
+  deleteLike,
 } from '../firebase/firestore.js';
 
 import { templateComents } from './templateComments.js';
@@ -35,10 +42,14 @@ export const template = (post) => {
         <div class="header-info">
           <div class="post-name${onePost.idP} namePost"></div>
           <div class="date"><p></p></div>
+          <div class=" privacityIcons   privacity${onePost.idP} fas"></div>
+
         </div>
 
         <div class="icon-options">
+          <div class="nameType">${onePost.type}</div>
           <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+
         </div>
       </div>
 
@@ -88,7 +99,9 @@ export const template = (post) => {
       }
     }, idPost);
 
-    const parrafoCountComment = nuevoElemento.querySelector(`.countComment${idPost}`);
+    const parrafoCountComment = nuevoElemento.querySelector(
+      `.countComment${idPost}`,
+    );
     readComment((comments) => {
       const num = comments.length;
       parrafoCountComment.innerHTML = num;
@@ -107,13 +120,26 @@ export const template = (post) => {
     // divPhotoUser= dataUser.data().photo;
   });
 
+  post.forEach((one) => {
+    const idPost = one.idP;
+    const privacityIcon = nuevoElemento.querySelector(`.privacity${idPost}`);
+    if (one.privacity === 'amigos') {
+      privacityIcon.classList.add('fa-globe-americas');
+    } else {
+      privacityIcon.classList.add('fa-lock');
+    }
+  });
+
   nuevoElemento.querySelectorAll('.postImg').forEach((postImg) => {
     // const postImgId = postImg.parentElement.id;
     // console.log(postImgId);
     const imgSrc = postImg;
     console.log(imgSrc.src);
     // eslint-disable-next-line no-plusplus
-    if ((imgSrc.src !== 'http://localhost:5000/') && (imgSrc.src !== 'http://127.0.0.1:5500/src/index.html')) {
+    if (
+      imgSrc.src !== 'http://localhost:5000/'
+      && imgSrc.src !== 'http://127.0.0.1:5500/src/index.html'
+    ) {
       imgSrc.className = 'img-post-home';
     } else {
       imgSrc.className = 'postImg';
@@ -179,11 +205,17 @@ export const template = (post) => {
             <textarea class="editPost" id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
             <button class="save">SAVE</button>`;
           document.querySelector('.save').addEventListener('click', () => {
-            const postEdit = document.getElementById(`contentEdit${post[i].idP}`).value;
+            const postEdit = document.getElementById(
+              `contentEdit${post[i].idP}`,
+            ).value;
             if (postEdit === `${post[i].content}`) {
-              document.querySelector(`#contentPost${post[i].idP}`).innerHTML = `${post[i].content}`;
+              document.querySelector(
+                `#contentPost${post[i].idP}`,
+              ).innerHTML = `${post[i].content}`;
             } else {
-              console.log(document.getElementById(`contentEdit${post[i].idP}`).value);
+              console.log(
+                document.getElementById(`contentEdit${post[i].idP}`).value,
+              );
               updatePost(id, postEdit);
             }
 

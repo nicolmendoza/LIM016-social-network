@@ -359,7 +359,6 @@
     #divParent-users{
         display: flex;
     }
-<<<<<<< HEAD
     #header-categories{
         display: flex;
         justify-content: space-around;
@@ -381,6 +380,4 @@
         /* font-weight: 700; */
         font-family: 'Outfit';
     }
-=======
->>>>>>> 59352c7d4c189400e0ef4e4cc6ced765c38ec166
 }
