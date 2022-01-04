@@ -14,10 +14,15 @@ export const Login = () => {
   <section class="bubble">
     <!-- content here -->
   </section>
-  <div class="section1"><img class="imgInicio" name="imgInicio" ></div>
-  <div class="section2">
+
+  <section class="section1"><img class="imgInicio" name="imgInicio" ></section>
+
+  <section class="section2">
     <div class="formulario">
-      <div class="logo">SOCIAL NETWORK</div>
+      <div id="inicioLogo"> 
+        <i class="fas fa-crown inicio"></i>
+        <p class="logo">QUEEN CODERS</p>
+      </div>
       <div><img id="logoLogin" class="imgInicioPequeño" name="imgInicioPequeño"></div>
 
       <div class="form-group-text">
@@ -82,8 +87,12 @@ function errorOccurs(typeError, text) {
     case 'auth/invalid-email':
       textMessage.innerHTML = 'La dirección de correo electrónico no es válida';
       break;
+    case 'auth/account-exists-with-different-credential':
+      textMessage.innerHTML = 'La dirección de correo electrónico ya es usada en una credencial diferente.';
+      break;
     default:
-      textMessage.innerHTML = 'Lo sentimos, se ha producido un error en la página.';
+      console.log(errorCode);
+      textMessage.innerHTML = 'Lo sentimos, se ha producido un error en la página. Vuelve a intentarlo más tarde.';
   }
 }
 

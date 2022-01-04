@@ -11,11 +11,14 @@ export const SignUp = () => {
     <!-- content here -->
   </section>
 
-  <section class="section1"><img class="imgInicio"></section>
+  <section class="section1"><img class="imgInicio" name="imgInicio" ></section>
 
   <section class="section2">
     <div class="formulario">
-      <div class="logo">SOCIAL NETWORK</div>
+      <div id="inicioLogo"> 
+        <i class="fas fa-crown"></i>
+        <p class="logo">QUEEN CODERS</p>
+      </div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
 
       <div class="form-group-text">
@@ -78,8 +81,8 @@ function errorOccurs(typeError) {
       passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
       break;
     default:
+      alert('Lo sentimos, se ha producido un error en la página. Vuelve a intentarlo más tarde.');
       console.log(typeError);
-      alert('Lo sentimos, se ha producido un error en la página.');
   }
 }
 
