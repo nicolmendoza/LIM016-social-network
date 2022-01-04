@@ -15,8 +15,8 @@ export const SignUp = () => {
 
   <section class="section2">
     <div class="formulario">
-      <div> 
-        <i class="fas fa-crown inicio"></i>
+      <div id="inicioLogo"> 
+        <i class="fas fa-crown"></i>
         <p class="logo">QUEEN CODERS</p>
       </div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>

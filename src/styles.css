@@ -262,7 +262,7 @@ p.errorMessage{
         margin-left: 3px;
     }
 }
-@media (min-width: 1020px){
+@media (min-width: 800px){
     #inicioLogo{
         width: 385px;
         margin: 30px auto;
