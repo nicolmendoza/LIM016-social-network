@@ -203,7 +203,7 @@
         font-family: math;
         color: #3570EC;
         font-weight: 0;
-        margin: 3% 0px;
+        margin: 3% auto 3% 0% ;
         align-self: flex-start !important;
         width: 80%;
     }
@@ -230,5 +230,11 @@
     }
     .li-number{
         font-size: 16px;
+    }
+}
+@media (min-width: 1080px){
+    #infoUserProfile{
+        width: 40%;
+        text-align: start;
     }
 }
