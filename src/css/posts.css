@@ -126,6 +126,7 @@
     font-size: 12px;
     margin-right: auto;
     margin-left: auto;
+    cursor: pointer;
 }
 
 /* -----DELETE POST MODAL----- */
@@ -231,7 +232,8 @@
 
 @media (min-width: 768px){
     .img-post-home{
-        height: 410px;
+        height: auto;
+        width: 100%;
     }
     .div-showPost{
         width: 50%;

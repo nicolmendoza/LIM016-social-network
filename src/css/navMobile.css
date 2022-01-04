@@ -27,10 +27,9 @@
 }
 
 .btn-newPost-mobile{
+    position: relative; 
     font-size: 64px;
-    position: absolute;
-    bottom: 21px;
-    left: calc(100% - 57%);
+    bottom: 26px;
 }
 
 .menu .fa-plus-circle{
@@ -91,6 +90,10 @@
     border: 1px solid gray;
     padding: 0px 14px;
 }
+.container-search input:focus{
+    outline: none;
+    box-shadow: 0px 0px 0.2px 3px #356fec44;
+}
 
 .menuFull{
     display: flex;
@@ -107,6 +110,7 @@
 }
 
 .menuFull a{
+    cursor: pointer;
     text-decoration: none;
     color: #356fec8c;
 }
@@ -120,10 +124,8 @@
     padding: 0px 15px;
     margin-top: 3px;
 }
-
 .container-result-search{
     width: 100%;
-
 }
 .result-search {
     list-style-type: none;

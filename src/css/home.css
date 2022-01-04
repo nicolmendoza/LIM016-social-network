@@ -117,12 +117,16 @@
 }
 
 #sectionUsers{
+    overflow-y: scroll;
     display: none;
     width: 100%;
+    height: 240px;
 }
 #section-User{
     width: 100%;
+    order: -2;
 }
+
 .container-info-users{
     /* position: fixed; */
     /* width: 23%; */
@@ -144,21 +148,29 @@
     align-items: flex-start;
     width: 100%;
 }
+.oneDivUser:hover{
+    background-color: #356fec44;
+    border-radius: 8px;
+    transition: all 0.1s linear;
+    transform: scale(1.1);
+    cursor: pointer;
+}
 .oneDivUser {
     display: flex;
     flex-direction: row;
     /* background: cornflowerblue; */
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
-    margin: 2px;
+    width: 90%;
+    margin: auto;
+    padding: 4px;
 }
 .link-user {
     width: 100%;
 }
 .img-user {
-    width: 35px;
-    height: 35px;
+    width: 28px;
+    height: 30px;
     border-radius: 50%;
     margin-right: 5%;
 }
@@ -177,9 +189,10 @@
     border: transparent;
     background-image: linear-gradient(120deg, #da5afa99 0%, #3570ec8a 100%);
     color: beige;
-    font-size: 12px;
+    font-size: 13px;
     margin-right: auto;
     margin-left: auto;
+    cursor: pointer;
 }
 
 /* -----SECTION TYPES OF POST----- */
@@ -199,11 +212,12 @@
 
 #todos{
     color: #3570EC;
+    cursor: pointer;
 }
 
 #botones-types{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     width: 100%;
 }
@@ -235,78 +249,6 @@
     font-family: 'Outfit';
 }
 
-.section-home{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-around;
-    margin: auto;
-}
-
-#divParent-users{   
-    /* padding: 7% 10px; */
-    display: none;
-    flex-direction: column;
-    align-items: flex-start;
-    /* margin-left: 10px; */
-    width: 100%;
-    border-top: 2px solid #94A4F5;
-    padding-top: 7%;
-}
-
-#divParent-users h1{
-    font-family: ui-serif;
-    font-size: 19px;
-    font-weight: 100;
-    color: #484860;
-    margin-bottom: 8px;
-    margin-left: 10px;
-}
-
-#sectionUsers{
-    display: none;
-    width: 100%;
-}
-
-#section-User{
-    width: 100%;
-    order: -2;
-}
-.container-info-users{
-        /* position: fixed; */
-    /* width: 23%; */
-    /* padding: 10px; */
-    /* background-image: linear-gradient(to bottom, #BEBDFF 0%, #C6FCFF 100% ); */
-    border: transparent;
-    /* border-radius: 20px; */
-    top: 6em;
-    bottom: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-#header-categories{
-    display: flex;
-    justify-content: space-between;
-}
-#header-categories p{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#todos{
-    color: #3570EC;
-}
-
-#botones-types{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-}
-.categoryMobile{
-    padding: 0px 2.5%;
-}
 
 @media (min-width: 768px){
     .container-home{
@@ -359,7 +301,6 @@
     #divParent-users{
         display: flex;
     }
-<<<<<<< HEAD
     #header-categories{
         display: flex;
         justify-content: space-around;
@@ -381,6 +322,4 @@
         /* font-weight: 700; */
         font-family: 'Outfit';
     }
-=======
->>>>>>> 59352c7d4c189400e0ef4e4cc6ced765c38ec166
 }
