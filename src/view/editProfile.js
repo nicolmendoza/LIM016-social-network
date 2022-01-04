@@ -106,6 +106,7 @@ export const profileEdit = () => {
 
 export const FunctionEdit = () => {
   const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user);
 
   const newName = document.getElementById('edit-name');
   const newAbout = document.getElementById('edit-about');
@@ -113,6 +114,7 @@ export const FunctionEdit = () => {
   const newPortada = document.getElementById('portadaUserEdit');
   const newCareer = document.getElementById('edit-career');
   const arrayInterest = [];
+  console.log(arrayInterest);
 
   const arrayImg = document.querySelectorAll('.img-prog');
   arrayImg.forEach((interest) => {
@@ -142,12 +144,16 @@ export const FunctionEdit = () => {
 
   (() => {
     obtenerInfo(user.uid).then((userInfo) => {
-      console.log(userInfo);
+      console.log(userInfo.data());
       newPhoto.src = `${userInfo.data().photo}`;
       newPortada.src = `${userInfo.data().portada}`;
       newName.value = `${userInfo.data().name}`;
       newAbout.value = `${userInfo.data().about}`;
       newCareer.value = `${userInfo.data().career}`;
+      const array1 = userInfo.data().interest;
+      array1.forEach((e) => {
+        arrayInterest.push(e);
+      });
     });
   })();
 
