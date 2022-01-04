@@ -203,7 +203,7 @@
         font-family: math;
         color: #3570EC;
         font-weight: 0;
-        margin: 3% auto 3% 0% ;
+        margin: 3% auto 3% 15px;
         align-self: flex-start !important;
         width: 80%;
     }
