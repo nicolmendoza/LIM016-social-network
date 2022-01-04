@@ -38,8 +38,9 @@ export const newPost = () => {
     <textarea namePost="textarea" id="post-description" rows="10" cols="50" placeholder="What's on you mind?"></textarea>
     <div id="container-image-preview">
       <img src="" class="image-preview" alt=""/>
+      <i id="delete-imgUpload" style="display:none" class="far fa-times-circle"></i>
     </div>
-
+    
     <div class="add-element">
       <div class="plus-image"><b>+</b></div>
       <div class="addImage">
@@ -104,6 +105,7 @@ export const functionNewPost = () => {
   reader.onload = function () {
     document.querySelector('.image-preview').className = 'image-preview img-prev';
     previewImg.src = reader.result;
+    document.getElementById('delete-imgUpload').style.display = 'block';
   };
   const postDescription = document.getElementById('post-description');
   document.querySelector('.publish').addEventListener('click', () => {
@@ -130,5 +132,12 @@ export const functionNewPost = () => {
   });
   document.querySelector('.descart').addEventListener('click', () => {
     document.querySelector('.modalNewPost').style.display = 'none';
+  });
+
+  document.querySelector('#delete-imgUpload').addEventListener('click', () => {
+    photoFile.value = '';
+    document.querySelector('.image-preview').className = 'image-preview';
+    previewImg.src = '';
+    document.getElementById('delete-imgUpload').style.display = 'none';
   });
 };

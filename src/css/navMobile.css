@@ -39,6 +39,17 @@
     filter: drop-shadow(0px 4px 18px #84A8F5);
 }
 
+.menu a:hover,
+.menu li:hover,
+.menuFull a:hover,
+.menuFull li:hover{
+    text-decoration: none;
+    color: #6916926e;
+}
+
+.active{
+    color: #6916926e !important;
+}
 
 /*------NAVEGADOR FULL SCREEN ------------*/
 .nav-full{
@@ -59,6 +70,8 @@
     font-weight: bold;
     font-size: 24px;
     letter-spacing: 7px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .container-search{
@@ -77,6 +90,13 @@
     outline: none;
     border: 1px solid gray;
     padding: 0px 14px;
+}
+
+.container-search .search:hover,
+.container-search .search:focus{
+    box-shadow: 0px 0px 7px 1px #b3b3b38f;
+    border: 0.55px solid #353535;
+
 }
 
 .menuFull{
@@ -133,6 +153,7 @@
     font-size: 17px;
     cursor: pointer;
 }
+
 
 @media (min-width: 768px){
     .nav-mobile{

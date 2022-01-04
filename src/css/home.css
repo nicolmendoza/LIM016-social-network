@@ -5,13 +5,7 @@
     min-height: 100vh;
     padding-top: 1em;
 }
-.section-home{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-around;
-    margin: auto;
-}
+
 
 /* -----WELCOME TO USER----- */
 
@@ -23,8 +17,8 @@
 .photoHome{
     margin: 12px 0;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
 }
 .header-text{
     display: flex;
@@ -35,13 +29,14 @@
     margin-bottom: 14px;
 }
 .header-text h{
-    font-size: 14px;
-    line-height : 20px;
+    font-size: 17px;
 }
 .header-text p{
-    font-size: 16px;
-    line-height : 20px;
+    font-size: 25px;
+    line-height: 20px;
     text-align: start;
+    text-transform: capitalize;
+    color: #356fecfa;
 }
 
 
@@ -57,7 +52,7 @@
     font-size: 17px;
     font-weight: bold;
     color: #484860;
-    margin: 8px auto;
+    margin: 8px 0px;
 }
 
 #infoDescription{
@@ -72,22 +67,19 @@
     font-size: 14px;
     line-height: 1.2;
     margin-bottom: 5px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #div-etiqueta{
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     margin-top: 6px;
-    margin-left: auto;
-    margin-right: auto;
 }
 #div-etiqueta p{
     width: auto;
     border: transparent;
-    background: #B495E7;
+    background: rgb(156 171 246 / 78%);
     border-radius: 13px;
     padding: 1px 5px;
     font-size: 12px;
@@ -173,14 +165,26 @@
     display: none;
     height: 40px;
     width: 9em;
-    border-radius: 15px;;
+    border-radius: 15px;
     border: transparent;
-    background-image: linear-gradient(120deg, #da5afa99 0%, #3570ec8a 100%);
-    color: beige;
-    font-size: 12px;
+    background-image: linear-gradient(120deg, #da5afa73 0%, #3570ec52 100%);
+    color: white;
+    font-size: 15px;
     margin-right: auto;
     margin-left: auto;
 }
+
+#btn-newPost:hover,
+#goEdit:hover,
+.save:hover{
+    border: 1.5px transparent;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    color: #6CC5DE;
+    box-shadow: 1px 1px 2px 1px #8888;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 
 /* -----SECTION TYPES OF POST----- */
 
@@ -199,6 +203,11 @@
 
 #todos{
     color: #3570EC;
+    cursor:pointer;
+}
+
+#todos:hover{
+    color: rgb(159 165 239);
 }
 
 #botones-types{
@@ -235,10 +244,18 @@
     font-family: 'Outfit';
 }
 
+.activeCategory,
+.btn-type:hover{
+    background: #2d2e2e7a;
+    color: white;
+    font-weight: bold;
+    border-radius: 9px;
+}
+
 .section-home{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 96%;
     justify-content: space-around;
     margin: auto;
 }
@@ -294,10 +311,6 @@
     font-weight: bold;
 }
 
-#todos{
-    color: #3570EC;
-}
-
 #botones-types{
     display: flex;
     flex-direction: row;
@@ -314,14 +327,15 @@
     }
     .section-home{
         flex-direction: row;
+        width: 100%;
     }
     #btn-newPost{
         display: block !important;
-        width: 100%;
+        width: 96%;
     }
     .header-home{
         display: flex;
-        justify-content: center;
+        /* justify-content: center; */
         align-items: center;
         padding: 0px 2.5%;
         border-bottom: 2px solid #94A4F5;
@@ -355,11 +369,11 @@
     }
     #sectionDescription{
         display: flex;
+        align-items: flex-start;
     }
     #divParent-users{
         display: flex;
     }
-<<<<<<< HEAD
     #header-categories{
         display: flex;
         justify-content: space-around;
@@ -381,6 +395,4 @@
         /* font-weight: 700; */
         font-family: 'Outfit';
     }
-=======
->>>>>>> 59352c7d4c189400e0ef4e4cc6ced765c38ec166
 }

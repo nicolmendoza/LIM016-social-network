@@ -44,6 +44,7 @@
     width: auto;
     text-align: start !important;
     margin: 5px 0;
+    cursor: pointer;
 }
 .date{
     font-size: 12px;
@@ -75,13 +76,14 @@
 .icon-options{
     margin-left: auto;
     padding-left: 1em;
+    cursor:pointer;
 }
 .div-options{
     display: flex;
     flex-direction: column;
     position: absolute;
-    right: calc(100% - 98%);
-    margin-top: 6px;
+    right: 1%;
+    margin-top: 5%;
     align-items: flex-end;
 }
 .box-options{
@@ -115,6 +117,13 @@
     border-radius: 8px;
     border: 0.5px solid #bfbebe;
     padding: 0.1em 0.5em 0.1em 0.5em;
+}
+
+.edit:hover,
+.delete:hover{
+    cursor:pointer;
+    box-shadow: 0px 0px 2px 1px #c5bef1;
+    border-radius: 2px;
 }
 .save{
     height: 23px;

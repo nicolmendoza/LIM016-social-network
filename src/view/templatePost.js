@@ -10,7 +10,7 @@ export const template = (post) => {
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
   const user = JSON.parse(localStorage.getItem('user'));
-
+  console.log(user)
   post.forEach((onePost) => {
     nuevoElemento.innerHTML += `
     <div class="postDiv" id="${onePost.idP}">
@@ -104,6 +104,7 @@ export const template = (post) => {
     const dataUser = await obtenerInfo(idUser);
     parrafoName.innerHTML = dataUser.data().name;
     divPhotoUser.src = dataUser.data().photo;
+    parrafoName.setAttribute('data-id', `${dataUser.data().userUID}`);
     // divPhotoUser= dataUser.data().photo;
   });
 
@@ -247,6 +248,17 @@ export const template = (post) => {
       }
     });
   });
+
+  nuevoElemento.querySelectorAll('.namePost').forEach((link) => {
+    console.log(link);
+    link.addEventListener('click', (e) => {
+      const idUser = e.target.dataset.id;
+      localStorage.setItem('idUserRedirecionar', idUser); // almacenar el id del usuario a redireccionar
+      window.location.href = `#/home/profile/${idUser}`;
+      console.log('holi');
+      console.log(idUser);
+    });
+  })
 
   showPost.innerHTML = '';
   showPost.appendChild(nuevoElemento);

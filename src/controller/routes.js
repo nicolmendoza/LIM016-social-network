@@ -32,7 +32,9 @@ const changeView = () => {
     case '#/home':
       stateChanged1();
       header.appendChild(components.navLaptop.navLaptop());
+      components.navLaptop.functionNavLaptop();
       footer.appendChild(components.navMobile.navMobile());
+      components.navMobile.functionNavMobile();
       components.home.Home();
       components.home.FunctionsHome();
       break;
@@ -41,7 +43,9 @@ const changeView = () => {
     case '#/home/profile':
       stateChanged1();
       header.appendChild(components.navLaptop.navLaptop());
+      components.navLaptop.functionNavLaptop();
       footer.appendChild(components.navMobile.navMobile());
+      components.navMobile.functionNavMobile();
       container.appendChild(components.profile.Profile());
       components.profile.FunctionProfile();
       break;

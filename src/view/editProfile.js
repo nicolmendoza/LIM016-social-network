@@ -49,7 +49,7 @@ export const profileEdit = () => {
     <textarea  id="edit-about" name="edit-about" row="3" placeholder="¡Cuentanos más sobre ti, o escribe una frase que te describe!" ></textarea>
     </div>
     <div class="form-group icons-programming">
-      <label for="edit-about">Edita tus intereses</label>
+      <label for="edit-about">Edita tus intereses <span>(máx 6 items)</span></label>
       <div class="img-programming">
         <div class="interest-programming">
         <img class="img-prog" src="./img/html.png" name="html" title="Html">
@@ -117,20 +117,24 @@ export const FunctionEdit = () => {
   const arrayImg = document.querySelectorAll('.img-prog');
   arrayImg.forEach((interest) => {
     interest.addEventListener('click', () => {
+      console.log(interest);
       const icoProgramming = interest.name;
       if (arrayInterest.length < 6) {
         if (arrayInterest.includes(icoProgramming)) {
           console.log('ya eligio este');
           arrayInterest.splice(arrayInterest.indexOf(icoProgramming), 1);
           console.log(arrayInterest);
+          interest.classList.remove('activeProgramming');
         } else {
           arrayInterest.push(icoProgramming);
           console.log(arrayInterest);
+          interest.classList.add('activeProgramming');
         }
       } else if (arrayInterest.includes(icoProgramming)) {
         console.log('ya eligio este');
         arrayInterest.splice(arrayInterest.indexOf(icoProgramming), 1);
         console.log(arrayInterest);
+        interest.classList.remove('activeProgramming');
       }
     });
   });

@@ -53,7 +53,7 @@ export const Home = () => {
   </div>
 
   <div class="div-showPost">
-    <button id="btn-newPost" style="display:none"> ADD NEW POST </button>
+    <button id="btn-newPost" style="display:none"> Add new post </button>
     <div id="showPost"></div>
   </div>
 
@@ -67,23 +67,23 @@ export const Home = () => {
       <div id="botones-types">
         <div class="div-type">
           <img class="img-types" src="./img/ofertaLaboral.jpg">
-          <button value="trabajo"  class="btn-type">Job Offer</button>
+          <button value="trabajo" id="trabajo" class="btn-type">Job Offer</button>
         </div>
         <div class="div-type">
           <img class="img-types" src="./img/evento.jpg">
-          <button value="evento"  class="btn-type">Events</button>
+          <button value="evento" id="evento"  class="btn-type">Events</button>
         </div>
         <div class="div-type">
           <img class="img-types" src="./img/cursos.jpg">
-          <button value="curso"  class="btn-type">Courses</button>
+          <button value="curso" id="curso" class="btn-type">Courses</button>
         </div>
         <div class="div-type">
           <img class="img-types" src="./img/tutorial.jpg">
-          <button value="tutorial" class="btn-type">Tutorials</button>
+          <button value="tutorial" id="tutorial" class="btn-type">Tutorials</button>
         </div>
         <div class="div-type">
           <img class="img-types" src="./img/preguntas.jpg">
-          <button value="preguntas" class="btn-type">Questions</button>
+          <button value="preguntas" id="preguntas" class="btn-type">Questions</button>
         </div>
       </div>
     </div>
@@ -149,8 +149,15 @@ export const FunctionsHome = () => {
 
   document.querySelector('#botones-types').addEventListener('click', (e) => {
     const type = e.target.value;
-    console.log(type);
     getDataPostType(template, type);
+    document.getElementById(`${type}`).classList.add('activeCategory');
+
+    document.querySelector('.sectionTypes').addEventListener('click', (a) => {
+      const tipoP2 = a.target.getAttribute('id');
+      if (type !== tipoP2) {
+        document.getElementById(`${type}`).classList.remove('activeCategory');
+      }
+    });
   });
 
   profileInfo();
@@ -205,5 +212,6 @@ export const FunctionsHome = () => {
   document.querySelector('#closeDelete').addEventListener('click', () => {
     document.querySelector('.modalDelete').classList.remove('revelar');
   });
+
   getUnsubscribePostProfile();
 };

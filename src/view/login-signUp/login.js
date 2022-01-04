@@ -158,7 +158,6 @@ export const initLogin = () => {
       }).catch((error) => {
         const message = document.getElementById('generalMessage');
         errorOccurs(error, message);
-
       });
   });
 
@@ -213,5 +212,4 @@ export const initLogin = () => {
     }
   }
   setInterval(cambiarImagenes2, 2000);
-
 };

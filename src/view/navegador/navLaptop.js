@@ -6,7 +6,7 @@ export const navLaptop = () => {
   const viewNavLaptop = document.createElement('nav');
   viewNavLaptop.classList.add('nav-full');
   viewNavLaptop.innerHTML = `
-    <div class="logo-full-screen"> QUEEN CODERS </div>
+    <div class="logo-full-screen"><a class="logo-full-screen" href="#/home">QUEEN CODERS</a> </div>
     
     <div class="container-search">
         <input type="text" class="search" id="search" placeholder="Search for people, tag, ..." autocomplete="off">
@@ -16,9 +16,9 @@ export const navLaptop = () => {
     </div>
 
     <ul class="menuFull">
-      <li><a href="#/home"><i class="fas fa-home"></i></a></li>
-      <li><a href="#"><i class="fas fa-bell"></i></a></li>
-      <li><a  href="#/home/profile/${userCurrent.uid}"><i class="fas fa-user-circle" id="myID" data-id="${userCurrent.uid}"></i></a></li>
+      <li><a class="btnHome" href="#/home"><i class="fas fa-home"></i></a></li>
+      <li><a href="#/home"><i class="fas fa-bell"></i></a></li>
+      <li><a  class="btnProfile" href="#/home/profile/${userCurrent.uid}"><i class="fas fa-user-circle" id="myID" data-id="${userCurrent.uid}"></i></a></li>
       <li><i id="out" class="fas fa-sign-out-alt"></i></li>
     </ul>
     `;
@@ -66,4 +66,12 @@ export const navLaptop = () => {
   });
 
   return viewNavLaptop;
+};
+
+export const functionNavLaptop = () => {
+  if (window.location.hash === '#/home') {
+    document.querySelector('.btnHome').classList.add('active');
+  } else if (window.location.hash.includes('#/home/profile')) {
+    document.querySelector('.btnProfile').classList.add('active');
+  }
 };

@@ -33,11 +33,11 @@ export const Profile = () => {
         <ul class="container-follower">
           <li class="follower">
             <p class="li-number">1.2 M</p>
-            <p class="li-description">Seguidores</p>
+            <p class="li-description">Followers</p>
           </li>
           <li class="follow">
             <p class="li-number">98</p>
-            <p class="li-description">Seguidos</p>
+            <p class="li-description">Follows</p>
           </li>
           <li class="posts-li">
             <p class="li-number">250</p>
@@ -68,7 +68,6 @@ export const Profile = () => {
     </div>
     <section id="post-section" class="container-postProfile">
       <button id="btn-newPost" style="display:none"> Add New Post </button>
-      <h1>Posts</h1>
       <div id="PostProfile"></div>
     </section>
   </section>
