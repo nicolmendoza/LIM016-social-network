@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import {
   storagePhotoProf,
   uploadTask,
@@ -177,7 +176,6 @@ export const FunctionEdit = () => {
 
   //   document.getElementById('btn-edit').addEventListener('click', (e) => {
   //     e.preventDefault();
-  //     // eslint-disable-next-line max-len
   //     if (fileEdit.files[0]) {
   //       const imgUpload = files[0];
   //       const metadata = { content: imgUpload.type };
@@ -205,16 +203,13 @@ export const FunctionEdit = () => {
   //         console.log(error);
   //       },
   //       (() => {
-  //         // eslint-disable-next-line max-len
   //         getPhotoURL(task.snapshot.ref).then((downloadURL) => {
-  //           // eslint-disable-next-line max-len
   // eslint-disable-next-line max-len
   //           updateInfoUser(user.uid, newAbout.value, newName.value, downloadURL, newPortada.src, newCareer.value);
   //           window.location.hash = '#/profile';
   //         });
   //       }));
   //     } else {
-  //       // eslint-disable-next-line max-len
   // eslint-disable-next-line max-len
   //       updateInfoUser(user.uid, newAbout.value, newName.value, newPhoto.src, newPortada.src, newCareer.value);
   //       window.location.hash = '#/profile';
