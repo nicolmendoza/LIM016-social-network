@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import {
-  readPostProfile, getUnsubscribe, leerPostProfile,
+  readPostProfile, getUnsubscribe, leerPostProfile, leerPostProfileFriend,
 } from '../firebase/firestore.js';
 
 import { profileEdit, FunctionEdit } from './editProfile.js';
@@ -95,9 +95,17 @@ export const FunctionProfile = () => {
   console.log(idUserRedirect);
   const userCurrent = JSON.parse(localStorage.getItem('user'));
   console.log(userCurrent);
+  if (idUserRedirect === userCurrent.uid) {
+    leerPostProfile(showPostProfile, idUserRedirect);
+
+    document.getElementById('goEdit').style.display = 'block';
+    // document.querySelector('.modalDelete').classList.remove('revelar');
+  } else {
+    document.getElementById('goEdit').style.display = 'none';
+    leerPostProfileFriend(showPostProfile, idUserRedirect);
+  }
   // const userID = userCurrent.uid;
   templateUsers();
-  leerPostProfile(showPostProfile, idUserRedirect);
 
   readPostProfile(idUserRedirect).then((docUser) => {
     document.getElementById('photoUserProfile').src = `${docUser.data().photo}`;
@@ -119,13 +127,6 @@ export const FunctionProfile = () => {
       document.getElementById('div-etiqueta').appendChild(pEtiqueta);
     }
   });
-
-  if (idUserRedirect === userCurrent.uid) {
-    document.getElementById('goEdit').style.display = 'block';
-    // document.querySelector('.modalDelete').classList.remove('revelar');
-  } else {
-    document.getElementById('goEdit').style.display = 'none';
-  }
 
   document.getElementById('goEdit').addEventListener('click', () => {
     profileEdit();
