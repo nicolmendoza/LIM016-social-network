@@ -27,6 +27,7 @@
     background-image: linear-gradient(120deg, #da5afa99 0%, #3570ec8a 100%);
     color: beige;
     font-size: 12px;
+    cursor: pointer;
 }
 
 /* -----INFO OF USER----- */

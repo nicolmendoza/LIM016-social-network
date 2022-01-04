@@ -200,15 +200,15 @@ export const template = (post) => {
       document.querySelector(`#box-options-${id}`).classList.toggle('show');
 
       for (let i = 0; i < post.length; i++) {
+        console.log(i, 'id:', id, 'idPots:', post[i].idP);
         console.log(post[i].userID === user.uid, post[i].idP === id);
         if (post[i].userID === user.uid && post[i].idP === id) {
           document.querySelector(`#contentPost${id}`).innerHTML = `
             <textarea class="editPost" id="contentEdit${post[i].idP}"}>${post[i].content}</textarea>
-            <button class="save">SAVE</button>`;
-          document.querySelector('.save').addEventListener('click', () => {
-            const postEdit = document.getElementById(
-              `contentEdit${post[i].idP}`,
-            ).value;
+            <button class="save" id="save${post[i].idP}">SAVE</button>`;
+          document.querySelector(`#save${id}`).addEventListener('click', () => {
+            const postEdit = document.getElementById(`contentEdit${post[i].idP}`).value;
+
             if (postEdit === `${post[i].content}`) {
               document.querySelector(
                 `#contentPost${post[i].idP}`,
@@ -219,8 +219,6 @@ export const template = (post) => {
               );
               updatePost(id, postEdit);
             }
-
-            updatePost(id, postEdit);
           });
 
           break;

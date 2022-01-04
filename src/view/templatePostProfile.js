@@ -83,7 +83,7 @@ export const showPostProfile = (post) => {
           <div>
             <h1>Eliminar publicación</h1>
             <div class="modal-parrafo">
-              ¿Estás seguro que quieres eliminar esta publicación de <b class="emailText">Queen Coders</b> para siembre?
+              ¿Estás seguro que quieres eliminar esta publicación de <b class="emailText">Queen Coders</b> para siempre?
             </div>
             <button class="aceptDelete">ELIMINAR</button>
           </div>
@@ -166,6 +166,7 @@ export const showPostProfile = (post) => {
 
   sectionPostProfile.querySelectorAll('.icon-options').forEach((div) => {
     div.addEventListener('click', (e) => {
+      console.log('1');
       const id = e.target.parentNode.parentNode.parentNode.id;
       for (let i = 0; i < post.length; i++) {
         console.log(post);
@@ -181,36 +182,40 @@ export const showPostProfile = (post) => {
 
   sectionPostProfile.querySelectorAll('.delete').forEach((div) => {
     div.addEventListener('click', (e) => {
+      console.log('2');
       const id = e.target.parentNode.parentNode.parentNode.parentNode.id;
       document.querySelector('.modalDelete').classList.add('revelar');
       for (let i = 0; i < post.length; i++) {
         document.querySelector('.aceptDelete').addEventListener('click', () => {
+          console.log('3');
+          console.log(post[i].userID === user.uid, post[i].postID === id);
           if (post[i].userID === user.uid && post[i].postID === id) {
             deletePost(id);
             document.querySelector('.modalDelete').classList.remove('revelar');
           }
         });
       }
+      document.querySelector('#closeDelete').addEventListener('click', () => {
+        document.querySelector('.modalDelete').classList.remove('revelar');
+      });
     });
-  });
-
-  sectionPostProfile.querySelector('#closeDelete').addEventListener('click', () => {
-    document.querySelector('.modalDelete').classList.remove('revelar');
   });
 
   sectionPostProfile.querySelectorAll('.edit').forEach((div) => {
     div.addEventListener('click', (e) => {
+      console.log('5');
       const id = e.target.parentNode.parentNode.parentNode.parentNode.id;
-      document.querySelector(`#box-options-${id}`).classList.toggle('show');
+      console.log(id);
+      // document.querySelector(`#box-options-${id}`).classList.toggle('show');
 
       for (let i = 0; i < post.length; i++) {
-        console.log(post[i].userID === user.uid, post[i].postID === id);
+        console.log(i, id, post[i].postID);
         if (post[i].userID === user.uid && post[i].postID === id) {
-          sectionPostProfile.querySelector(`
-          #contentPost${id}`).innerHTML = `
+          document.querySelector(`#contentPost${id}`).innerHTML = `
             <textarea class="editPost" id="contentEdit${post[i].postID}" placeholder="Write a comment...">${post[i].content}</textarea>
-            <button class="save" class="save">SAVE</button>`;
-          sectionPostProfile.querySelector('.save').addEventListener('click', () => {
+            <button class="save" id="save${post[i].postID}">SAVE</button>`;
+          document.querySelector(`#save${id}`).addEventListener('click', () => {
+            console.log('click');
             const postEdit = document.getElementById(`contentEdit${post[i].postID}`).value;
             if (postEdit === `${post[i].content}`) {
               document.querySelector(`#contentPost${post[i].postID}`).innerHTML = `${post[i].content}`;
@@ -218,8 +223,6 @@ export const showPostProfile = (post) => {
               console.log(document.getElementById(`contentEdit${post[i].postID}`).value);
               updatePost(id, postEdit);
             }
-
-            updatePost(id, postEdit);
           });
           break;
           // } else {
@@ -234,6 +237,7 @@ export const showPostProfile = (post) => {
   const nameUser = user.displayName;
   sectionPostProfile.querySelectorAll('.fa-heart').forEach((like) => {
     like.addEventListener('click', (e) => {
+      console.log('7');
       const postId = e.target.parentNode.parentNode.parentNode.id;
       if (e.target.className === 'far fa-heart icon') {
         e.target.className = 'fas fa-heart icon';
@@ -250,6 +254,7 @@ export const showPostProfile = (post) => {
 
   sectionPostProfile.querySelectorAll('.fa-comment').forEach((icon) => {
     icon.addEventListener('click', (e) => {
+      console.log('8');
       const id = e.target.parentNode.parentNode.parentNode.id;
       const showComment = document.getElementById(`showComment${id}`);
       if (showComment.className !== 'showContent') {
@@ -265,6 +270,7 @@ export const showPostProfile = (post) => {
 
   sectionPostProfile.querySelectorAll('.saveComment').forEach((save) => {
     save.addEventListener('click', (e) => {
+      console.log('9');
       const id = e.target.parentNode.parentNode.parentNode.id;
       console.log(id);
       const showComment = document.getElementById(`showComment${id}`);

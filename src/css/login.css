@@ -21,7 +21,6 @@
   overflow: hidden;
 }
 
-
 @media (max-width: 768px) {
   .imgInicio {
     display: none;
@@ -32,10 +31,12 @@
       height: 300px;
     
   }
+  .bubble {
+    display: none;
+  }
 }
 
-
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .imgInicioPequeño {
     display: none;
   }
@@ -79,10 +80,5 @@
   }
   .imgInicio {
     width: 70%;
-  }
-}
-@media (max-width: 768px) {
-  .bubble {
-    display: none;
   }
 }

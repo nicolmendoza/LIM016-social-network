@@ -324,7 +324,7 @@ export const FunctionEdit = () => {
       // eslint-disable-next-line max-len
         getPhotoURL(task.snapshot.ref).then((downloadURL) => {
         // eslint-disable-next-line max-len
-          updateInfoUser(user.uid, newAbout.value, newName.value, downloadURL, newPortada.src, newCareer.value, arrayInterest.value)
+          updateInfoUser(user.uid, newAbout.value, newName.value, downloadURL, newPortada.src, newCareer.value, arrayInterest)
             .then(() => {
               window.location.reload();
             });
