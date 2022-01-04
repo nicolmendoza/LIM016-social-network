@@ -39,6 +39,22 @@ export const getUsers = () => {
     });
   });
 };
+export const getUsersOthers = (uid) => {
+  const q = query(collection(db, 'usuarios'), where('userUID', '!=', `${uid}`));
+  return new Promise((resolve) => {
+    onSnapshot(q, (querySnapshot) => {
+      const users = [];
+      querySnapshot.forEach((docUser) => {
+        const objectUser = { };
+        objectUser.name = docUser.data().name;
+        objectUser.userUID = docUser.id;
+        objectUser.photo = docUser.data().photo;
+        users.push(objectUser);
+      });
+      resolve(users);
+    });
+  });
+};
 
 // /* ------------------  POSTS  --------------------- */
 let unsubscribe;

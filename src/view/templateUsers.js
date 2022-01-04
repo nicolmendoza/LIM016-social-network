@@ -1,9 +1,11 @@
-import { getUsers } from '../firebase/firestore.js';
+import { getUsersOthers } from '../firebase/firestore.js';
 
 export const templateUsers = () => {
   const divUsers = document.createElement('div');
   divUsers.classList.add('divUsers');
-  const arrayUsers = getUsers();
+  const userCurrent = JSON.parse(localStorage.getItem('user'));
+  const uid = userCurrent.uid;
+  const arrayUsers = getUsersOthers(uid);
   arrayUsers.then((users) => users.forEach((user) => {
     divUsers.innerHTML += `
     <div class="link-user" >
@@ -27,12 +29,3 @@ export const templateUsers = () => {
     document.getElementById('sectionUsers').appendChild(divUsers);
   }));
 };
-
-// export const addEventLinkUser = () => {
-
-//       // localStorage.setItem('idUserRedirecionar', idUser); // almacenar el id del usuario a redireccionar
-//       // window.location.href = `#/profile/${idUser}`;
-//       // window.location.reload();
-//     });
-//   });
-// };
