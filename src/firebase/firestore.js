@@ -76,10 +76,11 @@ export const getDataPostType = (callback, type) => {
       objectPost.likes = doct.data().likes;
       objectPost.img = doct.data().img;
       objectPost.type = doct.data().type;
+      objectPost.privacity = doct.data().privacity;
       posts.push(objectPost);
     });
+    console.log(posts);
     return callback(posts);
-    // console.log(posts);
   });
 };
 export const getUnsubscribe = () => unsubscribe;
@@ -204,6 +205,28 @@ export const leerPostProfile = (callback, uid) => {
     // console.log(postP);
   });
 };
+
+export const leerPostProfileFriend = (callback, uid) => {
+  const qP = query(collection(db, 'post'), where('userId', '==', `${uid}`), where('privacity', '==', 'amigos'), orderBy('date', 'desc'));
+  unsubscribePostProfile = onSnapshot(qP, (querySnapshot) => {
+    const postP = [];
+    querySnapshot.forEach((doctP) => {
+      const objectPostProfile = { };
+      objectPostProfile.content = doctP.data().message;
+      objectPostProfile.userID = doctP.data().userId;
+      objectPostProfile.date = doctP.data().date;
+      objectPostProfile.img = doctP.data().img;
+      objectPostProfile.postID = doctP.id;
+      objectPostProfile.type = doctP.data().type;
+      objectPostProfile.privacity = doctP.data().privacity;
+
+      postP.push(objectPostProfile);
+    });
+    return callback(postP);
+    // console.log(postP);
+  });
+};
+
 export const getUnsubscribePostProfile = () => unsubscribePostProfile;
 
 export const readPostProfile = (uid) => {
