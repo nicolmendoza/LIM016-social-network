@@ -184,13 +184,13 @@
         height: 130px;
     }
     .info-profile{
-        width: 32%;
-        /* margin-top: 0px; */
-        margin-left: 0;
-        padding: 0px 2px 0px 0px;
-        align-items: flex-start;
+        width: 90%;
+        flex-direction: row;
+        padding: 23px 2px 0px 0px;
+        align-items: center;
         background: none;
         border: none;
+        justify-content: space-between;
     }
     #career,
     #aboutP{
@@ -198,12 +198,14 @@
     }
 
     #infoUserProfile{
-        font-size: 35px;
+        font-size: 32px;
         text-transform: capitalize;
         font-family: math;
         color: #3570EC;
         font-weight: 0;
-        margin: 3% 26px;
+        margin: 3% auto 3% 15px;
+        align-self: flex-start !important;
+        width: 80%;
     }
 
     #section-infoUser{
@@ -219,9 +221,8 @@
     }
 
     .container-follower{
-        width: 100%;
-        margin-top:0px;
-        
+        width: 60%;
+        margin-top: 0px;
     }
 
     #post-section{
@@ -229,5 +230,15 @@
     }
     .li-number{
         font-size: 16px;
+    }
+}
+@media (min-width: 1080px){
+    #infoUserProfile{
+        width: 40%;
+        text-align: start;
+    }
+    .container-follower{
+        width: 50%;
+        margin-top: 0px;
     }
 }
