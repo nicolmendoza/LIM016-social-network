@@ -209,6 +209,7 @@
     font-size: 14px;
     box-shadow: 1px 1px 2px 1px #8888;
     font-weight: bold;
+    cursor: pointer;
 }
 .revelar{
     display: flex !important;

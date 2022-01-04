@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import {
   readPostProfile, getUnsubscribe, leerPostProfile, leerPostProfileFriend,
 } from '../firebase/firestore.js';
@@ -119,7 +118,7 @@ export const FunctionProfile = () => {
     console.log(docUser.data().interest);
     document.getElementById('ocupation').innerHTML = `${docUser.data().career}`;
     document.getElementById('about').innerHTML = `${docUser.data().about}`;
-    for (let i = 0; i < docUser.data().interest.length; i++) {
+    for (let i = 0; i < docUser.data().interest.length; i += 1) {
       const pEtiqueta = document.createElement('p');
       pEtiqueta.classList.add('etiqueta');
       pEtiqueta.innerHTML = `${docUser.data().interest[i]}`;
