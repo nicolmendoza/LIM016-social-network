@@ -112,7 +112,6 @@ export const showPostProfile = (post) => {
     sectionPostProfile.querySelectorAll('#photo-profile').forEach((photoUser) => {
       // eslint-disable-next-line no-param-reassign
       photoUser.src = `${userInfo.data().photo}`;
-      console.log(photoUser);
     });
   });
 
@@ -150,16 +149,13 @@ export const showPostProfile = (post) => {
     }
   });
 
-  console.log(post);
   sectionPostProfile.querySelectorAll('.postImg').forEach((postImg) => {
     const imgSrc = postImg;
-    console.log(imgSrc.src);
-    if (imgSrc.src !== 'http://localhost:5000/' && imgSrc.src !== 'http://127.0.0.1:5500/src/index.html' && imgSrc.src !== 'https://merlyanco.github.io/LIM016-social-network/') {
+    if (imgSrc.src !== window.location.origin) {
       imgSrc.className = 'img-post-home';
     } else {
       imgSrc.className = 'postImg';
     }
-    console.log(imgSrc.className);
   });
 
   sectionPostProfile.querySelectorAll('.icon-options').forEach((div) => {
