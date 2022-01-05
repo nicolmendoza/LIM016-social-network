@@ -161,7 +161,8 @@ export const initLogin = () => {
   githubLogin.addEventListener('click', () => {
     loginGitHub()
       .then(() => verificarUsuario())
-      .then(() => {
+      .then((user) => {
+        localStorage.setItem('user', JSON.stringify(user));
         window.location.hash = '#/home';
       }).catch((error) => {
         const message = document.getElementById('generalMessage');

@@ -15,7 +15,8 @@ export const templateUsers = () => {
       </div>
     </div>
   `;
-    document.querySelectorAll('.oneDivUser-parrafo').forEach((link) => {
+    console.log(divUsers.querySelectorAll('.oneDivUser-parrafo'));
+    divUsers.querySelectorAll('.oneDivUser-parrafo').forEach((link) => {
       link.addEventListener('click', (e) => {
         const idUser = e.target.dataset.id;
         localStorage.setItem('idUserRedirecionar', idUser); // almacenar el id del usuario a redireccionar
