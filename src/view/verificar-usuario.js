@@ -18,9 +18,11 @@ export const verificarUsuario = async function verificarSiExisteUsuario() {
   if (docSnap.exists()) {
     console.log('existe');
   } else if (nameUser === null) {
-    console.log(nameUser);
+    // const nameNew = JSON.parse(localStorage.getItem('name'));
+    // console.log(nameUser);
+    // console.log(nameNew);
     await setUserDoc(docRef, {
-      name: 'Developer',
+      name: 'nameNew',
       photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcsPTHZ91k7dc7VsbRYTe7M5KHLtydC2M0iQUzNh2YG-C_6kBkroerXsVVW9c_CpYmVU&usqp=CAU',
       userUID: userID,
       about: 'Escribe una frase con la que te identifiques',
@@ -56,6 +58,6 @@ export const verificarUsuario = async function verificarSiExisteUsuario() {
 
 export const stateChanged1 = () => {
   stateChanged((user) => {
-    if (user === null || user === undefined || !user.emailVerified) window.location.hash = '#/login';
+    if (user === null || user === undefined) window.location.hash = '#/login';
   });
 };

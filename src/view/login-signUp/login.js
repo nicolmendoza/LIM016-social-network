@@ -135,6 +135,7 @@ export const initLogin = () => {
     loginGoogle()
       .then(() => verificarUsuario())
       .then((user) => {
+        console.log(user)
         localStorage.setItem('user', JSON.stringify(user));
         window.location.hash = '#/home';
       })
@@ -144,24 +145,13 @@ export const initLogin = () => {
       });
   });
 
-  /* .......Logearse con Facebook........ */
-  // facebookLogin.addEventListener('click', () => {
-  //   loginFacebook()
-  //     .then(() => verificarUsuario())
-  //     .then(() => {
-  //       window.location.hash = '#/home';
-  //     })
-  //     .catch((error) => {
-  //       const message = document.getElementById('generalMessage');
-  //       errorOccurs(error, message);
-  //     });
-  // });
-
   /* .......Logearse con GitHub........ */
   githubLogin.addEventListener('click', () => {
     loginGitHub()
       .then(() => verificarUsuario())
-      .then(() => {
+      .then((user) => {
+        console.log(user)
+        localStorage.setItem('user', JSON.stringify(user));
         window.location.hash = '#/home';
       }).catch((error) => {
         const message = document.getElementById('generalMessage');

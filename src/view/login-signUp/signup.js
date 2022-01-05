@@ -97,7 +97,8 @@ export const handleRegister = (e) => {
   e.preventDefault();
   const email = document.querySelector('#signup-email').value;
   const password = document.querySelector('#signup-password').value;
-
+  const name = document.querySelector('#signup-name').value;
+  localStorage.setItem('name', JSON.stringify(name));
   createUser(email, password)
     .then((userCredential) => {
       const user = userCredential.user;

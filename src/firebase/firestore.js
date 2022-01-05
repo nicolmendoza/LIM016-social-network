@@ -110,11 +110,11 @@ export const savePost = (postDescription, userID, imgULR, Privacity, Type) => ad
   type: Type,
 });
 
-export const obtenerInfo = (ID) => {
+export const obtenerInfo = (ID) => new Promise((resolve) => {
   const docRef = doc(db, 'usuarios', ID);
   const docSnap = getDoc(docRef);
-  return docSnap;
-};
+  resolve(docSnap);
+});
 export const deletePost = (id) => deleteDoc(doc(db, 'post', id));
 
 export const updatePost = (id, postEdit) => {
