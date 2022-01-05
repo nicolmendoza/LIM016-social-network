@@ -17,7 +17,7 @@ export const template = (post) => {
   const showPost = document.getElementById('showPost');
   const nuevoElemento = document.createElement('div');
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user)
+  console.log(user);
   post.forEach((onePost) => {
     nuevoElemento.innerHTML += `
     <div class="postDiv" id="${onePost.idP}">
@@ -288,7 +288,7 @@ export const template = (post) => {
       console.log('holi');
       console.log(idUser);
     });
-  })
+  });
 
   showPost.innerHTML = '';
   showPost.appendChild(nuevoElemento);
