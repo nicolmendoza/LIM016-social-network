@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
+
 // Initialize Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js';

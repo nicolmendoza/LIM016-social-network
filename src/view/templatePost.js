@@ -138,7 +138,7 @@ export const template = (post) => {
     const imgSrc = postImg;
     console.log(imgSrc.src);
     if (
-      imgSrc.src !== 'http://localhost:5000/' && imgSrc.src !== 'http://127.0.0.1:5500/src/index.html' && imgSrc.src !== 'https://merlyanco.github.io/LIM016-social-network/'
+      imgSrc.src !== window.location.origin
     ) {
       imgSrc.className = 'img-post-home';
     } else {
@@ -278,7 +278,6 @@ export const template = (post) => {
   });
 
   nuevoElemento.querySelectorAll('.namePost').forEach((link) => {
-    console.log(link);
     link.addEventListener('click', (e) => {
       const idUser = e.target.dataset.id;
       localStorage.setItem('idUserRedirecionar', idUser); // almacenar el id del usuario a redireccionar
