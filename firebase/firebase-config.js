@@ -83,4 +83,4 @@ export {
   deleteDoc,
   updateDoc,
   where,
-}
+};

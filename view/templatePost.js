@@ -94,7 +94,8 @@ export const template = (post) => {
     readLikes((likes) => {
       const num = likes.length;
       parrafoCountLikes.innerHTML = num;
-      if (likes[0] !== undefined) {
+      const arr = likes.filter((like) => like.user === user.displayName);
+      if (arr.length >= 1) {
         iconLikes.className = 'fas fa-heart icon';
       }
     }, idPost);
@@ -136,10 +137,8 @@ export const template = (post) => {
     // console.log(postImgId);
     const imgSrc = postImg;
     console.log(imgSrc.src);
-    // eslint-disable-next-line no-plusplus
     if (
-      imgSrc.src !== 'http://localhost:5000/'
-      && imgSrc.src !== 'http://127.0.0.1:5500/src/index.html'
+      imgSrc.src !== window.location.origin
     ) {
       imgSrc.className = 'img-post-home';
     } else {
@@ -150,7 +149,6 @@ export const template = (post) => {
   nuevoElemento.querySelectorAll('.date').forEach((date) => {
     const postId = date.parentElement.parentElement.parentElement.id;
     const pElement = date.firstChild;
-    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < post.length; i++) {
       if (post[i].idP === postId) {
         const d = new Date();
@@ -199,7 +197,7 @@ export const template = (post) => {
       const id = e.target.parentNode.parentNode.parentNode.parentNode.id;
       document.querySelector(`#box-options-${id}`).classList.toggle('show');
 
-      for (let i = 0; i < post.length; i++) {
+      for (let i = 0; i < post.length; i += 1) {
         console.log(i, 'id:', id, 'idPots:', post[i].idP);
         console.log(post[i].userID === user.uid, post[i].idP === id);
         if (post[i].userID === user.uid && post[i].idP === id) {
@@ -280,7 +278,6 @@ export const template = (post) => {
   });
 
   nuevoElemento.querySelectorAll('.namePost').forEach((link) => {
-    console.log(link);
     link.addEventListener('click', (e) => {
       const idUser = e.target.dataset.id;
       localStorage.setItem('idUserRedirecionar', idUser); // almacenar el id del usuario a redireccionar

@@ -115,7 +115,6 @@ export const Register = () => {
 
   /* .....Función ocultar y mostrar contraseña..... */
   const iconEye = document.querySelector('#icon-eye');
-  // eslint-disable-next-line func-names
   iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 
@@ -129,4 +128,5 @@ export const Register = () => {
       icon.classList.add('fa-eye-slash');
     }
   });
+  document.imgInicio.src = 'img/gif.gif';
 };

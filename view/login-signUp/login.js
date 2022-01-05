@@ -172,7 +172,6 @@ export const initLogin = () => {
 
   /* .....Función ocultar y mostrar contraseña..... */
   const iconEye = document.querySelector('#icon-eye');
-  // eslint-disable-next-line func-names
   iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 
@@ -187,8 +186,6 @@ export const initLogin = () => {
     }
   });
   /* ........Imagen grande de Login............. */
-
   document.imgInicio.src = 'img/gif.gif';
-
   document.imgInicioPequeño.src = 'img/gif.gif';
 };
