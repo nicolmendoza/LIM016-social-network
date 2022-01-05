@@ -76,7 +76,17 @@
     grid-template-rows: 1fr 1fr;
     margin-top: 6px;
 }
-#div-etiqueta p{
+
+#div-etiquetaMobile{
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    margin: 6px auto 0px;
+}
+
+#div-etiqueta p,
+#div-etiquetaMobile p{
     width: auto;
     border: transparent;
     background: rgb(156 171 246 / 78%);
