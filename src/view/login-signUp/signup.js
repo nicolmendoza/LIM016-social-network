@@ -35,6 +35,12 @@ export const SignUp = () => {
       </div>
 
       <form id="signup-form">
+      <div class="form-group">
+          <span class="icon-input">
+            <i class="far fa-user-circle"></i>
+          </span>
+        <input type="text" id="signup-name"  placeholder="Name" required>
+        </div>
 
         <div class="form-group">
           <span class="icon-input">
