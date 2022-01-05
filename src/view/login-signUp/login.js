@@ -187,35 +187,5 @@ export const initLogin = () => {
   });
   /* ........Imagen grande de Login............. */
 
-  const imagenes = [];
-  imagenes[0] = 'img/loginnew.png';
-  imagenes[1] = 'img/logoLogin.png';
-  imagenes[2] = 'img/imgLogo.png';
-
-  let indice = 0;
-
-  function cambiarImagenes() {
-    document.imgInicio.src = imagenes[indice];
-
-    if (indice < 2) {
-      indice += 1;
-    } else {
-      indice = 0;
-    }
-  }
-
-  setInterval(cambiarImagenes, 2000);
-
-  /* ........Imagen pequeña de Login............. */
-
-  function cambiarImagenes2() {
-    document.imgInicioPequeño.src = imagenes[indice];
-
-    if (indice < 2) {
-      indice += 1;
-    } else {
-      indice = 0;
-    }
-  }
-  setInterval(cambiarImagenes2, 2000);
+  document.imgInicio.src = 'img/gif.gif';
 };

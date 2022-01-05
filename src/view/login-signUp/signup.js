@@ -128,4 +128,5 @@ export const Register = () => {
       icon.classList.add('fa-eye-slash');
     }
   });
+  document.imgInicio.src = 'img/gif.gif';
 };
