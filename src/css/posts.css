@@ -82,6 +82,10 @@
     flex-direction: row;
 }
 
+.icon-options .hydrated{
+    margin-top: -25px;
+}
+
 .nameType{
     background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);   
         width: 5em;
