@@ -14,7 +14,7 @@ export const SignUp = () => {
     <div class="formulario">
       <div id="inicioLogo"> 
         <i class="fas fa-crown"></i>
-        <p class="logo">QUEEN CODERS</p>
+        <p class="logo">Queen Coders</p>
       </div>
       <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
 

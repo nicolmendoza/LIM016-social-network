@@ -6,14 +6,17 @@
     padding-top: 3em;
 }
 
-#botones-types::-webkit-scrollbar {
+#botones-types::-webkit-scrollbar,
+#sectionUsers::-webkit-scrollbar{
     width: 10px;
   }
-  #botones-types::-webkit-scrollbar-track {
+  #botones-types::-webkit-scrollbar-track,
+  #sectionUsers::-webkit-scrollbar-track {
     border-radius: 10px;
     background-image: linear-gradient(to bottom, #e0f5ff 0%, #FFFFFF 100%);
   }
-  #botones-types::-webkit-scrollbar-thumb {
+  #botones-types::-webkit-scrollbar-thumb,
+  #sectionUsers::-webkit-scrollbar-thumb {
     background-image: linear-gradient(rgb(190, 189, 255) 0%, rgb(198, 252, 255) 100%);
     border-radius: 0px;
     -webkit-box-shadow: rgba(0,0,0,.12) 0 3px 13px 1px;
@@ -141,6 +144,8 @@
     width: 100%;
     order: -2;
 }
+
+#sectionUsers
 
 .container-info-users{
     /* position: fixed; */
@@ -319,7 +324,7 @@
 #sectionUsers{
     display: none;
     width: 100%;
-    height: 250px;
+    height: 200px;
     overflow: hidden;
     overflow-y: scroll;
 }

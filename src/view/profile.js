@@ -1,6 +1,8 @@
 /* eslint-disable no-plusplus */
 import {
   readPostProfile, getUnsubscribe, leerPostProfile, leerPostProfileFriend,
+  getUnsubscribeComments,
+  getUnsubscribeLikes,
 } from '../firebase/firestore.js';
 
 import { profileEdit, FunctionEdit } from './editProfile.js';
@@ -9,6 +11,7 @@ import {
 } from './templatePostProfile.js';
 import { templateUsers } from './templateUsers.js';
 import { newPost, functionNewPost } from './newPost.js';
+import { logout } from '../firebase/firebase-auth.js';
 
 export const Profile = () => {
   // Stop listening to changes
@@ -164,6 +167,36 @@ export const FunctionProfile = () => {
     newPost();
     document.querySelector('.modalNewPost').style.display = 'flex';
     functionNewPost();
+  });
+
+  // LogOut
+  window.addEventListener('click', (e) => {
+    const btnOut = e.target.id;
+    if (btnOut === 'out') {
+      logout()
+        .then(() => {
+          getUnsubscribe();
+          getUnsubscribeComments();
+          getUnsubscribeLikes();
+          console.log('log out');
+          window.location.hash = '#/';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (btnOut === 'logout-mob') {
+      logout()
+        .then(() => {
+          getUnsubscribe();
+          getUnsubscribeComments();
+          getUnsubscribeLikes();
+          console.log('log out');
+          window.location.hash = '#/';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   });
 
   getUnsubscribe();

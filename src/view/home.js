@@ -3,7 +3,7 @@ import {
   readData,
   userDocRef,
   getUserDoc,
-  updateUserDoc,
+  // updateUserDoc,
   getUnsubscribe,
   getUnsubscribeComments,
   getUnsubscribeLikes,
@@ -173,7 +173,7 @@ export const FunctionsHome = () => {
     setTimeout(() => {
       document.getElementById('loader').style.display = 'none';
     }, 3000);
-  }).then(() => { document.getElementById('loaderProfile').style.display = 'none' });
+  }).then(() => { document.getElementById('loaderProfile').style.display = 'none'; });
 
   readData(template);
   // .then(() => {
