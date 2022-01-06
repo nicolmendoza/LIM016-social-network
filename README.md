@@ -19,7 +19,7 @@ Queen Coders es un espacio diseñado para mujeres de todas las edades con un int
 El producto resuelve la necesidad de encontrar un espacio donde mujeres con intereses en el desarrollo  puedan conectarse y compartir todo tipo de conocimientos, tutoriales, ,eventos, cursos , ofertas de trabajo , etc.
 
 ## 4. Historias de usuario
-![](img/img-readme/historias de usuario.jpg)
+![](src/img/img-readme/historias de usuario.jpg)
 
 ## 5. Prototipos 
 ### Prototipos de baja fidelidad
