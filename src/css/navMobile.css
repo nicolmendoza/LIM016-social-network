@@ -65,10 +65,7 @@
 }
 
 .divLogo{
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 8px;
-    margin-top: -9px;
+    display: none;
 }
 .logo-full-screen{
     color: #356fec8c;
@@ -192,6 +189,12 @@
     } */
     .logout-mobile{
         display: none !important;
+    }
+    .divLogo{
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 8px;
+        margin-top: -9px;
     }
 }
 

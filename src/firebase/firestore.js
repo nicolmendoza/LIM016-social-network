@@ -39,6 +39,7 @@ export const getUsers = () => {
     });
   });
 };
+
 export const getUsersOthers = (uid) => {
   const q = query(collection(db, 'usuarios'), where('userUID', '!=', `${uid}`));
   return new Promise((resolve) => {
@@ -126,8 +127,7 @@ export const updatePost = (id, postEdit) => {
 };
 
 // /* ----------------- LIKES ----------------- */
-export const saveLike = (id, userId, userName) => setDoc(doc(db, 'post', id, 'likes', userId), {
-  user: userName,
+export const saveLike = (id, userId) => setDoc(doc(db, 'post', id, 'likes', userId), {
   date: Date.now(),
 });
 
