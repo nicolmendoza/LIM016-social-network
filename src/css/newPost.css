@@ -107,7 +107,6 @@
     margin-left: auto;
 }
 select{
-  
     border-radius: 20px;
     border: 1px solid black;
     font-size: 15px;
@@ -115,6 +114,11 @@ select{
 }
 
 .privacityPost, .type{
+    border-radius: 3px;
+    border: 1px;
+    border-color: rgb(87, 87, 87);
+    background: #ffffffbf;
+
     padding: 1.5px;
     margin: 2.4px;
     width: 100%;

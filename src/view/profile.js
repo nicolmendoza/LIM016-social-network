@@ -52,6 +52,7 @@ export const Profile = () => {
   <section id="section-infoUser">
     <div id="section-User" class=" fullUser">
       <div class="info-user-full">
+      <div class="lds-roller loader loaderInfo" id="loaderProfile"><img src="./img/loader.gif"></div>
       <div id="sectionDescription">
         <h1>Description</h1>
         <div id="infoDescription">
@@ -70,7 +71,10 @@ export const Profile = () => {
     </div>
     <section id="post-section" class="container-postProfile">
       <button id="btn-newPost" style="display:none"> Add New Post </button>
+      <div style="position: relative;">
+    <div class="lds-roller loader loaderPost" id="loader"><img src="./img/loader.gif"></div>
       <div id="PostProfile"></div>
+      </div>
     </section>
   </section>
 
@@ -133,7 +137,15 @@ export const FunctionProfile = () => {
       pEtiqueta.innerHTML = `${docUser.data().interest[i]}`;
       document.getElementById('div-etiquetaMobile').appendChild(pEtiqueta);
     }
-  });
+  })
+    .then(() => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.toggle('loader2');
+      }, 3000);
+      setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+      }, 3000);
+    }).then(() => { document.getElementById('loaderProfile').style.display = 'none'; });
 
   document.getElementById('goEdit').addEventListener('click', () => {
     profileEdit();

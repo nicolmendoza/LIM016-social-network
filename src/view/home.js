@@ -22,7 +22,8 @@ export const Home = () => {
   divElement.classList.add('container-home');
   divElement.innerHTML = `
   <div class="section-home">
-    <div id="section-User">
+    <div id="section-User" style="position: relative;">
+    <div class="lds-roller loader loaderInfo" id="loaderProfile"><img src="./img/loader.gif"></div>
       <div class="container-info-users">
       <div id="infoUserHome">
         <div class='header-home'>
@@ -53,7 +54,10 @@ export const Home = () => {
 
   <div class="div-showPost">
     <button id="btn-newPost" style="display:none"> Add new post </button>
+    <div style="position: relative;">
+    <div class="lds-roller loader loaderPost" id="loader"><img src="./img/loader.gif"></div>
     <div id="showPost"></div>
+    </div>
   </div>
 
   <div class="sectionTypes">
@@ -110,6 +114,8 @@ export const Home = () => {
       </div>
     </div>
   </section>
+
+  
   `;
   return document.querySelector('#container').appendChild(divElement);
 };
@@ -145,7 +151,6 @@ export const FunctionsHome = () => {
         document.getElementById('div-etiqueta').appendChild(pEtiqueta);
       }
     }
-    console.log(docSnap.data());
   }
 
   document.querySelector('#botones-types').addEventListener('click', (e) => {
@@ -161,9 +166,19 @@ export const FunctionsHome = () => {
     });
   });
 
-  profileInfo();
+  profileInfo().then(() => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.toggle('loader2');
+    }, 3000);
+    setTimeout(() => {
+      document.getElementById('loader').style.display = 'none';
+    }, 3000);
+  }).then(() => { document.getElementById('loaderProfile').style.display = 'none' });
 
   readData(template);
+  // .then(() => {
+  //   setTimeout(document.getElementById('loader').classList.toggle('loader2'), 10000);
+  // });
 
   document.getElementById('todos').addEventListener('click', () => {
     readData(template);
