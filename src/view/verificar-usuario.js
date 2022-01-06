@@ -23,7 +23,7 @@ export const verificarUsuario = async function verificarSiExisteUsuario() {
         userUID: userID,
         about: 'Escribe una frase con la que te identifiques',
         portada:
-          'https://static-cse.canva.com/blob/706582/1600w-dzsSYIjyvws.jpg',
+          'https://media.istockphoto.com/vectors/the-future-is-female-vector-illustration-stylish-print-for-t-shirts-vector-id1206930173',
         career: 'Cuentanos a que te dedicas',
       });
     } else {

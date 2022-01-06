@@ -51,6 +51,23 @@ export const newPost = () => {
         <button class= "add archive"><ion-icon name="attach-outline"></ion-icon></button>
       </div>
     </div>
+
+    <section class="modalDelete2" style="display: none">
+    <div class="modalDivDelete2">
+      <div class="modalContainer-Delete2">
+        <div>
+        </div>
+        <div>
+          <h1>Aviso</h1>
+          <div class="modal-parrafo2">
+          Su mensaje está vacio
+          </div>
+          <button class="aceptDelete2">Ok</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
     `;
   document
     .querySelector('.modalContainer-NewPost')
@@ -119,7 +136,10 @@ export const functionNewPost = () => {
       savePost(postDescription, userID, '', privacity, types);
       document.querySelector('.modalNewPost').style.display = 'none';
     } else {
-      alert('su post esta vacio');
+      document.querySelector('.modalDelete2').classList.add('revelar');
+      document.querySelector('.aceptDelete2').addEventListener('click', () => {
+        document.querySelector('.modalDelete2').classList.remove('revelar');
+      });
     }
     // savePost(postDescription, userID);
     // window.location.hash = '#/home';

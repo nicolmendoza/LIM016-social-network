@@ -80,6 +80,7 @@ export const template = (post) => {
         <div id="showComment${onePost.idP}"></div>
       </div>
     </div>
+    
     `;
 
     return nuevoElemento;

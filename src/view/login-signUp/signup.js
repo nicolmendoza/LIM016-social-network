@@ -1,7 +1,4 @@
-import {
-  createUser,
-  verificationEmail,
-} from '../../firebase/firebase-auth.js';
+import { createUser, verificationEmail } from '../../firebase/firebase-auth.js';
 
 export const SignUp = () => {
   const viewSignUp = document.createElement('div');
@@ -31,11 +28,7 @@ export const SignUp = () => {
       </div>
 
       <form id="signup-form">
-<<<<<<< HEAD
-        <div class="form-group">
-=======
       <div class="form-group">
->>>>>>> a6e3e3c9097fc64c87adafeab2d36403e1825522
           <span class="icon-input">
             <i class="far fa-user-circle"></i>
           </span>
@@ -59,13 +52,31 @@ export const SignUp = () => {
         </div>
 
         <button type="submit" class="btnLogin" >CREATE A COUNT</button>
+        <p id='errorFirebase' class="errorFirebase"></p>
 
         <div class="textResetPassword">
           <p class="registerText">Do you have an account?  <a href="#/signup" class="registerText link">Login now</a></p>
         </div>
       </form>
     </div>
-  </section>`;
+  </section>
+
+  <section class="modalDelete" style="display: none">
+  <div class="modalDivDelete">
+    <div class="modalContainer-Delete">
+      <div >
+      </div>
+      <div>
+        <h1>Correo de Verificación</h1>
+        <div class="modal-parrafo">
+        Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja
+        </div>
+        <button class="aceptDelete">Ok</button>
+      </div>
+    </div>
+  </div>
+</section>
+  `;
   return viewSignUp;
 };
 
@@ -73,6 +84,7 @@ export const SignUp = () => {
 function errorOccurs(typeError) {
   const emailMessage = document.getElementById('emailMessage');
   const passwordMessage = document.getElementById('passwordMessage');
+  const errorMessage = document.getElementById('errorFirebase');
   const errorCode = typeError.code;
   switch (errorCode) {
     case 'auth/invalid-email':
@@ -85,7 +97,7 @@ function errorOccurs(typeError) {
       passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
       break;
     default:
-      alert('Lo sentimos, se ha producido un error en la página. Vuelve a intentarlo más tarde.');
+      errorMessage.innerHTML = 'Lo sentimos, se ha producido un error en la página. Vuelve a intentarlo más tarde.';
       console.log(typeError);
   }
 }
@@ -100,11 +112,12 @@ export const handleRegister = (e) => {
     .then((userCredential) => {
       const user = userCredential.user;
       if (!user.emailVerified) {
-        alert('Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja');
-        verificationEmail()
-          .then(() => {
+        document.querySelector('.modalDelete').classList.add('revelar');
+        document.querySelector('.aceptDelete').addEventListener('click', () => {
+          verificationEmail().then(() => {
             window.location.hash = '#/';
           });
+        });
       }
     })
     .catch((error) => {
@@ -123,7 +136,7 @@ export const Register = () => {
   iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 
-    if ((this.nextElementSibling).type === 'password') {
+    if (this.nextElementSibling.type === 'password') {
       this.nextElementSibling.type = 'text';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');

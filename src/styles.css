@@ -43,9 +43,8 @@ body::-webkit-scrollbar-thumb {
     margin: 15px auto;
 }
 .logo {
-    font-size: 30px;
-    font-family: sans-serif;
-    font-weight: 900;
+
+    font-weight: 100;
     color: white;
     line-height : 20px;
 }
@@ -273,7 +272,8 @@ p.errorMessage{
 
 @media (min-width: 769px){
     .logo {
-      font-size: 40px;
+        font-size: 50px;
+        font-family: 'Pushster', cursive;
     }
     #inicioLogo > i{
         font-size: 24px;
