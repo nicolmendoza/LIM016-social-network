@@ -65,7 +65,23 @@ export const Login = () => {
         </div>
       </form>
     </div>
-  </section>`;
+  </section>
+  <section class="modalDelete" style="display: none">
+  <div class="modalDivDelete">
+    <div class="modalContainer-Delete">
+      <div>
+      </div>
+      <div>
+        <h1>Correo de Verificación</h1>
+        <div class="modal-parrafo">
+        Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja
+        </div>
+        <button class="aceptDelete">Ok</button>
+      </div>
+    </div>
+  </div>
+</section>
+  `;
 
   return viewHome;
 };
@@ -110,9 +126,10 @@ export const handleSubmit = (e) => {
           window.location.hash = '#/home';
         });
       } else {
-        alert(
-          'Te hemos enviado un email para verificar tu cuenta. Por favor revisa tu bandeja.',
-        );
+        document.querySelector('.modalDelete').classList.add('revelar');
+        document.querySelector('.aceptDelete').addEventListener('click', () => {
+          document.querySelector('.modalDelete').classList.remove('revelar');
+        });
       }
     })
     .catch((error) => {
@@ -135,7 +152,7 @@ export const initLogin = () => {
     loginGoogle()
       .then(() => verificarUsuario())
       .then((user) => {
-        console.log(user)
+        console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
         window.location.hash = '#/home';
       })
@@ -150,7 +167,7 @@ export const initLogin = () => {
     loginGitHub()
       .then(() => verificarUsuario())
       .then((user) => {
-        console.log(user)
+        console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
         window.location.hash = '#/home';
       }).catch((error) => {

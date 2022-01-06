@@ -131,12 +131,14 @@ export const FunctionsHome = () => {
     const docSnap = await getUserDoc(docRef);
     if (docSnap.exists()) {
       const userInfo = docSnap.data();
-      if (userInfo.name == null) {
-        await updateUserDoc(docRef, {
-          name: 'Developer',
-        });
-      }
+      console.log(userInfo);
+      // if (userInfo.name == null) {
+      //   await updateUserDoc(docRef, {
+      //     name: 'Developer',
+      //   });
+      // }
       const info = document.getElementById('infoUser');
+      console.log(info);
       info.innerHTML = `${userInfo.name}`;
       document.getElementById('photoUser').src = `${userInfo.photo}`;
       console.log(userInfo.interest);

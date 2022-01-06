@@ -1,11 +1,4 @@
-import {
-  loginGoogle,
-  loginGitHub,
-  createUser,
-  verificationEmail,
-} from '../../firebase/firebase-auth.js';
-
-import { verificarUsuario } from '../verificar-usuario.js';
+import { createUser, verificationEmail } from '../../firebase/firebase-auth.js';
 
 export const SignUp = () => {
   const viewSignUp = document.createElement('div');
@@ -23,7 +16,7 @@ export const SignUp = () => {
         <i class="fas fa-crown"></i>
         <p class="logo">QUEEN CODERS</p>
       </div>
-      <div><img id="logoLogin" class="imgInicioPequeño" name="imgInicioPequeño"></div>
+      <div><img id="logoLogin" class="imgInicioPequeño" src='./img/imgLogo.png'></div>
 
       <div class="form-group-text">
         <div class="textForm">
@@ -58,17 +51,32 @@ export const SignUp = () => {
           <p id='passwordMessage' class="errorMessage"></p>
         </div>
 
-        <button type="submit" class="btnLogin btnSingIn" >CREATE A COUNT</button><br>
-
-        <button type="button" class="icon-login" id="googleLogin"><img src="img/google.png"></i></button>
-        <button type="button" class="icon-login" id="githubLogin"><img src="img/github.png"></button>
+        <button type="submit" class="btnLogin" >CREATE A COUNT</button>
+        <p id='errorFirebase' class="errorFirebase"></p>
 
         <div class="textResetPassword">
           <p class="registerText">Do you have an account?  <a href="#/signup" class="registerText link">Login now</a></p>
         </div>
       </form>
     </div>
-  </section>`;
+  </section>
+
+  <section class="modalDelete" style="display: none">
+  <div class="modalDivDelete">
+    <div class="modalContainer-Delete">
+      <div >
+      </div>
+      <div>
+        <h1>Correo de Verificación</h1>
+        <div class="modal-parrafo">
+        Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja
+        </div>
+        <button class="aceptDelete">Ok</button>
+      </div>
+    </div>
+  </div>
+</section>
+  `;
   return viewSignUp;
 };
 
@@ -76,6 +84,7 @@ export const SignUp = () => {
 function errorOccurs(typeError) {
   const emailMessage = document.getElementById('emailMessage');
   const passwordMessage = document.getElementById('passwordMessage');
+  const errorMessage = document.getElementById('errorFirebase');
   const errorCode = typeError.code;
   switch (errorCode) {
     case 'auth/invalid-email':
@@ -88,7 +97,7 @@ function errorOccurs(typeError) {
       passwordMessage.innerHTML = 'La contraseña debe tener como mínimo 6 carácteres';
       break;
     default:
-      alert('Lo sentimos, se ha producido un error en la página. Vuelve a intentarlo más tarde.');
+      errorMessage.innerHTML = 'Lo sentimos, se ha producido un error en la página. Vuelve a intentarlo más tarde.';
       console.log(typeError);
   }
 }
@@ -103,11 +112,12 @@ export const handleRegister = (e) => {
     .then((userCredential) => {
       const user = userCredential.user;
       if (!user.emailVerified) {
-        alert('Te enviamos un correo para verificar tu cuenta. Por favor, revisa tu bandeja');
-        verificationEmail()
-          .then(() => {
+        document.querySelector('.modalDelete').classList.add('revelar');
+        document.querySelector('.aceptDelete').addEventListener('click', () => {
+          verificationEmail().then(() => {
             window.location.hash = '#/';
           });
+        });
       }
     })
     .catch((error) => {
@@ -116,45 +126,17 @@ export const handleRegister = (e) => {
 };
 
 export const Register = () => {
-  const googleLogin = document.querySelector('#googleLogin');
-  const githubLogin = document.getElementById('githubLogin');
-
   const signupForm = document.querySelector('#signup-form');
 
   /* .......Registrarse con correo y contraseña...... */
   signupForm.addEventListener('submit', handleRegister);
-
-  googleLogin.addEventListener('click', () => {
-    loginGoogle()
-      .then(() => verificarUsuario())
-      .then((user) => {
-        localStorage.setItem('user', JSON.stringify(user));
-        window.location.hash = '#/home';
-      })
-      .catch((error) => {
-        const message = document.getElementById('generalMessage');
-        errorOccurs(error, message);
-      });
-  });
-
-  /* .......Logearse con GitHub........ */
-  githubLogin.addEventListener('click', () => {
-    loginGitHub()
-      .then(() => verificarUsuario())
-      .then(() => {
-        window.location.hash = '#/home';
-      }).catch((error) => {
-        const message = document.getElementById('generalMessage');
-        errorOccurs(error, message);
-      });
-  });
 
   /* .....Función ocultar y mostrar contraseña..... */
   const iconEye = document.querySelector('#icon-eye');
   iconEye.addEventListener('click', function () {
     const icon = this.querySelector('i');
 
-    if ((this.nextElementSibling).type === 'password') {
+    if (this.nextElementSibling.type === 'password') {
       this.nextElementSibling.type = 'text';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
