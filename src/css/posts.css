@@ -56,8 +56,9 @@
 .img-post-home{
     width: 100%;
     object-fit: fill;
-    height: 250px;
+    height: auto;
     padding: 4px;
+    border-radius: 10px;
 }
 
 .text-post-home{
