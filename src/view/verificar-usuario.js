@@ -67,6 +67,6 @@ export const verificarUsuario = async function verificarSiExisteUsuario() {
 
 export const stateChanged1 = () => {
   stateChanged((user) => {
-    if (user === null || user === undefined) { window.location.hash = '#/login'; }
+    if (user === null || user === undefined) window.location.hash = '#/login';
   });
 };

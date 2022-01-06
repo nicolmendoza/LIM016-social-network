@@ -31,7 +31,11 @@ export const SignUp = () => {
       </div>
 
       <form id="signup-form">
+<<<<<<< HEAD
         <div class="form-group">
+=======
+      <div class="form-group">
+>>>>>>> a6e3e3c9097fc64c87adafeab2d36403e1825522
           <span class="icon-input">
             <i class="far fa-user-circle"></i>
           </span>
@@ -130,4 +134,5 @@ export const Register = () => {
     }
   });
   document.imgInicio.src = 'img/gif.gif';
+  document.imgInicioPequeño.src = 'img/gif.gif';
 };

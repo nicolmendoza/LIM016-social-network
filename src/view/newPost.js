@@ -22,7 +22,7 @@ export const newPost = () => {
       </div>
       <div id="selects">  
         <select class="privacityPost" required>
-          <option value="amigos">Public</option>
+          <option value="amigos">Public <div class="fas fa-globe-america"></div></option>
           <option value="soloYo">Private</option>
         </select>
         <select class="type" required>
