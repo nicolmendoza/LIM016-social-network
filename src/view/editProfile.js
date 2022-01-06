@@ -77,7 +77,7 @@ export const profileEdit = () => {
         <img class="img-prog" src="./img/python.png" name="python" title="Python">
         </div>
         <div class="interest-programming">
-        <img class="img-prog" src="./img/cpp.png" name="cpp" title="CPP">
+        <img class="img-prog" src="./img/cpp.png" name="c++" title="C++">
         </div>
         <div class="interest-programming">
         <img class="img-prog" src="./img/docker.png" name="docker" title="Docker">

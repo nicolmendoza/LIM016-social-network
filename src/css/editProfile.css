@@ -227,7 +227,7 @@ textarea:focus{
 @media (min-width: 768px){
     .modalContainer-edit{
         width: 500px;
-        height: 100%;
+        height: auto;
     }
     #portadaUserEdit{
         height: 100%;
