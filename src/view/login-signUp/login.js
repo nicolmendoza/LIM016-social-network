@@ -91,16 +91,12 @@ function errorOccurs(typeError, text) {
   const textMessage = text;
   switch (errorCode) {
     case 'auth/user-not-found':
-      textMessage.innerHTML = 'Usuario no encontrado';
-      break;
     case 'auth/wrong-password':
-      textMessage.innerHTML = 'Contraseña incorrecta.';
+    case 'auth/invalid-email':
+      textMessage.innerHTML = 'La dirección de correo electrónico o la contraseña no es válida.';
       break;
     case 'auth/too-many-requests':
       textMessage.innerHTML = 'Usted excedió el número de intentos fallidos. Reestablezca su contraseña o inténtelo más tarde.';
-      break;
-    case 'auth/invalid-email':
-      textMessage.innerHTML = 'La dirección de correo electrónico no es válida';
       break;
     case 'auth/account-exists-with-different-credential':
       textMessage.innerHTML = 'La dirección de correo electrónico ya es usada en una credencial diferente.';
