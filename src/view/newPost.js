@@ -27,6 +27,7 @@ export const newPost = () => {
           <option value="soloYo">Private</option>
         </select>
         <select class="type" required>
+        <option value="General"><i></i>General</option>
           <option value="Question"><i></i>Question</option>
           <option value="Job Offer"><i></i>Job offer</option>
           <option value="Event"><i></i>Event</option>
@@ -84,7 +85,7 @@ export const functionNewPost = () => {
     console.log(privacity);
   });
 
-  let types = 'Question';
+  let types = 'General';
   document.querySelector('.type').addEventListener('change', (e) => {
     types = e.target.value;
     console.log(types);
