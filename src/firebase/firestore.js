@@ -59,7 +59,7 @@ export const getUsersOthers = (uid) => {
 // /* ------------------  POSTS  --------------------- */
 let unsubscribe;
 
-export const readData = (callback) => {
+export const readData = (callback) => new Promise((resolve) => {
   const q = query(collection(db, 'post'), where('privacity', '==', 'amigos'), orderBy('date', 'desc'));
   unsubscribe = onSnapshot(q, (querySnapshot) => {
     const posts = [];
@@ -74,10 +74,11 @@ export const readData = (callback) => {
       objectPost.privacity = doct.data().privacity;
       posts.push(objectPost);
     });
-    return callback(posts);
+    callback(posts);
+    resolve();
     // console.log(posts);
   });
-};
+});
 
 export const getDataPostType = (callback, type) => {
   const q = query(collection(db, 'post'), where('privacity', '==', 'amigos'), orderBy('date', 'desc'), where('type', '==', type));

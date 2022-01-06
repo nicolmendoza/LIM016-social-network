@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import { savePost, readPostProfile } from '../firebase/firestore.js';
 
 import { getImage } from './get-Image.js';
