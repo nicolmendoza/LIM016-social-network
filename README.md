@@ -23,9 +23,13 @@ El producto resuelve la necesidad de encontrar un espacio donde mujeres con inte
 
 ## 5. Prototipos 
 ### Prototipos de baja fidelidad
-
+![Prototipo a mano](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Prototipos1.1.jpg)
+![Prototipo a mano](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Prototipos1.2.jpg)
 
 ### Prototipos de alta fidelidad
-
+![Prototipo en Figma](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Protoripo%202.1.png)
+![Prototipo en Figma](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Prototipo%202.2.png)
+![Prototipo en Figma](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Prototipo2.3.png)
+![Prototipo en Figma](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Prototipo2.4.png)
 
 
