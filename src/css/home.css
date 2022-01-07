@@ -197,6 +197,7 @@
 .oneDivUser-parrafo {
     font-size: 14px;
     text-align: start !important;
+    text-transform: capitalize;
 }
 
 /* -----BUTTON FOR CREATE A NEW POST----- */

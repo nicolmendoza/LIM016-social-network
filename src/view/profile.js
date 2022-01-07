@@ -99,6 +99,7 @@ export const Profile = () => {
 };
 
 export const FunctionProfile = () => {
+  document.documentElement.scrollTop = 0;
   const idUserRedirect = window.localStorage.getItem('idUserRedirecionar');
   console.log(idUserRedirect);
   const userCurrent = JSON.parse(localStorage.getItem('user'));

@@ -120,6 +120,7 @@ export const Home = () => {
   return document.querySelector('#container').appendChild(divElement);
 };
 export const FunctionsHome = () => {
+  document.documentElement.scrollTop = 0;
   templateUsers();
   // autentificando usuario logueado
   const userCurrent = JSON.parse(localStorage.getItem('user'));
