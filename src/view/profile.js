@@ -83,10 +83,12 @@ export const Profile = () => {
 
   <section class="modalEditProfile" style="display:none">
     <div class="modalDiv-editProf">
-    <div class="modalContainer-edit">
-    </div>
+      <div class="modalContainer-edit">
+        <div class="lds-roller loader loaderEdit" id="loaderEdit"><img src="./img/loader.gif"></div>
+      </div>
     </div>
   </section>
+
   <section class="modalNewPost" style="display: none">
       <div class="modalDivPost">
       <div class="modalContainer-NewPost">
@@ -152,6 +154,7 @@ export const FunctionProfile = () => {
     }).then(() => { document.getElementById('loaderProfile').style.display = 'none'; });
 
   document.getElementById('goEdit').addEventListener('click', () => {
+    document.getElementById('loaderEdit').style.display = 'none';
     profileEdit();
     document.querySelector('.modalEditProfile').style.display = 'flex';
     FunctionEdit();
