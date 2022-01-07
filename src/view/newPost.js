@@ -10,6 +10,7 @@ export const newPost = () => {
   const newPostContainer = document.createElement('section');
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
+
     <div class="header-newPost">
         <button class="descart"> CANCEL </button>
         <div id="newPost"> NEW POST </div>

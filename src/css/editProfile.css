@@ -23,6 +23,22 @@
     margin: 0px auto;
 }
 
+.loaderEdit{
+    display: flex;
+    width: 100vw;
+    min-height: 687px!important;
+    height: auto;
+    backdrop-filter: blur(50px);
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.loaderEdit img{
+    width: 10%;
+    margin-top: 60%;
+    z-index: 3;
+}
+
 .form-editProfile{
     display: flex;
     flex-direction: column;
@@ -230,19 +246,7 @@ textarea:focus{
         height: auto;
     }
     .loaderEdit{
-        display: flex;
         width: 500px;
-        min-height: 687px!important;
-        height: auto;
-        backdrop-filter: blur(50px);
-        justify-content: center;
-        align-items: center;
-        z-index: 2;
-    }
-    .loaderEdit img{
-        width: 10%;
-        margin-top: 60%;
-        z-index: 3;
     }
     #portadaUserEdit{
         height: 100%;
