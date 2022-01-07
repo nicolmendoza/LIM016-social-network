@@ -111,6 +111,7 @@ export const FunctionProfile = () => {
     leerPostProfile(showPostProfile, idUserRedirect);
 
     document.getElementById('goEdit').style.display = 'block';
+    document.getElementById('loaderNewPost').style.display = 'none';
     // document.querySelector('.modalDelete').classList.remove('revelar');
   } else {
     document.getElementById('goEdit').style.display = 'none';

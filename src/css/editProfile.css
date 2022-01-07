@@ -237,7 +237,6 @@ textarea:focus{
     display: grid !important;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     width: 100%;
-    
 }
 
 @media (min-width: 768px){

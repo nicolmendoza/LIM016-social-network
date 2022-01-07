@@ -78,7 +78,6 @@ export const newPost = () => {
 export const functionNewPost = () => {
   // userID = () => auth.currentUser.uid;
   const userCurrent = JSON.parse(localStorage.getItem('user'));
-  document.getElementById('loaderNewPost').style.display = 'none';
 
   let privacity = 'amigos';
   document.querySelector('.privacityPost').addEventListener('change', (e) => {
