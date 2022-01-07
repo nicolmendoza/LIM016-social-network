@@ -397,13 +397,15 @@
   }
 
   .loaderInfo{
-    height: 100vh !important;
+    height: 100% !important;
+    width: 98% !important;
   }
 
   .loaderPost{
-    width: 103% !important;
-    margin-left: -4px !important;
-    margin-top: -4px !important;
+    width: 96% !important;
+    margin: -4px 2% !important;
+/*     margin-left: -4px !important;
+    margin-top: -4px !important; */
   }
 
 @media (min-width: 768px){

@@ -74,7 +74,7 @@ export const Profile = () => {
     </div>
     <section id="post-section" class="container-postProfile">
       <button id="btn-newPost" style="display:none"> Add New Post </button>
-      <div style="position: relative;">
+      <div id ="postContainer" style="position: relative;">
     <div class="lds-roller loader loaderPost" id="loader"><img src="./img/loader.gif"></div>
       <div id="PostProfile"></div>
       </div>
