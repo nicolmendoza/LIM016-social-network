@@ -99,6 +99,7 @@ describe('Function reset', () => {
 //     expect(typeof addDoc.mock.calls[0][0]).toBe('object');
 //   });
 // });
+
 describe('Function onAuth', () => {
   it('debería ser una función', (done) => {
     const res = stateChanged('callback');
