@@ -36,6 +36,17 @@
     padding: 6% 5%;
 }
 
+#loaderNewPost{
+    width: 100% !important;
+    height: auto !important;
+    margin: 0px !important;
+    position: static !important;
+}
+#loaderNewPost img{
+    width: 15%;
+    margin-top:50%;
+}
+
 /* -----OPTIONS FOR NEW POST----- */
 
 .header-newPost{

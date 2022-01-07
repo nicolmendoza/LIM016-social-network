@@ -10,7 +10,6 @@ export const newPost = () => {
   const newPostContainer = document.createElement('section');
   newPostContainer.classList.add('containerNewPost');
   newPostContainer.innerHTML = `
-
     <div class="header-newPost">
         <button class="descart"> CANCEL </button>
         <div id="newPost"> NEW POST </div>
@@ -79,6 +78,7 @@ export const newPost = () => {
 export const functionNewPost = () => {
   // userID = () => auth.currentUser.uid;
   const userCurrent = JSON.parse(localStorage.getItem('user'));
+  document.getElementById('loaderNewPost').style.display = 'none';
 
   let privacity = 'amigos';
   document.querySelector('.privacityPost').addEventListener('change', (e) => {
@@ -123,12 +123,18 @@ export const functionNewPost = () => {
     document.getElementById('delete-imgUpload').style.display = 'block';
   };
   const postDescription = document.getElementById('post-description');
+
   document.querySelector('.publish').addEventListener('click', () => {
     if (
       (postDescription.value !== '' && photoFile.files[0])
       || (postDescription.value === '' && photoFile.files[0])
     ) {
       const imgUpload = files[0];
+      console.log('subiendo');
+
+      document.getElementById('loader').classList.toggle('loader2');
+      document.getElementById('loaderNewPost').style.display = 'block';
+
       getImage(imgUpload, (downloadURL) => {
         savePost(postDescription, userID, downloadURL, privacity, types);
 
@@ -136,6 +142,7 @@ export const functionNewPost = () => {
         document.querySelector('.modalNewPost').style.display = 'none';
       });
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
+      console.log('sbiendo2');
       savePost(postDescription, userID, '', privacity, types);
       document.querySelector('.modalNewPost').style.display = 'none';
     } else {

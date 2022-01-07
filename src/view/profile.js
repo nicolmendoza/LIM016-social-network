@@ -90,10 +90,11 @@ export const Profile = () => {
   </section>
 
   <section class="modalNewPost" style="display: none">
-      <div class="modalDivPost">
+    <div class="modalDivPost">
       <div class="modalContainer-NewPost">
+        <div class="lds-roller loader loaderNewPost" id="loaderNewPost"><img src="./img/loader.gif"></div>
       </div>
-      </div>
+    </div>
   </section>
     `;
 
