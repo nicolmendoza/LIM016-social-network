@@ -219,7 +219,7 @@ export const FunctionEdit = () => {
     }));
   }
 
-  // ........................ foto de portada..........................
+  // ........................ foto de perfil..........................
   const fileEdit = document.getElementById('edit-file');
   let files = [];
   const readerEdit = new FileReader();

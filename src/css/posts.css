@@ -47,6 +47,7 @@
     margin: 5px 0;
     cursor: pointer;
     text-transform: capitalize;
+    font-weight: 600;
 }
 .date{
     font-size: 12px;
