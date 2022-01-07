@@ -390,6 +390,7 @@
     transition: all 2s ease-in-out;
     /* transform: scale(0); */
     backdrop-filter: blur(0px);
+    color: red;
   }
 
   .loader2 img{
@@ -410,6 +411,7 @@
 
   .loaderPostHome{
     width: 100% !important;
+    top: -4px;
     /* margin: -4px 1% !important; */
 /*     margin-left: -4px !important;
     margin-top: -4px !important; */
