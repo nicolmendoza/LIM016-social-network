@@ -188,11 +188,15 @@ textarea:focus{
     width: 100%;
 }
 
-.activeProgramming,
-.interest-programming >img:hover {
+.activeProgramming {
     box-shadow: 0px 0px 4px 1px #8b8b8bb8;
     border-radius: 4px;
 }
+/* .activeProgramming,
+.interest-programming >img:hover {
+    box-shadow: 0px 0px 4px 1px #8b8b8bb8;
+    border-radius: 4px;
+} */
 
 #resetForm{
     height: 40px;
@@ -250,4 +254,8 @@ textarea:focus{
     #portadaUserEdit{
         height: 100%;
     }
+    .activeProgramming, .interest-programming >img:hover {
+    box-shadow: 0px 0px 4px 1px #8b8b8bb8;
+    border-radius: 4px;
+}
 }

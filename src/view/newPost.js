@@ -129,11 +129,6 @@ export const functionNewPost = () => {
       || (postDescription.value === '' && photoFile.files[0])
     ) {
       const imgUpload = files[0];
-      console.log('subiendo');
-
-      document.getElementById('loader').classList.toggle('loader2');
-      document.getElementById('loaderNewPost').style.display = 'block';
-
       getImage(imgUpload, (downloadURL) => {
         savePost(postDescription, userID, downloadURL, privacity, types);
 
@@ -141,7 +136,6 @@ export const functionNewPost = () => {
         document.querySelector('.modalNewPost').style.display = 'none';
       });
     } else if (postDescription.value !== '' && !photoFile.files[0]) {
-      console.log('sbiendo2');
       savePost(postDescription, userID, '', privacity, types);
       document.querySelector('.modalNewPost').style.display = 'none';
     } else {
