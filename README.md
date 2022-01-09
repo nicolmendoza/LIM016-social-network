@@ -36,8 +36,14 @@ El producto resuelve la necesidad de encontrar un espacio donde mujeres con inte
 ## 5. Prototipos 
 
 ### Prototipos de baja fidelidad
-![Prototipo a mano](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Prototipos1.1.jpg)
-![Prototipo a mano](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Prototipos1.2.jpg)
+
+<div align="center">
+  
+<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/img-readme/Prototipos1.1.jpg"  width="400">
+  
+<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/img-readme/Prototipos1.2.jpg"  width="400">
+
+</div>
 
 ### Prototipos de alta fidelidad
 ![Prototipo en Figma](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Protoripo%202.1.1.png)
@@ -102,6 +108,23 @@ El producto resuelve la necesidad de encontrar un espacio donde mujeres con inte
 ***
 
 ## 7. Producto final <img src="https://cdn-icons-png.flaticon.com/512/3709/3709284.png" width=35px>
+
+Esta es nuestra red social Queen Coders en su estado final. Si desea verlo completo puede dar click:
+-  [Version escritorio](https://github.com/MerlyAnco/LIM016-social-network/blob/main/src/img/videos%20de%20producto%20final/full%20screen%20video.mp4) 💻
+
+-  [Version mobile](https://github.com/MerlyAnco/LIM016-social-network/blob/main/src/img/videos%20de%20producto%20final/Queen%20Corder%20Mobile.mp4) 📱
+
+<div align="center">
+  
+<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/img-final/imagen-home.PNG"  width="800">
+
+</div>
+
+<div align="center">
+
+<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/img-final/img-profile.PNG"  width="800">
+
+</div>
 
 ***
 ## 8. Fuente 📄
