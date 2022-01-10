@@ -52,8 +52,19 @@ El producto resuelve la necesidad de encontrar un espacio donde mujeres con inte
 ![Prototipo en Figma](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Prototipo2.4.1.png)
 
 ***
+## 6. Test de USabilidad
 
-## 6. Checklist ✔️
+<div align="center">
+  
+<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/encuestas/1.png"  width="450">
+  
+<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/encuestas/2.png"  width="450">
+
+<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/encuestas/3.png"  width="450">
+
+</div>
+
+## 7. Checklist ✔️
 
 #### Creación de cuenta de usuario e inicio de sesión
 
@@ -107,7 +118,7 @@ El producto resuelve la necesidad de encontrar un espacio donde mujeres con inte
 
 ***
 
-## 7. Producto final <img src="https://cdn-icons-png.flaticon.com/512/3709/3709284.png" width=35px>
+## 8. Producto final <img src="https://cdn-icons-png.flaticon.com/512/3709/3709284.png" width=35px>
 
 Esta es nuestra red social Queen Coders en su estado final. Si desea verlo completo puede dar click:
 -  [Version escritorio](https://github.com/MerlyAnco/LIM016-social-network/blob/main/src/img/videos%20de%20producto%20final/full%20screen%20video.mp4) 💻
@@ -127,12 +138,12 @@ Esta es nuestra red social Queen Coders en su estado final. Si desea verlo compl
 </div>
 
 ***
-## 8. Fuente 📄
+## 9. Fuente 📄
 
 Social Network del [Repositorio de Laboratoria](https://github.com/Laboratoria/LIM016-social-network) <img src="https://scontent.flim14-1.fna.fbcdn.net/v/t1.6435-9/130980793_1690922481082152_7942209969687939916_n.png?_nc_cat=111&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeFFDsavO8fBBY62GsNsF_IsYehI860yPFhh6EjzrTI8WNi08hyHHv66WO3DZVHiJKe0OfHMVx75hdTyIhUJrKWj&_nc_ohc=tu2wv_3wOzkAX9TVZ5m&_nc_ht=scontent.flim14-1.fna&oh=00_AT-jr3sRGBUJeBi77mmrrSAaBbmvieCALw7YXqmB45O7Xg&oe=6202A8F2" width=20px>
 ***
 
-## 9. Autores
+## 10. Autores
 
 - [Nicol Mendoza](https://github.com/nicolmendoza) <img src="https://cdn-icons-png.flaticon.com/512/2570/2570280.png" width=20px>
 - [Andrea Henostroza](https://github.com/andreahenos) <img src="https://cdn-icons-png.flaticon.com/512/2570/2570280.png" width=20px>
