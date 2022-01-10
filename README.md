@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/87873460/148803663-a0b0d47c-fdb7-4343-bceb-e32c4c8fd500.png )
+<div align=center><img src="https://user-images.githubusercontent.com/87873460/148803663-a0b0d47c-fdb7-4343-bceb-e32c4c8fd500.png?raw=true" width=100%></div>
 
 # Quenn Coders 👑👩🤳💻📲
 ## Índice❗💡
