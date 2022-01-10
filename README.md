@@ -53,13 +53,13 @@ El producto resuelve la necesidad de encontrar un espacio donde mujeres con inte
 ![Prototipo en Figma](https://github.com/andreahenos/LIM016-social-network/blob/main/src/img/img-readme/Prototipo2.4.1.png)
 
 ***
-## 6. Test de USabilidad
+## 6. Test de Usabilidad 📄✍
 
 <div align="center">
   
-<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/encuestas/1.png"  width="450">
+<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/encuestas/1.png"  width="400">
   
-<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/encuestas/2.png"  width="450">
+<img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/encuestas/2.png"  width="400">
 
 <img  src="https://raw.githubusercontent.com/MerlyAnco/LIM016-social-network/main/src/img/encuestas/3.png"  width="450">
 
