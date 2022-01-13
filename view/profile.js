@@ -73,7 +73,7 @@ export const Profile = () => {
       </div>
     </div>
     <section id="post-section" class="container-postProfile">
-      <button id="btn-newPost" style="display:none"> Add New Post </button>
+      <button id="btn-newPost" > Add New Post </button>
       <div id ="postContainer" style="position: relative;">
     <div class="lds-roller loader loaderPost" id="loader"><img src="./img/loader.gif"></div>
       <div id="PostProfile"></div>
@@ -115,6 +115,8 @@ export const FunctionProfile = () => {
     // document.querySelector('.modalDelete').classList.remove('revelar');
   } else {
     document.getElementById('goEdit').style.display = 'none';
+    document.getElementById('btn-newPost').style.display = 'none';
+    document.getElementById('btn-post-mobile').style.display = 'none';
     leerPostProfileFriend(showPostProfile, idUserRedirect);
   }
   // const userID = userCurrent.uid;

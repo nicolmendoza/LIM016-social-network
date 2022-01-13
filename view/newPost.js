@@ -108,10 +108,8 @@ export const functionNewPost = () => {
   const reader = new FileReader();
   photoFile.onchange = (e) => {
     files = e.target.files;
-    // const extention = GetFileExt(files[0]);
-    // const name = GetFileName(files[0]);
+
     reader.readAsDataURL(files[0]);
-    // uploadImg(files);
   };
   reader.onload = function () {
     document.querySelector('.image-preview').className = 'image-preview img-prev';
@@ -141,8 +139,6 @@ export const functionNewPost = () => {
         document.querySelector('.modalDelete2').classList.remove('revelar');
       });
     }
-    // savePost(postDescription, userID);
-    // window.location.hash = '#/home';
   });
   document.querySelector('.descart').addEventListener('click', () => {
     document.querySelector('.modalNewPost').style.display = 'none';
