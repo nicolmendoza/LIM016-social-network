@@ -109,7 +109,7 @@ export const FunctionProfile = () => {
   console.log(userCurrent);
   if (idUserRedirect === userCurrent.uid) {
     leerPostProfile(showPostProfile, idUserRedirect);
-
+    document.getElementById('btn-newPost').style.display = 'block';
     document.getElementById('goEdit').style.display = 'block';
     document.getElementById('loaderNewPost').style.display = 'none';
     // document.querySelector('.modalDelete').classList.remove('revelar');

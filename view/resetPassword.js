@@ -57,9 +57,7 @@ export const handleReset = (e) => {
 
 export const resetPasswordInit = () => {
   const resetP = document.querySelector('#resetPasswordBtn');
-
   resetP.addEventListener('submit', handleReset);
-
   document.querySelector('.far').addEventListener('click', () => {
     document.querySelector('.modalReset').style.display = 'none';
   });
